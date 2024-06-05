@@ -12,7 +12,7 @@ load_dotenv()
 elevenlabsApiKey = os.getenv('ELEVENLABS_API_KEY')
 recognizer = sr.Recognizer()
 mic = sr.Microphone()
-
+print(mic.list_working_microphones())
 user = ElevenLabsUser(elevenlabsApiKey)
 
 voice = user.get_voices_by_name("Jarvis")[0]
@@ -44,12 +44,15 @@ def listen(conversation_continuation_timeout=3):
             recognizer.adjust_for_ambient_noise(source, duration=0.2)
             try:
                 audio = recognizer.listen(source, timeout=conversation_continuation_timeout) 
+                print("Audiated")
             except:
-                pass
+                print("Audio detection failed")
+                continue
 
         try:
             print("Recognizing...")
             statement = recognizer.recognize_google(audio)
+            print("statement")
             
             if "spark" in statement.lower():
                 speak("Activated S.P.A.R.K.")
@@ -61,11 +64,13 @@ def listen(conversation_continuation_timeout=3):
                 print("Conversation Timeout")
                 break
         except sr.UnknownValueError:
+            print("UNKNOWN VALUE")
             return ""
         except sr.RequestError:
             speak("Speech recognition service is unavailable. Please try again later.")
         except:
-            pass
+            print("Something went wrong")
+            continue
     print(f"User said: {statement}\n")
     return statement
 
