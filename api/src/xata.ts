@@ -6,12 +6,101 @@ import type {
   XataRecord,
 } from "@xata.io/client";
 
-const tables = [] as const;
+const tables = [
+  {
+    name: "group",
+    columns: [
+      { name: "messages", type: "json", notNull: true, defaultValue: "[{}]" },
+      {
+        name: "name",
+        type: "string",
+        notNull: true,
+        defaultValue: "New Group",
+      },
+      {
+        name: "devices",
+        type: "json",
+        notNull: true,
+        defaultValue: '{\n  "client": [],\n  "server": []\n}',
+      },
+      { name: "assignedUser", type: "link", link: { table: "user" } },
+    ],
+    revLinks: [
+      { column: "assignedGroup", table: "clientDevice" },
+      { column: "assignedGroup", table: "serverDevice" },
+    ],
+  },
+  {
+    name: "clientDevice",
+    columns: [
+      { name: "name", type: "string" },
+      { name: "messages", type: "json", notNull: true, defaultValue: "[{}]" },
+      { name: "assignedGroup", type: "link", link: { table: "group" } },
+      { name: "assignedUser", type: "link", link: { table: "user" } },
+    ],
+  },
+  {
+    name: "serverDevice",
+    columns: [
+      { name: "name", type: "string" },
+      { name: "messages", type: "json", notNull: true, defaultValue: "[{}]" },
+      { name: "assignedGroup", type: "link", link: { table: "group" } },
+      { name: "assignedUser", type: "link", link: { table: "user" } },
+    ],
+  },
+  {
+    name: "message",
+    columns: [
+      { name: "from", type: "string" },
+      { name: "to", type: "string" },
+      { name: "content", type: "text" },
+      { name: "status", type: "int" },
+    ],
+  },
+  {
+    name: "user",
+    columns: [
+      {
+        name: "username",
+        type: "string",
+        notNull: true,
+        defaultValue: "newUser",
+      },
+      { name: "password", type: "string", defaultValue: "" },
+    ],
+    revLinks: [
+      { column: "assignedUser", table: "group" },
+      { column: "assignedUser", table: "clientDevice" },
+      { column: "assignedUser", table: "serverDevice" },
+    ],
+  },
+] as const;
 
 export type SchemaTables = typeof tables;
 export type InferredTypes = SchemaInference<SchemaTables>;
 
-export type DatabaseSchema = {};
+export type Group = InferredTypes["group"];
+export type GroupRecord = Group & XataRecord;
+
+export type ClientDevice = InferredTypes["clientDevice"];
+export type ClientDeviceRecord = ClientDevice & XataRecord;
+
+export type ServerDevice = InferredTypes["serverDevice"];
+export type ServerDeviceRecord = ServerDevice & XataRecord;
+
+export type Message = InferredTypes["message"];
+export type MessageRecord = Message & XataRecord;
+
+export type User = InferredTypes["user"];
+export type UserRecord = User & XataRecord;
+
+export type DatabaseSchema = {
+  group: GroupRecord;
+  clientDevice: ClientDeviceRecord;
+  serverDevice: ServerDeviceRecord;
+  message: MessageRecord;
+  user: UserRecord;
+};
 
 const DatabaseClient = buildClient();
 
