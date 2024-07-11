@@ -4,7 +4,7 @@
 FROM oven/bun:latest
 
 # Set working directory
-WORKDIR /app
+WORKDIR /
 
 # Copy your project files
 COPY --link package.json bun.lockb ./
@@ -12,10 +12,7 @@ COPY --link package.json bun.lockb ./
 # Install dependencies
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y nodejs \
-    npm  
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y nodejs \
-    npm     
+    npm 
 RUN bun install
 
 COPY . .
@@ -24,4 +21,4 @@ COPY . .
 EXPOSE 7000
 
 # Start your application (replace with your command)
-RUN bun run start
+RUN npm start
