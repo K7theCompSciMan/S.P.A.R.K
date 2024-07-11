@@ -6,7 +6,7 @@ export class  PublicUser{
 
     constructor(user: User){
         this.id = user.id;
-        this.username = user.username;
+        this.username = user.username!;
     }
 }
 export default User

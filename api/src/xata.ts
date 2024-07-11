@@ -60,13 +60,8 @@ const tables = [
   {
     name: "user",
     columns: [
-      {
-        name: "username",
-        type: "string",
-        notNull: true,
-        defaultValue: "newUser",
-      },
       { name: "password", type: "string", defaultValue: "" },
+      { name: "username", type: "string", unique: true },
     ],
     revLinks: [
       { column: "assignedUser", table: "group" },
