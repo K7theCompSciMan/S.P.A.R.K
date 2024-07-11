@@ -13,7 +13,7 @@ COPY --link package.json bun.lockb ./
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y nodejs \
     npm 
-RUN bun install
+RUN bun i
 
 COPY . .
 
@@ -21,4 +21,4 @@ COPY . .
 EXPOSE 7000
 
 # Start your application (replace with your command)
-RUN npm start
+RUN bun start
