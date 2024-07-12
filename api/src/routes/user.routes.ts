@@ -6,6 +6,7 @@ export const userRouter = express.Router();
 import bcrypt from "bcryptjs";
 import { PublicUser } from "../models/user.model";
 import { requireUser, signAccessToken, signRefreshToken } from "../auth/auth";
+import log from "src/utils/logger";
 userRouter.get("/users", async (req: Request, res: Response) => {
 	try {
 		const users = await db.getUsers();
@@ -33,7 +34,7 @@ userRouter.get("/user/:id", async (req: Request, res: Response) => {
 
 userRouter.post("/register", async (req: Request, res: Response) => {
 	try {
-		const { username,password } = req.body;
+		const { username, password } = req.body;
 		if (!username || !password) {
 			return res.status(StatusCodes.BAD_REQUEST).send("Invalid input");
 		}
@@ -91,7 +92,9 @@ userRouter.post("/login", async (req: Request, res: Response) => {
 		// sign tokens
 		const accessToken = signAccessToken(user);
 		const refreshToken = signRefreshToken(user);
-		// log.info(`User logged in ${user} | accessToken: ${accessToken} | refreshToken: ${refreshToken}`);
+		log.info(
+			`User logged in ${user} | accessToken: ${accessToken} | refreshToken: ${refreshToken}`
+		);
 		const publicUser = new PublicUser(user);
 		return res
 			.status(StatusCodes.OK)

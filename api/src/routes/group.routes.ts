@@ -42,10 +42,9 @@ groupRouter.post("/group", requireUser, async (req: Request, res: Response) => {
 	try {
 		const { name, devices, messages } = req.body;
 		if (!name || !devices || !messages) {
-			const group = db.createGroup();
-			return res
-				.status(StatusCodes.OK)
-				.json({ group });
+			const group = await db.createGroup();
+			const newGroup = await db.getGroupById(group.id);
+			return res.status(StatusCodes.OK).json(newGroup);
 		}
 		const group = await db.createGroup({
 			name,
@@ -65,7 +64,7 @@ groupRouter.post("/group", requireUser, async (req: Request, res: Response) => {
 	}
 });
 
-groupRouter.put("/group", async (req: Request, res: Response) => {
+groupRouter.put("/group", requireUser, async (req: Request, res: Response) => {
 	try {
 		const group = req.body as Group;
 		if (!group) {
@@ -87,12 +86,12 @@ groupRouter.put("/group", async (req: Request, res: Response) => {
 	}
 });
 
-groupRouter.delete("/group/:id", async (req: Request, res: Response) => {
+groupRouter.delete("/group/:id", requireUser,  async (req: Request, res: Response) => {
 	res.json(await db.deleteGroup(req.params.id));
 });
 
-groupRouter.post("/group/addDevice", async (req: Request, res: Response) => {
-	res.json(
+groupRouter.post("/group/addDevice", requireUser,  async (req: Request, res: Response) => {
+	return res.json(
 		await db.addDeviceToGroup(
 			req.body.groupId,
 			req.body.deviceId,
