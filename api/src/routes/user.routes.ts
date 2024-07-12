@@ -33,11 +33,11 @@ userRouter.get("/user/:id", async (req: Request, res: Response) => {
 
 userRouter.post("/register", async (req: Request, res: Response) => {
 	try {
-		const { username, email, password } = req.body;
-		if (!username || !email || !password) {
+		const { username,password } = req.body;
+		if (!username || !password) {
 			return res.status(StatusCodes.BAD_REQUEST).send("Invalid input");
 		}
-		const user = await db.getUserByName(email);
+		const user = await db.getUserByName(username);
 		if (user) {
 			return res
 				.status(StatusCodes.BAD_REQUEST)
@@ -77,7 +77,7 @@ userRouter.post("/login", async (req: Request, res: Response) => {
 		if (!user) {
 			return res
 				.status(StatusCodes.NOT_FOUND)
-				.send("Invalid Email or Password");
+				.send("Invalid Username or Password");
 		}
 
 		const isPasswordValid = await db.checkPassword(user.id, password);
@@ -85,7 +85,7 @@ userRouter.post("/login", async (req: Request, res: Response) => {
 		if (!isPasswordValid) {
 			return res
 				.status(StatusCodes.UNAUTHORIZED)
-				.send("Invalid Email or Password");
+				.send("Invalid Username or Password");
 		}
 
 		// sign tokens

@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import * as db from "../db/group.db";
 import { StatusCodes } from "http-status-codes";
 import { Group } from "../xata";
+import { requireUser } from "src/auth/auth";
 
 export const groupRouter = express.Router();
 // TODO: Implement ID10T error handling
@@ -37,13 +38,14 @@ groupRouter.get("/group/:id", async (req: Request, res: Response) => {
 	}
 });
 
-groupRouter.post("/group", async (req: Request, res: Response) => {
+groupRouter.post("/group", requireUser, async (req: Request, res: Response) => {
 	try {
 		const { name, devices, messages } = req.body;
 		if (!name || !devices || !messages) {
+			const group = db.createGroup();
 			return res
-				.status(StatusCodes.BAD_REQUEST)
-				.json({ error: "Invalid request" });
+				.status(StatusCodes.OK)
+				.json({ group });
 		}
 		const group = await db.createGroup({
 			name,

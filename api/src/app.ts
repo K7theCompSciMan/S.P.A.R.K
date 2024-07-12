@@ -5,6 +5,7 @@ import helmet from "helmet";
 import { userRouter } from "./routes/user.routes";
 import { groupRouter } from "./routes/group.routes";
 import { authRouter } from "./auth/auth.router";
+import { deserializeUser } from "./auth/auth";
 
 dotevnv.config();
 
@@ -23,6 +24,7 @@ app.use(helmet());
 app.use(authRouter);
 app.use(userRouter);
 app.use(groupRouter);
+app.use(deserializeUser);
 app.listen(PORT, () => {
 	console.log(`Server is listening on port ${PORT}`);
 });

@@ -36,6 +36,9 @@ export function signAccessToken(user: User) {
 	const accessToken = signJwt({ user: publicUser }, "accessTokenPrivateKey", {
 		expiresIn: "15m",
 	});
+	if(accessToken === "Error signing JWT") {
+		throw new Error("Error signing JWT");
+	}
 	// log.info(`Access token created ${accessToken}`);
 	return accessToken;
 }
@@ -134,7 +137,6 @@ export const requireUser = (
 	if (
 		res.locals.user &&
 		res.locals.user.id &&
-		res.locals.user.email &&
 		res.locals.user.username
 	) {
 		// console.log(res.locals.user.id)
