@@ -42,11 +42,12 @@ export const sendMessageToClientFromServer = async (
 	clientDevice: ClientDevice
 ) => {
     const group = await getGroupFromServerDevice(serverDevice);
-    const message = await createMessage({ content: messageContent, from: serverDevice.id, to: clientDevice.id } as Message);
+    const message = await createMessage({ content: messageContent, from: serverDevice.id, to: clientDevice.id, fromDeviceType: "server" } as Message);
     serverDevice.messages.push(message);
     clientDevice.messages.push(message);
     group.messages.push(message);
     await updateServerDevice(serverDevice);
     await updateClientDevice(clientDevice);
     await updateGroup(group);
+    return message;
 };

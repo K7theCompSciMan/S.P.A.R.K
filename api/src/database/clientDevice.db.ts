@@ -25,26 +25,34 @@ export const updateClientDevice = async (ClientDevice: ClientDevice) => {
 };
 
 export const deleteClientDevice = async (ClientDeviceId: string) => {
+    const clientDevice = await getClientDeviceById(ClientDeviceId);
+    
 	return await xata.db.clientDevice.delete(ClientDeviceId);
 };
 
 export const getGroupFromClientDevice = async (ClientDevice: ClientDevice) => {
-    if (ClientDevice && ClientDevice.assignedGroup) {
-        return getGroupById(ClientDevice.assignedGroup.id);
-    }
-    throw new Error("Server Device not found or not assigned to a group");
-}
-export const sendMessageToClientFromServer = async (
+	if (ClientDevice && ClientDevice.assignedGroup) {
+		return getGroupById(ClientDevice.assignedGroup.id);
+	}
+	throw new Error("Server Device not found or not assigned to a group");
+};
+export const sendMessageToServerFromClient = async (
 	serverDevice: ServerDevice,
 	messageContent: string,
 	clientDevice: ClientDevice
 ) => {
-    const group = await getGroupFromClientDevice(serverDevice);
-    const message = await createMessage({ content: messageContent, to: serverDevice.id, from: clientDevice.id } as Message);
-    serverDevice.messages.push(message);
-    clientDevice.messages.push(message);
-    group.messages.push(message);
-    await updateClientDevice(serverDevice);
-    await updateClientDevice(clientDevice);
-    await updateGroup(group);
+	const group = await getGroupFromClientDevice(serverDevice);
+	const message = await createMessage({
+		content: messageContent,
+		to: serverDevice.id,
+		from: clientDevice.id,
+        fromDeviceType: "client",
+	} as Message);
+	serverDevice.messages.push(message);
+	clientDevice.messages.push(message);
+	group.messages.push(message);
+	await updateClientDevice(serverDevice);
+	await updateClientDevice(clientDevice);
+	await updateGroup(group);
+	return message;
 };

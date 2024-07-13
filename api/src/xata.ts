@@ -55,6 +55,12 @@ const tables = [
       { name: "to", type: "string" },
       { name: "content", type: "text" },
       { name: "status", type: "int" },
+      {
+        name: "fromDeviceType",
+        type: "string",
+        notNull: true,
+        defaultValue: "server",
+      },
     ],
   },
   {

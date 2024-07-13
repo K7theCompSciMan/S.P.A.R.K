@@ -135,10 +135,11 @@ export const requireUser = (
 	next: NextFunction
 ) => {
 	deserializeUser(req, res, () => {});
-	console.log(res.locals.user.id)
+	// console.log(res.locals.user.id)
 	if (res.locals.user && res.locals.user.id && res.locals.user.username) {
 		console.log(res.locals.user.id)
 		return next();
 	}
+	console.log("Unauthorized")
 	return res.status(403).send("Unauthorized");
 };
