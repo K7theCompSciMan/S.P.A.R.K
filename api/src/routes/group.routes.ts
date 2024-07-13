@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import * as db from "../db/group.db";
+import * as db from "../database/group.db";
 import { StatusCodes } from "http-status-codes";
 import { Group } from "../xata";
 import { requireUser } from "src/auth/auth";
@@ -86,16 +86,54 @@ groupRouter.put("/group", requireUser, async (req: Request, res: Response) => {
 	}
 });
 
-groupRouter.delete("/group/:id", requireUser,  async (req: Request, res: Response) => {
-	res.json(await db.deleteGroup(req.params.id));
-});
+groupRouter.delete(
+	"/group/:id",
+	requireUser,
+	async (req: Request, res: Response) => {
+		try {
+			const group = await db.deleteGroup(req.params.id);
+			if (group) {
+				return res
+					.status(StatusCodes.OK)
+					.json(await db.deleteGroup(req.params.id));
+			}
+			return res
+				.status(StatusCodes.NOT_FOUND)
+				.json({ error: "Group not found" });
+		} catch (error) {
+			return res
+				.status(StatusCodes.INTERNAL_SERVER_ERROR)
+				.json({ error: error });
+		}
+	}
+);
 
-groupRouter.post("/group/addDevice", requireUser,  async (req: Request, res: Response) => {
-	return res.json(
-		await db.addDeviceToGroup(
-			req.body.groupId,
-			req.body.deviceId,
-			req.body.deviceType
-		)
-	);
-});
+groupRouter.post(
+	"/group/addDevice",
+	requireUser,
+	async (req: Request, res: Response) => {
+		try {
+			const { groupId, deviceId, deviceType } = req.body;
+			if (!groupId || !deviceId || !deviceType) {
+				return res
+					.status(StatusCodes.BAD_REQUEST)
+					.json({ error: "Invalid request" });
+			}
+			const group = await db.addDeviceToGroup(
+				groupId,
+				deviceId,
+				deviceType
+			);
+			if (group) {
+				return res.status(StatusCodes.OK).json(group);
+			}
+			return res
+				.status(StatusCodes.NOT_FOUND)
+				.json({ error: "Group not found" });
+		} catch (error) {
+			return res
+				.status(StatusCodes.INTERNAL_SERVER_ERROR)
+				.json({ error: error });
+		}
+	}
+);

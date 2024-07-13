@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import { User } from "../xata";
 import { StatusCodes } from "http-status-codes";
-import * as db from "../db/user.db";
+import * as db from "../database/user.db";
 export const userRouter = express.Router();
 import bcrypt from "bcryptjs";
 import { PublicUser } from "../models/user.model";
