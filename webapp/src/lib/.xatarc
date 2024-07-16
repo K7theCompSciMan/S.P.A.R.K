@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://SPARK-7cmp99.us-east-1.xata.sh/db/SPARK-API",
+  "codegen": {
+    "output": "xata.ts"
+  }
+}
