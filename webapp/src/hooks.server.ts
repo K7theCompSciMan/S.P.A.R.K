@@ -20,7 +20,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 				authorization: `Bearer ${accessToken}`
 			}
 		});
-		const user = (await res.json()).user;
+		const user = (await res.json());
 		if (res.status === 200) {
 			event.locals.user = user;
 		}

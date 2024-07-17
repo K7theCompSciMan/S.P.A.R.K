@@ -12,6 +12,10 @@ export const getGroupById = async (id: string) => {
 	return (await getAllGroups()).filter((group) => group.id === id)[0];
 };
 
+export const getGroupsByUserId = async (userId: string) => {
+	return (await getAllGroups()).filter((group) => group.assignedUser?.id === userId);
+}
+
 export const createGroup = async (group?: Group) => {
 	if (group) return await xata.db.group.create(group);
 	return await xata.db.group.create({});

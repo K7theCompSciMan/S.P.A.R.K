@@ -22,6 +22,22 @@ groupRouter.get("/groups", async (req: Request, res: Response) => {
 	}
 });
 
+groupRouter.get("/groups/:userId", async (req: Request, res: Response) => {
+	try {
+		const groups = await db.getGroupsByUserId(req.params.userId);
+		if (groups) {
+			return res.status(StatusCodes.OK).json(groups);
+		}
+		return res
+			.status(StatusCodes.NOT_FOUND)
+			.json({ error: "No groups found" });
+	} catch (err) {
+		return res
+			.status(StatusCodes.INTERNAL_SERVER_ERROR)
+			.json({ error: err });
+	}
+});
+
 groupRouter.get("/group/:id", async (req: Request, res: Response) => {
 	try {
 		const group = await db.getGroupById(req.params.id);
