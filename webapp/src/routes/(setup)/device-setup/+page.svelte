@@ -6,12 +6,8 @@
 	import { deviceData } from "$lib/stores";
 	import { onMount } from "svelte";
 	import type { ActionData } from "./$types";
-	import { redirect } from "@sveltejs/kit";
 	import { page } from "$app/stores";
 
-    // $: if(!$deviceData.assignedGroup || !$deviceData.assignedUser){
-    //     redirect(301, "/setup");
-    // }
     let disabled=true;
     function handleContinue () {
         

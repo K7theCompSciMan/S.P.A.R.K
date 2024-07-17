@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
-import { refreshAccessTokenHandler } from "./auth";
+import { refreshAccessTokenHandler, signRefreshToken } from "./auth";
 import { verifyJwt } from "../utils/jwt";
 import { User } from "../xata";
 import { get } from "lodash";
@@ -17,3 +17,12 @@ authRouter.get("/session/user", (req: Request, res: Response) => {
 	}
 	return res.status(401).send("Invalid token");
 });
+authRouter.post("/session/device", (req: Request, res: Response) => {
+	const { user, device} = req.body;
+	if (! (user && device)) {
+		return res.status(400).send("Invalid input");
+	}
+	const refreshToken = signRefreshToken(user, device);
+
+	return res.status(200).json({ refreshToken });
+})

@@ -7,6 +7,7 @@ import bcrypt from "bcryptjs";
 import { PublicUser } from "../models/user.model";
 import { requireUser, signAccessToken, signRefreshToken } from "../auth/auth";
 import log from "src/utils/logger";
+import { Device } from "src/models/device.model";
 userRouter.get("/users", async (req: Request, res: Response) => {
 	try {
 		const users = await db.getUsers();
@@ -53,7 +54,7 @@ userRouter.post("/register", async (req: Request, res: Response) => {
 		}
 		// sign tokens
 		const accessToken = signAccessToken(newUser);
-		const refreshToken = signRefreshToken(newUser);
+		const refreshToken = signRefreshToken(newUser, {} as Device);
 
 		const publicNewUser = new PublicUser(newUser);
 
@@ -91,7 +92,7 @@ userRouter.post("/login", async (req: Request, res: Response) => {
 
 		// sign tokens
 		const accessToken = signAccessToken(user);
-		const refreshToken = signRefreshToken(user);
+		const refreshToken = signRefreshToken(user, {} as Device);
 		log.info(
 			`User logged in ${user} | accessToken: ${accessToken} | refreshToken: ${refreshToken}`
 		);

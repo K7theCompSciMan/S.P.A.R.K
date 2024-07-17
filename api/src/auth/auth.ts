@@ -5,6 +5,7 @@ import { Request, Response, NextFunction } from "express";
 import { get } from "lodash";
 import { STATUS_CODES } from "http";
 import log from "src/utils/logger";
+import { Device } from "src/models/device.model";
 
 /**
  * The function `signRefreshToken` generates a refresh token for a user and returns it.
@@ -12,14 +13,12 @@ import log from "src/utils/logger";
  * likely contains information such as the user's ID, username, email, and other relevant details.
  * @returns The function `signRefreshToken` returns a signed refresh token for the provided user.
  */
-export function signRefreshToken(user: User) {
+export function signRefreshToken(user: User, device: Device) {
 	const publicUser = new PublicUser(user);
 	// log.info(`Signing refresh token for user ${publicUser}`);
-	const session = new Session(publicUser);
+	const session = new Session(publicUser, device);
 	// log.info(`Session created for user ${session.user}`);
-	const refreshToken = signJwt({ session }, "refreshTokenPrivateKey", {
-		expiresIn: "1w",
-	});
+	const refreshToken = signJwt({ session }, "refreshTokenPrivateKey");
 	// log.info(`Refresh token created for user ${session.user}`);
 	return refreshToken;
 }
@@ -126,7 +125,7 @@ export const refreshAccessTokenHandler = async (
 	}
 
 	const accessToken = signAccessToken(user);
-	return res.status(200).json({ accessToken });
+	return res.status(200).json({ accessToken, device: session.device });
 };
 
 export const requireUser = async (

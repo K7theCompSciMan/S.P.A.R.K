@@ -1,0 +1,15 @@
+{
+  "name": "windows",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kesavan Rangarajan",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "electron": "^31.2.1"
+  }
+}

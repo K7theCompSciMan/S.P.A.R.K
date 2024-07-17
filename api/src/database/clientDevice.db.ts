@@ -1,7 +1,7 @@
 import { ClientDevice, getXataClient, Message, ServerDevice } from "src/xata";
 import { configDotenv } from "dotenv";
 import { getGroupById, updateGroup } from "./group.db";
-import { createMessage } from "./message.db";
+import { createMessage, deleteMessage } from "./message.db";
 configDotenv({ path: "../../.env" });
 const xata = getXataClient();
 
@@ -23,10 +23,13 @@ export const createClientDevice = async (ClientDevice?: ClientDevice) => {
 export const updateClientDevice = async (ClientDevice: ClientDevice) => {
 	return await xata.db.clientDevice.update(ClientDevice);
 };
+export const getMessagesFromClientDeviceId = async (clientDeviceId: string) => {
+	return (await getClientDeviceById(clientDeviceId)).messages as Message[];
+}
 
 export const deleteClientDevice = async (ClientDeviceId: string) => {
-    const clientDevice = await getClientDeviceById(ClientDeviceId);
-    
+    const messages = await getMessagesFromClientDeviceId(ClientDeviceId);
+	messages.forEach((m) => deleteMessage(m.id));
 	return await xata.db.clientDevice.delete(ClientDeviceId);
 };
 

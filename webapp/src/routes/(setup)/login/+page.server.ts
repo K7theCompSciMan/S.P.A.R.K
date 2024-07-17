@@ -3,7 +3,7 @@ import type { Actions, PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async (event) => {
 	if(event.locals.user) {
-		redirect(300, '/groups');
+		redirect(300, '/group-info');
 	}
 } 
 
@@ -44,7 +44,7 @@ export const actions: Actions = {
 			path: '/',
 			secure: true,
 			sameSite: 'strict',
-			maxAge: 60 * 60 * 24 // 1 day
+			expires: new Date(8.64e15)
 		});
         return {
             user

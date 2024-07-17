@@ -1,6 +1,10 @@
-<script lang="ts">
+<script>
 	import { goto } from "$app/navigation";
 </script>
+
+<svelte:head>
+    <title>Welcome to S.P.A.R.K</title>
+</svelte:head>
 
 <div class="text-center h-1/2 top-1/4 relative w-1/2 left-1/4 flex  flex-col justify-items-center text-amber-600">
     <h1 class="text-6xl mt-[4%]">

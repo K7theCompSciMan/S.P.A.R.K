@@ -1,6 +1,5 @@
 import { redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
-import { deviceData } from '$lib/stores';
 
 export const load:PageServerLoad = async (event) => {
     if(!event.locals.user) {
@@ -36,9 +35,56 @@ export const actions:Actions = {
             }
         }
         const data = await res.json();
-        return {
-            success: true,
-            device: data
+        event.locals.device = data;
+        const response = await fetch(`https://spark-api.fly.dev/group/addDevice`, {
+            method: "POST",
+            headers: {
+                "Content-Type": 'application/json',
+                authorization: `Bearer ${event.locals.accessToken}`,
+            },
+            body: JSON.stringify({groupId: assignedGroupId, deviceId: data.id, deviceType}),
+        });
+        const refreshTokenResponse = await fetch(`https://spark-api.fly.dev/session/device`, {
+            method: "POST",
+            headers: {
+                "Content-Type": 'application/json',
+                authorization: `Bearer ${event.locals.accessToken}`,
+            },
+            body: JSON.stringify({user: event.locals.user, device: data}),
+        })
+
+        const refreshToken = (await refreshTokenResponse.json()).refreshToken;
+        console.log(refreshToken);
+
+        event.cookies.set('refreshToken', refreshToken,  {
+			httpOnly: true,
+			path: '/',
+			secure: true,
+			sameSite: 'strict',
+			expires: new Date(8.64e15)
+		});
+
+
+
+        if (response.ok) {
+            return {
+                success: true,
+                device: data
+            }
+        }
+        else {
+            console.log('Failed to add device to group, deleting device');
+            console.log(await response.text());
+            await fetch(`https://spark-api.fly.dev/device/${data.id}`, {
+                method: "DELETE", 
+                headers: {
+                    "Content-Type": 'application/json',
+                    authorization: `Bearer ${event.locals.accessToken}`,
+                },
+            })
+            return {
+                error: await response.text()
+            }
         }
     }
 }

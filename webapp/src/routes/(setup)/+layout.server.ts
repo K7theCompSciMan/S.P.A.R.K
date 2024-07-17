@@ -4,17 +4,28 @@ import type { LayoutServerLoad } from './$types';
 export const load: LayoutServerLoad = async ({ locals }) => {
 	if(locals.user) {
 		if(locals.accessToken) {
+			if(locals.device) {
+				return {
+					user: locals.user,
+					accessToken: locals.accessToken,
+					device: locals.device
+				}
+			}
 			return {
 				user: locals.user,
-				accessToken: locals.accessToken
+				accessToken: locals.accessToken,
+				device: null
 			}
 		}
 		return {
-			user: locals.user
+			user: locals.user,
+			accessToken: '',
+			device: null
 		};
 	}
 	return {
 		user: null,
-		accessToken: ''
+		accessToken: '',
+		device: null
 	};
 };
