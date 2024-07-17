@@ -57,15 +57,11 @@ groupRouter.get("/group/:id", async (req: Request, res: Response) => {
 groupRouter.post("/group", requireUser, async (req: Request, res: Response) => {
 	try {
 		const { name, devices, messages } = req.body;
-		if (!name || !devices || !messages) {
-			const group = await db.createGroup();
-			const newGroup = await db.getGroupById(group.id);
-			return res.status(StatusCodes.OK).json(newGroup);
-		}
 		const group = await db.createGroup({
 			name,
 			devices,
 			messages,
+			assignedUser: res.locals.user.id,
 		} as Group);
 		if (!group) {
 			return res

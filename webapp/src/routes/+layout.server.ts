@@ -7,6 +7,11 @@ export const load: LayoutServerLoad = async ({ locals }) => {
 			user: locals.user
 		};
 	}
+	if (locals.accessToken) {
+		return {
+			accessToken: locals.accessToken
+		}
+	}
 	return {
 		user: null
 	};
