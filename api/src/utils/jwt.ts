@@ -22,9 +22,9 @@ export function verifyJwt<T>(
 	token: string,
 	keyName: "accessTokenPublicKey" | "refreshTokenPublicKey"
 ): T | null {
-	log.info(`Verifying JWT for token ${token}`);
+	// log.info(`Verifying JWT for token ${token}`);
 	const publicKey = Buffer.from(getEnv(keyName), "base64").toString("ascii");
-	log.info(`Got key ${publicKey}`);
+	// log.info(`Got key ${publicKey}`);
 	try {
 		const decoded = jwt.verify(token, publicKey) as T;
 		return decoded;

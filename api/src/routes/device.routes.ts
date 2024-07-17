@@ -98,17 +98,16 @@ deviceRouter.post(
 	async (req: Request, res: Response) => {
 		try {
 			const { name, assignedGroupId } = req.body;
-			if (!name || !assignedGroupId) {
-				const clientDevice = await client.createClientDevice();
-				return res.status(StatusCodes.OK).json(clientDevice);
-			}
+			log.info(req.body)
+			log.info({name, assignedGroupId})
 			const group = await getGroupById(assignedGroupId);
 			if (!group) {
 				log.info(`Group not found`);
+				return res.status(StatusCodes.NOT_FOUND).json({ error: "Group not found" });
 			}
 			const clientDevice = await client.createClientDevice({
 				name,
-				assignedGroup: group,
+				assignedGroup: assignedGroupId,
 				assignedUser: res.locals.user,
 			} as ClientDevice);
 			if (!clientDevice) {
@@ -131,10 +130,6 @@ deviceRouter.post(
 	async (req: Request, res: Response) => {
 		try {
 			const { name, assignedGroupId } = req.body;
-			if (!name || !assignedGroupId) {
-				const serverDevice = await server.createServerDevice();
-				return res.status(StatusCodes.OK).json(serverDevice);
-			}
 			const group = await getGroupById(assignedGroupId);
 			if (!group) {
 				log.info(`Group not found`);

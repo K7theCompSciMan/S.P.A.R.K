@@ -14,13 +14,13 @@ import log from "src/utils/logger";
  */
 export function signRefreshToken(user: User) {
 	const publicUser = new PublicUser(user);
-	log.info(`Signing refresh token for user ${publicUser}`);
+	// log.info(`Signing refresh token for user ${publicUser}`);
 	const session = new Session(publicUser);
-	log.info(`Session created for user ${session.user}`);
+	// log.info(`Session created for user ${session.user}`);
 	const refreshToken = signJwt({ session }, "refreshTokenPrivateKey", {
 		expiresIn: "1w",
 	});
-	log.info(`Refresh token created for user ${session.user}`);
+	// log.info(`Refresh token created for user ${session.user}`);
 	return refreshToken;
 }
 
@@ -33,14 +33,14 @@ export function signRefreshToken(user: User) {
  */
 export function signAccessToken(user: User) {
 	const publicUser = new PublicUser(user);
-	log.info(`Signing access token for user ${publicUser.id}`);
+	// log.info(`Signing access token for user ${publicUser.id}`);
 	const accessToken = signJwt({ user: publicUser }, "accessTokenPrivateKey", {
 		expiresIn: "15m",
 	});
 	if (accessToken === "Error signing JWT") {
 		throw new Error("Error signing JWT");
 	}
-	log.info(`Access token created ${accessToken}`);
+	// log.info(`Access token created ${accessToken}`);
 	return accessToken;
 }
 
@@ -71,12 +71,12 @@ export const deserializeUser = async (
 	const accessToken = (req.headers.authorization || "")
 		.replace("Bearer", "")
 		.replace(" ", "");
-	log.info(accessToken);
+	// log.info(accessToken);
 	if (!accessToken) {
-		log.info(`No token found in deserializeUser ${accessToken}`);
+		// log.info(`No token found in deserializeUser ${accessToken}`);
 		return next();
 	}
-	log.info(`Token found in deserializeUser`);
+	// log.info(`Token found in deserializeUser`);
 	const decoded = verifyJwt<User>(accessToken, "accessTokenPublicKey");
 	const user = get(decoded, "user") as unknown as User | null;
 	if (user !== null) {
@@ -105,7 +105,7 @@ export const refreshAccessTokenHandler = async (
 	res: Response
 ) => {
 	const refreshToken = get(req, "headers.x-refresh") as string;
-	log.info(`Received refresh token in refresh handler`);
+	// log.info(`Received refresh token in refresh handler`);
 	const decoded = verifyJwt<Session>(
 		refreshToken,
 		"refreshTokenPublicKey"
@@ -119,7 +119,7 @@ export const refreshAccessTokenHandler = async (
 	}
 
 	const user = session.user;
-	log.info(`User ${user.id} found in session`);
+	// log.info(`User ${user.id} found in session`);
 
 	if (!user) {
 		return res.status(401).send("Invalid user");
@@ -129,15 +129,15 @@ export const refreshAccessTokenHandler = async (
 	return res.status(200).json({ accessToken });
 };
 
-export const requireUser = (
+export const requireUser = async (
 	req: Request,
 	res: Response,
 	next: NextFunction
 ) => {
-	deserializeUser(req, res, () => {});
+	await deserializeUser(req, res, () => {});
 	// console.log(res.locals.user.id)
 	if (res.locals.user && res.locals.user.id && res.locals.user.username) {
-		console.log(res.locals.user.id)
+		// console.log(res.locals.user.id)
 		return next();
 	}
 	console.log("Unauthorized")

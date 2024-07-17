@@ -1,5 +1,4 @@
 <script lang="ts">
-	import AnimatedInputLabel from './../../../lib/AnimatedInputLabel.svelte';
 	import { goto } from "$app/navigation";
 	import { page } from "$app/stores";
 	import { deviceData } from "$lib/stores";
@@ -66,7 +65,7 @@
     </h1>
     <div class="overflow-scroll w-full h-96 mt-[1%] ">
         {#each groups as group}
-        <div class="border {selectedGroup === group ? "border-emerald-700 bg-gray-200 scale-105" : ""} bg-gray-500 mt-[2%] h-[12%] w-[75%] relative left-[12.5%] flex align-middle rounded-xl cursor-pointer shadow-xl hover:bg-gray-200 hover:scale-105 transition-all delay-75 duration-150 " >
+        <div class="border {selectedGroup === group ? "border-emerald-700 border-2 bg-gray-200 scale-105" : "bg-gray-500"}  mt-[2%] h-[12%] w-[75%] relative left-[12.5%] flex align-middle rounded-xl cursor-pointer shadow-xl hover:bg-gray-200 hover:scale-105 transition-all delay-75 duration-150 " >
                 <!-- svelte-ignore a11y_click_events_have_key_events -->
                 <!-- svelte-ignore a11y_no_static_element_interactions -->
                 <div on:click={()=> {if(selectedGroup === group) {selectedGroup = null} else {selectedGroup = group}}}>
