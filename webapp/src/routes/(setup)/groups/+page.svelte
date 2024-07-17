@@ -1,4 +1,5 @@
 <script lang="ts">
+	import AnimatedInputLabel from './../../../lib/AnimatedInputLabel.svelte';
 	import { goto } from "$app/navigation";
 	import { page } from "$app/stores";
 	import { deviceData } from "$lib/stores";
@@ -8,13 +9,13 @@
     let disabled=true;
     let selectedGroup: Group | null;
     $: disabled = selectedGroup === null;
+    let value = "";
     function handleContinue(){
         if(selectedGroup){
             deviceData.set({assignedGroup: selectedGroup.id, assignedUser: $page.data.user.id, ...$deviceData});
             goto("/device-info");
         }
     }
-    let createGroupPopup = false;
     async function deleteGroup(group: Group){
         const res = await fetch(`https://spark-api.fly.dev/group/${group.id}`, {
             method: "DELETE",
@@ -31,11 +32,35 @@
             console.error(await res.text())
         }
     }
+    async function handleSubmit(name: string){
+        createGroupPopup = false;
+        groupCreated = true;
+        value="";
+        const res = await fetch("https://spark-api.fly.dev/group", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${$page.data.accessToken}`
+            },
+            body: JSON.stringify({name})
+        });
+        if(res.ok){
+            const data = await res.json();
+            groups = [...groups, data];
+            selectedGroup = data;
+        }
+        else{
+            console.error(await res.text())
+        }
+    }
+    let createGroupPopup=false;
+    $: (createGroupPopup &&!value) ?  document.getElementById("createGroupInput")!.focus() : null;
+    let groupCreated = false;
 </script>
 <svelte:head>
     <title>Select Group</title>
 </svelte:head>
-<div class="text-center h-1/2 top-1/4 relative w-1/2 left-1/4 flex  flex-col justify-items-center text-amber-600 {createGroupPopup ? "hidden" : ""}">
+<div class="text-center h-1/2 top-1/4 relative w-1/2 left-1/4 flex  flex-col justify-items-center text-amber-600 ">
     <h1 class="text-6xl mt-[4%]">
         Select a Group 
     </h1>
@@ -61,13 +86,16 @@
         {/each}
         <!-- svelte-ignore a11y_no_static_element_interactions -->
         <!-- svelte-ignore a11y_click_events_have_key_events -->
-        <div class=" bg-transparent mt-[2%] h-[12%] w-[75%] relative left-[12.5%] flex align-middle rounded-xl cursor-pointer group " id="add" on:click={()=>{createGroupPopup = true}}>
+        <div class=" bg-transparent mt-[2%] h-[12%] w-[75%] relative left-[12.5%] flex align-middle rounded-xl cursor-pointer group {createGroupPopup ? "hidden" : ""} " id="add" on:click={()=>{createGroupPopup = true; setTimeout(()=> document.getElementById("createGroupInput")?.focus(), 100)}}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" id="add" class="size-6 absolute top-[24%] group-hover:rotate-45 group-hover:stroke-gray-500 transition-all group-hover:scale-110 duration-100 delay-75 ">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
             <h2 class="text-xl w-[80%] h-fit text-ellipsis overflow-auto text-left absolute top-[17%] ml-[2%] left-[2.5%] group-hover:text-gray-500 transition-all group-hover:scale-110 group-hover:left-[7.5%] duration-100 delay-75 ">
                 Create a New Group
             </h2>
+        </div>
+        <div class="border border-emerald-700 bg-gray-500 mt-[2%] h-[12%] w-[75%] relative left-[12.5%] flex align-middle rounded-xl cursor-pointer shadow-xl {createGroupPopup ? "" : "hidden"} " >
+            <input type="text" id="createGroupInput" placeholder="Enter a Name" name="Create New Event" class="pl-[2%] bg-transparent w-full text-xl focus:outline-none " bind:value on:keypress={async (event) => {if(event.key === "Enter" && !groupCreated) {await handleSubmit(value)}}} on:focusout={async () => {if(!value) {createGroupPopup = false} else if (!groupCreated && createGroupPopup) {await handleSubmit(value)}}}>
         </div>
     </div>
     <button on:click={() =>  goto("/group-info")}>
@@ -78,15 +106,6 @@
     <button on:click={() =>  handleContinue()} {disabled}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke={disabled ? "gray" : "currentColor"} class="size-8 absolute bottom-0 left-[67%]">
             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-        </svg>
-    </button>
-</div>
-
-
-<div class="bg-amber-600 w-[75%] h-[75%] relative top-[12.5%] left-[12.5%] flex flex-col justify-items-center text-white shadow-2xl rounded-3xl {createGroupPopup ? "" : "hidden"}">
-    <button on:click={() => createGroupPopup = false}>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12 absolute right-[1%] top-[1%]">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
         </svg>
     </button>
 </div>
