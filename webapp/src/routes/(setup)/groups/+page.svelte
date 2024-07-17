@@ -7,8 +7,8 @@
     let groups: Group[];
     groups = $page.data.groups;
     let disabled=true;
-    let selectedGroup: Group | null;
-    $: disabled = selectedGroup === null;
+    let selectedGroup: Group | null = null;
+    $: disabled = (selectedGroup === null);
     let value = "";
     function handleContinue(){
         if(selectedGroup){
