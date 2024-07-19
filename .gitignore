@@ -1,6 +1,8 @@
 */.env
 */*/.env
 node_modules/
+stores/
 .xata/
 ./**/stores
 .env
+client/stores/

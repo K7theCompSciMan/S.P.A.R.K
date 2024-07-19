@@ -1,5 +1,5 @@
 node_modules
-
+stores
 # Output
 .output
 .vercel
@@ -19,6 +19,3 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
-
-# Tauri
-stores/
