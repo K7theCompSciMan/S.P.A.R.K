@@ -1,6 +1,5 @@
 import { redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { cookieStore } from '$lib/tauri';
 
 export const load: PageServerLoad = async (event) => {
 	if (!event.locals.user) {
@@ -68,10 +67,6 @@ export const actions: Actions = {
 			sameSite: 'strict',
 			expires: new Date(8.64e15)
 		});
-
-		await cookieStore.set('refreshToken', refreshToken);
-		await cookieStore.save();
-
 		if (response.ok) {
 			return {
 				success: true,

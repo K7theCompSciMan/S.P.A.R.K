@@ -1,4 +1,4 @@
-import { cookieStore } from '$lib/tauri';
+
 import type { Handle } from '@sveltejs/kit';
 export const handle: Handle = async ({ event, resolve }) => {
 	// const { headers } = event.request;
@@ -6,10 +6,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const cookies = event.cookies;
 	if (cookies.get('refreshToken')) {
 		// Remove Bearer prefix
-		let refreshToken = cookies.get('refreshToken');
-		if(!refreshToken) {
-			refreshToken = await cookieStore.get('refreshToken') as string;
-		}
+		const refreshToken = cookies.get('refreshToken');
 		const response = await fetch('https://spark-api.fly.dev/session/refresh', {
 			method: 'GET',
 			headers: {
