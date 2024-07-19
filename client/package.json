@@ -41,6 +41,7 @@
 	"dependencies": {
 		"autoprefixer": "^10.4.19",
 		"postcss": "^8.4.39",
-		"tailwindcss": "^3.4.6"
+		"tailwindcss": "^3.4.6",
+		"tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store#v1"
 	}
 }
