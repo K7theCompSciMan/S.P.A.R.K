@@ -1,17 +1,28 @@
 <script lang="ts">
-	import { enhance } from "$app/forms";
 	import { goto } from "$app/navigation";
 	import AnimatedInputLabel from "$lib/AnimatedInputLabel.svelte";
 	import Radio from "$lib/Radio.svelte";
 	import { deviceData } from "$lib/stores";
 	import { onMount } from "svelte";
-	import type { ActionData } from "./$types";
-	import { page } from "$app/stores";
-
+	import { getStore, setStore } from "$lib/tauri";
+	import type { Device, PublicUser } from "$lib";
+    let accessToken: string;
+    let user: PublicUser;
+    onMount(async () => {
+        user = await getStore("user") as PublicUser;
+        accessToken = await getStore("accessToken") as string;
+        if(!user) {
+            goto("/login");
+        }
+        let device = await getStore("device") as Device;
+        if(device.id  && device.assignedUser){
+            goto("/dashboard");
+        }
+        if(!device.assignedGroup){
+            goto("/groups");
+        }
+    })
     let disabled=true;
-    function handleContinue () {
-        
-    }
     let value: string = "";
     let options = [{
 		value: 'client',
@@ -22,11 +33,67 @@
 	}
     ]
     let deviceType: string;
-    export let form: ActionData;
-    $: console.log($deviceData)
-    $: if(form?.success && form?.device){
-        deviceData.set({assignedGroup: $deviceData.assignedGroup, assignedUser: $deviceData.assignedUser, ...form.device});
-        disabled = false;
+        
+    
+    async function handleSubmit(){
+        if(!deviceType || !value){
+            alert("Please fill in all fields");
+            return false;
+        }
+        const res = await fetch(`https://spark-api.fly.dev/device/${deviceType}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				authorization: `Bearer ${accessToken}`
+			},
+			body: JSON.stringify({ name: value, assignedGroupId: $deviceData.assignedGroup })
+		});
+		if (!res.ok) {
+			console.log('Device creation failed');
+			console.log(await res.text());
+			return {
+				error: await res.text()
+			};
+		}
+		const data = await res.json();
+		const response = await fetch(`https://spark-api.fly.dev/group/addDevice`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				authorization: `Bearer ${accessToken}`
+			},
+			body: JSON.stringify({ groupId: $deviceData.assignedGroup, deviceId: data.id, deviceType })
+		});
+        if(!response.ok){
+            console.log('Failed to add device to group, deleting device');
+			console.log(await response.text());
+			await fetch(`https://spark-api.fly.dev/device/${data.id}`, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					authorization: `Bearer ${accessToken}`
+				}
+			});
+            return false;
+        }
+		const refreshTokenResponse = await fetch(`https://spark-api.fly.dev/session/device`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				authorization: `Bearer ${accessToken}`
+			},
+			body: JSON.stringify({ user, device: data })
+		});
+
+		const refreshToken = (await refreshTokenResponse.json()).refreshToken;
+        
+        await setStore("refreshToken", refreshToken);
+        await setStore("device", data);
+        console.log("Device created");
+        console.log(await getStore("device"));
+        deviceData.set({assignedGroup: $deviceData.assignedGroup, assignedUser: $deviceData.assignedUser, ...data});
+        goto("/dashboard");
+        return true;
     }
 </script>
 
@@ -39,14 +106,11 @@
         Set up your device 
     </h1>
     <div class="overflow-none relative  flex flex-col justify-center  mt-[1%]">
-        <form method="post" use:enhance>
+        <div>
             <AnimatedInputLabel name="Device Name" width="w-[40%]" labelbg="bg-[#175094]" bind:value></AnimatedInputLabel>
             <Radio  legend="Select a device type" {options} fontSize={20} bind:userSelected={deviceType} ></Radio>
-            <input type="text" bind:value={value} class="hidden" name="name">
-            <input type="text" bind:value={deviceType} class="hidden" name="deviceType">
-            <input type="text" name="assignedGroupId" class="hidden" value={$deviceData.assignedGroup}>
-            <button type="submit" class="border bg-transparent w-[75%] relative left-[12.5%] pl-4 pr-4 text-current rounded-md mt-[4%] scale-110 mt[6%]">Log In</button>
-        </form>
+            <button type="submit" on:click={async() => await handleSubmit()} class="border bg-transparent w-[75%] relative left-[12.5%] pl-4 pr-4 text-current rounded-md mt-[4%] scale-110 mt[6%]">Log In</button>
+        </div>
     </div>
     <button on:click={() =>  goto("/device-info")}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 absolute bottom-0 left-[23%]">

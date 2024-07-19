@@ -1,18 +1,32 @@
 <script lang="ts">
+	import { deviceData } from '$lib/stores';
 	import AnimatedInputLabel from '$lib/AnimatedInputLabel.svelte';
 
 	import { goto } from "$app/navigation";
-	import { setStore,  } from "$lib/tauri";
+	import { getStore, setStore,  } from "$lib/tauri";
 	import type { User } from "$lib/xata";
+	import { onMount } from 'svelte';
+	import type { Device, PublicUser } from '$lib';
     let disabled: boolean = true;
     let username: string = "";
     let password: string = "";
     let refreshToken: string = "";
-    let user: any;
+    let user: PublicUser;
 
     $: if(user){
         disabled=false;
     }
+
+    onMount(async () => {
+        user = await getStore("user") as PublicUser;
+        let device = await getStore("device") as Device;
+        if(device.id  && device.assignedUser){
+            goto("/dashboard");
+        }
+        if(user){ 
+            goto("/group-info");
+        }
+    })
 
     async function handleSubmit(){
         console.log("logging In")
@@ -34,6 +48,7 @@
         await setStore("accessToken", accessToken);
         await setStore("refreshToken", refreshToken);
         console.log("success")
+        disabled = false;
         return true;
     }
 

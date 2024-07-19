@@ -1,17 +1,48 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import { page } from "$app/stores";
+	import type { Device, PublicUser } from "$lib";
 	import { deviceData } from "$lib/stores";
+	import { getStore, setStore } from "$lib/tauri";
 	import type { Group } from "$lib/xata";
+	import { onMount } from "svelte";
     let groups: Group[];
-    groups = $page.data.groups;
     let disabled=true;
     let selectedGroup: Group | null = null;
     $: disabled = (selectedGroup === null);
     let value = "";
-    function handleContinue(){
+    let user: PublicUser;
+    let accessToken: string;
+
+    onMount(async () => {
+        user = await getStore("user") as PublicUser;
+        if(!user) {
+            goto("/login");
+        }
+        let device = await getStore("device") as Device;
+        if(device.id  && device.assignedUser){
+            goto("/dashboard");
+        }
+
+        accessToken = await getStore("accessToken") as string;
+
+        const res = await fetch(`https://spark-api.fly.dev/groups/${user.id}`, {
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${accessToken}`
+            }
+        });
+        if(res.status === 200){
+            groups = await res.json();
+        }
+        else {
+            console.error(await res.text());
+        }
+    })
+
+    async function handleContinue(){
         if(selectedGroup){
-            deviceData.set({assignedGroup: selectedGroup.id, assignedUser: $page.data.user.id, ...$deviceData});
+            deviceData.set({assignedGroup: selectedGroup.id, assignedUser: user.id, ...$deviceData});
+            await setStore("group", selectedGroup);
             goto("/device-info");
         }
     }
@@ -19,7 +50,7 @@
         const res = await fetch(`https://spark-api.fly.dev/group/${group.id}`, {
             method: "DELETE",
             headers: {
-                authorization: `Bearer ${$page.data.accessToken}`
+                authorization: `Bearer ${accessToken}`
             },         
         })
 
@@ -39,7 +70,7 @@
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                authorization: `Bearer ${$page.data.accessToken}`
+                authorization: `Bearer ${accessToken}`
             },
             body: JSON.stringify({name})
         });
@@ -102,7 +133,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
         </svg>  
     </button>
-    <button on:click={() =>  handleContinue()} {disabled}>
+    <button on:click={async () => await handleContinue()} {disabled}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke={disabled ? "gray" : "currentColor"} class="size-8 absolute bottom-0 left-[67%]">
             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
         </svg>

@@ -1,5 +1,19 @@
-<script>
+<script lang="ts">
 	import { goto } from "$app/navigation";
+	import type { Device, PublicUser } from "$lib";
+	import { deviceData } from "$lib/stores";
+	import { getStore } from "$lib/tauri";
+	import { onMount } from "svelte";
+    onMount(async () => {
+        let user = await getStore("user") as PublicUser;
+        if(!user) {
+            goto("/login");}
+        let device = await getStore("device") as Device;
+        if(device.id  && device.assignedUser){
+            goto("/dashboard");
+        }
+    })
+
 </script>
 
 <svelte:head>

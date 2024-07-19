@@ -1,5 +1,20 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
+	import type { Device, PublicUser } from "$lib";
+	import { deviceData } from "$lib/stores";
+	import { getStore } from "$lib/tauri";
+	import { onMount } from "svelte";
+
+    onMount(async () => {
+        let user = await getStore("user") as PublicUser;
+        if(!user) {
+            goto("/login");
+        }
+        let device = await getStore("device") as Device;
+        if(device.id  && device.assignedUser){
+            goto("/dashboard");
+        }
+    })
 </script>
 <div class="text-center h-1/2 top-1/4 relative w-1/2 left-1/4 flex  flex-col justify-items-center text-amber-600">
     <h1 class="text-6xl mt-[4%]">
