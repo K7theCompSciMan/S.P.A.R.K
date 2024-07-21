@@ -17,6 +17,7 @@
         }
         console.log(user)
     });
+
 </script>
 {#await user}
     <div>Loading...</div>
