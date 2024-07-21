@@ -89,6 +89,7 @@
         
         await setStore("refreshToken", refreshToken);
         await setStore("device", data);
+        await setStore("deviceType", deviceType);
         console.log("Device created");
         console.log(await getStore("device"));
         deviceData.set({assignedGroup: $deviceData.assignedGroup, assignedUser: $deviceData.assignedUser, ...data});

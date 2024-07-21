@@ -15,7 +15,6 @@
         if(!user) {
             goto("/login");
         }
-        console.log(user)
     });
 
 </script>
