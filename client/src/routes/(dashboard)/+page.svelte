@@ -1,13 +1,22 @@
 <script lang="ts">
 	import { page } from "$app/stores";
+	import type { Device, PublicUser } from "$lib";
+	import { store } from "$lib/tauri";
 	import { redirect } from "@sveltejs/kit";
+	import { onMount } from "svelte";
 
-    $: if($page.data.user && $page.data.device) {
-        console.log("User and device are set, redirecting to dashboard");
-        throw redirect(300, "/dashboard");
-    } else {
-        throw redirect(300, "/setup");
-    }
+    onMount(async () => {
+        let user = await store.get("user") as PublicUser;
+        let device = await store.get("device") as Device;
+        if(!user && device.id) {
+            throw redirect(301, "/login");
+        } else if (!device.id) {
+            throw redirect(301, "/setup");
+        } else {
+            throw redirect(301, "/dashboard");
+        }
+
+    })
 </script>
 
 <svelte:head>
