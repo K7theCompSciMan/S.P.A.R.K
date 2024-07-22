@@ -4,6 +4,7 @@ import { configDotenv } from "dotenv";
 import { getGroupById, updateGroup } from "./group.db";
 import { createMessage } from "./message.db";
 import { updateClientDevice } from "./clientDevice.db";
+import { Command } from "src/models/command.model";
 configDotenv({ path: "../../.env" });
 const xata = getXataClient();
 
@@ -51,3 +52,8 @@ export const sendMessageToClientFromServer = async (
     await updateGroup(group);
     return message;
 };
+
+export const addCommand = async (serverDevice: ServerDevice, command: Command) => {
+    serverDevice.deviceCommands.push(command);
+    return await updateServerDevice(serverDevice);
+}

@@ -2,6 +2,7 @@ import { ClientDevice, getXataClient, Message, ServerDevice } from "src/xata";
 import { configDotenv } from "dotenv";
 import { getGroupById, updateGroup } from "./group.db";
 import { createMessage, deleteMessage } from "./message.db";
+import { Command } from "src/models/command.model";
 configDotenv({ path: "../../.env" });
 const xata = getXataClient();
 
@@ -25,10 +26,10 @@ export const updateClientDevice = async (ClientDevice: ClientDevice) => {
 };
 export const getMessagesFromClientDeviceId = async (clientDeviceId: string) => {
 	return (await getClientDeviceById(clientDeviceId)).messages as Message[];
-}
+};
 
 export const deleteClientDevice = async (ClientDeviceId: string) => {
-    const messages = await getMessagesFromClientDeviceId(ClientDeviceId);
+	const messages = await getMessagesFromClientDeviceId(ClientDeviceId);
 	messages.forEach((m) => deleteMessage(m.id));
 	return await xata.db.clientDevice.delete(ClientDeviceId);
 };
@@ -49,7 +50,7 @@ export const sendMessageToServerFromClient = async (
 		content: messageContent,
 		to: serverDevice.id,
 		from: clientDevice.id,
-        fromDeviceType: "client",
+		fromDeviceType: "client",
 	} as Message);
 	serverDevice.messages.push(message);
 	clientDevice.messages.push(message);
@@ -58,4 +59,12 @@ export const sendMessageToServerFromClient = async (
 	await updateClientDevice(clientDevice);
 	await updateGroup(group);
 	return message;
+};
+
+export const addCommand = async (
+	clientDevice: ClientDevice,
+	command: Command
+) => {
+	clientDevice.deviceCommands.push(command);
+	return await updateClientDevice(clientDevice);
 };

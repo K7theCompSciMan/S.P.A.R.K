@@ -3,6 +3,7 @@ import * as db from "../database/group.db";
 import { StatusCodes } from "http-status-codes";
 import { Group } from "../xata";
 import { requireUser } from "src/auth/auth";
+import log from "src/utils/logger";
 
 export const groupRouter = express.Router();
 // TODO: Implement ID10T error handling
@@ -91,6 +92,31 @@ groupRouter.put("/group", requireUser, async (req: Request, res: Response) => {
 		return res
 			.status(StatusCodes.INTERNAL_SERVER_ERROR)
 			.json({ error: "Failed to update group" });
+	} catch (error) {
+		return res
+			.status(StatusCodes.INTERNAL_SERVER_ERROR)
+			.json({ error: error });
+	}
+});
+
+groupRouter.post("/group/addCommand", requireUser, async (req: Request, res: Response) => {
+	try {
+		const { groupId, command } = req.body;
+		if (!groupId || !command) {
+			return res
+				.status(StatusCodes.BAD_REQUEST)
+				.json({ error: "Invalid request" });
+		}
+		log.info("adding command " + command + " to group " + groupId)
+		let group = await db.getGroupById(groupId)
+		const newGroup = await db.addCommandToGroup(group, command);
+		if (newGroup) {
+			log.info("added command " + command + " to group " + groupId)
+			return res.status(StatusCodes.OK).json(newGroup);
+		}
+		return res
+			.status(StatusCodes.NOT_FOUND)
+			.json({ error: "Group not found" });
 	} catch (error) {
 		return res
 			.status(StatusCodes.INTERNAL_SERVER_ERROR)

@@ -98,8 +98,8 @@ deviceRouter.post(
 	async (req: Request, res: Response) => {
 		try {
 			const { name, assignedGroupId } = req.body;
-			log.info(req.body)
-			log.info({name, assignedGroupId})
+			// log.info(req.body)
+			// log.info({name, assignedGroupId})
 			const group = await getGroupById(assignedGroupId);
 			if (!group) {
 				log.info(`Group not found`);
@@ -276,6 +276,40 @@ deviceRouter.put(
         }
     }
 );
+
+deviceRouter.post("/device/client/addCommand", requireUser, async (req: Request, res: Response) => {
+	try {
+		const {clientDeviceId, command} = req.body;
+		if (!clientDeviceId || !command) {
+			return res.status(StatusCodes.BAD_REQUEST).json({error: "Invalid request"});
+		}
+		const clientDevice = await client.getClientDeviceById(clientDeviceId);
+		if (!clientDevice) {
+			return res.status(StatusCodes.NOT_FOUND).json({error: "Client Device not found"});
+		}
+		const updatedClientDevice = await client.addCommand(clientDevice, command);
+		return res.status(StatusCodes.OK).json(updatedClientDevice);
+	} catch (error) {
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: error});
+	}
+})
+
+deviceRouter.post("/device/server/addCommand", requireUser, async (req: Request, res: Response) => {
+	try {
+		const {serverDeviceId, command} = req.body;
+		if (!serverDeviceId || !command) {
+			return res.status(StatusCodes.BAD_REQUEST).json({error: "Invalid request"});
+		}
+		const serverDevice = await server.getServerDeviceById(serverDeviceId);
+		if (!serverDevice) {
+			return res.status(StatusCodes.NOT_FOUND).json({error: "server Device not found"});
+		}
+		const updatedServerDevice = await server.addCommand(serverDevice, command);
+		return res.status(StatusCodes.OK).json(updatedServerDevice);
+	} catch (error) {
+		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: error});
+	}
+})
 
 
 deviceRouter.delete("/device/message/:id", requireUser, async (req: Request, res: Response) => {

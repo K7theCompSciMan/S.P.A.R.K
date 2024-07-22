@@ -10,7 +10,6 @@ const tables = [
   {
     name: "group",
     columns: [
-      { name: "messages", type: "json", notNull: true, defaultValue: "[{}]" },
       {
         name: "name",
         type: "string",
@@ -24,6 +23,13 @@ const tables = [
         defaultValue: '{\n  "client": [],\n  "server": []\n}',
       },
       { name: "assignedUser", type: "link", link: { table: "user" } },
+      { name: "messages", type: "json", notNull: true, defaultValue: "[]" },
+      {
+        name: "groupCommands",
+        type: "json",
+        notNull: true,
+        defaultValue: "[]",
+      },
     ],
     revLinks: [
       { column: "assignedGroup", table: "clientDevice" },
@@ -37,6 +43,12 @@ const tables = [
       { name: "messages", type: "json", notNull: true, defaultValue: "[{}]" },
       { name: "assignedGroup", type: "link", link: { table: "group" } },
       { name: "assignedUser", type: "link", link: { table: "user" } },
+      {
+        name: "deviceCommands",
+        type: "json",
+        notNull: true,
+        defaultValue: "[]",
+      },
     ],
   },
   {
@@ -46,6 +58,12 @@ const tables = [
       { name: "messages", type: "json", notNull: true, defaultValue: "[{}]" },
       { name: "assignedGroup", type: "link", link: { table: "group" } },
       { name: "assignedUser", type: "link", link: { table: "user" } },
+      {
+        name: "deviceCommands",
+        type: "json",
+        notNull: true,
+        defaultValue: "[]",
+      },
     ],
   },
   {

@@ -93,9 +93,9 @@ userRouter.post("/login", async (req: Request, res: Response) => {
 		// sign tokens
 		const accessToken = signAccessToken(user);
 		const refreshToken = signRefreshToken(user, {} as Device);
-		log.info(
-			`User logged in ${user} | accessToken: ${accessToken} | refreshToken: ${refreshToken}`
-		);
+		// log.info(
+		// 	`User logged in ${user} | accessToken: ${accessToken} | refreshToken: ${refreshToken}`
+		// );
 		const publicUser = new PublicUser(user);
 		return res
 			.status(StatusCodes.OK)
