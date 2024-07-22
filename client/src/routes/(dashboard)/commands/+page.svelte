@@ -23,7 +23,7 @@
 	let deviceCommands: Command[] = [];
 	setTimeout(() => {
 		deviceCommands = device.deviceCommands!;
-	}, 100);
+	}, 10);
 	async function updateCommands() {
 		let response = await fetch(`https://spark-api.fly.dev/device/${deviceType}`, {
 			method: 'PUT',
@@ -72,7 +72,7 @@
 <!-- svelte-ignore css_unused_selector -->
 <div class="bg-slate-500 w-[80vw] ml-[5%] rounded-[2rem] shadow-2xl h-screen overflow-auto">
 	<div class="flex flex-col items-center h-full pt-[3%]">
-		<h1 class="text-2xl text-slate-200">Device Commands</h1>
+		<h1 class="text-2xl text-slate-200">{device.name} Commands</h1>
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
