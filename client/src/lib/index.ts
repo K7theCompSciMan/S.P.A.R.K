@@ -3,7 +3,8 @@ export type Device = {
     messages?: string ,
     assignedGroup?: { id: string} ,
     assignedUser?: { id: string},
-    id?: string
+    id?: string,
+    deviceCommands?: Command[],
 }
 
 export type PublicUser = {

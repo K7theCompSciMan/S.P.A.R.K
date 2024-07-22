@@ -41,7 +41,7 @@
 
     async function handleContinue(){
         if(selectedGroup){
-            deviceData.set({assignedGroup: selectedGroup.id, assignedUser: user.id, ...$deviceData});
+            deviceData.set({assignedGroup: selectedGroup.id, assignedUser: {id:user.id}, ...$deviceData});
             await setStore("group", selectedGroup);
             goto("/device-info");
         }
