@@ -1,5 +1,5 @@
 import type { Device } from '$lib';
-import {  writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
 function createDeviceData() {
 	const { subscribe, set } = writable({} as Device);
@@ -7,8 +7,18 @@ function createDeviceData() {
 	return {
 		subscribe,
 		set: (n: Device) => set(n),
-		reset: () => set({}),
+		reset: () => set({})
+	};
+}
+
+function createUrlStore() {
+	const { subscribe, set } = writable('' as string);
+	return {
+		subscribe,
+		set: (n: string) => set(n),
+		reset: () => set('')
 	};
 }
 
 export const deviceData = createDeviceData();
+export const currentUrl = createUrlStore();

@@ -1,22 +1,21 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import type { Group } from './xata';
 
 	export let url: string;
 	export let name: string;
 	export let classModifier = '';
-	export let selected = window.location.pathname === url;
 	export let type = '';
-	export let group: Group = {};
+	export let selected = false;
+	export let onclick: () => void = () => goto(url);
 </script>
 
 <button
-	class="{classModifier} h-fit mb-[5%] text-lg relative w-full hover:shadow-lg hover:text-slate-200
-    hover:bg-slate-500 rounded-md transition duration-150 {selected
+	class=" h-fit mb-[5%] text-lg relative w-full hover:shadow-lg hover:text-slate-200
+    hover:bg-slate-500 rounded-md transition-all duration-150
+    text-start overflow-hidden group {selected
 		? 'bg-slate-500 shadow-lg text-slate-200'
-		: ''} 
-    text-start overflow-hidden"
-	on:click={() => goto(url)}
+		: ''} {classModifier} "
+	on:click={onclick}
 >
 	{#if name === 'Dashboard'}
 		<svg
@@ -70,7 +69,7 @@
 			viewBox="0 0 24 24"
 			stroke-width="1.5"
 			stroke="currentColor"
-			class="size-6 absolute left-[2%] top-[2%]"
+			class="size-6 absolute left-[2%] top-[2%] group-hover:rotate-45 transition-all"
 		>
 			<path
 				stroke-linecap="round"
@@ -98,38 +97,6 @@
 				d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z"
 			/>
 		</svg>
-	{:else if name === 'This Device'}
-		{#if type === 'client'}
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke-width="1.5"
-				stroke="currentColor"
-				class="size-6 absolute left-[2%] top-[2%]"
-			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
-				/>
-			</svg>
-		{:else if type === 'server'}
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke-width="1.5"
-				stroke="currentColor"
-				class="size-6 absolute left-[2%] top-[2%]"
-			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					d="M21.75 17.25v-.228a4.5 4.5 0 0 0-.12-1.03l-2.268-9.64a3.375 3.375 0 0 0-3.285-2.602H7.923a3.375 3.375 0 0 0-3.285 2.602l-2.268 9.64a4.5 4.5 0 0 0-.12 1.03v.228m19.5 0a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3m19.5 0a3 3 0 0 0-3-3H5.25a3 3 0 0 0-3 3m16.5 0h.008v.008h-.008v-.008Zm-3 0h.008v.008h-.008v-.008Z"
-				/>
-			</svg>
-		{/if}
 	{:else if type === 'group'}
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -143,6 +110,36 @@
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75ZM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25ZM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z"
+			/>
+		</svg>
+	{:else if type === 'client'}
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke-width="1.5"
+			stroke="currentColor"
+			class="size-6 absolute left-[2%] top-[2%]"
+		>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
+			/>
+		</svg>
+	{:else if type === 'server'}
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke-width="1.5"
+			stroke="currentColor"
+			class="size-6 absolute left-[2%] top-[2%]"
+		>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M21.75 17.25v-.228a4.5 4.5 0 0 0-.12-1.03l-2.268-9.64a3.375 3.375 0 0 0-3.285-2.602H7.923a3.375 3.375 0 0 0-3.285 2.602l-2.268 9.64a4.5 4.5 0 0 0-.12 1.03v.228m19.5 0a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3m19.5 0a3 3 0 0 0-3-3H5.25a3 3 0 0 0-3 3m16.5 0h.008v.008h-.008v-.008Zm-3 0h.008v.008h-.008v-.008Z"
 			/>
 		</svg>
 	{/if}
