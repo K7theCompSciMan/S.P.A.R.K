@@ -23,7 +23,7 @@
 	let deviceCommands: Command[] = [];
 	setTimeout(() => {
 		deviceCommands = device.deviceCommands!;
-	}, 100)
+	}, 100);
 	async function updateCommands() {
 		let response = await fetch(`https://spark-api.fly.dev/device/${deviceType}`, {
 			method: 'PUT',
@@ -44,13 +44,13 @@
 	async function handleSubmit(newCommand: Command) {
 		if (!newCommand.alias && newCommand.command) {
 			console.error('Command alias is required');
-			return ;
+			return;
 		} else if (newCommand.alias && !newCommand.command) {
 			console.error('Command is required');
-			return ;
+			return;
 		} else if (!newCommand.alias && !newCommand.command) {
 			console.error('Command alias and command are required');
-			return ;
+			return;
 		} else {
 			createCommandPopup = false;
 			commandCreated = true;
@@ -62,6 +62,11 @@
 	}
 	let commandCreated = false;
 	let createCommandPopup = false;
+
+	async function deleteCommand(command: Command) {
+		deviceCommands = deviceCommands.filter((c) => c !== command);
+		await updateCommands();
+	}
 </script>
 
 <!-- svelte-ignore css_unused_selector -->
@@ -73,7 +78,9 @@
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div id="commands" class="w-1/2 h-full pt-[2%]">
 			{#each deviceCommands! as command}
-				<div class="bg-slate-600 rounded-2xl w-full h-[10%] flex items-center text-slate-200 mb-[2%]">
+				<div
+					class="bg-slate-600 rounded-2xl w-full h-[10%] flex flex-row relative items-center text-slate-200 mb-[2%]"
+				>
 					<div class="flex flex-col h-full w-[50%]">
 						<p class="relative left-[5%] top-[4%] text-xl">Command Alias</p>
 						<input
@@ -93,6 +100,18 @@
 							on:focusout={async () => await updateCommands()}
 						></textarea>
 					</code>
+					<button on:click={async () => await deleteCommand(command)}>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="size-6 absolute right-[1%] top-[5%] transition hover:stroke-red-600"
+						>
+							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+						</svg>
+					</button>
 				</div>
 			{/each}
 			<!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -123,30 +142,53 @@
 					Create a New Command
 				</h2>
 			</div>
-            <div class="bg-slate-600 rounded-2xl w-full h-[10%] flex items-center text-slate-200 {createCommandPopup ? "" : "hidden"} ">
-                <div class="flex flex-col h-full w-[50%]">
-                    <p class="relative left-[5%] top-[4%] text-xl">New Command Alias</p>
-                    <input
-                        type="text"
-                        bind:value={newCommand.alias}
-                        class="text-ellipsis border-b bg-transparent mt-[3%] w-[40%] ml-[5%] focus:outline-none"
-                        on:focusout={async () => {if(!newCommand.alias) {createCommandPopup = false} else if (!commandCreated && createCommandPopup) {await handleSubmit(newCommand)}}}
-                        on:keypress={async(event) => {if(event.key === "Enter" && !commandCreated) {await handleSubmit(newCommand)}}}
-                    />
-                </div>
-                <code class="w-[50%] bg-slate-700 rounded-r-2xl h-full text-ellipsis">
-                    <p class="relative w-fit h-fit text-xl ml-[4%]">New Command</p>
-                    <textarea
-                        rows="1"
-                        cols="50"
-                        bind:value={newCommand.command}
-                        class="bg-slate-800 rounded-br-2xl w-full relative pt-[1%] pl-[4%] h-[70%] text-md focus:outline-none cursor-text no-scrollbar resize-none overflow-auto"
-                        on:focusout={async () => {if(!newCommand.command) {createCommandPopup = false} else if (!commandCreated && createCommandPopup) {await handleSubmit(newCommand)}}}
-                        on:keypress={async(event) => {if(event.key === "Enter" && !commandCreated) {await handleSubmit(newCommand)}}}
-                    ></textarea>
-                </code>
-            </div>
-			
+			<div
+				class="bg-slate-600 rounded-2xl w-full h-[10%] flex items-center text-slate-200 {createCommandPopup
+					? ''
+					: 'hidden'} "
+			>
+				<div class="flex flex-col h-full w-[50%]">
+					<p class="relative left-[5%] top-[4%] text-xl">New Command Alias</p>
+					<input
+						type="text"
+						bind:value={newCommand.alias}
+						class="text-ellipsis border-b bg-transparent mt-[3%] w-[40%] ml-[5%] focus:outline-none"
+						on:focusout={async () => {
+							if (!newCommand.alias) {
+								createCommandPopup = false;
+							} else if (!commandCreated && createCommandPopup) {
+								await handleSubmit(newCommand);
+							}
+						}}
+						on:keypress={async (event) => {
+							if (event.key === 'Enter' && !commandCreated) {
+								await handleSubmit(newCommand);
+							}
+						}}
+					/>
+				</div>
+				<code class="w-[50%] bg-slate-700 rounded-r-2xl h-full text-ellipsis">
+					<p class="relative w-fit h-fit text-xl ml-[4%]">New Command</p>
+					<textarea
+						rows="1"
+						cols="50"
+						bind:value={newCommand.command}
+						class="bg-slate-800 rounded-br-2xl w-full relative pt-[1%] pl-[4%] h-[70%] text-md focus:outline-none cursor-text no-scrollbar resize-none overflow-auto"
+						on:focusout={async () => {
+							if (!newCommand.command) {
+								createCommandPopup = false;
+							} else if (!commandCreated && createCommandPopup) {
+								await handleSubmit(newCommand);
+							}
+						}}
+						on:keypress={async (event) => {
+							if (event.key === 'Enter' && !commandCreated) {
+								await handleSubmit(newCommand);
+							}
+						}}
+					></textarea>
+				</code>
+			</div>
 		</div>
 	</div>
 </div>
