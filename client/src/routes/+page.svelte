@@ -1,19 +1,18 @@
 <script lang="ts">
-	import { page } from "$app/stores";
+	import { goto } from "$app/navigation";
 	import type { Device, PublicUser } from "$lib";
 	import { store } from "$lib/tauri";
-	import { redirect } from "@sveltejs/kit";
 	import { onMount } from "svelte";
 
     onMount(async () => {
         let user = await store.get("user") as PublicUser;
         let device = await store.get("device") as Device;
         if(!user && device.id) {
-            throw redirect(301, "/login");
+            goto("/login");
         } else if (!device.id) {
-            throw redirect(301, "/setup");
+            goto("/setup");
         } else {
-            throw redirect(301, "/dashboard");
+            goto("/dashboard");
         }
 
     })
@@ -38,7 +37,7 @@
         </svg>  
     </button>
     <button>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 absolute bottom-1/4 left-[67%]">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="gray" class="size-8 absolute bottom-1/4 left-[67%]">
             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
         </svg>
     </button>

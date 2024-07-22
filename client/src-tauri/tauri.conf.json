@@ -3,7 +3,7 @@
   "build": {
     "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm run dev",
-    "devPath": "http://localhost:5173/setup",
+    "devPath": "http://localhost:4173/setup",
     "distDir": "../build"
   },
   "package": {
@@ -16,7 +16,7 @@
     },
     "bundle": {
       "active": true,
-      "category": "DeveloperTool",
+      "category": "Utility",
       "copyright": "",
       "deb": {
         "depends": []
@@ -29,7 +29,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.something.something",
+      "identifier": "com.spark.ai.assistant",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
