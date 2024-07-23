@@ -4,6 +4,7 @@
 	import type { Command, Device, PublicUser } from '$lib';
 	import { getStore, setStore } from '$lib/tauri';
 	import { onMount } from 'svelte';
+	import { invoke } from '@tauri-apps/api/tauri';
 
 	let user: PublicUser = { id: '', username: '' };
 	let group: Group = {};
@@ -67,6 +68,10 @@
 		deviceCommands = deviceCommands.filter((c) => c !== command);
 		await updateCommands();
 	}
+
+	async function runCommand(command: Command) {
+		invoke('run_command', { command: command.command });
+	}
 </script>
 
 <!-- svelte-ignore css_unused_selector -->
@@ -110,6 +115,22 @@
 							class="size-6 absolute right-[1%] top-[5%] transition hover:stroke-red-600"
 						>
 							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+						</svg>
+					</button>
+					<button on:click={async()=> await runCommand(command)}>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="size-6 absolute right-[4%] top-[5%] transition hover:stroke-green-600"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+							/>
 						</svg>
 					</button>
 				</div>
