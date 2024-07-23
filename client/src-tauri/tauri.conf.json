@@ -12,7 +12,14 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "all": false,
+      "window": {
+        "all": true
+      }
+    },
+    "systemTray": {
+      "iconPath": "icons/icon.ico",
+      "iconAsTemplate": true
     },
     "bundle": {
       "active": true,
@@ -60,7 +67,8 @@
         "resizable": true,
         "title": "S.P.A.R.K",
         "width": 800,
-        "maximized": true
+        "maximized": true,
+        "label": "main"
       }
     ]
   }
