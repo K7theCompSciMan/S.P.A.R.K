@@ -33,9 +33,7 @@ export function signRefreshToken(user: User, device: Device) {
 export function signAccessToken(user: User) {
 	const publicUser = new PublicUser(user);
 	// log.info(`Signing access token for user ${publicUser.id}`);
-	const accessToken = signJwt({ user: publicUser }, "accessTokenPrivateKey", {
-		expiresIn: "15m",
-	});
+	const accessToken = signJwt({ user: publicUser }, "accessTokenPrivateKey");
 	if (accessToken === "Error signing JWT") {
 		throw new Error("Error signing JWT");
 	}

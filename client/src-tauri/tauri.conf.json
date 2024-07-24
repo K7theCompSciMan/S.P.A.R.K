@@ -3,16 +3,23 @@
   "build": {
     "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm run dev",
-    "devPath": "http://localhost:4173/setup",
+    "devPath": "http://localhost:5173/",
     "distDir": "../build"
   },
   "package": {
     "productName": "SPARK",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "all": false,
+      "window": {
+        "all": true
+      }
+    },
+    "systemTray": {
+      "iconPath": "icons/icon.ico",
+      "iconAsTemplate": true
     },
     "bundle": {
       "active": true,
@@ -60,7 +67,8 @@
         "resizable": true,
         "title": "S.P.A.R.K",
         "width": 800,
-        "maximized": true
+        "maximized": true,
+        "label": "main"
       }
     ]
   }
