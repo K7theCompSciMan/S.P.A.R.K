@@ -17,6 +17,12 @@ fn default_device() -> Device {
 
 }
 
+fn handle_server_device() {
+    loop {
+        println!("Server Device Running");
+    }
+}
+
 pub fn handle_device_updates<R: Runtime>( store: &mut Store<R>) -> Result<(), Error> {
     loop {
         let device: Device = serde_json::from_value::<Device>(store.get("device".to_string()).unwrap().clone()).unwrap_or(default_device());
@@ -28,6 +34,11 @@ pub fn handle_device_updates<R: Runtime>( store: &mut Store<R>) -> Result<(), Er
             let updated_device: xata_structs::Device = reqwest::blocking::get(&request_url)?.json()?;
             println!("past Device Messages {:?}", device.messages );
             println!("updated Device Messages {:?}", updated_device.messages );
+            if device_type == "server" {
+                thread::spawn(|| {
+                    handle_server_device();
+                });
+            }
             if updated_device != device {
                 if past_messages != updated_device.messages {
                     let new_messages = updated_device.messages.clone();
