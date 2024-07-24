@@ -1,3 +1,4 @@
+use json::JsonValue::Null;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value}; // Import the `json` macro from the `serde_json` crate
 
@@ -9,8 +10,7 @@ pub struct Device {
     pub assignedUser: User,
     pub assignedGroup: Group,
     pub messages: Vec<Message>,
-    pub commands: Vec<Command>,
-    pub device_type: String,
+    pub deviceCommands: Vec<Command>,
 
 }
 impl Device {
@@ -21,8 +21,7 @@ pub fn to_json_value(&self) -> Value {
         "assignedUser": self.assignedUser,
         "assignedGroup": self.assignedGroup,
         "messages": self.messages,
-        "commands": self.commands,
-        "device_type": self.device_type,
+        "commands": self.deviceCommands,
     })
 }
 }
@@ -41,9 +40,9 @@ pub struct Message {
     pub id: String,
     pub from: String,
     pub to: String,
-    pub status: i8,
+    pub status: Option<i8>,
     pub content: String,
-    pub from_device_type: String,
+    pub fromDeviceType: String,
 }
 
 impl PartialEq for Message {
@@ -53,7 +52,7 @@ impl PartialEq for Message {
             && self.to == other.to
             && self.status == other.status
             && self.content == other.content
-            && self.from_device_type == other.from_device_type
+            && self.fromDeviceType == other.fromDeviceType
     }
 }
 
