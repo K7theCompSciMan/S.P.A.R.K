@@ -1,4 +1,4 @@
-use std::thread;
+use std::{borrow::BorrowMut, sync::{Arc, Mutex, MutexGuard}, thread};
 
 use reqwest::{self, Error};
 use tauri::Runtime;
@@ -23,22 +23,33 @@ fn handle_server_device() {
     }
 }
 
-pub fn handle_device_updates<R: Runtime>( store: &mut Store<R>) -> Result<(), Error> {
+pub fn handle_device_updates<R: Runtime>( store: Arc<Mutex<&mut Store<R>>>) -> Result<(), Error> {
+    let mut binding = match store.lock() {
+        Ok(guard) => guard,
+        Err(poisoned) => {
+            // Handle mutex poisoning
+            let guard = poisoned.into_inner();
+            println!("Thread recovered from mutex poisoning: {:?}", *guard);
+            guard
+        }
+    };
+    let store: &mut MutexGuard<&mut Store<R>> = binding.borrow_mut();
+    let mut device: Device = serde_json::from_value::<Device>(store.get("device".to_string()).unwrap().clone()).unwrap_or(default_device());
+    let mut device_type = serde_json::from_value::<String>(store.get("deviceType".to_string()).unwrap().clone()).unwrap_or("none".to_string());
+    if device_type == "server" {
+        thread::spawn(|| {
+            handle_server_device();
+        });
+    }
     loop {
-        let device: Device = serde_json::from_value::<Device>(store.get("device".to_string()).unwrap().clone()).unwrap_or(default_device());
-        let device_type = serde_json::from_value::<String>(store.get("deviceType".to_string()).unwrap().clone()).unwrap_or("none".to_string());
         
-        if device.id!="default".to_string() && device_type!="none".to_string(){
+        if device.id!="default".to_string() && device_type!="none".to_string() {
             let past_messages = device.messages.clone();
             let request_url = format!("https://spark-api.fly.dev/device/{device_type}/{device_id}/", device_type = device_type, device_id = device.id);
             let updated_device: xata_structs::Device = reqwest::blocking::get(&request_url)?.json()?;
             println!("past Device Messages {:?}", device.messages );
             println!("updated Device Messages {:?}", updated_device.messages );
-            if device_type == "server" {
-                thread::spawn(|| {
-                    handle_server_device();
-                });
-            }
+            
             if updated_device != device {
                 if past_messages != updated_device.messages {
                     let new_messages = updated_device.messages.clone();
@@ -58,5 +69,7 @@ pub fn handle_device_updates<R: Runtime>( store: &mut Store<R>) -> Result<(), Er
             println!("No device or device type set");
         }
         thread::sleep(std::time::Duration::from_secs(5));
+        device = serde_json::from_value::<Device>(store.get("device".to_string()).unwrap().clone()).unwrap_or(default_device());
+        device_type = serde_json::from_value::<String>(store.get("deviceType".to_string()).unwrap().clone()).unwrap_or("none".to_string());
     }
 }

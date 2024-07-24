@@ -1,10 +1,10 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use std::path::PathBuf; // Add this line to import PathBuf
+use std::{path::PathBuf, sync::{Arc, Mutex, MutexGuard}, thread}; // Add this line to import PathBuf
 
 use backend::handle_device_updates;
-use tauri::{self, Manager, Wry};
+use tauri::{self, AppHandle, Manager, Wry};
 use tauri_plugin_store::{with_store, StoreCollection};
 mod app;
 mod tray;
@@ -22,10 +22,28 @@ fn main() {
         api.prevent_close();
       }
       _ => {}
-    }).setup(|app| Ok({
-      let _store = with_store(app.app_handle(), app.state::<StoreCollection<Wry>>(),  PathBuf::from("C:/Code/S.P.A.R.K/client/stores/store.json"), |store| Ok({
-          let _ = handle_device_updates(store).expect("failed to handle device updates");
-      })).expect("failed to handle device updates");
+    })
+    .setup(|app| Ok({
+      let arc_app_handle = Arc::new(Mutex::new(app.app_handle().clone())).clone();
+      
+      thread::spawn(move || {
+          let app_handle: MutexGuard<AppHandle> = match arc_app_handle.lock() {
+              Ok(guard) => guard,
+              Err(poisoned) => {
+                  // Handle mutex poisoning
+                  let guard = poisoned.into_inner();
+                  println!("Thread recovered from mutex poisoning: {:?}", *guard);
+                  guard
+              }
+          };
+          with_store(app_handle.clone(),
+          app_handle.clone().state::<StoreCollection<Wry>>(), 
+          PathBuf::from("C:/Code/S.P.A.R.K/stores/store.json"), 
+          |store| Ok({
+              let store = Arc::new(Mutex::new(store));  
+              handle_device_updates(store).unwrap();
+          }))
+      });
     }))
     .run(tauri::generate_context!())
     .expect("error while running tauri application");

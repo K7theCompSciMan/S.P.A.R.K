@@ -84,6 +84,7 @@ dependencies = [
  "tauri",
  "tauri-build",
  "tauri-plugin-store",
+ "tauri-runtime-wry",
  "tokio",
 ]
 

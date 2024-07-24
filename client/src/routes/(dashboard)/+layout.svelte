@@ -1,10 +1,11 @@
 <script lang="ts">
+	import { invoke } from '@tauri-apps/api/tauri';
 	import { page } from '$app/stores';
 	import NavButton from '$lib/NavButton.svelte';
 	import '../../app.css';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { getStore, setStore } from '$lib/tauri';
+	import { getStore, setStore, store } from '$lib/tauri';
 	import type { Device, PublicUser } from '$lib';
 	import type { Group } from '$lib/xata';
 	import { currentUrl } from '$lib/stores';
@@ -65,6 +66,9 @@
 		} else {
 			console.error(await res.text());
 		}
+
+		console.log("invoking handle_device_updates")
+		await invoke("handle_device_updates", { store })
 	});
 	let pages: Page[] = [
 		{ name: `This Device (${device.name})`, url: `/${deviceType}s/${device.id}` },
