@@ -72,13 +72,13 @@ const tables = [
       { name: "from", type: "string" },
       { name: "to", type: "string" },
       { name: "content", type: "text" },
-      { name: "status", type: "int" },
       {
         name: "fromDeviceType",
         type: "string",
         notNull: true,
         defaultValue: "server",
       },
+      { name: "status", type: "int", notNull: true, defaultValue: "0" },
     ],
   },
   {
