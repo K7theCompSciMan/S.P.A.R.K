@@ -8,8 +8,8 @@ use crate::{app::run_command, xata_structs::{self, Device}};
 
 pub fn handle_device_updates<R: Runtime>( store: &mut Store<R>) -> Result<(), Error> {
     loop {
-        let device: Device = serde_json::from_value::<Device>(store.get("device".to_string()).unwrap().clone()).expect("Error getting device from store").unwrap();
-        let device_type = serde_json::from_value::<String>(store.get("deviceType".to_string()).unwrap().clone()).expect("error getting device type from store").unwrap();
+        let device: Device = serde_json::from_value::<Device>(store.get("device".to_string()).unwrap().clone()).unwrap();
+        let device_type = serde_json::from_value::<String>(store.get("deviceType".to_string()).unwrap().clone()).unwrap();
         let past_messages = device.messages.clone();
         let request_url = format!("https://spark-api.fly.dev/device/{device_type}/{device_id}/", device_type = device_type, device_id = device.id);
         let updated_device: xata_structs::Device = reqwest::blocking::get(&request_url)?.json()?;
