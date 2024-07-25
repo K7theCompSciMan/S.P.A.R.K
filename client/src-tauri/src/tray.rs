@@ -9,9 +9,9 @@ pub fn init_tray() -> SystemTray {
     let tray_menu = SystemTrayMenu::new()
         .add_item(quit)
         .add_native_item(SystemTrayMenuItem::Separator)
-        .add_item(hide)
+        .add_item(show)
         .add_native_item(SystemTrayMenuItem::Separator)
-        .add_item(show);
+        .add_item(hide);
     
     system_tray.with_menu(tray_menu)
 }

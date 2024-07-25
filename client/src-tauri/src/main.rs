@@ -1,11 +1,11 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use std::{path::PathBuf, sync::{Arc, Mutex, MutexGuard}, thread}; // Add this line to import PathBuf
+use std::{borrow::BorrowMut, path::PathBuf, sync::{Arc, Mutex, MutexGuard}, thread}; // Add this line to import PathBuf
 
 use backend::handle_device_updates;
-use tauri::{self, AppHandle, Manager, Wry};
-use tauri_plugin_store::{with_store, StoreCollection};
+use tauri::{self, async_runtime::handle, AppHandle, EventLoopMessage, Manager, Wry};
+use tauri_plugin_store::{with_store, Store, StoreBuilder, StoreCollection};
 mod app;
 mod tray;
 mod backend;
@@ -23,29 +23,17 @@ fn main() {
       }
       _ => {}
     })
-    .setup(|app| Ok({
-      let arc_app_handle = Arc::new(Mutex::new(app.app_handle().clone())).clone();
+    .setup(|app| {
+      let store = StoreBuilder::new(app.handle(), "C:/Code/S.P.A.R.K/client/stores/store.json".parse()?).build();
       
       thread::spawn(move || {
-          let app_handle: MutexGuard<AppHandle> = match arc_app_handle.lock() {
-              Ok(guard) => guard,
-              Err(poisoned) => {
-                  // Handle mutex poisoning
-                  let guard = poisoned.into_inner();
-                  println!("Thread recovered from mutex poisoning: {:?}", *guard);
-                  guard
-              }
-          };
-          with_store(app_handle.clone(),
-          app_handle.clone().state::<StoreCollection<Wry>>(), 
-          PathBuf::from("C:/Code/S.P.A.R.K/stores/store.json"), 
-          |store| Ok({
-              let store = Arc::new(Mutex::new(store));  
-              handle_device_updates(store).unwrap();
-          }))
+        let store = Arc::new(Mutex::new(store));
+        handle_device_updates(store).expect("Error handling device updates");
       });
-    }))
-    .run(tauri::generate_context!())
-    .expect("error while running tauri application");
+      Ok(())
+    })
+    .build(tauri::generate_context!())
+    .expect("error while running tauri application")
+    .run(|_app_handle, _event| {}); 
 
 }

@@ -53,7 +53,7 @@
 		} else {
 			console.error(await response.text());
 		}
-
+		
 		accessToken = (await getStore('accessToken')) as string;
 		const res = await fetch(`https://spark-api.fly.dev/groups/${user.id}`, {
 			method: 'GET',
@@ -66,9 +66,6 @@
 		} else {
 			console.error(await res.text());
 		}
-
-		console.log("invoking handle_device_updates")
-		await invoke("handle_device_updates", { store })
 	});
 	let pages: Page[] = [
 		{ name: `This Device (${device.name})`, url: `/${deviceType}s/${device.id}` },

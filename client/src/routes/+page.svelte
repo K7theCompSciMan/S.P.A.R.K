@@ -3,10 +3,11 @@
 	import type { Device, PublicUser } from "$lib";
 	import { store } from "$lib/tauri";
 	import { onMount } from "svelte";
-
+    let user = {} as PublicUser;
+    let device = {} as Device;
     onMount(async () => {
-        let user = await store.get("user") as PublicUser;
-        let device = await store.get("device") as Device;
+        user = await store.get("user") as PublicUser;
+        device = await store.get("device") as Device;
         if(!user && device.id) {
             goto("/login");
         } else if (!device.id) {
@@ -14,22 +15,23 @@
         } else {
             goto("/dashboard");
         }
-
     })
+    console.log(user);
+    console.log(device);
 </script>
 
 <svelte:head>
-    <title>Welcome to S.P.A.R.K</title>
+    <title>You aren't supposed to see this</title>
 </svelte:head>
 
-<div class="text-center h-1/2 top-1/4 relative w-1/2 left-1/4 flex  flex-col justify-items-center text-amber-600">
+<div class="text-center h-1/2 top-1/4 relative w-1/2 left-1/4 flex  flex-col justify-items-center text-amber-600 bg-black-500">
     <h1 class="text-6xl mt-[4%]">
-        Welcome to S.P.A.R.K!
+        You aren't supposed to see this!
     </h1>
     <p class="text-2xl mt-[4%]  w-[75%] left-[12.5%] relative">
-        The following pages will help you setup your S.P.A.R.K group, or add your device to an existing group. 
+        BEEP BOOP NO SEE THIS 
         <br>
-        You will be guided through the steps, which includes creating an account, or signing in to an already existing account (<span class="text-rose-700 font-medium">no email required</span>).
+        BEEP BOOP NO SEE THIS
     </p>
     <button disabled>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="gray" class="size-8 absolute bottom-1/4 left-[23%]">
