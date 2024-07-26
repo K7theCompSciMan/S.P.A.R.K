@@ -1,11 +1,12 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use std::{borrow::BorrowMut, path::PathBuf, sync::{Arc, Mutex, MutexGuard}, thread}; // Add this line to import PathBuf
+use std::{path::PathBuf, sync::{Arc, Mutex}, thread}; // Add this line to import PathBuf
 
 use backend::handle_device_updates;
-use tauri::{self, async_runtime::handle, AppHandle, EventLoopMessage, Manager, Wry};
-use tauri_plugin_store::{with_store, Store, StoreBuilder, StoreCollection};
+use tauri::{self, EventLoopMessage, Manager};
+use tauri_plugin_store::{with_store, StoreBuilder, StoreCollection};
+use tauri_runtime_wry::Wry;
 mod app;
 mod tray;
 mod backend;
@@ -24,10 +25,16 @@ fn main() {
       _ => {}
     })
     .setup(|app| {
-      let store = StoreBuilder::new(app.handle(), "C:/Code/S.P.A.R.K/client/stores/store.json".parse()?).build();
-      
+      let mut back_store = StoreBuilder::new(app.handle(), "C:/Code/S.P.A.R.K/client/stores/store.json".parse()?).build();
+      let _ = with_store(app.handle(), app.state::<StoreCollection<Wry<EventLoopMessage>>>(), PathBuf::from("C:/Code/S.P.A.R.K/client/stores/store.json"), |store| {
+        let _= store.entries().into_iter().for_each(|(key, value)| {
+          back_store.insert(key.to_string(), value.clone()).expect("Error inserting to back_store");
+        });
+        Ok(())
+      });
+      println!("Store: {:?}", back_store);
       thread::spawn(move || {
-        let store = Arc::new(Mutex::new(store));
+        let store = Arc::new(Mutex::new(back_store));
         handle_device_updates(store).expect("Error handling device updates");
       });
       Ok(())

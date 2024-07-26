@@ -20,7 +20,7 @@ pub fn to_json_value(&self) -> Value {
         "assignedUser": self.assignedUser,
         "assignedGroup": self.assignedGroup,
         "messages": self.messages,
-        "commands": self.deviceCommands,
+        "deviceCommands": self.deviceCommands,
     })
 }
 }
