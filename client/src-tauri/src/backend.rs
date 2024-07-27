@@ -19,7 +19,7 @@ fn default_device() -> Device {
 
 pub fn handle_server_device() {
     loop {
-        println!("Server Device Running");
+        println!("Server Device Running"); 
     }
 }
 

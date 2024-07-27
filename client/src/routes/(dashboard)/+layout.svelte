@@ -53,7 +53,7 @@
 		} else {
 			console.error(await response.text());
 		}
-		
+
 		accessToken = (await getStore('accessToken')) as string;
 		const res = await fetch(`https://spark-api.fly.dev/groups/${user.id}`, {
 			method: 'GET',
@@ -67,14 +67,17 @@
 			console.error(await res.text());
 		}
 	});
-	let pages: Page[] = [
-		{ name: `This Device (${device.name})`, url: `/${deviceType}s/${device.id}` },
-		{ name: 'Dashboard', url: '/dashboard' },
-		{ name: 'Clients', url: '/clients' },
-		{ name: 'Servers', url: '/servers' },
-		{ name: 'Commands', url: '/commands' },
-		{ name: 'Settings', url: '/settings' }
-	];
+	let pages: Page[];
+	setTimeout(() => {
+		pages = [
+			{ name: `This Device (${device.name})`, url: `/${deviceType}s/${device.id}` },
+			{ name: 'Dashboard', url: '/dashboard' },
+			{ name: 'Clients', url: '/clients' },
+			{ name: 'Servers', url: '/servers' },
+			{ name: 'Commands', url: '/commands' },
+			{ name: 'Settings', url: '/settings' }
+		];
+	}, 100);
 	type Page = {
 		name: string;
 		url: string;
@@ -106,7 +109,7 @@
 						type={deviceType}
 						selected={$currentUrl === page.url}
 						onclick={() => {
-							currentUrl.set(page.url)
+							currentUrl.set(page.url);
 							goto(page.url);
 						}}
 					/>

@@ -32,11 +32,11 @@ fn main() {
         });
         Ok(())
       });
-      println!("Store: {:?}", back_store);
-      thread::spawn(move || {
-        let store = Arc::new(Mutex::new(back_store));
-        handle_device_updates(store).expect("Error handling device updates");
-      });
+      // println!("Store: {:?}", back_store);
+      // thread::spawn(move || {
+      //   let store = Arc::new(Mutex::new(back_store));
+      //   handle_device_updates(store).expect("Error handling device updates");
+      // });
       Ok(())
     })
     .build(tauri::generate_context!())
