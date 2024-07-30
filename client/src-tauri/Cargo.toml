@@ -11,6 +11,9 @@ rust-version = "1.79.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[build]
+out-dir = "target/"
+
 [build-dependencies]
 tauri-build = { version = "1.5.3", features = [] }
 
@@ -25,7 +28,8 @@ tokio = { version = "1", features = ["full"] }
 mini-redis = "0.4"
 futures = "0.3.30"
 tauri-runtime-wry = "0.14.9"
-
+simple_transcribe_rs = "1.0.3"
+pv_recorder = "*"
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.
 # If you use cargo directly instead of tauri's cli you can use this feature flag to switch between tauri's `dev` and `build` modes.

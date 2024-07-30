@@ -17,12 +17,6 @@ fn default_device() -> Device {
 
 }
 
-pub fn handle_server_device() {
-    loop {
-        println!("Server Device Running"); 
-    }
-}
-
 pub fn handle_device_updates<R: Runtime>( store: Arc<Mutex<Store<R>>>) -> Result<(), Error> {
     let mut binding = match store.lock() {
         Ok(guard) => {
@@ -38,11 +32,6 @@ pub fn handle_device_updates<R: Runtime>( store: Arc<Mutex<Store<R>>>) -> Result
     store.load().expect("Error loading store");
     let mut device: Device = serde_json::from_value::<Device>(store.get("device".to_string()).unwrap().clone()).unwrap_or(default_device());
     let mut device_type = serde_json::from_value::<String>(store.get("deviceType".to_string()).unwrap().clone()).unwrap_or("none".to_string());
-    if device_type == "server" {
-        thread::spawn(|| {
-                handle_server_device();
-            });
-    }
     loop {
         if device.id!="default".to_string() && device_type!="none".to_string() {
             let past_messages = device.messages.clone();

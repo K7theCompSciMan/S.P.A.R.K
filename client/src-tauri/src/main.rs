@@ -3,14 +3,15 @@
 
 use std::{path::PathBuf, sync::{Arc, Mutex}, thread}; // Add this line to import PathBuf
 
-use backend::handle_device_updates;
+use client::handle_device_updates;
 use tauri::{self, EventLoopMessage, Manager};
 use tauri_plugin_store::{with_store, StoreBuilder, StoreCollection};
 use tauri_runtime_wry::Wry;
 mod app;
 mod tray;
-mod backend;
+mod client;
 mod xata_structs;
+mod server;
 fn main() {
   tauri::Builder::default()
     .plugin(tauri_plugin_store::Builder::default().build())
