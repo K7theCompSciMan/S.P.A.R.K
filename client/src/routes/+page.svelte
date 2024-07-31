@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import type { Device, PublicUser } from "$lib";
-	import { store } from "$lib/tauri";
+	import { initStore, store } from "$lib/tauri";
 	import { onMount } from "svelte";
     let user = {} as PublicUser;
     let device = {} as Device;
     onMount(async () => {
+        await initStore();
         user = await store.get("user") as PublicUser;
         device = await store.get("device") as Device;
         if(!user && device.id) {

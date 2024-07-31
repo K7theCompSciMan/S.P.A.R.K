@@ -26,8 +26,9 @@ fn main() {
       _ => {}
     })
     .setup(|app| {
-      let mut back_store = StoreBuilder::new(app.handle(), "C:/Code/S.P.A.R.K/client/stores/store.json".parse()?).build();
-      let _ = with_store(app.handle(), app.state::<StoreCollection<Wry<EventLoopMessage>>>(), PathBuf::from("C:/Code/S.P.A.R.K/client/stores/store.json"), |store| {
+      let store_path = app.path_resolver().resolve_resource("stores/store.json").expect("Failed to resolve resource");
+      let mut back_store = StoreBuilder::new(app.handle(), store_path.clone()).build();
+      let _ = with_store(app.handle(), app.state::<StoreCollection<Wry<EventLoopMessage>>>(), store_path.clone(), |store| {
         let _= store.entries().into_iter().for_each(|(key, value)| {
           back_store.insert(key.to_string(), value.clone()).expect("Error inserting to back_store");
         });

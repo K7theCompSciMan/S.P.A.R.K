@@ -1,75 +1,91 @@
 {
-  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
-  "build": {
-    "beforeBuildCommand": "npm run build",
-    "beforeDevCommand": "npm run dev",
-    "devPath": "http://localhost:5173/",
-    "distDir": "../build"
-  },
-  "package": {
-    "productName": "SPARK",
-    "version": "0.1.2"
-  },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "window": {
+	"$schema": "../node_modules/@tauri-apps/cli/schema.json",
+	"build": {
+		"beforeBuildCommand": "npm run build",
+		"beforeDevCommand": "npm run dev",
+		"devPath": "http://localhost:5173/",
+		"distDir": "../build"
+	},
+	"package": {
+		"productName": "SPARK",
+		"version": "0.1.2"
+	},
+	"tauri": {
+		"allowlist": {
+			"all": false,
+			"window": {
+				"all": true
+			},
+      "fs": {
+        "all": false,
+        "copyFile": false,
+        "createDir": false,
+        "exists": false,
+        "readDir": false,
+        "readFile": false,
+        "removeDir": false,
+        "removeFile": false,
+        "renameFile": false,
+        "scope": ["$RESOURCE/stores/*"],
+        "writeFile": false
+      },
+      "path": {
         "all": true
       }
-    },
-    "systemTray": {
-      "iconPath": "icons/icon.ico",
-      "iconAsTemplate": true
-    },
-    "bundle": {
-      "active": true,
-      "category": "Utility",
-      "copyright": "",
-      "deb": {
-        "depends": []
-      },
-      "externalBin": [],
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "identifier": "com.spark.ai.assistant",
-      "longDescription": "",
-      "macOS": {
-        "entitlements": null,
-        "exceptionDomain": "",
-        "frameworks": [],
-        "providerShortName": null,
-        "signingIdentity": null
-      },
-      "resources": [],
-      "shortDescription": "",
-      "targets": "all",
-      "windows": {
-        "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "timestampUrl": ""
-      }
-    },
-    "security": {
-      "csp": null
-    },
-    "updater": {
-      "active": false
-    },
-    "windows": [
-      {
-        "fullscreen": false,
-        "height": 1000,
-        "resizable": true,
-        "title": "S.P.A.R.K",
-        "width": 800,
-        "maximized": true,
-        "label": "main"
-      }
-    ]
-  }
+		},
+		"systemTray": {
+			"iconPath": "icons/icon.ico",
+			"iconAsTemplate": true
+		},
+		"bundle": {
+			"active": true,
+			"category": "Utility",
+			"copyright": "",
+			"deb": {
+				"depends": []
+			},
+			"externalBin": [],
+			"icon": [
+				"icons/32x32.png",
+				"icons/128x128.png",
+				"icons/128x128@2x.png",
+				"icons/icon.icns",
+				"icons/icon.ico"
+			],
+			"identifier": "com.spark.ai.assistant",
+			"longDescription": "",
+			"macOS": {
+				"entitlements": null,
+				"exceptionDomain": "",
+				"frameworks": [],
+				"providerShortName": null,
+				"signingIdentity": null
+			},
+			"resources": ["stores/*"],
+			"shortDescription": "",
+			"targets": "all",
+			"windows": {
+				"certificateThumbprint": null,
+				"digestAlgorithm": "sha256",
+				"timestampUrl": ""
+			}
+		},
+		"security": {
+			"csp": null
+		},
+		"updater": {
+			"active": false
+		},
+		"windows": [
+			{
+				"fullscreen": false,
+				"height": 1000,
+				"resizable": true,
+				"title": "S.P.A.R.K",
+				"width": 800,
+				"maximized": true,
+				"label": "main"
+			}
+		]
+	}
 }
