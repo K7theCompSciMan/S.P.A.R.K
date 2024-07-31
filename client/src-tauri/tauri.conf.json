@@ -12,26 +12,33 @@
 	},
 	"tauri": {
 		"allowlist": {
+			"shell": {
+				"all": false,
+				"execute": false,
+				"open": false,
+				"scope": [{ "name": "bin/python/test", "sidecar": true, "args": true }],
+				"sidecar": true
+			},
 			"all": false,
 			"window": {
 				"all": true
 			},
-      "fs": {
-        "all": false,
-        "copyFile": false,
-        "createDir": false,
-        "exists": false,
-        "readDir": false,
-        "readFile": false,
-        "removeDir": false,
-        "removeFile": false,
-        "renameFile": false,
-        "scope": ["$RESOURCE/stores/*"],
-        "writeFile": false
-      },
-      "path": {
-        "all": true
-      }
+			"fs": {
+				"all": false,
+				"copyFile": false,
+				"createDir": false,
+				"exists": false,
+				"readDir": false,
+				"readFile": false,
+				"removeDir": false,
+				"removeFile": false,
+				"renameFile": false,
+				"scope": ["$RESOURCE/stores/*"],
+				"writeFile": false
+			},
+			"path": {
+				"all": true
+			}
 		},
 		"systemTray": {
 			"iconPath": "icons/icon.ico",
@@ -44,7 +51,7 @@
 			"deb": {
 				"depends": []
 			},
-			"externalBin": [],
+			"externalBin": ["bin/python/test"],
 			"icon": [
 				"icons/32x32.png",
 				"icons/128x128.png",

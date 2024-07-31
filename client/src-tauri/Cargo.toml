@@ -21,7 +21,7 @@ tauri-build = { version = "1.5.3", features = [] }
 tauri-plugin-store = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.7.0", features = [ "path-all", "window-all", "system-tray"] }
+tauri = { version = "1.7.0", features = [ "shell-sidecar", "path-all", "window-all", "system-tray", "process-command-api"] }
 reqwest = {version = "0.11.18", features = ["json", "blocking"] }
 json = "0.12.4"
 tokio = { version = "1", features = ["full"] }
