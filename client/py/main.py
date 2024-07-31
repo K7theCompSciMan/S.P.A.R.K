@@ -78,5 +78,5 @@ def main():
                         "serverDeviceId": server_device.id,
                         "clientDeviceId": device.id,
                         "messageContent": f"[RUN COMMAND] {filtered_text-f"[RUN COMMAND ON DEVICE: {device_name}] "}",
-                    },
+                    }, headers={"Authorization": f"Bearer {access_token}"},
                 )
