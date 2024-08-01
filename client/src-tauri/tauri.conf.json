@@ -42,7 +42,8 @@
 		},
 		"systemTray": {
 			"iconPath": "icons/icon.ico",
-			"iconAsTemplate": true
+			"iconAsTemplate": true,
+			"menuOnLeftClick": false
 		},
 		"bundle": {
 			"active": true,

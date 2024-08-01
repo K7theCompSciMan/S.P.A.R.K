@@ -32,6 +32,24 @@ pub fn system_tray_event_handler(app: &AppHandle, event: SystemTrayEvent) {
             _ => {}
             }
         }
+        SystemTrayEvent::LeftClick { .. } => {
+            let window = match app.get_window("main") {
+                Some(window) => match window.is_visible().expect("winvis") {
+                    true => {
+                        window.hide().expect("winhide");
+                        return;
+
+                    }
+                    false => window,
+                },
+                None => return,
+            };
+            #[cfg(not(target_os = "macos"))]
+            {
+                window.show().unwrap();
+            }
+            window.set_focus().unwrap();
+        }
             _ => {}
     }
 }
