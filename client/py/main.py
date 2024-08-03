@@ -1,6 +1,6 @@
 import speech_recognition as sr
 import pyttsx3 as tts
-
+from openai import OpenAI
 import os, sys, requests
 
 recognizer = sr.Recognizer()
@@ -34,11 +34,26 @@ def listen():
             print("Conversation timed out")
 
 
-def handle_ai(text):
-    pass
-
-
+def handle_ai(text, group, client):
+    client_devices = [{x.name, x.deviceCommands} for x in group.devices["client"]]
+    server_devices = [{x.name, x.deviceCommands} for x in group.devices["server"]]
+    mod_text = text + f" | {client_devices} | {server_devices} "
+    filtered_text, group.aiMessages = send_to_ai(mod_text, group.aiMessages, client)
+    if "[RUN COMMAND ON DEVICE: " in filtered_text:
+        device_name = filtered_text.split("[RUN COMMAND ON DEVICE: ")[1].split("]")[0]
+        return filtered_text, device_name, group
+    return filtered_text, "", group
+def send_to_ai(message, messages: list, client: OpenAI):
+    messages.append({"role": "user", "content": message})
+    response = client.chat.completions.create(
+        model="model-identifier",
+        messages=messages,
+        temperature=0.7
+    )
+    messages.append(response.choices[0].message)
+    return response.choices[0].message.content, messages
 def main():
+    client = OpenAI(base_url="http://localhost:4000/v1", api_key="lm-studio")
     server_device_id = sys.argv[1]
     access_token = sys.argv[2]
     server_device = requests.get(
@@ -64,7 +79,7 @@ def main():
         server_device_names = [x.name for x in server_devices]
         text = listen()
         if text:
-            filtered_text, device_name = handle_ai(text)
+            filtered_text, device_name, updated_group = handle_ai(text, group, client)
             if f"[RUN COMMAND ON DEVICE: {device_name}]" in filtered_text and (
                 device_name in client_device_names or device_name in server_device_names
             ):
@@ -80,3 +95,12 @@ def main():
                         "messageContent": f"[RUN COMMAND] {filtered_text-f"[RUN COMMAND ON DEVICE: {device_name}] "}",
                     }, headers={"Authorization": f"Bearer {access_token}"},
                 )
+            if updated_group != group:
+                requests.put(
+                    "https://spark-api.fly.dev/group/",
+                    json=updated_group,
+                    headers={"Authorization": f"Bearer {access_token}"},
+                )
+
+if __name__ == "__main__":
+    main()
