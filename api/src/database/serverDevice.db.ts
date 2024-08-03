@@ -52,6 +52,21 @@ export const sendMessageToClientFromServer = async (
     await updateGroup(group);
     return message;
 };
+export const sendMessageToServerFromServer = async (
+	serverDevice: ServerDevice,
+	messageContent: string,
+	recieverDevice: ServerDevice
+) => {
+    const group = await getGroupFromServerDevice(serverDevice);
+    const message = await createMessage({ content: messageContent, from: serverDevice.id, to: recieverDevice.id, fromDeviceType: "server" } as Message);
+    serverDevice.messages.push(message);
+    recieverDevice.messages.push(message);
+    group.messages.push(message);
+    await updateServerDevice(serverDevice);
+    await updateClientDevice(recieverDevice);
+    await updateGroup(group);
+    return message;
+};
 
 export const addCommand = async (serverDevice: ServerDevice, command: Command) => {
     serverDevice.deviceCommands.push(command);

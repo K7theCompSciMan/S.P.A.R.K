@@ -158,8 +158,8 @@ deviceRouter.post(
 	requireUser,
 	async (req: Request, res: Response) => {
 		try {
-			const { serverDeviceId, messageContent, clientDeviceId } = req.body;
-			if (!serverDeviceId || !messageContent || !clientDeviceId) {
+			const { serverDeviceId, messageContent, recieverDeviceId } = req.body;
+			if (!serverDeviceId || !messageContent || !recieverDeviceId) {
 				return res
 					.status(StatusCodes.BAD_REQUEST)
 					.json({ error: "Invalid request" });
@@ -167,18 +167,25 @@ deviceRouter.post(
 			const serverDevice = await server.getServerDeviceById(
 				serverDeviceId
 			);
-			const clientDevice = await client.getClientDeviceById(
-				clientDeviceId
-			);
-			if (!serverDevice || !clientDevice) {
+			let receiverDevice = await client.getClientDeviceById(recieverDeviceId);
+			let deviceType = "client";
+			if (!receiverDevice) {
+				receiverDevice = await server.getServerDeviceById(recieverDeviceId);
+				deviceType = "server";
+			}
+			if (!serverDevice || !receiverDevice) {
 				return res
 					.status(StatusCodes.NOT_FOUND)
 					.json({ error: "Device not found" });
 			}
-			const message = await server.sendMessageToClientFromServer(
+			const message = deviceType === "client" ? await server.sendMessageToClientFromServer(
 				serverDevice,
 				messageContent,
-				clientDevice
+				receiverDevice
+			) : await server.sendMessageToServerFromServer(
+				serverDevice,
+				messageContent,
+				receiverDevice
 			);
 			return res
 				.status(StatusCodes.OK)
