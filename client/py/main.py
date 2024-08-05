@@ -40,9 +40,11 @@ def handle_ai(text, group, client, client_devices, server_devices):
     server_devices_updated = [{'name': x['name'], 'deviceCommands': x['deviceCommands']} for x in server_devices]
     mod_text = text + f" | {client_devices_updated} | {server_devices_updated} "
     filtered_text, group['aiMessages'] = send_to_ai(mod_text, group['aiMessages'], client)
-    if "[RUN COMMAND ON DEVICE: " in filtered_text:
-        device_name = filtered_text.split("[RUN COMMAND ON DEVICE: ")[1].split("]")[0]
-        return filtered_text, device_name, group
+    if "RUN COMMAND ON DEVICE: " in filtered_text:
+        new_text = filtered_text.split("|| ")[1].split(" ||")[0]
+        device_name = new_text.split("RUN COMMAND ON DEVICE: ")[1].split(" |")[0]
+        print(f"text: {new_text}, device name {device_name} ")
+        return new_text, device_name, group
     return filtered_text, "", group
 def send_to_ai(message, messages: list, client: OpenAI):
     messages.append({"role": "user", "content": message})
@@ -81,7 +83,7 @@ def main():
         text = listen()
         if text:
             filtered_text, device_name, updated_group = handle_ai(text, group, client, client_devices, server_devices)
-            if f"[RUN COMMAND ON DEVICE: {device_name}]" in filtered_text and (
+            if f"RUN COMMAND ON DEVICE: {device_name} |" in filtered_text and (
                 device_name in client_device_names or device_name in server_device_names
             ):
                 if device_name in client_device_names:
@@ -93,12 +95,12 @@ def main():
                     json={
                         "serverDeviceId": server_device['id'],
                         "clientDeviceId": device['id'],
-                        "messageContent": f"[RUN COMMAND] {filtered_text- f'[RUN COMMAND ON DEVICE: {device_name}] '}",
+                        "messageContent": f"[RUN COMMAND] {filtered_text.split(f'RUN COMMAND ON DEVICE: {device_name} | ')}",
                     }, headers={"Authorization": f"Bearer {access_token}"},
                 )
             else:
                 speak(filtered_text)
-            if updated_group['aiMessages'].length > group['aiMessages'].length:
+            if updated_group['aiMessages'].len > group['aiMessages'].len:
                 requests.put(
                     "https://spark-api.fly.dev/group/",
                     json=updated_group,
