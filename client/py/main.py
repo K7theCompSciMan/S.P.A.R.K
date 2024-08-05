@@ -33,6 +33,7 @@ def listen():
         except sr.WaitTimeoutError:
             print("Conversation timed out")
 
+# TODO: Modify initial message to get the flipping AI to understand what to do
 
 def handle_ai(text, group, client, client_devices, server_devices):
     client_devices_updated = [{'name': x['name'], 'deviceCommands': x['deviceCommands']} for x in client_devices]
@@ -97,7 +98,7 @@ def main():
                 )
             else:
                 speak(filtered_text)
-            if updated_group != group:
+            if updated_group['aiMessages'].length > group['aiMessages'].length:
                 requests.put(
                     "https://spark-api.fly.dev/group/",
                     json=updated_group,
