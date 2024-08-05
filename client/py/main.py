@@ -34,11 +34,11 @@ def listen():
             print("Conversation timed out")
 
 
-def handle_ai(text, group, client):
-    client_devices = [{x.name, x.deviceCommands} for x in group.devices["client"]]
-    server_devices = [{x.name, x.deviceCommands} for x in group.devices["server"]]
-    mod_text = text + f" | {client_devices} | {server_devices} "
-    filtered_text, group.aiMessages = send_to_ai(mod_text, group.aiMessages, client)
+def handle_ai(text, group, client, client_devices, server_devices):
+    client_devices_updated = [{'name': x['name'], 'deviceCommands': x['deviceCommands']} for x in client_devices]
+    server_devices_updated = [{'name': x['name'], 'deviceCommands': x['deviceCommands']} for x in server_devices]
+    mod_text = text + f" | {client_devices_updated} | {server_devices_updated} "
+    filtered_text, group['aiMessages'] = send_to_ai(mod_text, group['aiMessages'], client)
     if "[RUN COMMAND ON DEVICE: " in filtered_text:
         device_name = filtered_text.split("[RUN COMMAND ON DEVICE: ")[1].split("]")[0]
         return filtered_text, device_name, group
@@ -57,29 +57,29 @@ def main():
     server_device_id = sys.argv[1]
     access_token = sys.argv[2]
     server_device = requests.get(
-        f"https://spark-api.fly.dev/devices/server/{server_device_id}"
+        f"https://spark-api.fly.dev/device/server/{server_device_id}"
     ).json()
     while True:
         group = requests.get(
-            f"https://spark-api.fly.dev/groups/{server_device.assignedGroup.id}"
+            f"https://spark-api.fly.dev/group/{server_device['assignedGroup']['id']}"
         ).json()
         client_devices = []
         server_devices = []
-        group.devices["client"].for_each(
-            lambda x: client_devices.append(
-                requests.get(f"https://spark-api.fly.dev/devices/client/{x}").json()
+        for x in group['devices']['client']:
+            client_devices.append(
+                requests.get(f"https://spark-api.fly.dev/device/client/{x}").json()
             )
-        )
-        group.devices["server"].for_each(
-            lambda x: server_devices.append(
-                requests.get(f"https://spark-api.fly.dev/devices/server/{x}").json()
+        
+        for x in group['devices']["server"]:
+            server_devices.append(
+                requests.get(f"https://spark-api.fly.dev/device/server/{x}").json()
             )
-        )
-        client_device_names = [x.name for x in client_devices]
-        server_device_names = [x.name for x in server_devices]
+        
+        client_device_names = [x['name'] for x in client_devices]
+        server_device_names = [x['name'] for x in server_devices]
         text = listen()
         if text:
-            filtered_text, device_name, updated_group = handle_ai(text, group, client)
+            filtered_text, device_name, updated_group = handle_ai(text, group, client, client_devices, server_devices)
             if f"[RUN COMMAND ON DEVICE: {device_name}]" in filtered_text and (
                 device_name in client_device_names or device_name in server_device_names
             ):
@@ -90,11 +90,13 @@ def main():
                 requests.post(
                     "https://spark-api.fly.dev/device/server/sendMessage",
                     json={
-                        "serverDeviceId": server_device.id,
-                        "clientDeviceId": device.id,
-                        "messageContent": f"[RUN COMMAND] {filtered_text-f"[RUN COMMAND ON DEVICE: {device_name}] "}",
+                        "serverDeviceId": server_device['id'],
+                        "clientDeviceId": device['id'],
+                        "messageContent": f"[RUN COMMAND] {filtered_text- f'[RUN COMMAND ON DEVICE: {device_name}] '}",
                     }, headers={"Authorization": f"Bearer {access_token}"},
                 )
+            else:
+                speak(filtered_text)
             if updated_group != group:
                 requests.put(
                     "https://spark-api.fly.dev/group/",
