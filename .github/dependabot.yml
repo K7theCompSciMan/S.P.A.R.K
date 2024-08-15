@@ -6,10 +6,10 @@
 version: 2
 updates:
   - package-ecosystem: "npm" # See documentation for possible values
-    directories: 
-      - "/webapp"
+    directories:
       - "/api"
-      - "/client" # Location of package manifests
+      - "/webapp"
+      - "/client"
     schedule:
       interval: "weekly"
    - package-ecosystem: "cargo" # See documentation for possible values
