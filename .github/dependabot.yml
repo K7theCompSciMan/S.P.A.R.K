@@ -5,14 +5,14 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
+ - package-ecosystem: "npm" # See documentation for possible values
     directories:
       - "/api"
       - "/webapp"
       - "/client"
     schedule:
       interval: "weekly"
-   - package-ecosystem: "cargo" # See documentation for possible values
+  - package-ecosystem: "cargo" # See documentation for possible values
     directory: "/client/src-tauri" # Location of package manifests
     schedule:
       interval: "weekly"
