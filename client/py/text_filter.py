@@ -1,9 +1,12 @@
 import sys, json
 
 action_words = ["launch", "open", "run", "start"]
-
+question_words = ["what", "when", "where", "why", "how"]
 
 def filter(input: str, devices: list) -> str:
+    for word in question_words:
+        if word in input:
+            return input
     for word in action_words:
         if word in input:
             return filter_action(input, word, devices)
@@ -21,14 +24,13 @@ def filter_action(input: str, action: str, devices: list) -> str:
     for device in devices:
         if device["name"].lower() in predicate:
             print("found device")
-            return_text = f"Found device: {device['name']} but could not find command "
-            for device_command in device["deviceCommands"]:
+            return_text = f"<ERROR: Found device: {device['name']} but could not find command>"
+            for device_command in device["commands"]:
                 if device_command["alias"].lower() in predicate:
                     print("found command")
                     return f"|| RUN COMMAND ON DEVICE: {device['name']} | {device_command['alias']} ||"
-                    break
         else:
-            return_text = "Could not find device"
+            return_text = "<ERROR: Could not find device>"
     return return_text
 
 
@@ -39,14 +41,14 @@ def test():
             [
                 {
                     "name": "My PC",
-                    "deviceCommands": [
+                    "commands": [
                         {"alias": "Launch Notepad", "command": "start notepad"},
                         {"alias": "Open Chrome", "command": "start chrome"},
                     ],
                 },
                 {
                     "name": "My Server Device",
-                    "deviceCommands": [
+                    "commands": [
                         {"alias": "Launch Notepad", "command": "start notepad"}
                     ],
                 },
@@ -54,31 +56,34 @@ def test():
         )
     )
 
-
-print(
-    json.loads(
-        '''
-                "devices": [
-                    {
-                        "name": "My PC", 
-                        "deviceCommands": [
-                            {
-                                "alias": "Launch Notepad", 
-                                "command": "start notepad"
-                            }
-                        ]
-                    } ,
-                    {
-                        "name": "My Server Device", 
-                        "deviceCommands": [
-                            {
-                                "alias": "Launch Notepad", 
-                                "command": "start notepad"
-                            }
-                        ]
-                    } 
-                ]
-        '''
+def main():
+    print(
+        json.loads(
+            '''
+                    {"devices" :[
+                        {
+                            "name": "My PC", 
+                            "commands": [
+                                {
+                                    "alias": "Launch Notepad", 
+                                    "command": "start notepad"
+                                }
+                            ]
+                        } ,
+                        {
+                            "name": "My Server Device", 
+                            "commands": [
+                                {
+                                    "alias": "Launch Notepad", 
+                                    "command": "start notepad"
+                                }
+                            ]
+                        } 
+                    ]}
+            '''
+        )
     )
-)
-filter(sys.argv[1], json.loads(sys.argv[2])["devices"]) if len(sys.argv) > 2 else test()
+    print(filter(sys.argv[1], json.loads(sys.argv[2])["devices"])) if len(sys.argv) > 2 else test
+
+if __name__ == "__main__":
+    main()

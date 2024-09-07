@@ -2,7 +2,7 @@ import speech_recognition as sr
 import pyttsx3 as tts
 from openai import OpenAI
 import os, sys, requests
-
+from text_filter import *
 recognizer = sr.Recognizer()
 
 
@@ -38,13 +38,15 @@ def handle_ai(text, group, client, client_devices, server_devices):
     client_devices_updated = [{'name': x['name'], 'commands': x['deviceCommands']} for x in client_devices]
     server_devices_updated = [{'name': x['name'], 'commands': x['deviceCommands']} for x in server_devices]
     mod_text = text + f" | {client_devices_updated} | {server_devices_updated} "
-    filtered_text, group['aiMessages'] = send_to_ai(mod_text, group['aiMessages'], client)
+    filtered_text = filter(text, client_devices_updated + server_devices_updated)
+    print(filtered_text)
     if "RUN COMMAND ON DEVICE: " in filtered_text:
         new_text = filtered_text.split("|| ")[1].split(" ||")[0]
         device_name = new_text.split("RUN COMMAND ON DEVICE: ")[1].split(" |")[0]
         print(f"text: {new_text}, device name {device_name} ")
         return new_text, device_name, group
-    return filtered_text, "", group
+    response = (send_to_ai(filtered_text, group['aiMessages'], client) if "<Error: " not in filtered_text else filtered_text)
+    return response, "", group
 def send_to_ai(message, messages: list, client: OpenAI):
     messages.append({"role": "user", "content": message})
     response = client.chat.completions.create(
@@ -83,7 +85,7 @@ def main():
         server_device_names = [x['name'] for x in server_devices]
         text = listen()
         if text:
-            filtered_text, device_name, updated_group = handle_ai(text.replace('spark', '').replace('Spark', '') + " Spark", group, client, client_devices, server_devices)
+            filtered_text, device_name, updated_group = handle_ai(text, group, client, client_devices, server_devices)
             if f"RUN COMMAND ON DEVICE: {device_name} |" in filtered_text and (
                 device_name in client_device_names or device_name in server_device_names
             ):
@@ -91,14 +93,16 @@ def main():
                     device = client_devices[client_device_names.index(device_name)]
                 else:
                     device = server_devices[server_device_names.index(device_name)]
-                requests.post(
+                message_content = f"[RUN COMMAND] {filtered_text.split(f'RUN COMMAND ON DEVICE: {device_name} | ')[1]}"
+                print(message_content)
+                print(requests.post(
                     "https://spark-api.fly.dev/device/server/sendMessage",
                     json={
                         "serverDeviceId": server_device['id'],
-                        "clientDeviceId": device['id'],
-                        "messageContent": f"[RUN COMMAND] {filtered_text.split(f'RUN COMMAND ON DEVICE: {device_name} | ')[1]}",
+                        "recieverDeviceId": device['id'],
+                        "messageContent": message_content
                     }, headers={"Authorization": f"Bearer {access_token}"},
-                )
+                ).json())
             else:
                 speak(filtered_text)
             if len(updated_group['aiMessages']) > len(group['aiMessages']):

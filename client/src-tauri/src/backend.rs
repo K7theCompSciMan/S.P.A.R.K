@@ -17,7 +17,7 @@ fn default_device() -> Device {
 
 }
 
-pub fn handle_device_updates<R: Runtime>( store: Arc<Mutex<Store<R>>>) -> Result<(), Error> {
+pub fn handle_device_updates_api_call<R: Runtime>( store: Arc<Mutex<Store<R>>>) -> Result<(), Error> {
     let mut binding = match store.lock() {
         Ok(guard) => {
             guard},

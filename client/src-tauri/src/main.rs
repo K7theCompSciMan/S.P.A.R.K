@@ -3,15 +3,14 @@
 
 use std::{path::PathBuf, sync::{Arc, Mutex}, thread}; // Add this line to import PathBuf
 
-use client::handle_device_updates;
+use backend::handle_device_updates_api_call;
 use tauri::{self, EventLoopMessage, Manager};
 use tauri_plugin_store::{with_store, StoreBuilder, StoreCollection};
 use tauri_runtime_wry::Wry;
 mod app;
 mod tray;
-mod client;
+mod backend;
 mod xata_structs;
-mod server;
 fn main() {
   tauri::Builder::default()
     .plugin(tauri_plugin_store::Builder::default().build())
@@ -34,11 +33,11 @@ fn main() {
         });
         Ok(())
       });
-      // println!("Store: {:?}", back_store);
-      // thread::spawn(move || {
-      //   let store = Arc::new(Mutex::new(back_store));
-      //   handle_device_updates(store).expect("Error handling device updates");
-      // });
+      println!("Store: {:?}", back_store);
+      thread::spawn(move || {
+        let store = Arc::new(Mutex::new(back_store));
+        handle_device_updates_api_call(store).expect("Error handling device updates");
+      });
       Ok(())
     })
     .build(tauri::generate_context!())
