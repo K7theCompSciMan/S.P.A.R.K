@@ -48,7 +48,7 @@ pub fn handle_device_updates<R: Runtime>( store: Arc<Mutex<Store<R>>>) -> Result
                     // println!("recieved message {:?}", new_message);
                     if new_message.content.contains("[RUN COMMAND]") {
                         for command in updated_device.deviceCommands.clone() {
-                            if format!("[RUN COMMAND] {}", command.alias) == new_message.content {
+                            if format!("[RUN COMMAND] {} ", command.alias) == new_message.content {
                                 run_command(&command.command)
                             }
                         }

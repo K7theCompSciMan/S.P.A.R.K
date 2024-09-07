@@ -16,15 +16,13 @@ def listen():
     while True:
         try:
             with sr.Microphone() as source:
-                recognizer.adjust_for_ambient_noise(source)
                 print("Listening...")
-
                 audio = recognizer.listen(source, timeout=3, phrase_time_limit=5)
                 text = str(recognizer.recognize_google(audio))
                 print("User said : {}".format(text))
                 if "spark" in text.lower():
+                    print("SPARK ACTIVATED")
                     speak("SPARK ACTIVATED")
-                    print("Recognized")
                     return text
         except sr.RequestError as e:
             print("Could not request results; {0}".format(e))
@@ -57,6 +55,8 @@ def send_to_ai(message, messages: list, client: OpenAI):
     messages.append(response.choices[0].message)
     return response.choices[0].message.content, messages
 def main():
+    with sr.Microphone() as source:
+        recognizer.adjust_for_ambient_noise(source)
     client = OpenAI(base_url="http://localhost:4000/v1", api_key="lm-studio")
     server_device_id = sys.argv[1]
     access_token = sys.argv[2]
@@ -96,7 +96,7 @@ def main():
                     json={
                         "serverDeviceId": server_device['id'],
                         "clientDeviceId": device['id'],
-                        "messageContent": f"[RUN COMMAND] {filtered_text.split(f'RUN COMMAND ON DEVICE: {device_name} | ')}",
+                        "messageContent": f"[RUN COMMAND] {filtered_text.split(f'RUN COMMAND ON DEVICE: {device_name} | ')[1]}",
                     }, headers={"Authorization": f"Bearer {access_token}"},
                 )
             else:
