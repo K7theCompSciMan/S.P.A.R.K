@@ -28,6 +28,7 @@ tokio = { version = "1", features = ["full"] }
 mini-redis = "0.4"
 futures = "0.3.30"
 tauri-runtime-wry = "0.14.9"
+fs = "0.0.5"
 # simple_transcribe_rs = "1.0.3"
 # pv_recorder = "*"
 [features]

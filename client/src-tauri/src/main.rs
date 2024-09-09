@@ -11,6 +11,7 @@ mod app;
 mod tray;
 mod backend;
 mod xata_structs;
+mod store;
 fn main() {
   tauri::Builder::default()
     .plugin(tauri_plugin_store::Builder::default().build())
@@ -25,18 +26,17 @@ fn main() {
       _ => {}
     })
     .setup(|app| {
-      let store_path = app.path_resolver().resolve_resource("stores/store.json").expect("Failed to resolve resource");
-      let mut back_store = StoreBuilder::new(app.handle(), store_path.clone()).build();
-      let _ = with_store(app.handle(), app.state::<StoreCollection<Wry<EventLoopMessage>>>(), store_path.clone(), |store| {
-        let _= store.entries().into_iter().for_each(|(key, value)| {
-          back_store.insert(key.to_string(), value.clone()).expect("Error inserting to back_store");
-        });
-        Ok(())
-      });
-      println!("Store: {:?}", back_store);
+      // let store_path = app.path_resolver().resolve_resource("stores/store.json").expect("Failed to resolve resource");
+      // let mut back_store = StoreBuilder::new(app.handle(), store_path.clone()).build();
+      // let _ = with_store(app.handle(), app.state::<StoreCollection<Wry<EventLoopMessage>>>(), store_path.clone(), |store: &mut tauri_plugin_store::Store<Wry<EventLoopMessage>>| {
+      //   let _= store.entries().into_iter().for_each(|(key, value)| {
+      //     back_store.insert(key.to_string(), value.clone()).expect("Error inserting to back_store");
+      //   });
+      //   Ok(())
+      // });
+      // println!("Store: {:?}", back_store);
       thread::spawn(move || {
-        let store = Arc::new(Mutex::new(back_store));
-        handle_device_updates_api_call(store).expect("Error handling device updates");
+        handle_device_updates_api_call().expect("Error handling device updates");
       });
       Ok(())
     })

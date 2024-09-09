@@ -1,18 +1,9 @@
-import {Store} from "tauri-plugin-store-api";
-import { resolveResource } from '@tauri-apps/api/path'
+import { invoke } from "@tauri-apps/api/tauri"
 
-
-export let store: Store;
-
-export const initStore = async () => {
-    const resourcePath = await resolveResource('stores/store.json');
-    store = new Store(resourcePath);
-}
 
 export const setStore = async (key: string, value: unknown) => {
-    await store.set(key, value);
-    await store.save() ;
+    invoke('set_store', { path: "stores/store.json", key, value})
 }
 export const getStore = async (key: string) => {
-    return await store.get(key);
+    return invoke("get_store", { path: "stores/store.json", key})
 }

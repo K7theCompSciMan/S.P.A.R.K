@@ -5,7 +5,7 @@
 	import '../../app.css';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { getStore, setStore, store, initStore } from '$lib/tauri';
+	import { getStore, setStore } from '$lib/tauri';
 	import type { Device, PublicUser } from '$lib';
 	import type { Group } from '$lib/xata';
 	import { currentUrl } from '$lib/stores';
@@ -16,7 +16,6 @@
 	let user: PublicUser;
 	let navDisplay = true;
 	onMount(async () => {
-		await initStore();
 		currentUrl.set(window.location.pathname);
 		device = (await getStore('device')) as Device;
 		user = (await getStore('user')) as PublicUser;

@@ -69,7 +69,7 @@
 				"providerShortName": null,
 				"signingIdentity": null
 			},
-			"resources": ["stores/*"],
+			"resources": ["stores/store.json"],
 			"shortDescription": "",
 			"targets": "all",
 			"windows": {
