@@ -24,7 +24,7 @@
 	let deviceCommands: Command[] = [];
 	setTimeout(() => {
 		deviceCommands = device.deviceCommands!;
-	}, 10);
+	}, 100);
 	async function updateCommands() {
 		let response = await fetch(`https://spark-api.fly.dev/device/${deviceType}`, {
 			method: 'PUT',
@@ -124,7 +124,7 @@
 							viewBox="0 0 24 24"
 							stroke-width="1.5"
 							stroke="currentColor"
-							class="size-6"
+							class="size-6 absolute right-[5%] top-[5%] transition hover:stroke-green-500"
 						>
 							<path
 								stroke-linecap="round"

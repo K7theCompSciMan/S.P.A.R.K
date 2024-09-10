@@ -9,9 +9,9 @@ pub fn get(path: String, key: String) -> serde_json::Value {
 
 pub fn set(path: String, key: String, value: serde_json::Value) {
     let read_file = File::open(path.clone()).expect("Error creating file");
-    println!("reading from file in set function");
+    // println!("reading from file in set function");
     let json: serde_json::Value = serde_json::from_reader(read_file.try_clone().expect("Couldn't clone file")).expect("Error reading file");
-    println!("read from file in set function");
+    // println!("read from file in set function");
     let write_file = File::create(path.clone()).expect("Error creating file");
     let mut new_json = json.as_object().unwrap().clone();
     new_json.insert(key, value);

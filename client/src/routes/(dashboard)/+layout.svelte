@@ -94,11 +94,12 @@
 {:then device}
 	<div class="overflow-auto h-screen w-screen bg-slate-600 flex">
 		<nav
-			class="pt-[0.5%] h-full w-[10%] border-r-[0.5rem] border-slate-800 bg-slate-800 min-w-36 {navDisplay
+			class="pt-[0.5%] h-full w-[10%] border-r-[0.5rem] border-slate-800 bg-slate-800 min-w-36 resize-x sticky {navDisplay
 				? 'opacity-100'
 				: 'hidden opacity-0'} transition-all duration-150 md:shrink-0 lg:shrink-0 {withClose
 				? `absolute`
 				: ``}"
+				style="resize: x"
 		>
 			<div class="relative w-full h-fit flex flex-col justify-center text-start text-slate-400">
 				{#each pages as page, i}
