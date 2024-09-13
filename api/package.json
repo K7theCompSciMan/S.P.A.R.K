@@ -19,7 +19,7 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/lodash": "^4.17.4",
     "@types/nanoid": "^3.0.0",
-    "@types/uuid": "^9.0.2",
+    "@types/uuid": "^10.0.0",
     "@xata.io/client": "^0.29.5",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.12",
@@ -35,7 +35,7 @@
     "mongodb": "^6.8.0",
     "nanoid": "^4.0.2",
     "pino": "^9.2.0",
-    "uuid": "^9.0.0"
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@flydotio/dockerfile": "^0.5.2",
@@ -49,7 +49,7 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/lodash": "^4.17.4",
     "@types/nodemailer": "^6.4.15",
-    "@types/uuid": "^9.0.8",
+    "@types/uuid": "^10.0.0",
     "nodemon": "^3.0.3",
     "pino-pretty": "^11.1.0",
     "pre-commit": "^1.2.2",
