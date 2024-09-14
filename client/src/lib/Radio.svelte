@@ -32,7 +32,7 @@
 
 <style>
 	:root {
-		--accent-color: CornflowerBlue;
+		--accent-color: #bb25e4;
 		--gray: #ccc;
 	}
 

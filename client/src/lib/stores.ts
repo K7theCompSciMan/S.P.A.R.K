@@ -20,5 +20,16 @@ function createUrlStore() {
 	};
 }
 
+function createNavOpenStore() {
+	const { subscribe, set } = writable(true);
+
+	return {
+		subscribe,
+		set: (n: boolean) => set(n),
+		reset: () => set(true)
+	};
+}
+
 export const deviceData = createDeviceData();
 export const currentUrl = createUrlStore();
+export const navOpen = createNavOpenStore();

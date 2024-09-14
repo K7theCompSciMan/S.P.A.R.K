@@ -2,7 +2,37 @@
 export default {
   content: ["./src/**/*.{svelte, html, js, ts}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        dark: {
+          primary: '#8c8df1',
+          secondary: '#66139a',
+          accent: '#bb25e4',
+          success: '#',
+          fail: '#',
+          warning: '#',
+          background: {
+            '800':'#04051f',
+            '600': '#0F051f',
+            '500': '#2F051f',
+            '300': '#843b5e'
+          },
+          text: '#d3d6fa'
+      },
+      light: {
+        primary: '#0e1071',
+          secondary: '#b865ec',
+          accent: '#b11bda',
+          success: '#',
+          fail: '#',
+          warning: '#',
+          background: {
+            default:'#dfe0fb'
+          },
+          text: '#05082e'
+      }
+    }
+    },
   },
   plugins: [],
 }

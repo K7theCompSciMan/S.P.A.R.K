@@ -75,33 +75,35 @@
 </script>
 
 <!-- svelte-ignore css_unused_selector -->
-<div class="bg-slate-500 w-[80vw] ml-[5%] rounded-[2rem] shadow-2xl h-screen overflow-auto">
+<div class="bg-background-500 w-[80vw] ml-[5%] rounded-[2rem] shadow-2xl h-screen overflow-auto">
 	<div class="flex flex-col items-center h-full pt-[3%]">
 		<h1 class="text-2xl text-slate-200">{device.name} Commands</h1>
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div id="commands" class="w-1/2 h-full pt-[2%]">
-			{#each deviceCommands! as command}
+			{#each deviceCommands as command}
 				<div
-					class="bg-slate-600 rounded-2xl w-full h-[10%] flex flex-row relative items-center text-slate-200 mb-[2%]"
+					class="bg-dark-background-300 rounded-2xl w-[90%] ml-[5%] h-[20%] flex flex-row relative items-center text-dark-text mb-[2%]"
 				>
 					<div class="flex flex-col h-full w-[50%]">
 						<p class="relative left-[5%] top-[4%] text-xl">Command Alias</p>
 						<input
 							type="text"
 							bind:value={command.alias}
-							class="text-ellipsis border-b bg-transparent mt-[3%] w-[40%] ml-[5%] focus:outline-none"
+							class="text-ellipsis border-b bg-transparent mt-[3%] w-[100%] ml-[5%] focus:outline-none"
 							on:focusout={async () => await updateCommands()}
 						/>
 					</div>
-					<code class="w-[50%] bg-slate-700 rounded-r-2xl h-full text-ellipsis">
+					<code
+						class="w-[50%] bg-dark-background-500 rounded-r-2xl h-full text-ellipsis border border-dark-secondary"
+					>
 						<p class="relative w-fit h-fit text-xl ml-[4%]">Command</p>
 						<textarea
 							rows="1"
 							cols="50"
 							bind:value={command.command}
-							class="bg-slate-800 rounded-br-2xl w-full relative pt-[1%] pl-[4%] h-[70%] text-md focus:outline-none cursor-text no-scrollbar resize-none overflow-auto"
+							class="bg-transparent rounded-br-2xl w-full relative pt-[1%] pl-[4%] h-[70%] text-md focus:outline-none cursor-text no-scrollbar resize-none overflow-auto"
 							on:focusout={async () => await updateCommands()}
 						></textarea>
 					</code>
@@ -117,14 +119,17 @@
 							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
 						</svg>
 					</button>
-					<button on:click={async () => await runCommand(command)}>
+					<button
+						on:click={async () => await runCommand(command)}
+						class="absolute right-[8%] top-[5%] transition hover:text-green-500"
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke-width="1.5"
 							stroke="currentColor"
-							class="size-6 absolute right-[5%] top-[5%] transition hover:stroke-green-500"
+							class="size-6"
 						>
 							<path
 								stroke-linecap="round"
@@ -136,8 +141,9 @@
 				</div>
 			{/each}
 			<!-- svelte-ignore a11y_click_events_have_key_events -->
+			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<div
-				class=" bg-transparant mt-[2%] h-[5%] w-full relative flex align-middle text-slate-200 rounded-xl cursor-pointer group {createCommandPopup
+				class=" bg-transparant mt-[2%] h-[5%] w-full relative flex align-middle text-dark-text rounded-xl cursor-pointer group {createCommandPopup
 					? 'hidden'
 					: ''} "
 				id="add"
@@ -153,27 +159,22 @@
 					stroke-width="1.5"
 					stroke="currentColor"
 					id="add"
-					class="size-6 absolute top-[35%] group-hover:rotate-45 group-hover:stroke-green-500 transition-all group-hover:scale-110 duration-100 delay-75"
+					class="size-6 absolute left-[8%] top-[35%] group-hover:rotate-45 group-hover:stroke-green-500 transition-all group-hover:scale-110 duration-200"
 				>
 					<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
 				</svg>
-				<h2
-					class="text-xl w-[80%] h-fit text-ellipsis overflow-auto text-left absolute top-[32%] left-[3.5%] group-hover:text-green-500 transition-all group-hover:scale-110 group-hover:left-[7.5%] duration-100 delay-75"
-				>
-					Create a New Command
-				</h2>
 			</div>
 			<div
-				class="bg-slate-600 rounded-2xl w-full h-[10%] flex items-center text-slate-200 {createCommandPopup
+				class="bg-background-500 rounded-2xl w-[90%] relative left-[5%] h-[20%] flex items-center text-dark-text {createCommandPopup
 					? ''
 					: 'hidden'} "
 			>
-				<div class="flex flex-col h-full w-[50%]">
+				<div class="flex flex-col h-full w-[50%] bg-dark-background-300 rounded-l-2xl">
 					<p class="relative left-[5%] top-[4%] text-xl">New Command Alias</p>
 					<input
 						type="text"
 						bind:value={newCommand.alias}
-						class="text-ellipsis border-b bg-transparent mt-[3%] w-[40%] ml-[5%] focus:outline-none"
+						class="text-ellipsis border-b border-dark-secondary bg-dark-background-300 mt-[3%] w-[100%] ml-[5%] focus:outline-none"
 						on:focusout={async () => {
 							if (!newCommand.alias) {
 								createCommandPopup = false;
@@ -188,13 +189,15 @@
 						}}
 					/>
 				</div>
-				<code class="w-[50%] bg-slate-700 rounded-r-2xl h-full text-ellipsis">
+				<code
+					class="w-[50%] bg-dark-background-500 rounded-r-2xl h-full text-ellipsis border border-dark-secondary"
+				>
 					<p class="relative w-fit h-fit text-xl ml-[4%]">New Command</p>
 					<textarea
 						rows="1"
 						cols="50"
 						bind:value={newCommand.command}
-						class="bg-slate-800 rounded-br-2xl w-full relative pt-[1%] pl-[4%] h-[70%] text-md focus:outline-none cursor-text no-scrollbar resize-none overflow-auto"
+						class="bg-dark-background-500 rounded-br-2xl w-full relative pt-[1%] pl-[4%] h-[70%] text-md focus:outline-none cursor-text no-scrollbar resize-none overflow-auto"
 						on:focusout={async () => {
 							if (!newCommand.command) {
 								createCommandPopup = false;

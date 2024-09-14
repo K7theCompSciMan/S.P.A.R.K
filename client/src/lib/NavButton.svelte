@@ -10,10 +10,10 @@
 </script>
 
 <button
-	class=" h-fit mb-[5%] text-lg relative w-full hover:shadow-lg hover:text-slate-200
-    hover:bg-slate-500 rounded-md transition-all duration-150
+	class=" h-fit mb-[5%] text-lg relative w-full hover:shadow-lg hover:text-dark-primary
+    hover:bg-dark-background-500 rounded-md transition-all duration-200
     text-start overflow-hidden group {selected
-		? 'bg-slate-500 shadow-lg text-slate-200'
+		? 'bg-dark-background-500 shadow-lg text-dark-primary '
 		: ''} {classModifier} "
 	on:click={onclick}
 >
@@ -69,7 +69,7 @@
 			viewBox="0 0 24 24"
 			stroke-width="1.5"
 			stroke="currentColor"
-			class="size-6 absolute left-[2%] top-[2%] group-hover:rotate-45 transition-all"
+			class="size-6 absolute left-[2%] top-[2%] group-hover:rotate-45 group-hover:text-dark-primary transition-all duration-200 delay-0"
 		>
 			<path
 				stroke-linecap="round"

@@ -19,9 +19,9 @@
 
 </script>
 {#await user}
-    <div>Loading...</div>
+    <div class='text-dark-text'>Loading...</div>
 {:then user}
-    <h1>this is ur dashboard, {user.username}</h1>
+    <h1 class='text-dark-text'>this is ur dashboard, {user.username}</h1>
 {:catch error}
-    <div>{error.message}</div>
+    <div class='text-dark-text'>{error.message}</div>
 {/await}

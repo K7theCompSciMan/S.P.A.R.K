@@ -4,11 +4,11 @@
 	import { goto } from '$app/navigation';
 	import type { Command, Device } from '$lib';
 	import { getStore, setStore } from '$lib/tauri';
-	import type { ClientDevice, User, Group } from '$lib/xata';
+	import type { ServerDevice, User, Group } from '$lib/xata';
 	import { onMount } from 'svelte';
 	let thisDevice: Device = {};
 	let user: User = {};
-	let clients: ClientDevice[] = [];
+	let servers: ServerDevice[] = [];
 	let group: Group = {};
 	let accessToken = '';
 	onMount(async () => {
@@ -20,8 +20,8 @@
 			console.error('Missing data');
 			goto('/setup');
 		}
-		group.devices['client'].forEach(async (element: string) => {
-			let res = await fetch(`https://spark-api.fly.dev/device/client/${element}`, {
+		group.devices['server'].forEach(async (element: string) => {
+			let res = await fetch(`https://spark-api.fly.dev/device/server/${element}`, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
@@ -30,7 +30,7 @@
 			});
 			if (res.ok) {
 				let data = await res.json();
-				clients = [...clients, data];
+				servers = [...servers, data];
 			} else {
 				console.error(await res.text());
 			}
@@ -53,38 +53,38 @@
 			commandCreated = true;
 			selectedDevice.deviceCommands = [...selectedDevice.deviceCommands, newCommand];
 			console.log(selectedDevice.deviceCommands);
-			await updateClient(selectedDevice);
+			await updateServer(selectedDevice);
 		}
 	}
 	let commandCreated = false;
 	let createCommandPopup = false;
 
-	async function updateClient(client: ClientDevice) {
-		let res = await fetch(`https://spark-api.fly.dev/device/client/`, {
+	async function updateServer(server: ServerDevice) {
+		let res = await fetch(`https://spark-api.fly.dev/device/server/`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
 				authorization: `Bearer ${accessToken}`
 			},
-			body: JSON.stringify({ ...client, id: client.id })
+			body: JSON.stringify({ ...server, id: server.id })
 		});
 		if (res.ok) {
-			console.log('Client updated');
-			if (client.id === thisDevice.id) {
-				await setStore('device', client);
+			console.log('Server updated');
+			if (server.id === thisDevice.id) {
+				await setStore('device', server);
 			}
 		} else {
 			console.error(await res.text());
 		}
 	}
 
-	$: console.log(clients);
+	$: console.log(servers);
 
-	let selectedDevice: ClientDevice = { id: '', name: '', messages: [], deviceCommands: [] };
-	let selectedDeviceType = 'client';
+	let selectedDevice: ServerDevice = { id: '', name: '', messages: [], deviceCommands: [] };
+	let selectedDeviceType = 'server';
 	let settingsPopup = false;
-	async function getClientDevice(id: string) {
-		let res = await fetch(`https://spark-api.fly.dev/device/client/${id}`, {
+	async function getServerDevice(id: string) {
+		let res = await fetch(`https://spark-api.fly.dev/device/server/${id}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -115,7 +115,7 @@
 		selectedDevice.deviceCommands = selectedDevice.deviceCommands.filter(
 			(c: Command) => c !== command
 		);
-		await updateClient(selectedDevice);
+		await updateServer(selectedDevice);
 	}
 
 	async function runCommand(command: Command) {
@@ -128,40 +128,40 @@
 >
 	<div class="flex flex-col items-center h-full pt-[3%]">
 		<h1 class="text-2xl text-dark-primary">
-			Client Devices in <span class="text-dark-accent">{group.name}</span>
+			Server Devices in <span class="text-dark-accent">{group.name}</span>
 		</h1>
-		{#await clients}
+		{#await servers}
 			<h1 class="text-dark-primary text-2xl">Loading...</h1>
-		{:then clients}
-			<div id="clients" class="w-1/2 h-full pt-[2%] {settingsPopup ? 'hidden' : ''}">
-				{#each clients as client}
+		{:then servers}
+			<div id="servers" class="w-1/2 h-full pt-[2%] {settingsPopup ? 'hidden' : ''}">
+				{#each servers as server}
 					<!-- svelte-ignore a11y_click_events_have_key_events -->
 					<!-- svelte-ignore a11y_no_static_element_interactions -->
 					<div
 						class="bg-dark-background-500 rounded-2xl w-full h-[12%] flex flex-row relative items-center text-dark-text mb-[2%] cursor-pointer hover:scale-105 shadow-lg hover:shadow-dark-accent hover:text-dark-accent transition-all duration-200"
 						on:click={() => {
-							selectedDevice = client;
+							selectedDevice = server;
 							settingsPopup = true;
 						}}
 					>
 						<input
-							id="clientName"
+							id="serverName"
 							type="text"
 							class="text-xl h-fit border-b-2 border-dark-secondary w-[30%] pl-[1%] focus:outline-none absolute top-[8%] left-[1.5%] bg-transparent"
 							placeholder="Name"
-							bind:value={client.name}
+							bind:value={server.name}
 							on:focusout={async () => {
-								await updateClient(client);
+								await updateServer(server);
 							}}
 							on:keypress={async (e) => {
 								if (e.key === 'Enter') {
-									await updateClient(client);
+									await updateServer(server);
 								}
 							}}
 						/>
 						<div class="absolute right-[1%] top-[50%]">
-							<p id="messages" class="text-current">Messages: {client.messages.length}</p>
-							<p id="messages" class="text-current">Commands: {client.deviceCommands.length}</p>
+							<p id="messages" class="text-current">Messages: {server.messages.length}</p>
+							<p id="messages" class="text-current">Commands: {server.deviceCommands.length}</p>
 						</div>
 						<!-- <button
 							class="absolute top-[2%] right-[1%] hover:text-green-500 transition-all"
@@ -245,13 +245,13 @@
 			<h1 class="text-2xl mb-[2%]">Device Messages:</h1>
 			<div class="rounded-2xl no-scrollbar overflow-auto flex flex-col items-center w-full h-[70%]">
 				{#each selectedDevice.messages as message}
-					{#await getClientDevice(message.from)}
+					{#await getServerDevice(message.from)}
 						<h1 class="text-slate-400 text-xl">Loading Messages...</h1>
-					{:then ClientDevice}
+					{:then serverDevice}
 						<div
 							class="text-lg bg-dark-background-300 mb-[2%] rounded-xl w-[80%] h-fit text-dark-text relative"
 						>
-							<span class="text-dark-accent cursor-pointer">{ClientDevice.name}</span> sent:
+							<span class="text-dark-accent cursor-pointer">{serverDevice.name}</span> sent:
 							<div class="text-green-500">{message.content}</div>
 							<button
 								class="absolute top-[5%] right-[1%] hover:text-red-500 transition-all duration-100"
@@ -292,7 +292,7 @@
 								type="text"
 								bind:value={command.alias}
 								class="text-ellipsis border-b bg-transparent mt-[3%] w-[100%] ml-[5%] focus:outline-none"
-								on:focusout={async () => await updateClient(selectedDevice)}
+								on:focusout={async () => await updateServer(selectedDevice)}
 							/>
 						</div>
 						<code
@@ -304,7 +304,7 @@
 								cols="50"
 								bind:value={command.command}
 								class="bg-transparent rounded-br-2xl w-full relative pt-[1%] pl-[4%] h-[70%] text-md focus:outline-none cursor-text no-scrollbar resize-none overflow-auto"
-								on:focusout={async () => await updateClient(selectedDevice)}
+								on:focusout={async () => await updateServer(selectedDevice)}
 							></textarea>
 						</code>
 						<button on:click={async () => await deleteCommand(command)}>

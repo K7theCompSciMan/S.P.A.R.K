@@ -8,13 +8,12 @@
 	import { getStore, setStore } from '$lib/tauri';
 	import type { Device, PublicUser } from '$lib';
 	import type { Group } from '$lib/xata';
-	import { currentUrl } from '$lib/stores';
+	import { currentUrl, navOpen } from '$lib/stores';
 	let device: Device = { id: '', name: '' };
 	let deviceType: string = 'client';
 	let accessToken: string = '';
 	let groups: Group[] = [];
 	let user: PublicUser;
-	let navDisplay = true;
 	onMount(async () => {
 		currentUrl.set(window.location.pathname);
 		device = (await getStore('device')) as Device;
@@ -82,9 +81,8 @@
 		name: string;
 		url: string;
 	};
-	let withClose = false;
 	let screenWidth: number = 0;
-	$: screenWidth < 1024 ? (navDisplay = false) : (navDisplay = true);
+	let navWidth = 'w-[10%]';
 </script>
 
 <svelte:window bind:innerWidth={screenWidth} />
@@ -92,21 +90,19 @@
 {#await device}
 	<p>Loading</p>
 {:then device}
-	<div class="overflow-auto h-screen w-screen bg-slate-600 flex">
+	<div class="overflow-auto h-screen w-screen bg-dark-background-800 flex">
 		<nav
-			class="pt-[0.5%] h-full w-[10%] border-r-[0.5rem] border-slate-800 bg-slate-800 min-w-36 resize-x sticky {navDisplay
-				? 'opacity-100'
-				: 'hidden opacity-0'} transition-all duration-150 md:shrink-0 lg:shrink-0 {withClose
+			class="pt-[0.5%] h-full {navWidth} border-r pt-[2%] border-slate-800 bg-dark-background-800 resize-x overflow-x-hidden sticky transition-all duration-150 md:shrink-0 lg:shrink-0 {$navOpen
 				? `absolute`
 				: ``}"
-				style="resize: x"
+			style="resize: x"
 		>
-			<div class="relative w-full h-fit flex flex-col justify-center text-start text-slate-400">
+			<div class="relative w-auto h-fit flex flex-col justify-center text-start text-dark-text">
 				{#each pages as page, i}
 					<NavButton
 						name={i === 0 ? (device.name ? device.name : 'This Device') : page.name}
 						url={page.url}
-						classModifier={`${i == 0 ? 'mt-[3%]' : ''}`}
+						classModifier={`${i == 0 ? 'mt-[3%]' : ''} text-nowrap`}
 						type={deviceType}
 						selected={$currentUrl === page.url}
 						onclick={() => {
@@ -115,18 +111,30 @@
 						}}
 					/>
 				{/each}
-				<p class="pt-[20%] pl-[5%] text-md pb-[5%]">Your Groups</p>
+				<p
+					class="pt-[20%] pl-[5%] text-md pb-[5%] transition-all duration-200 overflow-hidden text-nowrap {navOpen
+						? 'opacity-100'
+						: 'opacity-0'}"
+				>
+					Your Groups
+				</p>
 				{#each groups as group}
-					<NavButton name={group.name} url={`/group/${group.id}`} type="group" selected={false} />
+					<NavButton
+						name={group.name}
+						url={`/group/${group.id}`}
+						type="group"
+						classModifier={`${navOpen ? 'opacity-100' : 'opacity-0'} transition-all duration-200`}
+						selected={false}
+					/>
 				{/each}
 			</div>
 			<button
-				class="w-fit h-fit {withClose
-					? ''
-					: 'hidden'} text-slate-300 absolute -right-2 top-1 hover:text-slate-50 hover:shadow-lg"
+				class="w-fit h-fit {$navOpen
+					? 'right-[2%]'
+					: 'right-[25%] rotate-180'} text-dark-primary absolute transition-all duration-200  top-[0.5%] hover:text-dark-accent hover:shadow-lg"
 				on:click={() => {
-					withClose = false;
-					navDisplay = false;
+					navOpen.set(!$navOpen);
+					navWidth = (navWidth === 'w-[10%]') ? 'w-[2.5%] px-2' : 'w-[10%]';
 				}}
 			>
 				<svg
@@ -137,34 +145,14 @@
 					stroke="currentColor"
 					class="size-6"
 				>
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5"
+					/>
 				</svg>
 			</button>
 		</nav>
-		<button
-			class="{navDisplay
-				? 'hidden'
-				: 'left-[2%] top-[2%]'} border h-fit w-fit mr-[2%] text-slate-300"
-			on:click={() => {
-				navDisplay = true;
-				withClose = true;
-			}}
-		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke-width="1.5"
-				stroke="currentColor"
-				class="size-6"
-			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
-				/>
-			</svg></button
-		>
 
 		<slot />
 	</div>
