@@ -4,7 +4,7 @@
 use std::{path::PathBuf, sync::{Arc, Mutex}, thread}; // Add this line to import PathBuf
 
 use backend::handle_device_updates_api_call;
-use tauri::{self, EventLoopMessage, Manager};
+use tauri::{self, api::process::{Command, CommandEvent}, EventLoopMessage, Manager};
 use tauri_plugin_store::{with_store, StoreBuilder, StoreCollection};
 use tauri_runtime_wry::Wry;
 mod app;
@@ -25,7 +25,7 @@ fn main() {
       }
       _ => {}
     })
-    .setup(|app| {
+    .setup(|_app| {
       // let store_path = app.path_resolver().resolve_resource("stores/store.json").expect("Failed to resolve resource");
       // let mut back_store = StoreBuilder::new(app.handle(), store_path.clone()).build();
       // let _ = with_store(app.handle(), app.state::<StoreCollection<Wry<EventLoopMessage>>>(), store_path.clone(), |store: &mut tauri_plugin_store::Store<Wry<EventLoopMessage>>| {
@@ -35,8 +35,9 @@ fn main() {
       //   Ok(())
       // });
       // println!("Store: {:?}", back_store);
+      
       thread::spawn(move || {
-        // handle_device_updates_api_call().expect("Error handling device updates");
+        handle_device_updates_api_call().expect("Error handling device updates");
       });
       Ok(())
     })

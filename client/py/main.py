@@ -3,8 +3,10 @@ import pyttsx3 as tts
 from openai import OpenAI
 import os, sys, requests
 from text_filter import *
+import wx
 recognizer = sr.Recognizer()
 
+# TODO: Improve Speech Recognition, text-filtering and etc.
 
 def speak(text):
     engine = tts.init()
@@ -19,7 +21,7 @@ def listen():
                 print("Listening...")
                 audio = recognizer.listen(source, timeout=3, phrase_time_limit=5)
                 text = str(recognizer.recognize_google(audio))
-                print("User said : {}".format(text))
+                print("You said : {}".format(text))
                 if "spark" in text.lower():
                     print("SPARK ACTIVATED")
                     speak("SPARK ACTIVATED")
@@ -31,7 +33,6 @@ def listen():
         except sr.WaitTimeoutError:
             print("Conversation timed out")
 
-# TODO: Modify initial message to get the flipping AI to understand what to do
 
 def handle_ai(text, group, client, client_devices, server_devices):
 
@@ -39,13 +40,14 @@ def handle_ai(text, group, client, client_devices, server_devices):
     server_devices_updated = [{'name': x['name'], 'commands': x['deviceCommands']} for x in server_devices]
     mod_text = text + f" | {client_devices_updated} | {server_devices_updated} "
     filtered_text = filter(text, client_devices_updated + server_devices_updated)
-    print(filtered_text)
     if "RUN COMMAND ON DEVICE: " in filtered_text:
         new_text = filtered_text.split("|| ")[1].split(" ||")[0]
         device_name = new_text.split("RUN COMMAND ON DEVICE: ")[1].split(" |")[0]
-        print(f"text: {new_text}, device name {device_name} ")
         return new_text, device_name, group
     response = (send_to_ai(filtered_text, group['aiMessages'], client) if "<Error: " not in filtered_text else filtered_text)
+    if "<Error: " in response:
+        print(response)
+        return response, "", group
     return response, "", group
 def send_to_ai(message, messages: list, client: OpenAI):
     messages.append({"role": "user", "content": message})
@@ -94,7 +96,7 @@ def main():
                 else:
                     device = server_devices[server_device_names.index(device_name)]
                 message_content = f"[RUN COMMAND] {filtered_text.split(f'RUN COMMAND ON DEVICE: {device_name} | ')[1]}"
-                print(message_content)
+                print(f"sending message: `{message_content}`")
                 print(requests.post(
                     "https://spark-api.fly.dev/device/server/sendMessage",
                     json={
@@ -102,7 +104,7 @@ def main():
                         "recieverDeviceId": device['id'],
                         "messageContent": message_content
                     }, headers={"Authorization": f"Bearer {access_token}"},
-                ).json())
+                ).json()['message'])
             else:
                 speak(filtered_text)
             if len(updated_group['aiMessages']) > len(group['aiMessages']):
@@ -111,14 +113,4 @@ def main():
                     json=updated_group,
                     headers={"Authorization": f"Bearer {access_token}"},
                 )
-def learn(new_message, client):
-    messages.append({"role": "user", "content": new_message})
-    response = client.chat.completions.create(
-        model="model-identifier",
-        messages=messages,
-        temperature=0.7
-    )
-    messages.append(response.choices[0].message);
-    print(response.choices[0].message.content)
-if __name__ == "__main__":
-    main()
+main()

@@ -19,15 +19,13 @@ def filter_action(input: str, action: str, devices: list) -> str:
         x for x in input_list if input_list.index(x) >= input_list.index(action)
     ]
     predicate = " ".join(predicate)
-    print(predicate)
     # print(devices[0]['deviceCommands'][0]['alias'].lower())
     for device in devices:
         if device["name"].lower() in predicate:
-            print("found device")
             return_text = f"<ERROR: Found device: {device['name']} but could not find command>"
             for device_command in device["commands"]:
                 if device_command["alias"].lower() in predicate:
-                    print("found command")
+                    print(f"Command Found: {device_command['alias']}")
                     return f"|| RUN COMMAND ON DEVICE: {device['name']} | {device_command['alias']} ||"
         else:
             return_text = "<ERROR: Could not find device>"

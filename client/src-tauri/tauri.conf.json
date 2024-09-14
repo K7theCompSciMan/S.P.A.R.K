@@ -16,7 +16,7 @@
 				"all": false,
 				"execute": false,
 				"open": false,
-				"scope": [{ "name": "bin/python/test", "sidecar": true, "args": true }],
+				"scope": [{ "name": "bin/python/server", "sidecar": true, "args": true }],
 				"sidecar": true
 			},
 			"all": false,
@@ -52,7 +52,7 @@
 			"deb": {
 				"depends": []
 			},
-			"externalBin": ["bin/python/test"],
+			"externalBin": ["bin/python/server"],
 			"icon": [
 				"icons/32x32.png",
 				"icons/128x128.png",
