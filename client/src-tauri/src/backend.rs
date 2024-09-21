@@ -20,20 +20,33 @@ fn default_device() -> Device {
 }
 
 pub fn handle_server_device_updates() {
-    tauri::async_runtime::spawn(async move {
-        let (mut rx, mut child) = Command::new_sidecar("server")
-            .expect("failed to setup `server` sidecar")
-            .args(["rec_cq9do7pk946ki2d08fo0","eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoicmVjX2NxODdjMjltMGRlMmJ0MzlsbW1nIiwidXNlcm5hbWUiOiJLZXNhdmFuIn0sImlhdCI6MTcyNDExNjk5N30.ae5Y86J74WadBSckxmWxR0Htiev7_VAgs1G327ovQ4oGitLNOhrhj4EETOiSjXZlstMc-kMSmOofqBUcb41DW9uVVMNjFTkuLBSgf-YYCQhj3M2wn2IJyJIu3BHXxDU6aOlacFrK3lCmoxYTX7EGkcrZ6NU_XEyoJCwyqPzHXYCRgT_pnG5ANRHFBYi5hB1qMHzXGgHOWinAdDJYvCCS9v4VLl-wX9E9YdOiEJuJ18hdpkLHkZhCsmaVV0gbdqbEOUWoF3iISTzL1wzBkN3q24iNUcimEe01ab7yB2yOwewhvqf9wuxVfoM7iNhh6pmolIurqVPZKNlq5b6ttirlDg"])
-            .spawn()
-            .expect("Failed to spawn packaged node");
-
-        // child.write("rec_cq9do7pk946ki2d08fo0 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoicmVjX2NxODdjMjltMGRlMmJ0MzlsbW1nIiwidXNlcm5hbWUiOiJLZXNhdmFuIn0sImlhdCI6MTcyNDExNjk5N30.ae5Y86J74WadBSckxmWxR0Htiev7_VAgs1G327ovQ4oGitLNOhrhj4EETOiSjXZlstMc-kMSmOofqBUcb41DW9uVVMNjFTkuLBSgf-YYCQhj3M2wn2IJyJIu3BHXxDU6aOlacFrK3lCmoxYTX7EGkcrZ6NU_XEyoJCwyqPzHXYCRgT_pnG5ANRHFBYi5hB1qMHzXGgHOWinAdDJYvCCS9v4VLl-wX9E9YdOiEJuJ18hdpkLHkZhCsmaVV0gbdqbEOUWoF3iISTzL1wzBkN3q24iNUcimEe01ab7yB2yOwewhvqf9wuxVfoM7iNhh6pmolIurqVPZKNlq5b6ttirlDg".as_bytes());
-        while let Some(event) = rx.recv().await {
-            if let CommandEvent::Stdout(line) = event {
-                let mut current_server_output = serde_json::from_value::<Vec<String>>(store::get("stores/store.json".to_string(), "serverOutput".to_string())).unwrap_or(Vec::<String>::new());
-                current_server_output.push(line.clone());
-                store::set("stores/store.json".to_string(), "serverOutput".to_string(), current_server_output.into());
-                println!("server output: {}", line.clone());
+    tauri::async_runtime::Builder::new_current_thread().enable_all(async move {
+        while true {
+            println!("Checking if server is running");
+            if serde_json::from_value(store::get("stores/store.json".to_string(), "runningServerBackend".to_string())).unwrap_or(false) {
+                println!("Server is running");
+                let (mut rx, mut child) = Command::new_sidecar("server")
+                .expect("failed to setup `server` sidecar")
+                .args(["rec_cq9do7pk946ki2d08fo0","eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoicmVjX2NxODdjMjltMGRlMmJ0MzlsbW1nIiwidXNlcm5hbWUiOiJLZXNhdmFuIn0sImlhdCI6MTcyNDExNjk5N30.ae5Y86J74WadBSckxmWxR0Htiev7_VAgs1G327ovQ4oGitLNOhrhj4EETOiSjXZlstMc-kMSmOofqBUcb41DW9uVVMNjFTkuLBSgf-YYCQhj3M2wn2IJyJIu3BHXxDU6aOlacFrK3lCmoxYTX7EGkcrZ6NU_XEyoJCwyqPzHXYCRgT_pnG5ANRHFBYi5hB1qMHzXGgHOWinAdDJYvCCS9v4VLl-wX9E9YdOiEJuJ18hdpkLHkZhCsmaVV0gbdqbEOUWoF3iISTzL1wzBkN3q24iNUcimEe01ab7yB2yOwewhvqf9wuxVfoM7iNhh6pmolIurqVPZKNlq5b6ttirlDg"])
+                .spawn()
+                .expect("Failed to spawn packaged node");
+                // child.write("rec_cq9do7pk946ki2d08fo0 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoicmVjX2NxODdjMjltMGRlMmJ0MzlsbW1nIiwidXNlcm5hbWUiOiJLZXNhdmFuIn0sImlhdCI6MTcyNDExNjk5N30.ae5Y86J74WadBSckxmWxR0Htiev7_VAgs1G327ovQ4oGitLNOhrhj4EETOiSjXZlstMc-kMSmOofqBUcb41DW9uVVMNjFTkuLBSgf-YYCQhj3M2wn2IJyJIu3BHXxDU6aOlacFrK3lCmoxYTX7EGkcrZ6NU_XEyoJCwyqPzHXYCRgT_pnG5ANRHFBYi5hB1qMHzXGgHOWinAdDJYvCCS9v4VLl-wX9E9YdOiEJuJ18hdpkLHkZhCsmaVV0gbdqbEOUWoF3iISTzL1wzBkN3q24iNUcimEe01ab7yB2yOwewhvqf9wuxVfoM7iNhh6pmolIurqVPZKNlq5b6ttirlDg".as_bytes());
+                while let Some(event) = rx.recv().await {
+                    if let CommandEvent::Stdout(line) = event {
+                        let mut current_server_output = serde_json::from_value::<Vec<String>>(store::get("stores/store.json".to_string(), "serverOutput".to_string())).unwrap_or(Vec::<String>::new());
+                        current_server_output.push(line.clone());
+                        store::set("stores/store.json".to_string(), "serverOutput".to_string(), current_server_output.into());
+                        println!("server output: {}", line.clone());
+                    }
+                    if !serde_json::from_value(store::get("stores/store.json".to_string(), "runningServerBackend".to_string())).unwrap_or(false) {
+                        println!("Server is not running");
+                        child.kill();
+                        break;
+                    }
+                }
+            }
+            else {
+                println!("Server is not running")
             }
         }
     });
@@ -41,6 +54,7 @@ pub fn handle_server_device_updates() {
 
 pub fn handle_device_updates_api_call() -> Result<(), Error> {
     let path = "stores/store.json".to_string();
+    println!("Getting Updated Device");
     let mut device: Device = serde_json::from_value::<Device>(store::get(path.clone(), "device".to_string())).unwrap_or(default_device());
     // println!("Device from store: {:?}", device);
     let mut device_type = serde_json::from_value::<String>(store::get(path.clone(), "deviceType".to_string())).unwrap_or("default".to_string());
@@ -78,6 +92,7 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
         }
         // println!();
         thread::sleep(std::time::Duration::from_secs(10));
+        println!("Getting updated device");
         device = serde_json::from_value::<Device>(store::get(path.clone(), "device".to_string())).unwrap_or(default_device());
         // println!("Device from store: {:?}", device);
         device_type = serde_json::from_value::<String>(store::get(path.clone(), "deviceType".to_string())).unwrap_or("default".to_string());
