@@ -3,7 +3,7 @@ import pyttsx3 as tts
 from openai import OpenAI
 import os, sys, requests
 from text_filter import *
-import wx
+import wx, threading, json
 recognizer = sr.Recognizer()
 
 # TODO: Improve Speech Recognition, text-filtering and etc.
@@ -18,20 +18,20 @@ def listen():
     while True:
         try:
             with sr.Microphone() as source:
-                print("Listening...")
+                print_to_console("Listening...")
                 audio = recognizer.listen(source, timeout=3, phrase_time_limit=5)
                 text = str(recognizer.recognize_google(audio))
-                print("You said : {}".format(text))
+                print_to_console("You said : {}".format(text))
                 if "spark" in text.lower():
-                    print("SPARK ACTIVATED")
+                    print_to_console("SPARK ACTIVATED")
                     speak("SPARK ACTIVATED")
                     return text
         except sr.RequestError as e:
-            print("Could not request results; {0}".format(e))
+            print_to_console("Could not request results; {0}".format(e))
         except sr.UnknownValueError:
-            print("unknown error occured")
+            print_to_console("unknown error occured")
         except sr.WaitTimeoutError:
-            print("Conversation timed out")
+            print_to_console("Conversation timed out")
 
 
 def handle_ai(text, group, client, client_devices, server_devices):
@@ -46,7 +46,7 @@ def handle_ai(text, group, client, client_devices, server_devices):
         return new_text, device_name, group
     response = (send_to_ai(filtered_text, group['aiMessages'], client) if "<Error: " not in filtered_text else filtered_text)
     if "<Error: " in response:
-        print(response)
+        print_to_console(response)
         return response, "", group
     return response, "", group
 def send_to_ai(message, messages: list, client: OpenAI):
@@ -96,8 +96,8 @@ def main():
                 else:
                     device = server_devices[server_device_names.index(device_name)]
                 message_content = f"[RUN COMMAND] {filtered_text.split(f'RUN COMMAND ON DEVICE: {device_name} | ')[1]}"
-                print(f"sending message: `{message_content}`")
-                print(requests.post(
+                print_to_console(f"sending message: `{message_content}`")
+                print_to_console(requests.post(
                     "https://spark-api.fly.dev/device/server/sendMessage",
                     json={
                         "serverDeviceId": server_device['id'],
@@ -113,4 +113,14 @@ def main():
                     json=updated_group,
                     headers={"Authorization": f"Bearer {access_token}"},
                 )
+def print_to_console(content):
+    path = sys.argv[3] if len(sys.argv) > 3 else "not found"
+    with open(path) as f:
+        data = json.load(f)
+        server_output = data['serverOutput']
+        server_output.append(content)
+        data['serverOutput'] = server_output
+        with open(path, "w") as f:
+            json.dump(data, f)
+    print(content)
 main()
