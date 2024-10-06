@@ -20,8 +20,8 @@ fn default_device() -> Device {
 }
 
 pub fn handle_server_device_updates() {
-    tauri::async_runtime::Builder::new_current_thread().enable_all(async move {
-        while true {
+    tauri::async_runtime::spawn(async move {
+        loop {
             println!("Checking if server is running");
             if serde_json::from_value(store::get("stores/store.json".to_string(), "runningServerBackend".to_string())).unwrap_or(false) {
                 println!("Server is running");
@@ -35,7 +35,7 @@ pub fn handle_server_device_updates() {
                     if let CommandEvent::Stdout(line) = event {
                         let mut current_server_output = serde_json::from_value::<Vec<String>>(store::get("stores/store.json".to_string(), "serverOutput".to_string())).unwrap_or(Vec::<String>::new());
                         current_server_output.push(line.clone());
-                        store::set("stores/store.json".to_string(), "serverOutput".to_string(), current_server_output.into());
+                        // store::set("stores/store.json".to_string(), "serverOutput".to_string(), current_server_output.into());
                         println!("server output: {}", line.clone());
                     }
                     if !serde_json::from_value(store::get("stores/store.json".to_string(), "runningServerBackend".to_string())).unwrap_or(false) {
@@ -43,6 +43,7 @@ pub fn handle_server_device_updates() {
                         child.kill();
                         break;
                     }
+                    println!("Server Running");
                 }
             }
             else {
