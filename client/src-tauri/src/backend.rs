@@ -66,7 +66,8 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
     let mut device_type = serde_json::from_value::<String>(store::get(path.clone(), "deviceType".to_string())).unwrap_or("default".to_string());
     handle_server_device_updates();
     loop {
-        if device.id!="default".to_string() && device_type!="none".to_string() {
+        let mut running_backend = serde_json::from_value::<bool>(store::get(path.clone(), "runningClientBackend".to_string())).unwrap_or("false".to_string());
+        if device.id!="default".to_string() && device_type!="none".to_string() && running_backend {
             let past_messages = device.messages.clone();
             let request_url = format!("https://spark-api.fly.dev/device/{device_type}/{device_id}/", device_type = device_type, device_id = device.id);
             let updated_device: Device = reqwest::blocking::get(&request_url)?.json()?;
