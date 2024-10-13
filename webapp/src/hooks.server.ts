@@ -15,9 +15,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		});
 		const data = await response.json()
 		const accessToken = data.accessToken;
-		const device = data.device;
 		event.locals.accessToken = accessToken;
-		event.locals.device = device;
 		const res = await fetch('https://spark-api.fly.dev/session/user', {
 			headers: {
 				authorization: `Bearer ${accessToken}`

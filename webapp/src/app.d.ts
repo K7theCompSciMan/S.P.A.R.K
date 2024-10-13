@@ -1,7 +1,6 @@
 // See https://kit.svelte.dev/docs/types#app
 
-import type { Device } from "$lib";
-import type { User } from "$lib/xata";
+import type { PublicUser } from "$lib";
 
 // for information about these interfaces
 declare global {
@@ -9,8 +8,7 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			accessToken: string;
-			user: User | null;
-			device: Device | null;
+			user: PublicUser | null;
 		}
 		// interface PageData {}
 		// interface PageState {}
