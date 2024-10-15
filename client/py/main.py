@@ -3,7 +3,7 @@ import pyttsx3 as tts
 from openai import OpenAI
 import os, sys, requests
 from text_filter import *
-import wx, threading, json
+import json
 recognizer = sr.Recognizer()
 
 # TODO: Improve Speech Recognition, text-filtering and etc.
