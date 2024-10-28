@@ -1,9 +1,11 @@
+import socketserver
 import speech_recognition as sr
 import pyttsx3 as tts
 from openai import OpenAI
 import os, sys, requests
 from text_filter import *
 import json
+from http.server import HTTPServer, SimpleHTTPRequestHandler, BaseHTTPRequestHandler
 recognizer = sr.Recognizer()
 
 # TODO: Improve Speech Recognition, text-filtering and etc.
@@ -123,4 +125,19 @@ def print_to_console(content):
         with open(path, "w") as f:
             json.dump(data, f)
     print(content)
-main()
+def server_setup():
+    PORT = 8000
+
+    class Handler (BaseHTTPRequestHandler) :
+        def __init__(self, *args, directory=None, **kwargs):
+            super()
+        def do_GET(self):
+            self.send_response(200)
+            self.send_header("Content-type", "text/html")
+            self.end_headers()
+            self.wfile.write(bytes("<html><body><h1>Hello World!</h1></body></html>", "utf-8"))
+
+    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+        print("serving at port", PORT)
+        httpd.serve_forever()
+server_setup()
