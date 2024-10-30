@@ -128,16 +128,18 @@ def print_to_console(content):
 def server_setup():
     PORT = 8000
 
-    class Handler (BaseHTTPRequestHandler) :
+    class Handler(SimpleHTTPRequestHandler) :
         def __init__(self, *args, directory=None, **kwargs):
-            super()
+            super().__init__(*args, **kwargs, directory=directory)
         def do_GET(self):
+            print("GET request received")
             self.send_response(200)
             self.send_header("Content-type", "text/html")
             self.end_headers()
-            self.wfile.write(bytes("<html><body><h1>Hello World!</h1></body></html>", "utf-8"))
+            self.wfile.write(bytes(str(output), "utf-8")), print(str(output))
 
     with socketserver.TCPServer(("", PORT), Handler) as httpd:
         print("serving at port", PORT)
         httpd.serve_forever()
+output = ["Listening to server..."]
 server_setup()
