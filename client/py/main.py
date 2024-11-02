@@ -124,6 +124,7 @@ def print_to_console(content):
         data['serverOutput'] = server_output
         with open(path, "w") as f:
             json.dump(data, f)
+    output.append(content)
     print(content)
 def server_setup():
     PORT = 8000
