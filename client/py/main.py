@@ -100,14 +100,16 @@ async def main():
                     device = server_devices[server_device_names.index(device_name)]
                 message_content = f"[RUN COMMAND] {filtered_text.split(f'RUN COMMAND ON DEVICE: {device_name} | ')[1]}"
                 await print_to_console(f"sending message: `{message_content}`")
-                await print_to_console(requests.post(
+                await nc.publish(device['id'], message_content.encode('utf-8'))
+                data = requests.post(
                     "https://spark-api.fly.dev/device/server/sendMessage",
                     json={
                         "serverDeviceId": server_device['id'],
                         "recieverDeviceId": device['id'],
                         "messageContent": message_content
                     }, headers={"Authorization": f"Bearer {access_token}"},
-                ).json()['message'])
+                ).json()['message']
+                await print_to_console(data)
             else:
                 speak(filtered_text)
             if len(updated_group['aiMessages']) > len(group['aiMessages']):
