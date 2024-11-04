@@ -29,6 +29,7 @@ mini-redis = "0.4"
 futures = "0.3.30"
 tauri-runtime-wry = "0.14.9"
 fs = "0.0.5"
+rants = "0.6.0"
 # simple_transcribe_rs = "1.0.3"
 # pv_recorder = "*"
 [features]
