@@ -6,7 +6,7 @@ use tauri_plugin_store::Store;
 use crate::{app::run_command, xata_structs::{self, Device}};
 use crate::{store};
 use tauri::api::process::Command;
-use rants::Client;
+use async_nats;
 fn default_device() -> Device {
     Device {
         name: "default".to_string(),
@@ -60,26 +60,19 @@ pub fn handle_server_device_updates() {
 
 async fn run_nats_backend(subject: str) {
     let address = "0.0.0.0:4222".parse().unwrap();
-    let client = Client::new(vec![address]);
-
-    client.connect_mut().await.echo(true);
-
-    client.connect().await;
+    let client = async_nats::connect(&address).await?;
 
     let subject = subject.parse().unwrap();
 
-    let (_, mut subscription) = client.subscribe(&subject, 1024).await.unwrap();
+    let  mut subscription = client.subscribe(&subject).await?.unwrap();
 
-    client
-        .publish(&subject, "Test")
-        .await
-        .unwrap();
-
-    let message = subscription.next().await.unwrap();
-    let message = String::from_utf8(message.into_payload()).unwrap();
-    println!("Recieved message: {}", message);
-
-    client.disconnect().await;
+    for _ in 0..10 {
+        client.publish("messages", "data".into()).await?;
+    }
+    while let Some(msg) = subscription.next().await {
+        println!("Received message: {:?}", msg);
+    }
+    
 }
 pub fn handle_device_updates_api_call() -> Result<(), Error> {
     let path = "stores/store.json".to_string();
@@ -93,8 +86,8 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
         tauri::async_runtime::spawn(async move {
             run_nats_backend(device.id.clone().to_str()).await;
         })
+        return Ok(());
     }
-    return Ok(());
     loop {
         let mut running_backend = serde_json::from_value::<bool>(store::get(path.clone(), "runningClientBackend".to_string())).unwrap_or(false);
         if device.id!="default".to_string() && device_type!="none".to_string() && running_backend {            
