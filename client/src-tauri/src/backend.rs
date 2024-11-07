@@ -6,7 +6,7 @@ use tauri_plugin_store::Store;
 use crate::{app::run_command, xata_structs::{self, Device}};
 use crate::{store};
 use tauri::api::process::Command;
-
+use async_nats;
 fn default_device() -> Device {
     Device {
         name: "default".to_string(),
@@ -58,6 +58,22 @@ pub fn handle_server_device_updates() {
     });
 }
 
+async fn run_nats_backend(subject: str) {
+    let address = "0.0.0.0:4222".parse().unwrap();
+
+    let client = async_nats::connect(&address).await?;
+
+    let subject = subject.parse().unwrap();
+
+    let  mut subscription = client.subscribe(&subject).await?.unwrap();
+
+    for _ in 0..10 {
+        client.publish("messages", "data".into()).await?;
+    }
+    while let Some(msg) = subscription.next().await {
+        println!("Received message: {:?}", msg);
+    }
+}
 pub fn handle_device_updates_api_call() -> Result<(), Error> {
     let path = "stores/store.json".to_string();
     println!("Getting Updated Device");
@@ -65,9 +81,17 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
     // println!("Device from store: {:?}", device);
     let mut device_type = serde_json::from_value::<String>(store::get(path.clone(), "deviceType".to_string())).unwrap_or("default".to_string());
     handle_server_device_updates();
+    let mut backend_nats = serde_json::from_value::<bool>(store::get(path.clone(), "backendNATS".to_string())).unwrap_or(false);
+    if backend_nats {
+        tauri::async_runtime::spawn(async move {
+            run_nats_backend(device.id.clone().to_str()).await;
+        })
+        return Ok(());
+    }
+
     loop {
         let mut running_backend = serde_json::from_value::<bool>(store::get(path.clone(), "runningClientBackend".to_string())).unwrap_or(false);
-        if device.id!="default".to_string() && device_type!="none".to_string() && running_backend {
+        if device.id!="default".to_string() && device_type!="none".to_string() && running_backend {            
             let past_messages = device.messages.clone();
             let request_url = format!("https://spark-api.fly.dev/device/{device_type}/{device_id}/", device_type = device_type, device_id = device.id);
             let updated_device: Device = reqwest::blocking::get(&request_url)?.json()?;

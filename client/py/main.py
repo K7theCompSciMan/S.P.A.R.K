@@ -1,9 +1,11 @@
+import socketserver
 import speech_recognition as sr
 import pyttsx3 as tts
 from openai import OpenAI
-import os, sys, requests
+import os, sys, requests, nats, asyncio
 from text_filter import *
 import json
+from http.server import HTTPServer, SimpleHTTPRequestHandler, BaseHTTPRequestHandler
 recognizer = sr.Recognizer()
 
 # TODO: Improve Speech Recognition, text-filtering and etc.
@@ -14,31 +16,31 @@ def speak(text):
     engine.runAndWait()
 
 
-def listen():
+async def listen():
     while True:
         try:
             with sr.Microphone() as source:
-                print_to_console("Listening...")
+                await print_to_console(b"Listening...")
                 audio = recognizer.listen(source, timeout=3, phrase_time_limit=5)
                 text = str(recognizer.recognize_google(audio))
-                print_to_console("You said : {}".format(text))
+                await print_to_console(b"You said : {}".format(text))
                 if "spark" in text.lower():
-                    print_to_console("SPARK ACTIVATED")
+                    await print_to_console(b"SPARK ACTIVATED")
                     speak("SPARK ACTIVATED")
                     return text
         except sr.RequestError as e:
-            print_to_console("Could not request results; {0}".format(e))
+            await print_to_console(b"Could not request results; {0}".format(e))
         except sr.UnknownValueError:
-            print_to_console("unknown error occured")
+            await print_to_console(b"unknown error occured")
         except sr.WaitTimeoutError:
-            print_to_console("Conversation timed out")
+            await print_to_console(b"Conversation timed out")
 
 
-def handle_ai(text, group, client, client_devices, server_devices):
+async def handle_ai(text, group, client, client_devices, server_devices):
 
     client_devices_updated = [{'name': x['name'], 'commands': x['deviceCommands']} for x in client_devices]
     server_devices_updated = [{'name': x['name'], 'commands': x['deviceCommands']} for x in server_devices]
-    mod_text = text + f" | {client_devices_updated} | {server_devices_updated} "
+    # mod_text = text + f" | {client_devices_updated} | {server_devices_updated} "
     filtered_text = filter(text, client_devices_updated + server_devices_updated)
     if "RUN COMMAND ON DEVICE: " in filtered_text:
         new_text = filtered_text.split("|| ")[1].split(" ||")[0]
@@ -46,10 +48,10 @@ def handle_ai(text, group, client, client_devices, server_devices):
         return new_text, device_name, group
     response = (send_to_ai(filtered_text, group['aiMessages'], client) if "<Error: " not in filtered_text else filtered_text)
     if "<Error: " in response:
-        print_to_console(response)
+        await print_to_console(response)
         return response, "", group
     return response, "", group
-def send_to_ai(message, messages: list, client: OpenAI):
+async def send_to_ai(message, messages: list, client: OpenAI):
     messages.append({"role": "user", "content": message})
     response = client.chat.completions.create(
         model="model-identifier",
@@ -58,7 +60,7 @@ def send_to_ai(message, messages: list, client: OpenAI):
     )
     messages.append(response.choices[0].message)
     return response.choices[0].message.content, messages
-def main():
+async def main():
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source)
     client = OpenAI(base_url="http://localhost:4000/v1", api_key="lm-studio")
@@ -67,6 +69,7 @@ def main():
     server_device = requests.get(
         f"https://spark-api.fly.dev/device/server/{server_device_id}"
     ).json()
+    await nats_setup(server_device)
     while True:
         group = requests.get(
             f"https://spark-api.fly.dev/group/{server_device['assignedGroup']['id']}"
@@ -85,9 +88,9 @@ def main():
         
         client_device_names = [x['name'] for x in client_devices]
         server_device_names = [x['name'] for x in server_devices]
-        text = listen()
+        text = await listen()
         if text:
-            filtered_text, device_name, updated_group = handle_ai(text, group, client, client_devices, server_devices)
+            filtered_text, device_name, updated_group = await handle_ai(text, group, client, client_devices, server_devices)
             if f"RUN COMMAND ON DEVICE: {device_name} |" in filtered_text and (
                 device_name in client_device_names or device_name in server_device_names
             ):
@@ -96,15 +99,17 @@ def main():
                 else:
                     device = server_devices[server_device_names.index(device_name)]
                 message_content = f"[RUN COMMAND] {filtered_text.split(f'RUN COMMAND ON DEVICE: {device_name} | ')[1]}"
-                print_to_console(f"sending message: `{message_content}`")
-                print_to_console(requests.post(
+                await print_to_console(f"sending message: `{message_content}`")
+                await nc.publish(device['id'], message_content.encode('utf-8'))
+                data = requests.post(
                     "https://spark-api.fly.dev/device/server/sendMessage",
                     json={
                         "serverDeviceId": server_device['id'],
                         "recieverDeviceId": device['id'],
                         "messageContent": message_content
                     }, headers={"Authorization": f"Bearer {access_token}"},
-                ).json()['message'])
+                ).json()['message']
+                await print_to_console(data)
             else:
                 speak(filtered_text)
             if len(updated_group['aiMessages']) > len(group['aiMessages']):
@@ -113,14 +118,44 @@ def main():
                     json=updated_group,
                     headers={"Authorization": f"Bearer {access_token}"},
                 )
-def print_to_console(content):
-    path = sys.argv[3] if len(sys.argv) > 3 else "not found"
-    with open(path) as f:
-        data = json.load(f)
-        server_output = data['serverOutput']
-        server_output.append(content)
-        data['serverOutput'] = server_output
-        with open(path, "w") as f:
-            json.dump(data, f)
-    print(content)
-main()
+async def print_to_console(content: bytes):
+    # path = sys.argv[3] if len(sys.argv) > 3 else "not found"
+    # with open(path) as f:
+    #     data = json.load(f)
+    #     server_output = data['serverOutput']
+    #     server_output.append(content)
+    #     data['serverOutput'] = server_output
+    #     with open(path, "w") as f:
+    #         json.dump(data, f)
+    # output.append(content)
+    await nc.publish("server-output", payload=content)
+    await nc.flush()
+    print(content.decode("utf-8"))
+# def server_setup():
+#     PORT = 8000
+
+#     class Handler(SimpleHTTPRequestHandler) :
+#         def __init__(self, *args, directory=None, **kwargs):
+#             super().__init__(*args, **kwargs, directory=directory)
+#         def do_GET(self):
+#             print("GET request received")
+#             self.send_response(200)
+#             self.send_header("Content-type", "text/html")
+#             self.end_headers()
+#             self.wfile.write(bytes(str(output), "utf-8")), print(str(output))
+
+#     with socketserver.TCPServer(("", PORT), Handler) as httpd:
+#         print("serving at port", PORT)
+#         httpd.serve_forever()
+# output = ["Listening to server..."]
+
+global nc
+nc = nats.NATS()  
+async def nats_setup(server_device):
+    ###  REMEMBER TO LAUNCH NATS SERVER BEFORE RUNNING THIS ###
+    await nc.connect(f"")
+    await nc.publish("server-output", b'nats-connect from python')
+    await nc.flush()
+    # print("nats connected")
+if __name__ == "__main__":
+    asyncio.run(main())
