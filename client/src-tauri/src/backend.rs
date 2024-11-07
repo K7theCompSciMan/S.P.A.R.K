@@ -60,6 +60,7 @@ pub fn handle_server_device_updates() {
 
 async fn run_nats_backend(subject: str) {
     let address = "0.0.0.0:4222".parse().unwrap();
+
     let client = async_nats::connect(&address).await?;
 
     let subject = subject.parse().unwrap();
@@ -72,7 +73,6 @@ async fn run_nats_backend(subject: str) {
     while let Some(msg) = subscription.next().await {
         println!("Received message: {:?}", msg);
     }
-    
 }
 pub fn handle_device_updates_api_call() -> Result<(), Error> {
     let path = "stores/store.json".to_string();
@@ -88,6 +88,7 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
         })
         return Ok(());
     }
+
     loop {
         let mut running_backend = serde_json::from_value::<bool>(store::get(path.clone(), "runningClientBackend".to_string())).unwrap_or(false);
         if device.id!="default".to_string() && device_type!="none".to_string() && running_backend {            
