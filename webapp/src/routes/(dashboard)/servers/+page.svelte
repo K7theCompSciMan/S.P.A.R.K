@@ -122,7 +122,7 @@
 		invoke('run_command', { command: command.command });
 	}
 </script>
-<h1>Erm what the flip</h1>
+
 <div
 	class="bg-dark-background-600 w-[80vw] ml-[5%] rounded-[2rem] shadow-2xl h-screen overflow-auto relative"
 >

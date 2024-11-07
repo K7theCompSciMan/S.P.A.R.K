@@ -1,53 +1,54 @@
-import { fail, redirect } from "@sveltejs/kit";
-import type { Actions, PageServerLoad } from "./$types";
+import type { PageServerLoad, Actions } from './$types';
+import { redirect, fail } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async (event) => {
-	if(event.locals.user) {
-		redirect(300, '/group-info');
+export const load: PageServerLoad = (event) => {
+	const user = event.locals.user;
+	if (user) {
+		throw redirect(302, '/dashboard');
 	}
-} 
+};
 
 export const actions: Actions = {
 	default: async (event) => {
 		const formData = Object.fromEntries(await event.request.formData());
-		if (!formData.username || !formData.password) {
-            console.log('Missing username or password');
+
+		if (!formData.email || !formData.password) {
 			return fail(400, {
-				missing: true
+				error: 'Missing email or password'
 			});
 		}
 
-		const { username, password } = formData as { username: string; password: string };
+		const { email, password } = formData as { email: string; password: string };
 
 		const response = await fetch('https://spark-api.fly.dev/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ username, password })
+			body: JSON.stringify({ email, password })
 		});
 		if (response.status !== 200) {
-			console.log('Login Failed');
 			return fail(401, {
-				username,
-				incorrect: true
+				response
 			});
 		}
 		const data = await response.json();
 		const { user, accessToken, refreshToken } = data;
-
+		
 		event.locals.user = user;
-		event.locals.accessToken = accessToken;
+        event.locals.accessToken = accessToken;
+
+		
+		
 		// Set the cookie
 		event.cookies.set('refreshToken', refreshToken, {
 			httpOnly: true,
 			path: '/',
 			secure: true,
 			sameSite: 'strict',
-			expires: new Date(8.64e15)
+			maxAge: 60 * 60 * 24 // 1 day
 		});
-        return {
-            user
-        }
+
+		throw redirect(302, '/dashboard');
 	}
 };

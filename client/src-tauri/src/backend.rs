@@ -6,7 +6,7 @@ use tauri_plugin_store::Store;
 use crate::{app::run_command, xata_structs::{self, Device}};
 use crate::{store};
 use tauri::api::process::Command;
-
+use async_nats;
 fn default_device() -> Device {
     Device {
         name: "default".to_string(),
@@ -20,14 +20,16 @@ fn default_device() -> Device {
 }
 
 pub fn handle_server_device_updates() {
-    tauri::async_runtime::Builder::new_current_thread().enable_all(async move {
-        while true {
+    tauri::async_runtime::spawn(async move {
+        loop {
             println!("Checking if server is running");
             if serde_json::from_value(store::get("stores/store.json".to_string(), "runningServerBackend".to_string())).unwrap_or(false) {
                 println!("Server is running");
                 let (mut rx, mut child) = Command::new_sidecar("server")
                 .expect("failed to setup `server` sidecar")
-                .args(["rec_cq9do7pk946ki2d08fo0","eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoicmVjX2NxODdjMjltMGRlMmJ0MzlsbW1nIiwidXNlcm5hbWUiOiJLZXNhdmFuIn0sImlhdCI6MTcyNDExNjk5N30.ae5Y86J74WadBSckxmWxR0Htiev7_VAgs1G327ovQ4oGitLNOhrhj4EETOiSjXZlstMc-kMSmOofqBUcb41DW9uVVMNjFTkuLBSgf-YYCQhj3M2wn2IJyJIu3BHXxDU6aOlacFrK3lCmoxYTX7EGkcrZ6NU_XEyoJCwyqPzHXYCRgT_pnG5ANRHFBYi5hB1qMHzXGgHOWinAdDJYvCCS9v4VLl-wX9E9YdOiEJuJ18hdpkLHkZhCsmaVV0gbdqbEOUWoF3iISTzL1wzBkN3q24iNUcimEe01ab7yB2yOwewhvqf9wuxVfoM7iNhh6pmolIurqVPZKNlq5b6ttirlDg"])
+                .args(["rec_cq9do7pk946ki2d08fo0",
+                    "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoicmVjX2NxODdjMjltMGRlMmJ0MzlsbW1nIiwidXNlcm5hbWUiOiJLZXNhdmFuIn0sImlhdCI6MTcyNDExNjk5N30.ae5Y86J74WadBSckxmWxR0Htiev7_VAgs1G327ovQ4oGitLNOhrhj4EETOiSjXZlstMc-kMSmOofqBUcb41DW9uVVMNjFTkuLBSgf-YYCQhj3M2wn2IJyJIu3BHXxDU6aOlacFrK3lCmoxYTX7EGkcrZ6NU_XEyoJCwyqPzHXYCRgT_pnG5ANRHFBYi5hB1qMHzXGgHOWinAdDJYvCCS9v4VLl-wX9E9YdOiEJuJ18hdpkLHkZhCsmaVV0gbdqbEOUWoF3iISTzL1wzBkN3q24iNUcimEe01ab7yB2yOwewhvqf9wuxVfoM7iNhh6pmolIurqVPZKNlq5b6ttirlDg", 
+                    "stores/store.json"])
                 .spawn()
                 .expect("Failed to spawn packaged node");
                 // child.write("rec_cq9do7pk946ki2d08fo0 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoicmVjX2NxODdjMjltMGRlMmJ0MzlsbW1nIiwidXNlcm5hbWUiOiJLZXNhdmFuIn0sImlhdCI6MTcyNDExNjk5N30.ae5Y86J74WadBSckxmWxR0Htiev7_VAgs1G327ovQ4oGitLNOhrhj4EETOiSjXZlstMc-kMSmOofqBUcb41DW9uVVMNjFTkuLBSgf-YYCQhj3M2wn2IJyJIu3BHXxDU6aOlacFrK3lCmoxYTX7EGkcrZ6NU_XEyoJCwyqPzHXYCRgT_pnG5ANRHFBYi5hB1qMHzXGgHOWinAdDJYvCCS9v4VLl-wX9E9YdOiEJuJ18hdpkLHkZhCsmaVV0gbdqbEOUWoF3iISTzL1wzBkN3q24iNUcimEe01ab7yB2yOwewhvqf9wuxVfoM7iNhh6pmolIurqVPZKNlq5b6ttirlDg".as_bytes());
@@ -38,11 +40,15 @@ pub fn handle_server_device_updates() {
                         store::set("stores/store.json".to_string(), "serverOutput".to_string(), current_server_output.into());
                         println!("server output: {}", line.clone());
                     }
+                    else {
+                        println!("server output: {:?}", event);
+                    }
                     if !serde_json::from_value(store::get("stores/store.json".to_string(), "runningServerBackend".to_string())).unwrap_or(false) {
                         println!("Server is not running");
                         child.kill();
                         break;
                     }
+                    println!("Server Running");
                 }
             }
             else {
@@ -52,6 +58,22 @@ pub fn handle_server_device_updates() {
     });
 }
 
+async fn run_nats_backend(subject: str) {
+    let address = "0.0.0.0:4222".parse().unwrap();
+
+    let client = async_nats::connect(&address).await?;
+
+    let subject = subject.parse().unwrap();
+
+    let  mut subscription = client.subscribe(&subject).await?.unwrap();
+
+    for _ in 0..10 {
+        client.publish("messages", "data".into()).await?;
+    }
+    while let Some(msg) = subscription.next().await {
+        println!("Received message: {:?}", msg);
+    }
+}
 pub fn handle_device_updates_api_call() -> Result<(), Error> {
     let path = "stores/store.json".to_string();
     println!("Getting Updated Device");
@@ -59,8 +81,17 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
     // println!("Device from store: {:?}", device);
     let mut device_type = serde_json::from_value::<String>(store::get(path.clone(), "deviceType".to_string())).unwrap_or("default".to_string());
     handle_server_device_updates();
+    let mut backend_nats = serde_json::from_value::<bool>(store::get(path.clone(), "backendNATS".to_string())).unwrap_or(false);
+    if backend_nats {
+        tauri::async_runtime::spawn(async move {
+            run_nats_backend(device.id.clone().to_str()).await;
+        })
+        return Ok(());
+    }
+
     loop {
-        if device.id!="default".to_string() && device_type!="none".to_string() {
+        let mut running_backend = serde_json::from_value::<bool>(store::get(path.clone(), "runningClientBackend".to_string())).unwrap_or(false);
+        if device.id!="default".to_string() && device_type!="none".to_string() && running_backend {            
             let past_messages = device.messages.clone();
             let request_url = format!("https://spark-api.fly.dev/device/{device_type}/{device_id}/", device_type = device_type, device_id = device.id);
             let updated_device: Device = reqwest::blocking::get(&request_url)?.json()?;

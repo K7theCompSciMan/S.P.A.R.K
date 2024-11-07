@@ -22,13 +22,15 @@ tauri-plugin-store = { git = "https://github.com/tauri-apps/plugins-workspace", 
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 tauri = { version = "1.7.0", features = [ "shell-sidecar", "path-all", "window-all", "system-tray", "process-command-api"] }
-reqwest = {version = "0.11.18", features = ["json", "blocking"] }
+reqwest = {version = "0.12.9", features = ["json", "blocking"] }
 json = "0.12.4"
 tokio = { version = "1", features = ["full"] }
 mini-redis = "0.4"
 futures = "0.3.30"
 tauri-runtime-wry = "0.14.9"
 fs = "0.0.5"
+rants = "0.6.0"
+async-nats = "0.37.0"
 # simple_transcribe_rs = "1.0.3"
 # pv_recorder = "*"
 [features]
