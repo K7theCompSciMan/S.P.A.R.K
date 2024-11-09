@@ -153,9 +153,9 @@ global nc
 nc = nats.NATS()  
 async def nats_setup(server_device):
     ###  REMEMBER TO LAUNCH NATS SERVER BEFORE RUNNING THIS ###
-    await nc.connect(f"")
+    await nc.connect()
     await nc.publish("server-output", b'nats-connect from python')
     await nc.flush()
-    # print("nats connected")
+    print("nats connected")
 if __name__ == "__main__":
     asyncio.run(main())
