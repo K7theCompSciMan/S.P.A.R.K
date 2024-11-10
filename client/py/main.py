@@ -1,11 +1,8 @@
-import socketserver
 import speech_recognition as sr
 import pyttsx3 as tts
 from openai import OpenAI
-import os, sys, requests, nats, asyncio
+import  sys, requests, nats, asyncio
 from text_filter import *
-import json
-from http.server import HTTPServer, SimpleHTTPRequestHandler, BaseHTTPRequestHandler
 recognizer = sr.Recognizer()
 
 # TODO: Improve Speech Recognition, text-filtering and etc.
@@ -119,40 +116,14 @@ async def main():
                     headers={"Authorization": f"Bearer {access_token}"},
                 )
 async def print_to_console(content: bytes):
-    # path = sys.argv[3] if len(sys.argv) > 3 else "not found"
-    # with open(path) as f:
-    #     data = json.load(f)
-    #     server_output = data['serverOutput']
-    #     server_output.append(content)
-    #     data['serverOutput'] = server_output
-    #     with open(path, "w") as f:
-    #         json.dump(data, f)
-    # output.append(content)
     await nc.publish("server-output", payload=content)
     await nc.flush()
     print(content.decode("utf-8"))
-# def server_setup():
-#     PORT = 8000
-
-#     class Handler(SimpleHTTPRequestHandler) :
-#         def __init__(self, *args, directory=None, **kwargs):
-#             super().__init__(*args, **kwargs, directory=directory)
-#         def do_GET(self):
-#             print("GET request received")
-#             self.send_response(200)
-#             self.send_header("Content-type", "text/html")
-#             self.end_headers()
-#             self.wfile.write(bytes(str(output), "utf-8")), print(str(output))
-
-#     with socketserver.TCPServer(("", PORT), Handler) as httpd:
-#         print("serving at port", PORT)
-#         httpd.serve_forever()
-# output = ["Listening to server..."]
 
 global nc
 nc = nats.NATS()  
 async def nats_setup(server_device):
-    ###  REMEMBER TO LAUNCH NATS SERVER BEFORE RUNNING THIS ###
+    ### IMPORTANT: REMEMBER TO LAUNCH NATS SERVER BEFORE RUNNING THIS ###
     await nc.connect()
     await nc.publish("server-output", b'nats-connect from python')
     await nc.flush()
