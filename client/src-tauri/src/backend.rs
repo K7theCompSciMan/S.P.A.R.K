@@ -58,7 +58,7 @@ pub fn handle_server_device_updates() {
     });
 }
 
-async fn run_nats_backend(subject: str) {
+async fn run_nats_backend(subject: &str) {
     let address = "0.0.0.0:4222".parse().unwrap();
 
     let client = async_nats::connect(&address).await?;
@@ -67,12 +67,16 @@ async fn run_nats_backend(subject: str) {
 
     let  mut subscription = client.subscribe(&subject).await?.unwrap();
 
-    for _ in 0..10 {
-        client.publish("messages", "data".into()).await?;
-    }
-    while let Some(msg) = subscription.next().await {
-        println!("Received message: {:?}", msg);
-    }
+    client
+        .publish(&subject, "Test".as_bytes().to_vec())
+        .await
+        .unwrap();
+
+    let message = subscription.
+    let message = String::from_utf8(message.into_payload()).unwrap();
+    println!("Recieved message: {}", message);
+
+    client.disconnect().await;
 }
 pub fn handle_device_updates_api_call() -> Result<(), Error> {
     let path = "stores/store.json".to_string();

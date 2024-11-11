@@ -14,7 +14,7 @@
 		"test:integration": "playwright test",
 		"test:unit": "vitest",
 		"tauri": "tauri",
-		"build-py": "pyinstaller -F py/main.py --distpath src-tauri/bin/python --clean -n server-x86_64-pc-windows-msvc"
+		"build-py": "pyinstaller -F py/main.py --distpath src-tauri/bin/python --clean -n server-x86_64-apple-darwin"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
