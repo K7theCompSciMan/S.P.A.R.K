@@ -6,8 +6,8 @@
 	import { onMount } from "svelte";
     onMount(async () => {
         let user = await getStore("user") as PublicUser;
-        if(!user) {
-            goto("/login");}
+        // if(!user) {
+        //     goto("/login");}
         let device = await getStore("device") as Device;
         if(device.id  && device.assignedUser){
             goto("/dashboard");

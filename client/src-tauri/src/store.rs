@@ -1,9 +1,30 @@
 use serde_json;
 use std::{fs::File, thread};
-
+fn default_store() -> serde_json::Value {
+    return serde_json::json!({
+        "user": {
+            "id": "",
+            "username": ""
+        },
+        "device": {
+            "id": "",
+            "name": "",
+            "messages": [],
+            "deviceCommands": []
+        },
+        "deviceType": "",
+        "backendNATS": false,
+        "runningClientBackend": false
+    });
+}
 pub fn get(path: String, key: String) -> serde_json::Value {
-    let file = File::open(path).expect("Error opening file");
-    let json: serde_json::Value = serde_json::from_reader(file.try_clone().expect("Couldn't clone file")).expect("Error reading file");
+    let file = File::open(path.clone()).expect("Error opening file");
+    let json: serde_json::Value = serde_json::from_reader(file.try_clone().expect("Couldn't clone file")).map_err(|e| {
+        if(e.is_eof()) {
+            let write_file = File::create(path.clone()).expect("Error creating file");
+            serde_json::to_writer_pretty(write_file, &default_store()).expect("Error writing file");
+        }
+    }).unwrap();
     return json.get(key).expect("Error getting key").clone();
 }
 
