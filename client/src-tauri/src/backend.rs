@@ -1,5 +1,6 @@
 use std::{ops::DerefMut, sync::{Arc, Mutex}, thread::{self, current}};
-
+use futures_core::stream::Stream;
+use futures_util::StreamExt;
 use reqwest::{self, Error};
 use tauri::{api::process::CommandEvent, Runtime};
 use tauri_plugin_store::Store;
@@ -58,21 +59,38 @@ pub fn handle_server_device_updates() {
     });
 }
 
-async fn run_nats_backend(subject: str) {
-    let address = "0.0.0.0:4222".parse().unwrap();
+async fn run_nats_backend(subject: &str, device: Device, path: String) -> Result<(), async_nats::Error> {
+    // Connect to the NATS server
+    let client = async_nats::connect("0.0.0.0").await?;
 
-    let client = async_nats::connect(&address).await?;
+    let new_subject = format!("{}", subject);
+    // Subscribe to the "messages" subject
+    let mut subscriber = client.subscribe(new_subject.clone()).await.unwrap();
 
-    let subject = subject.parse().unwrap();
-
-    let  mut subscription = client.subscribe(&subject).await?.unwrap();
-
+    // Publish messages to the "messages" new_subject.clone()
     for _ in 0..10 {
-        client.publish("messages", "data".into()).await?;
+        client.publish(new_subject.clone(), "data".into()).await?;
     }
-    while let Some(msg) = subscription.next().await {
-        println!("Received message: {:?}", msg);
+
+    // Receive and process messages
+    while let Some(message) = subscriber.next().await {
+        let message_content: &str = std::str::from_utf8(&message.payload).unwrap();
+        println!("Received message {:?}", message_content);
+        if message_content.contains("[RUN COMMAND]") {
+            for command in device.deviceCommands.clone() {
+                if format!("[RUN COMMAND] {}", command.alias) == message_content {
+                    run_command(&command.command)
+                }
+            }
+        }
+        if message_content.contains("Uptade Device: ") {
+            let updated_device: Device = serde_json::from_str(message_content.replace("Uptade Device: ", "").as_str()).unwrap();
+            store::set(path.clone(), "device".to_string(), updated_device.to_json_value());
+
+        }
     }
+
+    Ok(())
 }
 pub fn handle_device_updates_api_call() -> Result<(), Error> {
     let path = "stores/store.json".to_string();
@@ -80,12 +98,14 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
     let mut device: Device = serde_json::from_value::<Device>(store::get(path.clone(), "device".to_string())).unwrap_or(default_device());
     // println!("Device from store: {:?}", device);
     let mut device_type = serde_json::from_value::<String>(store::get(path.clone(), "deviceType".to_string())).unwrap_or("default".to_string());
-    handle_server_device_updates();
+    if device_type.clone() == "server" {
+        handle_server_device_updates();
+    }
     let mut backend_nats = serde_json::from_value::<bool>(store::get(path.clone(), "backendNATS".to_string())).unwrap_or(false);
     if backend_nats {
         tauri::async_runtime::spawn(async move {
-            run_nats_backend(device.id.clone().to_str()).await;
-        })
+            run_nats_backend(&device.id.clone().to_string(), device.clone(), path.clone()).await;
+        });
         return Ok(());
     }
 

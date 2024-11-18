@@ -13,7 +13,7 @@
     let refreshToken: string = "";
     let user: PublicUser;
 
-    $: if(user){
+    $: if(user && user.id && user.username) {
         disabled=false;
     }
 
@@ -23,7 +23,7 @@
         if(device.id  && device.assignedUser){
             goto("/dashboard");
         }
-        if(user){ 
+        if(user && user.id && user.username){ 
             goto("/group-info");
         }
     })

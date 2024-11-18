@@ -15,7 +15,7 @@
 
 	onMount(async () => {
 		user = (await getStore('user')) as PublicUser;
-		if (!user) {
+		if (!(user.id && user.username)) {
 			goto('/login');
 		}
 		let device = (await getStore('device')) as Device;
