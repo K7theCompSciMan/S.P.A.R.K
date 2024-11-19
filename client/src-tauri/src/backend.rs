@@ -46,7 +46,7 @@ pub fn handle_server_device_updates() {
                     }
                     if !serde_json::from_value(store::get("stores/store.json".to_string(), "runningServerBackend".to_string())).unwrap_or(false) {
                         println!("Server is not running");
-                        child.kill();
+                        let _ = child.kill();
                         break;
                     }
                     println!("Server Running");
@@ -93,7 +93,7 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
     let mut backend_nats = serde_json::from_value::<bool>(store::get(path.clone(), "backendNATS".to_string())).unwrap_or(false);
     if backend_nats {
         tauri::async_runtime::spawn(async move {
-            run_nats_backend(&device.id.clone().to_string(), device.clone(), path.clone()).await;
+            let _ = run_nats_backend(&device.id.clone().to_string(), device.clone(), path.clone()).await;
         });
         return Ok(());
     }
@@ -132,7 +132,7 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
         }
         // println!();
         thread::sleep(std::time::Duration::from_secs(10));
-        println!("Getting updated device");
+        println!("Getting updated device from store");
         device = serde_json::from_value::<Device>(store::get(path.clone(), "device".to_string())).unwrap_or(default_device());
         // println!("Device from store: {:?}", device);
         device_type = serde_json::from_value::<String>(store::get(path.clone(), "deviceType".to_string())).unwrap_or("default".to_string());
