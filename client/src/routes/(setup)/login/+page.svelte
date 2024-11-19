@@ -4,7 +4,6 @@
 
 	import { goto } from "$app/navigation";
 	import { getStore, setStore,  } from "$lib/tauri";
-	import type { User } from "$lib/xata";
 	import { onMount } from 'svelte';
 	import type { Device, PublicUser } from '$lib';
     let disabled: boolean = true;

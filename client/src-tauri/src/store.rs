@@ -14,7 +14,8 @@ fn default_store() -> serde_json::Value {
         },
         "deviceType": "",
         "backendNATS": false,
-        "runningClientBackend": false
+        "runningClientBackend": false,
+        "runningServerBackend": false
     });
 }
 pub fn get(path: String, key: String) -> serde_json::Value {
