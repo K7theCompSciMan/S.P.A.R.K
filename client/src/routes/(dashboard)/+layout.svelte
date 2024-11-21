@@ -69,7 +69,7 @@
 	let pages: Page[];
 	setTimeout(() => {
 		pages = [
-			{ name: `This Device (${device.name})`, url: `/${deviceType}s/${device.id}` },
+			{ name: `This Device (${device.name})`, url: `/${device.id}` },
 			{ name: 'Dashboard', url: '/dashboard' },
 			{ name: 'Clients', url: '/clients' },
 			{ name: 'Servers', url: '/servers' },
