@@ -32,9 +32,9 @@ def remove_stop_words(text):
     text = [word for word in text if word.isalpha() and not word in stop_words]
     return ' '.join(text)
     
-x = df.apply(lambda row: remove_stop_words(row['Text']), axis=1)
+x = df.apply(lambda row: row['Text'], axis=1)
 y = df['IsAction']
-
+print(x[:5])
 tokenizer = Tokenizer(num_words=max_words)
 tokenizer.fit_on_texts(x)
 sequences = tokenizer.texts_to_sequences(x)
