@@ -1,6 +1,6 @@
 import sys, json
 
-action_words = ["launch", "open", "run", "start"]
+action_words = [x.lower() for x in ["launch", "open", "run", "start", "turn", "off", "on", "close","Start"'Stop','Turn','Move','Go','Put','Take','Get','Open','Close','Change','Adjust','Press','Install','Remove','Add','Update','Check','Execute','Set','Call','Clean','Arrange','Save','Activate','Deactivate','Launch','Pause','Select','Download','Upload','Create','Delete','Run','Build']]
 question_words = ["what", "when", "where", "why", "how"]
 
 def filter(input: str, devices: list) -> str:

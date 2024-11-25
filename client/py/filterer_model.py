@@ -1,7 +1,8 @@
 from keras.models import Sequential
-from keras.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense
+from keras.layers import Embedding, Conv1D, MaxPooling1D, Dense, Dropout, GlobalMaxPooling1D
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
+from keras.regularizers import l2
 import pandas as pd
 import nltk
 from nltk.corpus import stopwords
@@ -14,14 +15,16 @@ nltk.download('stopwords')
 max_words = 20000
 max_length = 50
 
+
 model = Sequential()
-model.add(Embedding(max_words, 128, input_length=max_length))
-model.add(Conv1D(32, 3, activation='relu'))
-model.add(MaxPooling1D(3))
-model.add(Flatten())
-model.add(Dense(1, activation='sigmoid'))
+model.add(Embedding(max_words, 32, input_length=max_length))
+model.add(MaxPooling1D(5))
+model.add(Dropout(0.5))  # Dropout after pooling
+model.add(Conv1D(32, 7, activation='relu'))
+model.add(GlobalMaxPooling1D())
+model.add(Dropout(0.5))  # Dropout before the dense layer
+model.add(Dense(1, activation='sigmoid', kernel_regularizer=l2(0.01)))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.summary()
 
 df = pd.read_csv('C:\\Users\\k7ran\\Code\\S.P.A.R.K\\client\\py\\actions.csv')
 df = df.drop_duplicates()
