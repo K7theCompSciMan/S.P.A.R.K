@@ -3,18 +3,41 @@
 	import UserSettings from '$lib/UserSettings.svelte';
 
 	import { onMount } from 'svelte';
-	import { getStore } from '$lib/tauri';
-	import type { PublicUser } from '$lib';
+	import { getStore, setStore } from '$lib/tauri';
+	import type { Device, PublicUser } from '$lib';
 	import { goto } from '$app/navigation';
 	let user: PublicUser = { username: 'default', id: '1' };
+	let device: Device = { id: '1', name: 'default', };
+	let settings: { [key: string]: any } = {"usingNATS": false}
 	onMount(async () => {
 		user = (await getStore('user')) as PublicUser;
-
+		device = (await getStore('device')) as Device;
 		if (!user) {
 			goto('/login');
 		}
 	});
 	$: console.log(user);
+	const saveUser = async() => {
+		let res = await fetch(`https://spark-api.fly.dev/user/${user.id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(user)
+		});
+		if(res.ok){
+			return true
+		}
+		return false;
+	}
+	const saveSettings = async() => {
+		console.log('Saving settings');
+		await setStore('user', user);
+		for(const key in settings){
+			await setStore(key, settings[key]);
+		}
+		await saveUser();
+	}
 </script>
 
 <div
