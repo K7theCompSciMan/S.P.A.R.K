@@ -12,7 +12,7 @@ fn default_device() -> Device {
     Device {
         name: "default".to_string(),
         id: "default".to_string(),
-        assignedUser: xata_structs::User { id: "default".to_string() },
+        assignedUser: xata_structs::User { id: "default".to_string(), username: "default".to_string(), settings: xata_structs::UserSettings { primaryCommunicationMethod: "nats".to_string() } },
         assignedGroup: xata_structs::Group { id: "default".to_string() },
         messages: vec![],
         deviceCommands: vec![],

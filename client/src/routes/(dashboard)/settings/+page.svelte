@@ -8,20 +8,22 @@
 	import { goto } from '$app/navigation';
 	let user: PublicUser = { username: 'default', id: '1', settings: { primaryCommunicationMethod: "api"} };
 	let device: Device = { id: '1', name: 'default', };
-	let settings: { [key: string]: any } = {"usingNATS": false}
+	let accessToken: string = '';
 	onMount(async () => {
 		user = (await getStore('user')) as PublicUser;
 		device = (await getStore('device')) as Device;
+		accessToken = (await getStore('accessToken')) as string;
 		if (!user) {
 			goto('/login');
 		}
 	});
 	$: console.log(user);
 	const saveUser = async() => {
-		let res = await fetch(`https://spark-api.fly.dev/user/${user.id}`, {
+		let res = await fetch(`https://spark-api.fly.dev/user`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${accessToken}`
 			},
 			body: JSON.stringify(user)
 		});
@@ -33,9 +35,6 @@
 	const saveSettings = async() => {
 		console.log('Saving settings');
 		await setStore('user', user);
-		for(const key in settings){
-			await setStore(key, settings[key]);
-		}
 		await saveUser();
 	}
 </script>
@@ -51,6 +50,7 @@
 	</div>
 	<button
 		class=" flex text-dark-text rounded-xl bg-dark-primary w-[5%] relative left-[47.5%] px-2 py-1 justify-center items-center mt-[2%] scale-[1.20] mt[6%] hover:bg-dark-accent hover:scale-[1.25] hover:text-dark-success transition-all duration-200"
+		on:click={saveSettings}
 	>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

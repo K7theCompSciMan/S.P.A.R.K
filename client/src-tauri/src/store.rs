@@ -4,7 +4,10 @@ fn default_store() -> serde_json::Value {
     return serde_json::json!({
         "user": {
             "id": "",
-            "username": ""
+            "username": "",
+            "settings": {
+                "primaryCommunicationMethod": "nats"
+            }
         },
         "device": {
             "id": "",

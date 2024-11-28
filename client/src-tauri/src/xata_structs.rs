@@ -26,7 +26,14 @@ pub fn to_json_value(&self) -> Value {
 }
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct User {
-    pub id: String
+    pub id: String,
+    pub username: String,
+    pub settings: UserSettings,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
+pub struct UserSettings {
+    pub primaryCommunicationMethod: String
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
