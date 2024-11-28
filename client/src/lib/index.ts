@@ -9,7 +9,11 @@ export type Device = {
 
 export type PublicUser = {
     username: string,
-    id: string
+    id: string,
+    settings: UserSettings,
+}
+export type UserSettings= {
+    primaryCommunicationMethod: 'api' | 'nats' | 'localhost',
 }
 
 export type Command = {
