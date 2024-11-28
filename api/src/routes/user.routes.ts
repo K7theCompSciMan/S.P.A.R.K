@@ -107,7 +107,7 @@ userRouter.post("/login", async (req: Request, res: Response) => {
 
 userRouter.put("/user", requireUser, async (req: Request, res: Response) => {
 	try {
-		const user = res.locals.user.user as User;
+		const user = res.locals.user as User;
 
 		if (!user) {
 			return res
