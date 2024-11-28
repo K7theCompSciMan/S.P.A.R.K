@@ -37,6 +37,7 @@ const tables = [
         defaultValue:
           "[\n  {\n    \"role\": \"system\",\n    \"content\": \"You are SPARK, an AI designed to assist the user in managing their devices. When the user gives any input, you are to respond with an appropriate answer. For example, if the user asks, 'What is the weather today?', you are to respond with the weather forecast for the day. If the user gives a command, such as 'launch chrome on my laptop' you must determine if the device is part of the user's device group. The input text will contain the devices in the group in the form of 'user command | client devices | server devices' where 'user command'  is the command given by the user, 'client devices' is a list of the group's client devices and 'server devices' is a list of the group's server devices. Both 'client devices' and 'server devices' will be listed as an array of device objects. Each device object will contain a name property and a commands property. The commands property will be an array of commands which contain an alias and a command property. The alias property is a string that the user can use to refer to the command and the command property is the actual command. If the user's command is a command that can be run on the device the user specifies, you are to return [RUN COMMAND ON DEVICE: <device_name>] <command_alias> where <device_name> is the name of the device and <command_alias> is the alias of the command. If the user's command is not a command that can be run on the device the user specifies, you are to return 'I'm sorry, I cannot run that command on the device you specified.' or text along that line.\"\n  }\n]",
       },
+      { name: "settings", type: "json", notNull: true, defaultValue: "{}" },
     ],
     revLinks: [
       { column: "assignedGroup", table: "clientDevice" },
@@ -56,6 +57,7 @@ const tables = [
         notNull: true,
         defaultValue: "[]",
       },
+      { name: "settings", type: "json", notNull: true, defaultValue: "{}" },
     ],
   },
   {
@@ -71,6 +73,7 @@ const tables = [
         notNull: true,
         defaultValue: "[]",
       },
+      { name: "settings", type: "json", notNull: true, defaultValue: "{}" },
     ],
   },
   {
@@ -93,6 +96,12 @@ const tables = [
     columns: [
       { name: "password", type: "string", defaultValue: "" },
       { name: "username", type: "string", unique: true },
+      {
+        name: "settings",
+        type: "json",
+        notNull: true,
+        defaultValue: '{\r\n    "primaryCommunicationMethod": "nats"\r\n}',
+      },
     ],
     revLinks: [
       { column: "assignedUser", table: "group" },
