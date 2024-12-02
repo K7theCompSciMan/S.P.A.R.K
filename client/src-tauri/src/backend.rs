@@ -4,20 +4,24 @@ use futures_util::StreamExt;
 use reqwest::{self, Error};
 use tauri::{api::process::CommandEvent, Runtime};
 use tauri_plugin_store::Store;
-use crate::{app::run_command, xata_structs::{self, Device}};
+use crate::{app::run_command, xata_structs::{self, Device, User}};
 use crate::{store};
 use tauri::api::process::Command;
 use async_nats;
+use std::{io::{prelude::*, BufReader}, net::{TcpListener, TcpStream}};
 fn default_device() -> Device {
     Device {
         name: "default".to_string(),
         id: "default".to_string(),
-        assignedUser: xata_structs::User { id: "default".to_string(), username: "default".to_string(), settings: xata_structs::UserSettings { primaryCommunicationMethod: "nats".to_string() } },
+        assignedUser: default_user(),
         assignedGroup: xata_structs::Group { id: "default".to_string() },
         messages: vec![],
         deviceCommands: vec![],
     }
 
+}
+fn default_user() -> User {
+    User { id: "default".to_string(), username: "default".to_string(), settings: xata_structs::UserSettings { primaryCommunicationMethod: "nats".to_string() } }
 }
 
 pub fn handle_server_device_updates() {
@@ -92,6 +96,44 @@ async fn run_nats_backend(subject: &str, device: Device, path: String) -> Result
 
     Ok(())
 }
+
+pub fn run_localhost_backend(path: String) -> Result<(), Error> {
+    fn handle_connection(mut stream: TcpStream, messages: Vec<String>) {
+        let buf_reader = BufReader::new(&stream);
+        let request_line = buf_reader.lines().next().unwrap().unwrap();
+        if request_line == "GET / HTTP/1.1" {
+            let status_line = "HTTP/1.1 200 OK";
+            let length = messages.len();
+            let response = format!(
+                "{status_line}\r\nContent-Length: {length}\r\n\r\n{messages}"
+            );
+    
+            stream.write_all(response.as_bytes()).unwrap();
+        }     
+        else if request_line == "POST / HTTP/1.1" {
+            let status_line = "HTTP/1.1 200 OK";
+            buf_reader.unwrap().lines().for_each(|line| {
+                let line = line.unwrap();
+                println!("{}", line);
+            });
+            let length = messages.len();
+            let response = format!(
+                "{status_line}\r\nContent-Length: {length}\r\n\r\n{messages}"
+            );
+    
+            stream.write_all(response.as_bytes()).unwrap();
+        }
+    } 
+    let listener = TcpListener::bind("127.0.0.1:4173").unwrap();
+
+    for stream in listener.incoming() {
+        let stream = stream.unwrap();
+
+        handle_connection(stream)
+    }
+}
+
+
 pub fn handle_device_updates_api_call() -> Result<(), Error> {
     let path = "stores/store.json".to_string();
     println!("Getting Updated Device");
@@ -101,51 +143,58 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
     if device_type.clone() == "server" {
         handle_server_device_updates();
     }
-    let mut backend_nats = serde_json::from_value::<bool>(store::get(path.clone(), "backendNATS".to_string())).unwrap_or(false);
-    if backend_nats {
+    let mut primary_communication_method = serde_json::from_value::<User>(store::get(path.clone(), "user".to_string())).unwrap_or(default_user()).settings.primaryCommunicationMethod ;
+    if primary_communication_method == "nats" {
         tauri::async_runtime::spawn(async move {
             let _ = run_nats_backend(&device.id.clone().to_string(), device.clone(), path.clone()).await;
         });
         return Ok(());
     }
-
-    loop {
-        let mut running_backend = serde_json::from_value::<bool>(store::get(path.clone(), "runningClientBackend".to_string())).unwrap_or(false);
-        if device.id!="default".to_string() && device_type!="none".to_string() && running_backend {            
-            let past_messages = device.messages.clone();
-            let request_url = format!("https://spark-api.fly.dev/device/{device_type}/{device_id}/", device_type = device_type, device_id = device.id);
-            let updated_device: Device = reqwest::blocking::get(&request_url)?.json()?;
-            // println!("Getting Updated Device: {:?}", updated_device);
-            // println!("_____________________________________________");
-            // println!("past Device Messages {:?}", device.messages );
-            // println!("updated Device Messages {:?}", updated_device.messages );
-            
-            if updated_device != device {
-                // println!("updated device different from store");
-                if past_messages != updated_device.messages {
-                    let new_messages = updated_device.messages.clone();
-                    let new_message = new_messages[new_messages.len() - 1].clone();
-                    // println!("recieved message {:?}", new_message);
-                    if new_message.content.contains("[RUN COMMAND]") {
-                        for command in updated_device.deviceCommands.clone() {
-                            if format!("[RUN COMMAND] {}", command.alias) == new_message.content {
-                                run_command(&command.command)
+    else if primary_communication_method == "localhost" {
+        tauri::async_runtime::spawn(async move {
+            let _ = run_localhost_backend(device.clone(), path.clone()).await;
+        });
+        return Ok(());
+    }
+    else {
+        loop {
+            let mut running_backend = serde_json::from_value::<bool>(store::get(path.clone(), "runningClientBackend".to_string())).unwrap_or(false);
+            if device.id!="default".to_string() && device_type!="none".to_string() && running_backend {            
+                let past_messages = device.messages.clone();
+                let request_url = format!("https://spark-api.fly.dev/device/{device_type}/{device_id}/", device_type = device_type, device_id = device.id);
+                let updated_device: Device = reqwest::blocking::get(&request_url)?.json()?;
+                // println!("Getting Updated Device: {:?}", updated_device);
+                // println!("_____________________________________________");
+                // println!("past Device Messages {:?}", device.messages );
+                // println!("updated Device Messages {:?}", updated_device.messages );
+                
+                if updated_device != device {
+                    // println!("updated device different from store");
+                    if past_messages != updated_device.messages {
+                        let new_messages = updated_device.messages.clone();
+                        let new_message = new_messages[new_messages.len() - 1].clone();
+                        // println!("recieved message {:?}", new_message);
+                        if new_message.content.contains("[RUN COMMAND]") {
+                            for command in updated_device.deviceCommands.clone() {
+                                if format!("[RUN COMMAND] {}", command.alias) == new_message.content {
+                                    run_command(&command.command)
+                                }
                             }
                         }
                     }
+                    let _ =store::set(path.clone(), "device".to_string(), updated_device.to_json_value());
                 }
-                let _ =store::set(path.clone(), "device".to_string(), updated_device.to_json_value());
             }
+            else { 
+                // println!("____________________________");
+                // println!("No device or device type set");
+            }
+            // println!();
+            thread::sleep(std::time::Duration::from_secs(10));
+            println!("Getting updated device from store");
+            device = serde_json::from_value::<Device>(store::get(path.clone(), "device".to_string())).unwrap_or(default_device());
+            // println!("Device from store: {:?}", device);
+            device_type = serde_json::from_value::<String>(store::get(path.clone(), "deviceType".to_string())).unwrap_or("default".to_string());
         }
-        else { 
-            // println!("____________________________");
-            // println!("No device or device type set");
-        }
-        // println!();
-        thread::sleep(std::time::Duration::from_secs(10));
-        println!("Getting updated device from store");
-        device = serde_json::from_value::<Device>(store::get(path.clone(), "device".to_string())).unwrap_or(default_device());
-        // println!("Device from store: {:?}", device);
-        device_type = serde_json::from_value::<String>(store::get(path.clone(), "deviceType".to_string())).unwrap_or("default".to_string());
     }
 }
