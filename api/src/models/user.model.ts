@@ -18,3 +18,15 @@ export class UserSettings{
     }
 }
 export default User
+
+export const defaultUser: PublicUser = {
+    id: "1",
+    username: "default",
+    settings: {
+        primaryCommunicationMethod: "nats"
+    }
+}
+
+export const defaultUserSettings: UserSettings = {
+    primaryCommunicationMethod: 'nats'
+} 
