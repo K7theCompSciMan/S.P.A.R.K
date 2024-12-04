@@ -9,6 +9,20 @@ use crate::{store};
 use tauri::api::process::Command;
 use async_nats;
 use std::{io::{prelude::*, BufReader}, net::{TcpListener, TcpStream}};
+
+pub struct Reception {
+    pub message: String,
+}
+
+impl std::str::FromStr for Reception {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let message = s.split("\r\n\r\n").collect::<Vec<&str>>()[1].to_string();
+        Ok(Reception { message })
+    }
+}
+
 fn default_device() -> Device {
     Device {
         name: "default".to_string(),
@@ -98,39 +112,40 @@ async fn run_nats_backend(subject: &str, device: Device, path: String) -> Result
 }
 
 pub fn run_localhost_backend(path: String) -> Result<(), Error> {
-    fn handle_connection(mut stream: TcpStream, messages: Vec<String>) {
-        let buf_reader = BufReader::new(&stream);
-        let request_line = buf_reader.lines().next().unwrap().unwrap();
-        if request_line == "GET / HTTP/1.1" {
+    fn handle_connection(mut stream: TcpStream, mut messages: Vec<String>) {
+        let mut buffer = [0; 1024];
+        stream.read(&mut buffer).unwrap();
+        if buffer.starts_with(b"GET / HTTP/1.1") {
             let status_line = "HTTP/1.1 200 OK";
             let length = messages.len();
             let response = format!(
-                "{status_line}\r\nContent-Length: {length}\r\n\r\n{messages}"
+                "{status_line}\r\nContent-Length: {length}\r\n\r\n{:?}", messages
             );
     
             stream.write_all(response.as_bytes()).unwrap();
         }     
-        else if request_line == "POST / HTTP/1.1" {
+        else if buffer.starts_with(b"POST / HTTP/1.1") {
             let status_line = "HTTP/1.1 200 OK";
-            buf_reader.unwrap().lines().for_each(|line| {
-                let line = line.unwrap();
-                println!("{}", line);
-            });
+            let x = std::str::from_utf8(&buffer).unwrap();
+            let  reception: Reception = x.split("\r\n\r\n").collect::<Vec<&str>>()[1].to_string().parse::<Reception>().unwrap();
+            messages.push(reception.message);
             let length = messages.len();
             let response = format!(
-                "{status_line}\r\nContent-Length: {length}\r\n\r\n{messages}"
+                "{status_line}\r\nContent-Length: {length}\r\n\r\n{:?}", messages 
             );
     
             stream.write_all(response.as_bytes()).unwrap();
         }
     } 
+    let messages = vec!["test".to_string()];
     let listener = TcpListener::bind("127.0.0.1:4173").unwrap();
 
     for stream in listener.incoming() {
         let stream = stream.unwrap();
 
-        handle_connection(stream)
+        handle_connection(stream, messages.clone());
     }
+    return Ok(());
 }
 
 
@@ -152,7 +167,7 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
     }
     else if primary_communication_method == "localhost" {
         tauri::async_runtime::spawn(async move {
-            let _ = run_localhost_backend(device.clone(), path.clone()).await;
+            let _ = run_localhost_backend(path.clone());
         });
         return Ok(());
     }
