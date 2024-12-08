@@ -2,6 +2,7 @@ import { configDotenv } from "dotenv";
 import { User } from "../xata";
 import { getXataClient } from "../xata";
 import bcrypt from "bcryptjs";
+import { defaultUserSettings } from "src/models/user.model";
 
 configDotenv();
 const xata = getXataClient();
@@ -17,6 +18,7 @@ export const createUser = async (userData: User): Promise<User | null> => {
 	const user = await xata.db.user.create({
 		username: userData.username,
 		password: hashedPassword,
+		settings: defaultUserSettings
 	});
 	return user;
 };
