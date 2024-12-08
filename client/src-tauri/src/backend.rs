@@ -121,20 +121,23 @@ pub fn run_localhost_backend(path: String) -> Result<(), Error> {
             let response = format!(
                 "{status_line}\r\nContent-Length: {length}\r\n\r\n{:?}", messages
             );
-    
-            stream.write_all(response.as_bytes()).unwrap();
+            println!("Recieved GET request, responding: {:?}", response);    
+            stream.write(response.as_bytes()).unwrap();
+            stream.flush().unwrap();
         }     
         else if buffer.starts_with(b"POST / HTTP/1.1") {
             let status_line = "HTTP/1.1 200 OK";
             let x = std::str::from_utf8(&buffer).unwrap();
-            let  reception: Reception = x.split("\r\n\r\n").collect::<Vec<&str>>()[1].to_string().parse::<Reception>().unwrap();
-            messages.push(reception.message);
+            let  reception: Reception = x.to_string().parse::<Reception>().unwrap();
+            let message = reception.message;
+            messages.push(message.clone());
             let length = messages.len();
             let response = format!(
                 "{status_line}\r\nContent-Length: {length}\r\n\r\n{:?}", messages 
             );
-    
-            stream.write_all(response.as_bytes()).unwrap();
+            println!("Recieved POST request with message: {message}, responding: {:?}", response);
+            stream.write(response.as_bytes()).unwrap();
+            stream.flush().unwrap();
         }
     } 
     let messages = vec!["test".to_string()];
@@ -151,7 +154,6 @@ pub fn run_localhost_backend(path: String) -> Result<(), Error> {
 
 pub fn handle_device_updates_api_call() -> Result<(), Error> {
     let path = "stores/store.json".to_string();
-    println!("Getting Updated Device");
     let mut device: Device = serde_json::from_value::<Device>(store::get(path.clone(), "device".to_string())).unwrap_or(default_device());
     // println!("Device from store: {:?}", device);
     let mut device_type = serde_json::from_value::<String>(store::get(path.clone(), "deviceType".to_string())).unwrap_or("default".to_string());

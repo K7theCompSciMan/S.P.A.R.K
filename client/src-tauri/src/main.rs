@@ -36,7 +36,7 @@ fn main() {
       // });
       // println!("Store: {:?}", back_store);
       
-      thread::Builder::new().name("handle_device_updates_api_call".to_string()).spawn(move || {
+      let _ = thread::Builder::new().name("handle_device_updates_api_call".to_string()).spawn(move || {
         let _ = handle_device_updates_api_call().expect("Error handling device updates");
       });
       Ok(())

@@ -24,7 +24,7 @@ fn default_store() -> serde_json::Value {
 pub fn get(path: String, key: String) -> serde_json::Value {
     let file = File::open(path.clone()).expect("Error opening file");
     let json: serde_json::Value = serde_json::from_reader(file.try_clone().expect("Couldn't clone file")).map_err(|e| {
-        if(e.is_eof()) {
+        if e.is_eof() {
             let write_file = File::create(path.clone()).expect("Error creating file");
             serde_json::to_writer_pretty(write_file, &default_store()).expect("Error writing file");
         }

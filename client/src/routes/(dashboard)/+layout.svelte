@@ -24,34 +24,6 @@
 		if (!user) {
 			goto('/setup');
 		}
-		deviceType = (await getStore('deviceType')) as string;
-		let response = await fetch(`https://spark-api.fly.dev/device/${deviceType}/${device.id}`, {
-			method: 'GET'
-		});
-		if (response.ok) {
-			device = await response.json();
-			await setStore('device', device);
-			let updateGroup = await fetch(`https://spark-api.fly.dev/group/${device.assignedGroup!.id}`, {
-				method: 'GET'
-			});
-			if (updateGroup.ok) {
-				let group = await updateGroup.json();
-				await setStore('group', group);
-			} else {
-				console.error(await updateGroup.text());
-			}
-			let updateUser = await fetch(`https://spark-api.fly.dev/user/${device.assignedUser!.id}`, {
-				method: 'GET'
-			});
-			if (updateUser.ok) {
-				let user = (await updateUser.json()).user;
-				await setStore('user', user);
-			} else {
-				console.error(await updateUser.text());
-			}
-		} else {
-			console.error(await response.text());
-		}
 
 		accessToken = (await getStore('accessToken')) as string;
 		const res = await fetch(`https://spark-api.fly.dev/groups/${user.id}`, {

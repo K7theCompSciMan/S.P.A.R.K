@@ -6,7 +6,7 @@
 	import { getStore, setStore } from '$lib/tauri';
 	import type { Device, PublicUser } from '$lib';
 	import { goto } from '$app/navigation';
-	let user: PublicUser = { username: 'default', id: '1', settings: { primaryCommunicationMethod: "api"} };
+	let user: PublicUser = { username: 'default', id: '1', settings: { primaryCommunicationMethod: "nats"} };
 	let device: Device = { id: '1', name: 'default', };
 	let accessToken: string = '';
 	onMount(async () => {
