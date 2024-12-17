@@ -103,7 +103,9 @@ deviceRouter.post(
 			const group = await getGroupById(assignedGroupId);
 			if (!group) {
 				log.info(`Group not found`);
-				return res.status(StatusCodes.NOT_FOUND).json({ error: "Group not found" });
+				return res
+					.status(StatusCodes.NOT_FOUND)
+					.json({ error: "Group not found" });
 			}
 			const clientDevice = await client.createClientDevice({
 				name,
@@ -158,7 +160,8 @@ deviceRouter.post(
 	requireUser,
 	async (req: Request, res: Response) => {
 		try {
-			const { serverDeviceId, messageContent, recieverDeviceId } = req.body;
+			const { serverDeviceId, messageContent, recieverDeviceId } =
+				req.body;
 			if (!serverDeviceId || !messageContent || !recieverDeviceId) {
 				return res
 					.status(StatusCodes.BAD_REQUEST)
@@ -167,10 +170,14 @@ deviceRouter.post(
 			const serverDevice = await server.getServerDeviceById(
 				serverDeviceId
 			);
-			let receiverDevice = await client.getClientDeviceById(recieverDeviceId);
+			let receiverDevice = await client.getClientDeviceById(
+				recieverDeviceId
+			);
 			let deviceType = "client";
 			if (!receiverDevice) {
-				receiverDevice = await server.getServerDeviceById(recieverDeviceId);
+				receiverDevice = await server.getServerDeviceById(
+					recieverDeviceId
+				);
 				deviceType = "server";
 			}
 			if (!serverDevice || !receiverDevice) {
@@ -178,18 +185,32 @@ deviceRouter.post(
 					.status(StatusCodes.NOT_FOUND)
 					.json({ error: "Device not found" });
 			}
-			const message = deviceType === "client" ? await server.sendMessageToClientFromServer(
-				serverDevice,
-				messageContent,
-				receiverDevice
-			) : await server.sendMessageToServerFromServer(
-				serverDevice,
-				messageContent,
-				receiverDevice
-			);
-			return res
-				.status(StatusCodes.OK)
-				.json({ message: `Message Sent "${message.content}"` });
+			if (
+				serverDevice.assignedUser!.id === res.locals.user.id &&
+				receiverDevice.assignedUser!.id === res.locals.user.id
+			) {
+				const message =
+					deviceType === "client"
+						? await server.sendMessageToClientFromServer(
+								serverDevice,
+								messageContent,
+								receiverDevice
+						)
+						: await server.sendMessageToServerFromServer(
+								serverDevice,
+								messageContent,
+								receiverDevice
+						);
+				return res
+					.status(StatusCodes.OK)
+					.json({ message: `Message Sent "${message.content}"` });
+			} else {
+				return res
+					.status(StatusCodes.FORBIDDEN)
+					.json({
+						error: "You are not authorized to send a message to or from this device",
+					});
+			}
 		} catch (error) {
 			return res
 				.status(StatusCodes.INTERNAL_SERVER_ERROR)
@@ -220,14 +241,25 @@ deviceRouter.post(
 					.status(StatusCodes.NOT_FOUND)
 					.json({ error: "Device not found" });
 			}
-			const message = await client.sendMessageToServerFromClient(
-				serverDevice,
-				messageContent,
-				clientDevice
-			);
-			return res
-				.status(StatusCodes.OK)
-				.json({ message: `Message Sent "${message.content}"` });
+			if (
+				serverDevice.assignedUser!.id === res.locals.user.id &&
+				clientDevice.assignedUser!.id === res.locals.user.id
+			) {
+				const message = await client.sendMessageToServerFromClient(
+					serverDevice,
+					messageContent,
+					clientDevice
+				);
+				return res
+					.status(StatusCodes.OK)
+					.json({ message: `Message Sent "${message.content}"` });
+			} else {
+				return res
+					.status(StatusCodes.FORBIDDEN)
+					.json({
+						error: "You are not authorized to send a message to or from this device",
+					});
+			}
 		} catch (error) {
 			return res
 				.status(StatusCodes.INTERNAL_SERVER_ERROR)
@@ -240,120 +272,197 @@ deviceRouter.put(
 	"/device/client",
 	requireUser,
 	async (req: Request, res: Response) => {
-        try {
-            const clientDevice = req.body as ClientDevice;
-            if (!clientDevice || !clientDevice.id) {
-                return res
-                    .status(StatusCodes.BAD_REQUEST)
-                    .json({ error: "Invalid request" });
-            }
+		try {
+			const clientDevice = req.body as ClientDevice;
+			if (!clientDevice || !clientDevice.id) {
+				return res
+					.status(StatusCodes.BAD_REQUEST)
+					.json({ error: "Invalid request" });
+			}
 
-            const updatedClientDevice = await client.updateClientDevice(clientDevice);
+			const updatedClientDevice = await client.updateClientDevice(
+				clientDevice
+			);
 
-            if (updatedClientDevice) {
-                return res.status(StatusCodes.OK).json(updatedClientDevice);
-            }
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Failed to update device" });
-        } catch (error) {
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error });
-        }
-    }
+			if (updatedClientDevice) {
+				return res.status(StatusCodes.OK).json(updatedClientDevice);
+			}
+			return res
+				.status(StatusCodes.INTERNAL_SERVER_ERROR)
+				.json({ error: "Failed to update device" });
+		} catch (error) {
+			return res
+				.status(StatusCodes.INTERNAL_SERVER_ERROR)
+				.json({ error: error });
+		}
+	}
 );
 
 deviceRouter.put(
 	"/device/server",
 	requireUser,
 	async (req: Request, res: Response) => {
-        try {
-            const serverDevice = req.body as ServerDevice;
-            if (!serverDevice || !serverDevice.id) {
-                return res
-                    .status(StatusCodes.BAD_REQUEST)
-                    .json({ error: "Invalid request" });
-            }
+		try {
+			const serverDevice = req.body as ServerDevice;
+			if (!serverDevice || !serverDevice.id) {
+				return res
+					.status(StatusCodes.BAD_REQUEST)
+					.json({ error: "Invalid request" });
+			}
 
-            const updatedserverDevice = await server.updateServerDevice(serverDevice);
+			const updatedserverDevice = await server.updateServerDevice(
+				serverDevice
+			);
 
-            if (updatedserverDevice) {
-                return res.status(StatusCodes.OK).json(updatedserverDevice);
-            }
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Failed to update device" });
-        } catch (error) {
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error });
-        }
-    }
+			if (updatedserverDevice) {
+				return res.status(StatusCodes.OK).json(updatedserverDevice);
+			}
+			return res
+				.status(StatusCodes.INTERNAL_SERVER_ERROR)
+				.json({ error: "Failed to update device" });
+		} catch (error) {
+			return res
+				.status(StatusCodes.INTERNAL_SERVER_ERROR)
+				.json({ error: error });
+		}
+	}
 );
 
-deviceRouter.post("/device/client/addCommand", requireUser, async (req: Request, res: Response) => {
-	try {
-		const {clientDeviceId, command} = req.body;
-		if (!clientDeviceId || !command) {
-			return res.status(StatusCodes.BAD_REQUEST).json({error: "Invalid request"});
+deviceRouter.post(
+	"/device/client/addCommand",
+	requireUser,
+	async (req: Request, res: Response) => {
+		try {
+			const { clientDeviceId, command } = req.body;
+			if (!clientDeviceId || !command) {
+				return res
+					.status(StatusCodes.BAD_REQUEST)
+					.json({ error: "Invalid request" });
+			}
+			const clientDevice = await client.getClientDeviceById(
+				clientDeviceId
+			);
+			if (!clientDevice) {
+				return res
+					.status(StatusCodes.NOT_FOUND)
+					.json({ error: "Client Device not found" });
+			}
+			const updatedClientDevice = await client.addCommand(
+				clientDevice,
+				command
+			);
+			return res.status(StatusCodes.OK).json(updatedClientDevice);
+		} catch (error) {
+			return res
+				.status(StatusCodes.INTERNAL_SERVER_ERROR)
+				.json({ error: error });
 		}
-		const clientDevice = await client.getClientDeviceById(clientDeviceId);
-		if (!clientDevice) {
-			return res.status(StatusCodes.NOT_FOUND).json({error: "Client Device not found"});
-		}
-		const updatedClientDevice = await client.addCommand(clientDevice, command);
-		return res.status(StatusCodes.OK).json(updatedClientDevice);
-	} catch (error) {
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: error});
 	}
-})
+);
 
-deviceRouter.post("/device/server/addCommand", requireUser, async (req: Request, res: Response) => {
-	try {
-		const {serverDeviceId, command} = req.body;
-		if (!serverDeviceId || !command) {
-			return res.status(StatusCodes.BAD_REQUEST).json({error: "Invalid request"});
+deviceRouter.post(
+	"/device/server/addCommand",
+	requireUser,
+	async (req: Request, res: Response) => {
+		try {
+			const { serverDeviceId, command } = req.body;
+			if (!serverDeviceId || !command) {
+				return res
+					.status(StatusCodes.BAD_REQUEST)
+					.json({ error: "Invalid request" });
+			}
+			const serverDevice = await server.getServerDeviceById(
+				serverDeviceId
+			);
+			if (!serverDevice) {
+				return res
+					.status(StatusCodes.NOT_FOUND)
+					.json({ error: "server Device not found" });
+			}
+			const updatedServerDevice = await server.addCommand(
+				serverDevice,
+				command
+			);
+			return res.status(StatusCodes.OK).json(updatedServerDevice);
+		} catch (error) {
+			return res
+				.status(StatusCodes.INTERNAL_SERVER_ERROR)
+				.json({ error: error });
 		}
-		const serverDevice = await server.getServerDeviceById(serverDeviceId);
-		if (!serverDevice) {
-			return res.status(StatusCodes.NOT_FOUND).json({error: "server Device not found"});
-		}
-		const updatedServerDevice = await server.addCommand(serverDevice, command);
-		return res.status(StatusCodes.OK).json(updatedServerDevice);
-	} catch (error) {
-		return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error: error});
 	}
-})
+);
 
-
-deviceRouter.delete("/device/message/:id", requireUser, async (req: Request, res: Response) => {
-    try { 
-        const message = await getMessageById(req.params.id);
-        if (!message) {
-            return res.status(StatusCodes.NOT_FOUND).json({ error: "Message not found" });
-        }
-        const {deleted, updatedClientDevice, updatedServerDevice, updatedGroup} = await deleteMessage(req.params.id);
-        return res.status(StatusCodes.OK).json({deleted, updatedClientDevice, updatedServerDevice, updatedGroup});
-    } catch (error) {
-        log.error(error);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error });
-    }
-});
+deviceRouter.delete(
+	"/device/message/:id",
+	requireUser,
+	async (req: Request, res: Response) => {
+		try {
+			const message = await getMessageById(req.params.id);
+			if (!message) {
+				return res
+					.status(StatusCodes.NOT_FOUND)
+					.json({ error: "Message not found" });
+			}
+			const {
+				deleted,
+				updatedClientDevice,
+				updatedServerDevice,
+				updatedGroup,
+			} = await deleteMessage(req.params.id);
+			return res
+				.status(StatusCodes.OK)
+				.json({
+					deleted,
+					updatedClientDevice,
+					updatedServerDevice,
+					updatedGroup,
+				});
+		} catch (error) {
+			log.error(error);
+			return res
+				.status(StatusCodes.INTERNAL_SERVER_ERROR)
+				.json({ error: error });
+		}
+	}
+);
 
 //  TODO: Implement removal of devices from group, and deletion of all messages with that device as either to or from.
-deviceRouter.delete("/device/client/:id", requireUser, async (req: Request, res: Response) => {
-    try {
-        const clientDevice = await client.deleteClientDevice(req.params.id);
-        if (clientDevice) {
-            return res.status(StatusCodes.OK).json(clientDevice);
-        }
-        return res.status(StatusCodes.NOT_FOUND).json({ error: "Device not found" });
-    } catch (error) {
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error });
-    }
-});
+deviceRouter.delete(
+	"/device/client/:id",
+	requireUser,
+	async (req: Request, res: Response) => {
+		try {
+			const clientDevice = await client.deleteClientDevice(req.params.id);
+			if (clientDevice) {
+				return res.status(StatusCodes.OK).json(clientDevice);
+			}
+			return res
+				.status(StatusCodes.NOT_FOUND)
+				.json({ error: "Device not found" });
+		} catch (error) {
+			return res
+				.status(StatusCodes.INTERNAL_SERVER_ERROR)
+				.json({ error: error });
+		}
+	}
+);
 
-deviceRouter.delete("/device/server/:id", requireUser, async (req: Request, res: Response) => {
-    try {
-        const serverDevice = await server.deleteServerDevice(req.params.id);
-        if (serverDevice) {
-            return res.status(StatusCodes.OK).json(serverDevice);
-        }
-        return res.status(StatusCodes.NOT_FOUND).json({ error: "Device not found" });
-    } catch (error) {
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error });
-    }
-})
+deviceRouter.delete(
+	"/device/server/:id",
+	requireUser,
+	async (req: Request, res: Response) => {
+		try {
+			const serverDevice = await server.deleteServerDevice(req.params.id);
+			if (serverDevice) {
+				return res.status(StatusCodes.OK).json(serverDevice);
+			}
+			return res
+				.status(StatusCodes.NOT_FOUND)
+				.json({ error: "Device not found" });
+		} catch (error) {
+			return res
+				.status(StatusCodes.INTERNAL_SERVER_ERROR)
+				.json({ error: error });
+		}
+	}
+);
