@@ -17,20 +17,20 @@ async def listen():
     while True:
         try:
             with sr.Microphone() as source:
-                await print_to_console(b"Listening...")
+                await print_to_console(f"Listening...")
                 audio = recognizer.listen(source, timeout=3, phrase_time_limit=5)
                 text = str(recognizer.recognize_google(audio))
-                await print_to_console(b"You said : {}".format(text))
+                await print_to_console(f"You said : {text}")  
                 if "spark" in text.lower():
-                    await print_to_console(b"SPARK ACTIVATED")
+                    await print_to_console(f"SPARK ACTIVATED")
                     speak("SPARK ACTIVATED")
                     return text
         except sr.RequestError as e:
-            await print_to_console(b"Could not request results; {0}".format(e))
+            await print_to_console(f"Could not request results; {e}")
         except sr.UnknownValueError:
-            await print_to_console(b"unknown error occured")
+            await print_to_console("unknown error occured")
         except sr.WaitTimeoutError:
-            await print_to_console(b"Conversation timed out")
+            await print_to_console("Conversation timed out")
 
 
 async def handle_ai(text, group, client, client_devices, server_devices):
@@ -115,10 +115,10 @@ async def main():
                     json=updated_group,
                     headers={"Authorization": f"Bearer {access_token}"},
                 )
-async def print_to_console(content: bytes):
-    await nc.publish("server-output", payload=content)
+async def print_to_console(content: str):
+    await nc.publish("server-output", payload=bytes(content, 'utf-8'))
     await nc.flush()
-    print(content.decode("utf-8"))
+    print(content)
 
 global nc
 nc = nats.NATS()  

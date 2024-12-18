@@ -17,7 +17,6 @@
 			? 'visible'
 			: 'hidden'} flex flex-row justify-left items-center"
 	>
-		2
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<div
 			id="Application Control"
@@ -27,6 +26,7 @@
 				: 'text-dark-secondary'}"
 			on:click={() => {
 				type = 'application';
+				step = 2;
 			}}
 		>
 			<h1
@@ -44,6 +44,7 @@
 				: 'text-dark-secondary'}"
 			on:click={() => {
 				type = 'os';
+				step = 2;
 			}}
 		>
 			<h1
@@ -58,5 +59,11 @@
 		class="h-[94.3%] text-center {step === 2
 			? 'visible'
 			: 'hidden'} flex flex-row justify-left items-center"
-	></div>
+	>
+		{#if type === 'application'}
+			<div class=" text-dark-fail">[#TODO] Incomplete Code. Will be implemented in the future</div>
+		{:else}
+			<div class=" text-dark-fail">[#TODO] Incomplete Code. Will be implemented in the future</div>
+		{/if}
+	</div>
 </div>

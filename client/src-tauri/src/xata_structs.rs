@@ -6,7 +6,7 @@ use serde_json::{json, Value}; // Import the `json` macro from the `serde_json` 
 pub struct Device {
     pub name: String,
     pub id: String,
-    pub assignedUser: User,
+    pub assignedUser: AssignedUser ,
     pub assignedGroup: Group,
     pub messages: Vec<Message>,
     pub deviceCommands: Vec<Command>,
@@ -24,6 +24,7 @@ pub fn to_json_value(&self) -> Value {
     })
 }
 }
+
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct User {
     pub id: String,
@@ -31,6 +32,10 @@ pub struct User {
     pub settings: UserSettings,
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
+pub struct AssignedUser {
+    pub id: String
+}
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct UserSettings {
     pub primaryCommunicationMethod: String

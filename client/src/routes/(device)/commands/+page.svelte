@@ -36,8 +36,10 @@
 			body: JSON.stringify({ ...device, deviceCommands })
 		});
 		if (response.ok) {
-			console.log('Commands updated');
+			let new_device = await response.json();
+			device = new_device;
 			await setStore('device', device);
+			console.log('Commands updated');
 		} else {
 			console.error(await response.text());
 		}
@@ -118,9 +120,10 @@
 				<div class="flex flex-col h-full w-[50%] bg-dark-background-300 rounded-l-2xl">
 					<p class="relative left-[5%] top-[4%] text-xl">New Command Alias</p>
 					<input
+						id="createGroupInput"
 						type="text"
 						bind:value={newCommand.alias}
-						class="text-ellipsis border-b border-dark-secondary bg-dark-background-300 mt-[3%] w-[100%] ml-[5%] focus:outline-none"
+						class="text-ellipsis border-b border-dark-text bg-dark-background-300 mt-[3%] w-[80%] ml-[5%] focus:outline-none"
 						on:focusout={async () => {
 							if (!newCommand.alias) {
 								createCommandPopup = false;

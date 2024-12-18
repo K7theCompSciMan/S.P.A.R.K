@@ -9,8 +9,8 @@ export default {
           secondary: '#66139a',
           accent: '#bb25e4',
           success: '#31e425',
-          fail: '#',
-          warning: '#',
+          fail: '#f90000',
+          warning: '#f98100',
           background: {
             '800':'#04051f',
             '600': '#0F051f',
@@ -23,9 +23,9 @@ export default {
         primary: '#0e1071',
           secondary: '#b865ec',
           accent: '#b11bda',
-          success: '#',
-          fail: '#',
-          warning: '#',
+          success: '#31e425',
+          fail: '#f90000',
+          warning: '#f98100',
           background: {
             default:'#dfe0fb'
           },

@@ -11,18 +11,18 @@
 	class="bg-dark-background-300 rounded-2xl w-[90%] ml-[5%] h-[20%] flex flex-row relative items-center text-dark-text mb-[2%]"
 >
 	<div class="flex flex-col h-full w-[50%]">
-		<p class="relative left-[5%] top-[4%] text-xl">Command Alias</p>
+		<p class="relative left-[5%] top-[4%] text-xl text-dark-accent">Command Alias</p>
 		<input
 			type="text"
 			bind:value={command.alias}
-			class="text-ellipsis border-b bg-transparent mt-[3%] w-[100%] ml-[5%] focus:outline-none"
+			class="text-ellipsis border-b bg-transparent mt-[3%] w-[80%] ml-[5%] focus:outline-none"
 			on:focusout={async () => await updateCommands()}
 		/>
 	</div>
 	<code
 		class="w-[50%] bg-dark-background-500 rounded-r-2xl h-full text-ellipsis border border-dark-secondary"
 	>
-		<p class="relative w-fit h-fit text-xl ml-[4%]">Command</p>
+		<p class="relative w-fit h-fit text-xl ml-[4%] top-[3%] text-dark-accent">Command</p>
 		<textarea
 			rows="1"
 			cols="50"
