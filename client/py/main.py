@@ -4,6 +4,7 @@ from openai import OpenAI
 import  sys, requests, nats, asyncio
 from text_filter import *
 import filterer_model
+import command_formatter
 recognizer = sr.Recognizer()
 
 # TODO: Improve Speech Recognition, text-filtering and etc.
@@ -35,15 +36,16 @@ async def listen():
 
 
 async def handle_ai(text, group, client, client_devices, server_devices):
-
-    client_devices_updated = [{'name': x['name'], 'commands': x['deviceCommands']} for x in client_devices]
-    server_devices_updated = [{'name': x['name'], 'commands': x['deviceCommands']} for x in server_devices]
+    classifier = filterer_model.CommandClassifier()
+    classifier.build_model()
+    client_devices_updated = [{'name': x['name'], 'commands': [command['alias'] for command in x['deviceCommands']]} for x in client_devices]
+    server_devices_updated = [{'name': x['name'], 'commands': [command['alias'] for command in x['deviceCommands']]} for x in server_devices]
     # mod_text = text + f" | {client_devices_updated} | {server_devices_updated} "
-    filtered_text = filter(text, client_devices_updated + server_devices_updated)
-    if "RUN COMMAND ON DEVICE: " in filtered_text:
-        new_text = filtered_text.split("|| ")[1].split(" ||")[0]
-        device_name = new_text.split("RUN COMMAND ON DEVICE: ")[1].split(" |")[0]
-        return new_text, device_name, group
+    if (classifier.predict(text)['confidence'] > 0.6):
+        result = formatter.parse_command(f"{text} || {client_devices_updated} || {server_devices_updated}")
+        device_name = result['device']
+        return result['formatted_command'], device_name, group
+
     response = (send_to_ai(filtered_text, group['aiMessages'], client) if "<Error: " not in filtered_text else filtered_text)
     if "<Error: " in response:
         await print_to_console(response)
@@ -61,10 +63,6 @@ async def send_to_ai(message, messages: list, client: OpenAI):
     return response.choices[0].message.content, messages
 
 async def main():
-    classifier = filterer_model.CommandClassifier()
-    classifier.build_model()
-    history = classifier.train('actions.csv')
-    filterer_model.plot_training_history(history)
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source)
     client = OpenAI(base_url="http://localhost:4000/v1", api_key="lm-studio")
@@ -102,7 +100,7 @@ async def main():
                     device = client_devices[client_device_names.index(device_name)]
                 else:
                     device = server_devices[server_device_names.index(device_name)]
-                message_content = f"[RUN COMMAND] {filtered_text.split(f'RUN COMMAND ON DEVICE: {device_name} | ')[1]}"
+                message_content = f"[RUN COMMAND] {filtered_text.split(f'RUN COMMAND ON DEVICE: {device_name} | ')[1].split(' ||')[0]}"
                 await print_to_console(f"sending message: `{message_content}`")
                 await nc.publish(device['id'], message_content.encode('utf-8'))
                 data = requests.post(
@@ -131,7 +129,7 @@ global nc
 nc = nats.NATS()  
 global classifier
 classifier = filterer_model.CommandClassifier()
-
+formatter = command_formatter.CommandFormatter()
 async def nats_setup(server_device):
     ### IMPORTANT: REMEMBER TO LAUNCH NATS SERVER BEFORE RUNNING THIS ###
     await nc.connect()

@@ -156,8 +156,8 @@ def plot_training_history(history):
 if __name__ == "__main__":
     classifier = CommandClassifier()
     classifier.build_model()
-    history = classifier.train('actions.csv')
-    plot_training_history(history)
+    # history = classifier.train('actions.csv')
+    # plot_training_history(history)
     
     while True:
         text = input("Enter text (or 'q' to quit): ")
@@ -169,3 +169,7 @@ if __name__ == "__main__":
         print(f"Confidence: {result['confidence']:.2%}")
         print(f"Likely Question Indicators: {result['likely_question_indicators']}")
         print(f"Likely Command: {result['likely_command']}")
+        
+        
+
+
