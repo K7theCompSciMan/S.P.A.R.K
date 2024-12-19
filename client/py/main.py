@@ -3,6 +3,7 @@ import pyttsx3 as tts
 from openai import OpenAI
 import  sys, requests, nats, asyncio
 from text_filter import *
+import filterer_model
 recognizer = sr.Recognizer()
 
 # TODO: Improve Speech Recognition, text-filtering and etc.
@@ -48,6 +49,7 @@ async def handle_ai(text, group, client, client_devices, server_devices):
         await print_to_console(response)
         return response, "", group
     return response, "", group
+
 async def send_to_ai(message, messages: list, client: OpenAI):
     messages.append({"role": "user", "content": message})
     response = client.chat.completions.create(
@@ -57,7 +59,12 @@ async def send_to_ai(message, messages: list, client: OpenAI):
     )
     messages.append(response.choices[0].message)
     return response.choices[0].message.content, messages
+
 async def main():
+    classifier = filterer_model.CommandClassifier()
+    classifier.build_model()
+    history = classifier.train('actions.csv')
+    filterer_model.plot_training_history(history)
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source)
     client = OpenAI(base_url="http://localhost:4000/v1", api_key="lm-studio")
@@ -122,6 +129,9 @@ async def print_to_console(content: str):
 
 global nc
 nc = nats.NATS()  
+global classifier
+classifier = filterer_model.CommandClassifier()
+
 async def nats_setup(server_device):
     ### IMPORTANT: REMEMBER TO LAUNCH NATS SERVER BEFORE RUNNING THIS ###
     await nc.connect()

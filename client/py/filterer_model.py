@@ -149,6 +149,10 @@ def plot_training_history(history):
     plt.tight_layout()
     plt.show()
 
+
+
+
+
 if __name__ == "__main__":
     classifier = CommandClassifier()
     classifier.build_model()
