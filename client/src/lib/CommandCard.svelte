@@ -1,23 +1,69 @@
 <script lang="ts">
-	import type { Command } from "$lib";
+	import type { Command } from '$lib';
 
-    export let command: Command;
-    export let updateCommands: () => Promise<void> = async () => {};
-    export let deleteCommand: (command: Command) => Promise<void> = async () => {};
-    export let runCommand: (command: Command) => Promise<void> = async () => {};
+	export let command: Command;
+	export let updateCommands: () => Promise<void> = async () => {};
+	export let deleteCommand: (command: Command) => Promise<void> = async () => {};
+	export let runCommand: (command: Command) => Promise<void> = async () => {};
 </script>
 
 <div
 	class="bg-dark-background-300 rounded-2xl w-[90%] ml-[5%] h-[20%] flex flex-row relative items-center text-dark-text mb-[2%]"
 >
-	<div class="flex flex-col h-full w-[50%]">
-		<p class="relative left-[5%] top-[4%] text-xl text-dark-accent">Command Alias</p>
+	<div class="flex flex-col h-full w-[50%] overflow-auto no-scrollbar">
+		<p class="relative left-[5%] top-[4%] text-xl text-dark-accent">Command name</p>
 		<input
 			type="text"
-			bind:value={command.alias}
+			bind:value={command.name}
 			class="text-ellipsis border-b bg-transparent mt-[3%] w-[80%] ml-[5%] focus:outline-none"
 			on:focusout={async () => await updateCommands()}
 		/>
+		<p class="relative left-[5%] top-[4%] text-lg text-dark-accent">Command Aliases</p>
+		<div class="flex flex-col h-full w-full ml-[5%] relative">
+			{#each command.aliases as alias}
+				<div class="mt-2 relative">
+					<input
+						type="text"
+						bind:value={alias}
+						class="bg-transparent focus:outline-none text-sm border-b border-dark-secondary pl-2"
+					/>
+					<button class="absolute right-[50%] top-[0%] transition hover:text-red-500" on:click={async() => {command.aliases.filter((a) => a !== alias); await updateCommands()}}>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="size-6"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M6 18 18 6M6 6l12 12"
+							/>
+						</svg>
+						
+					</button>
+				</div>
+			{/each}
+			<button
+				class="bg-transparent focus:outline-none text-sm mt-[2%] w-fit h-fit border-dark-secondary"
+				on:click={() => {
+					command.aliases.push('');
+				}}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="size-6"
+				>
+					<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+				</svg>
+			</button>
+		</div>
 	</div>
 	<code
 		class="w-[50%] bg-dark-background-500 rounded-r-2xl h-full text-ellipsis border border-dark-secondary"

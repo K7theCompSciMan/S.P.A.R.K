@@ -6,8 +6,9 @@
 	import { onMount } from 'svelte';
 	import { invoke } from '@tauri-apps/api/tauri';
 	import CommandCard from '$lib/CommandCard.svelte';
+	import CreateCommandPopup from '$lib/CreateCommandPopup.svelte';
 
-	let user: PublicUser = { id: '', username: '',  settings: { primaryCommunicationMethod: "nats"} };
+	let user: PublicUser = { id: '', username: '', settings: { primaryCommunicationMethod: 'nats' } };
 	let group: Group = {};
 	let device: Device = { deviceCommands: [] };
 	let deviceType = '';
@@ -44,16 +45,16 @@
 			console.error(await response.text());
 		}
 	}
-	let newCommand: Command = { alias: '', command: '' };
+	let newCommand: Command = { name: '', command: '', aliases: [''] };
 	async function handleSubmit(newCommand: Command) {
-		if (!newCommand.alias && newCommand.command) {
-			console.error('Command alias is required');
+		if (!newCommand.name && newCommand.command) {
+			console.error('Command name is required');
 			return;
-		} else if (newCommand.alias && !newCommand.command) {
+		} else if (newCommand.name && !newCommand.command) {
 			console.error('Command is required');
 			return;
-		} else if (!newCommand.alias && !newCommand.command) {
-			console.error('Command alias and command are required');
+		} else if (!newCommand.name && !newCommand.command) {
+			console.error('Command name and command are required');
 			return;
 		} else {
 			createCommandPopup = false;
@@ -79,7 +80,7 @@
 
 <!-- svelte-ignore css_unused_selector -->
 <div class="bg-background-500 w-[80vw] ml-[5%] rounded-[2rem] shadow-2xl h-screen overflow-auto">
-	<div class="flex flex-col items-center h-full pt-[3%]">
+	<div class="flex flex-col items-center justify-center h-full pt-[3%]">
 		<h1 class="text-2xl text-slate-200">{device.name} Commands</h1>
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -112,56 +113,19 @@
 					<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
 				</svg>
 			</div>
-			<div
-				class="bg-background-500 rounded-2xl w-[90%] relative left-[5%] h-[20%] flex items-center text-dark-text {createCommandPopup
-					? ''
-					: 'hidden'} "
-			>
-				<div class="flex flex-col h-full w-[50%] bg-dark-background-300 rounded-l-2xl">
-					<p class="relative left-[5%] top-[4%] text-xl">New Command Alias</p>
-					<input
-						id="createGroupInput"
-						type="text"
-						bind:value={newCommand.alias}
-						class="text-ellipsis border-b border-dark-text bg-dark-background-300 mt-[3%] w-[80%] ml-[5%] focus:outline-none"
-						on:focusout={async () => {
-							if (!newCommand.alias) {
-								createCommandPopup = false;
-							} else if (!commandCreated && createCommandPopup) {
-								await handleSubmit(newCommand);
-							}
-						}}
-						on:keypress={async (event) => {
-							if (event.key === 'Enter' && !commandCreated) {
-								await handleSubmit(newCommand);
-							}
-						}}
-					/>
-				</div>
-				<code
-					class="w-[50%] bg-dark-background-500 rounded-r-2xl h-full text-ellipsis border border-dark-secondary"
-				>
-					<p class="relative w-fit h-fit text-xl ml-[4%]">New Command</p>
-					<textarea
-						rows="1"
-						cols="50"
-						bind:value={newCommand.command}
-						class="bg-dark-background-500 rounded-br-2xl w-full relative pt-[1%] pl-[4%] h-[70%] text-md focus:outline-none cursor-text no-scrollbar resize-none overflow-auto"
-						on:focusout={async () => {
-							if (!newCommand.command) {
-								createCommandPopup = false;
-							} else if (!commandCreated && createCommandPopup) {
-								await handleSubmit(newCommand);
-							}
-						}}
-						on:keypress={async (event) => {
-							if (event.key === 'Enter' && !commandCreated) {
-								await handleSubmit(newCommand);
-							}
-						}}
-					></textarea>
-				</code>
-			</div>
+			<CreateCommandPopup
+				location="absolute left-[55%]"
+				device={device}
+				bind:newCommand={newCommand}
+				bind:visible={createCommandPopup}
+				createCommand={async () => {
+					createCommandPopup = false;
+					commandCreated = true;
+					deviceCommands = [...device.deviceCommands!, newCommand];
+					console.log(deviceCommands);
+					await updateCommands();
+				}}
+			/>		
 		</div>
 	</div>
 </div>

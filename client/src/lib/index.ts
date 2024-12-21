@@ -18,5 +18,6 @@ export type UserSettings= {
 
 export type Command = {
     command: string,
-    alias: string,
+    name: string,
+    aliases: string[],
 }

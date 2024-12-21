@@ -37,16 +37,16 @@
 		});
 	});
 
-	let newCommand: Command = { alias: '', command: '' };
+	let newCommand: Command = { name: '', command: '', aliases: [''] };
 	async function handleSubmit(newCommand: Command) {
-		if (!newCommand.alias && newCommand.command) {
-			console.error('Command alias is required');
+		if (!newCommand.name && newCommand.command) {
+			console.error('Command name is required');
 			return;
-		} else if (newCommand.alias && !newCommand.command) {
+		} else if (newCommand.name && !newCommand.command) {
 			console.error('Command is required');
 			return;
-		} else if (!newCommand.alias && !newCommand.command) {
-			console.error('Command alias and command are required');
+		} else if (!newCommand.name && !newCommand.command) {
+			console.error('Command name and command are required');
 			return;
 		} else {
 			createCommandPopup = false;
@@ -122,6 +122,7 @@
 		invoke('run_command', { command: command.command });
 	}
 </script>
+
 <h1>Erm what the flip</h1>
 <div
 	class="bg-dark-background-600 w-[80vw] ml-[5%] rounded-[2rem] shadow-2xl h-screen overflow-auto relative"
@@ -287,10 +288,10 @@
 						class="bg-dark-background-300 rounded-2xl w-[90%] ml-[5%] h-[20%] flex flex-row relative items-center text-dark-text mb-[2%]"
 					>
 						<div class="flex flex-col h-full w-[50%]">
-							<p class="relative left-[5%] top-[4%] text-xl">Command Alias</p>
+							<p class="relative left-[5%] top-[4%] text-xl">Command name</p>
 							<input
 								type="text"
-								bind:value={command.alias}
+								bind:value={command.name}
 								class="text-ellipsis border-b bg-transparent mt-[3%] w-[100%] ml-[5%] focus:outline-none"
 								on:focusout={async () => await updateServer(selectedDevice)}
 							/>
@@ -371,13 +372,13 @@
 						: 'hidden'} "
 				>
 					<div class="flex flex-col h-full w-[50%] bg-dark-background-300 rounded-l-2xl">
-						<p class="relative left-[5%] top-[4%] text-xl">New Command Alias</p>
+						<p class="relative left-[5%] top-[4%] text-xl">New Command name</p>
 						<input
 							type="text"
-							bind:value={newCommand.alias}
+							bind:value={newCommand.name}
 							class="text-ellipsis border-b border-dark-secondary bg-dark-background-300 mt-[3%] w-[100%] ml-[5%] focus:outline-none"
 							on:focusout={async () => {
-								if (!newCommand.alias) {
+								if (!newCommand.name) {
 									createCommandPopup = false;
 								} else if (!commandCreated && createCommandPopup) {
 									await handleSubmit(newCommand);

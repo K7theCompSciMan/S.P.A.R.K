@@ -51,7 +51,6 @@ pub fn handle_server_device_updates() {
                     "stores/store.json"])
                 .spawn()
                 .expect("Failed to spawn packaged node");
-                // child.write("rec_cq9do7pk946ki2d08fo0 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoicmVjX2NxODdjMjltMGRlMmJ0MzlsbW1nIiwidXNlcm5hbWUiOiJLZXNhdmFuIn0sImlhdCI6MTcyNDExNjk5N30.ae5Y86J74WadBSckxmWxR0Htiev7_VAgs1G327ovQ4oGitLNOhrhj4EETOiSjXZlstMc-kMSmOofqBUcb41DW9uVVMNjFTkuLBSgf-YYCQhj3M2wn2IJyJIu3BHXxDU6aOlacFrK3lCmoxYTX7EGkcrZ6NU_XEyoJCwyqPzHXYCRgT_pnG5ANRHFBYi5hB1qMHzXGgHOWinAdDJYvCCS9v4VLl-wX9E9YdOiEJuJ18hdpkLHkZhCsmaVV0gbdqbEOUWoF3iISTzL1wzBkN3q24iNUcimEe01ab7yB2yOwewhvqf9wuxVfoM7iNhh6pmolIurqVPZKNlq5b6ttirlDg".as_bytes());
                 while let Some(event) = rx.recv().await {
                     if let CommandEvent::Stdout(line) = event {
                         let mut current_server_output = serde_json::from_value::<Vec<String>>(store::get("stores/store.json".to_string(), "serverOutput".to_string())).unwrap_or(Vec::<String>::new());

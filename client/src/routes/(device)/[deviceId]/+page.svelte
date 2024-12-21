@@ -27,5 +27,4 @@
     <div class="w-full h-full bg-dark-background-600 rounded-2xl ">
         <h1 class="text-center text-dark-primary text-2xl pt-[4%]">Data for <span class="text-dark-accent">{thisDevice.name}</span></h1>
     </div>
-	<CreateCommandPopup device={thisDevice} />
 </div>

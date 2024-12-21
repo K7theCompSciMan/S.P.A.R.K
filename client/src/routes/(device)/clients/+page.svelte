@@ -38,16 +38,16 @@
 		});
 	});
 
-	let newCommand: Command = { alias: '', command: '' };
+	let newCommand: Command = { name: '', command: '', aliases: [''] };
 	async function handleSubmit(newCommand: Command) {
-		if (!newCommand.alias && newCommand.command) {
-			console.error('Command alias is required');
+		if (!newCommand.name && newCommand.command) {
+			console.error('Command name is required');
 			return;
-		} else if (newCommand.alias && !newCommand.command) {
+		} else if (newCommand.name && !newCommand.command) {
 			console.error('Command is required');
 			return;
-		} else if (!newCommand.alias && !newCommand.command) {
-			console.error('Command alias and command are required');
+		} else if (!newCommand.name && !newCommand.command) {
+			console.error('Command name and command are required');
 			return;
 		} else {
 			createCommandPopup = false;
@@ -284,7 +284,12 @@
 			<h1 class="text-2xl mb-[2%]">Device Commands:</h1>
 			<div class="rounded-2xl no-scrollbar overflow-auto flex flex-col items-center w-full h-[70%]">
 				{#each selectedDevice.deviceCommands as command}
-					<CommandCard {command} updateCommands={async() => await updateClient(selectedDevice)}  {deleteCommand} {runCommand} />
+					<CommandCard
+						{command}
+						updateCommands={async () => await updateClient(selectedDevice)}
+						{deleteCommand}
+						{runCommand}
+					/>
 				{/each}
 				<!-- svelte-ignore a11y_click_events_have_key_events -->
 				<!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -317,14 +322,14 @@
 						: 'hidden'} "
 				>
 					<div class="flex flex-col h-full w-[50%] bg-dark-background-300 rounded-l-2xl">
-						<p class="relative left-[5%] top-[4%] text-xl">New Command Alias</p>
+						<p class="relative left-[5%] top-[4%] text-xl">New Command name</p>
 						<input
 							id="createGroupInput"
 							type="text"
-							bind:value={newCommand.alias}
+							bind:value={newCommand.name}
 							class="text-ellipsis border-b border-dark-text bg-dark-background-300 mt-[3%] w-[80%] ml-[5%] focus:outline-none"
 							on:focusout={async () => {
-								if (!newCommand.alias) {
+								if (!newCommand.name) {
 									createCommandPopup = false;
 								} else if (!commandCreated && createCommandPopup) {
 									await handleSubmit(newCommand);

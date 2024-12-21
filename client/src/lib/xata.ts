@@ -21,7 +21,7 @@ const tables = [
 			{ name: 'assignedUser', type: 'link', link: { table: 'user' } },
 			{ name: 'messages', type: 'json', notNull: true, defaultValue: '[]' },
 			{
-				name: 'groupCommands',
+				name: 'commandPresets',
 				type: 'json',
 				notNull: true,
 				defaultValue: '[]'
@@ -53,7 +53,8 @@ const tables = [
 				notNull: true,
 				defaultValue: '[]'
 			},
-			{ name: 'settings', type: 'json', notNull: true, defaultValue: '{}' }
+			{ name: 'settings', type: 'json', notNull: true, defaultValue: '{}' },
+			{ name: 'aliases', type: 'multiple' }
 		]
 	},
 	{
@@ -63,13 +64,9 @@ const tables = [
 			{ name: 'messages', type: 'json', notNull: true, defaultValue: '[{}]' },
 			{ name: 'assignedGroup', type: 'link', link: { table: 'group' } },
 			{ name: 'assignedUser', type: 'link', link: { table: 'user' } },
-			{
-				name: 'deviceCommands',
-				type: 'json',
-				notNull: true,
-				defaultValue: '[]'
-			},
-			{ name: 'settings', type: 'json', notNull: true, defaultValue: '{}' }
+			{ name: 'settings', type: 'json', notNull: true, defaultValue: '{}' },
+			{ name: 'deviceCommands', type: 'json', defaultValue: '{}' },
+			{ name: 'aliases', type: 'multiple' }
 		]
 	},
 	{
