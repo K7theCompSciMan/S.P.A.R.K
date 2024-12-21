@@ -63,7 +63,7 @@ export const sendMessageToServerFromServer = async (
     recieverDevice.messages.push(message);
     group.messages.push(message);
     await updateServerDevice(serverDevice);
-    await updateClientDevice(recieverDevice);
+    await updateServerDevice(recieverDevice);
     await updateGroup(group);
     return message;
 };

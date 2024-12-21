@@ -99,30 +99,34 @@ groupRouter.put("/group", requireUser, async (req: Request, res: Response) => {
 	}
 });
 
-groupRouter.post("/group/addCommand", requireUser, async (req: Request, res: Response) => {
-	try {
-		const { groupId, command } = req.body;
-		if (!groupId || !command) {
+groupRouter.post(
+	"/group/addCommand",
+	requireUser,
+	async (req: Request, res: Response) => {
+		try {
+			const { groupId, command } = req.body;
+			if (!groupId || !command) {
+				return res
+					.status(StatusCodes.BAD_REQUEST)
+					.json({ error: "Invalid request" });
+			}
+			log.info("adding command " + command + " to group " + groupId);
+			let group = await db.getGroupById(groupId);
+			const newGroup = await db.addCommandPresetToGroup(group, command);
+			if (newGroup) {
+				log.info("added command " + command + " to group " + groupId);
+				return res.status(StatusCodes.OK).json(newGroup);
+			}
 			return res
-				.status(StatusCodes.BAD_REQUEST)
-				.json({ error: "Invalid request" });
+				.status(StatusCodes.NOT_FOUND)
+				.json({ error: "Group not found" });
+		} catch (error) {
+			return res
+				.status(StatusCodes.INTERNAL_SERVER_ERROR)
+				.json({ error: error });
 		}
-		log.info("adding command " + command + " to group " + groupId)
-		let group = await db.getGroupById(groupId)
-		const newGroup = await db.addCommandToGroup(group, command);
-		if (newGroup) {
-			log.info("added command " + command + " to group " + groupId)
-			return res.status(StatusCodes.OK).json(newGroup);
-		}
-		return res
-			.status(StatusCodes.NOT_FOUND)
-			.json({ error: "Group not found" });
-	} catch (error) {
-		return res
-			.status(StatusCodes.INTERNAL_SERVER_ERROR)
-			.json({ error: error });
 	}
-});
+);
 
 groupRouter.delete(
 	"/group/:id",

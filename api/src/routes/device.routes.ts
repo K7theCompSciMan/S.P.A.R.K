@@ -109,6 +109,7 @@ deviceRouter.post(
 			}
 			const clientDevice = await client.createClientDevice({
 				name,
+				aliases: [name],
 				assignedGroup: assignedGroupId,
 				assignedUser: res.locals.user,
 			} as ClientDevice);
@@ -138,6 +139,7 @@ deviceRouter.post(
 			}
 			const serverDevice = await server.createServerDevice({
 				name,
+				aliases: [name],
 				assignedGroup: group,
 				assignedUser: res.locals.user,
 			} as ServerDevice);
@@ -170,15 +172,20 @@ deviceRouter.post(
 			const serverDevice = await server.getServerDeviceById(
 				serverDeviceId
 			);
-			let receiverDevice = await client.getClientDeviceById(
+			let receiverDeviceClient = await client.getClientDeviceById(
 				recieverDeviceId
 			);
+			let receiverDevice;
 			let deviceType = "client";
-			if (!receiverDevice) {
-				receiverDevice = await server.getServerDeviceById(
+			if (!receiverDeviceClient) {
+				let receiverDeviceServer = await server.getServerDeviceById(
 					recieverDeviceId
 				);
 				deviceType = "server";
+				receiverDevice = receiverDeviceServer;
+			}
+			else {
+				receiverDevice = receiverDeviceClient;
 			}
 			if (!serverDevice || !receiverDevice) {
 				return res
@@ -194,12 +201,12 @@ deviceRouter.post(
 						? await server.sendMessageToClientFromServer(
 								serverDevice,
 								messageContent,
-								receiverDevice
+								receiverDevice as ClientDevice
 						)
 						: await server.sendMessageToServerFromServer(
 								serverDevice,
 								messageContent,
-								receiverDevice
+								receiverDevice as ServerDevice
 						);
 				return res
 					.status(StatusCodes.OK)

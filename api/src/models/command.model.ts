@@ -1,4 +1,5 @@
 export type Command = {
-    alias: string;
+    name: string;
+    aliases: string[];
     command: string;
 }

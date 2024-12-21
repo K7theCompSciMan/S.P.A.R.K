@@ -1,8 +1,10 @@
 import { ClientDevice, ServerDevice } from "src/xata";
+import { defaultUser } from "./user.model";
 
 export class Device {
     id: string;
     name: string;
+    aliases: string[];
     messages: string;
     assignedGroup?: string;
     assignedUser?: string;
@@ -14,5 +16,6 @@ export class Device {
         this.assignedGroup = device.assignedGroup?.id;
         this.assignedUser = device.assignedUser?.id;
         this.type = type;
+        this.aliases = device.aliases!;
     }
 }
