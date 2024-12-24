@@ -1,68 +1,38 @@
 <script lang="ts">
+	import CreateCommandPopup from './CommandPopup.svelte';
 	import type { Command } from '$lib';
 
 	export let command: Command;
 	export let updateCommands: () => Promise<void> = async () => {};
 	export let deleteCommand: (command: Command) => Promise<void> = async () => {};
 	export let runCommand: (command: Command) => Promise<void> = async () => {};
+	export let popup = false;
 </script>
 
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	class="bg-dark-background-300 rounded-2xl w-[90%] ml-[5%] h-[20%] flex flex-row relative items-center text-dark-text mb-[2%]"
+	class="bg-dark-background-300 rounded-2xl w-[90%] ml-[5%] h-[20%] flex flex-row relative items-center text-dark-text mb-[2%] cursor-pointer"
+	on:click={() => popup = true}
 >
 	<div class="flex flex-col h-full w-[50%] overflow-auto no-scrollbar">
 		<p class="relative left-[5%] top-[4%] text-xl text-dark-accent">Command name</p>
 		<input
 			type="text"
+			disabled
 			bind:value={command.name}
-			class="text-ellipsis border-b bg-transparent mt-[3%] w-[80%] ml-[5%] focus:outline-none"
-			on:focusout={async () => await updateCommands()}
+			class="text-ellipsis bg-transparent mt-[3%] w-[80%] ml-[5%] focus:outline-none"
 		/>
 		<p class="relative left-[5%] top-[4%] text-lg text-dark-accent">Command Aliases</p>
 		<div class="flex flex-col h-full w-full ml-[5%] relative">
 			{#each command.aliases as alias}
 				<div class="mt-2 relative">
-					<input
-						type="text"
-						bind:value={alias}
-						class="bg-transparent focus:outline-none text-sm border-b border-dark-secondary pl-2"
-					/>
-					<button class="absolute right-[50%] top-[0%] transition hover:text-red-500" on:click={async() => {command.aliases.filter((a) => a !== alias); await updateCommands()}}>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="size-6"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M6 18 18 6M6 6l12 12"
-							/>
-						</svg>
-						
-					</button>
+					<p
+						class="bg-transparent focus:outline-none w-fit pr-2 text-sm border-b border-dark-secondary"
+					>{alias}</p>
+					
 				</div>
 			{/each}
-			<button
-				class="bg-transparent focus:outline-none text-sm mt-[2%] w-fit h-fit border-dark-secondary"
-				on:click={() => {
-					command.aliases.push('');
-				}}
-			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					class="size-6"
-				>
-					<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-				</svg>
-			</button>
 		</div>
 	</div>
 	<code
@@ -72,9 +42,9 @@
 		<textarea
 			rows="1"
 			cols="50"
+			disabled
 			bind:value={command.command}
 			class="bg-transparent rounded-br-2xl w-full relative pt-[1%] pl-[4%] h-[70%] text-md focus:outline-none cursor-text no-scrollbar resize-none overflow-auto"
-			on:focusout={async () => await updateCommands()}
 		></textarea>
 	</code>
 	<button on:click={async () => await deleteCommand(command)}>
@@ -109,3 +79,4 @@
 		</svg>
 	</button>
 </div>
+<CreateCommandPopup bind:visible={popup} type="Edit" location="absolute left-[55%]" newCommand={command} updateCommand={updateCommands} on:close={() => popup = false} />

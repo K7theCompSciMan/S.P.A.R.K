@@ -95,7 +95,7 @@ async fn run_nats_backend(subject: &str, device: Device, path: String) -> Result
         println!("Received message {:?}", message_content);
         if message_content.contains("[RUN COMMAND]") {
             for command in device.deviceCommands.clone() {
-                if format!("[RUN COMMAND] {}", command.alias) == message_content {
+                if format!("[RUN COMMAND] {}", command.name) == message_content {
                     run_command(&command.command)
                 }
             }
@@ -192,7 +192,7 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
                         // println!("recieved message {:?}", new_message);
                         if new_message.content.contains("[RUN COMMAND]") {
                             for command in updated_device.deviceCommands.clone() {
-                                if format!("[RUN COMMAND] {}", command.alias) == new_message.content {
+                                if format!("[RUN COMMAND] {}", command.name) == new_message.content {
                                     run_command(&command.command)
                                 }
                             }

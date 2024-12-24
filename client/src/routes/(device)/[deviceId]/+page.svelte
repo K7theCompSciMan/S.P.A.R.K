@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CreateCommandPopup from '$lib/CreateCommandPopup.svelte';
+	import CreateCommandPopup from '$lib/CommandPopup.svelte';
 	import { invoke } from '@tauri-apps/api/tauri';
 	import Radio from '$lib/Radio.svelte';
 	import { goto } from '$app/navigation';

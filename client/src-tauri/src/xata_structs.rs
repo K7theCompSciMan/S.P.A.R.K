@@ -69,13 +69,15 @@ impl PartialEq for Message {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Command {
-    pub alias: String,
+    pub name: String,
+    pub aliases: Vec<String>,
     pub command: String
 }
 
 impl PartialEq for Command {
     fn eq(&self, other: &Self) -> bool {
-        self.alias == other.alias
+        self.name == other.name
             && self.command == other.command
+            && self.aliases == other.aliases
     }
 }

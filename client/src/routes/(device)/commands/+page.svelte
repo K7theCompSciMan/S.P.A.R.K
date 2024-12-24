@@ -6,7 +6,7 @@
 	import { onMount } from 'svelte';
 	import { invoke } from '@tauri-apps/api/tauri';
 	import CommandCard from '$lib/CommandCard.svelte';
-	import CreateCommandPopup from '$lib/CreateCommandPopup.svelte';
+	import CreateCommandPopup from '$lib/CommandPopup.svelte';
 
 	let user: PublicUser = { id: '', username: '', settings: { primaryCommunicationMethod: 'nats' } };
 	let group: Group = {};
@@ -76,6 +76,7 @@
 	async function runCommand(command: Command) {
 		invoke('run_command', { command: command.command });
 	}
+	let popup=false;
 </script>
 
 <!-- svelte-ignore css_unused_selector -->
@@ -87,12 +88,12 @@
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div id="commands" class="w-1/2 h-full pt-[2%]">
 			{#each deviceCommands as command}
-				<CommandCard {command} {updateCommands} {deleteCommand} {runCommand} />
+				<CommandCard bind:popup={popup} {command} {updateCommands} {deleteCommand} {runCommand} />
 			{/each}
 			<!-- svelte-ignore a11y_click_events_have_key_events -->
 			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<div
-				class=" bg-transparant mt-[2%] h-[5%] w-full relative flex align-middle text-dark-text rounded-xl cursor-pointer group {createCommandPopup
+				class=" bg-transparant mt-[2%] h-[5%] w-full relative flex align-middle text-dark-text rounded-xl cursor-pointer group {createCommandPopup || popup
 					? 'hidden'
 					: ''} "
 				id="add"
@@ -115,17 +116,17 @@
 			</div>
 			<CreateCommandPopup
 				location="absolute left-[55%]"
-				device={device}
-				bind:newCommand={newCommand}
+				{device}
+				bind:newCommand
 				bind:visible={createCommandPopup}
-				createCommand={async () => {
+				updateCommand={async () => {
 					createCommandPopup = false;
 					commandCreated = true;
 					deviceCommands = [...device.deviceCommands!, newCommand];
 					console.log(deviceCommands);
 					await updateCommands();
 				}}
-			/>		
+			/>
 		</div>
 	</div>
 </div>

@@ -6,9 +6,10 @@
 	import { getStore } from './tauri';
 	export let device: Device = {};
 	export let newCommand: Command = { name: '', command: '', aliases: [''] };
-	export let createCommand: () => Promise<void> = async () => {};
+	export let updateCommand: () => Promise<void> = async () => {};
 	export let visible: boolean = false;
 	export let location: string = '';
+	export let type: 'Create' | 'Edit' = 'Create';
 	let presetDropdown = false;
 	let group: Group = {};
 	let presets: { group: Command[]; default: Command[] } = {
@@ -29,12 +30,13 @@
 	async function runCommand(command: Command) {
 		invoke('run_command', { command: command.command });
 	}
+	$: console.log(newCommand);
 </script>
 
 <div
 	class="bg-dark-background-300 rounded-2xl w-[80%] h-[80%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute items-center text-dark-text {location} {visible ? '' : 'hidden'}"
 >
-	<h1 class="text-dark-primary text-2xl text-center mt-2 mb-2">Create Command for {device.name}</h1>
+	<h1 class="text-dark-primary text-2xl text-center mt-2 mb-2">{type} Command for {device.name}</h1>
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div class="h-[94.3%] w-full flex flex-col">
 		<div class="w-full h-[10%] flex flex-col items-center p-2 justify-center">
@@ -63,18 +65,30 @@
 					<label for="name" class="text-xl">Command Aliases</label>
 					<div class="flex flex-col h-full w-full">
 						{#each newCommand.aliases as alias}
-							<div class="mt-2">
+							<div class="mt-2 relative">
 								<input
 									type="text"
 									bind:value={alias}
 									class="bg-transparent focus:outline-none text-xl border-b border-dark-secondary pl-2"
 								/>
+								<button class="absolute left-[30%] top-[0.5%] transition-all hover:text-dark-fail duration-200" on:click={() => newCommand.aliases = newCommand.aliases.filter(a => a !== alias)}>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke-width="1.5"
+										stroke="currentColor"
+										class="size-6"
+									>
+										<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+									</svg>
+								</button>
 							</div>
 						{/each}
 						<button
 							class="bg-transparent focus:outline-none text-xl mt-[2%] w-fit h-fit border-dark-secondary"
 							on:click={() => {
-								newCommand.aliases.push('');
+								newCommand.aliases = [...newCommand.aliases, ''];
 							}}
 						>
 							<svg
@@ -199,8 +213,8 @@
 			</div>
 		</div>
 		<button class="absolute w-[20%] h-[5%] bottom-[5%] text-xl left-[40%] bg-dark-background-600 rounded-2xl hover:text-dark-success {presetDropdown ? 'blur-md -z-10' : ''}" on:click={
-			async () => await createCommand()
-		}>Create New Command</button> 
+			async () => await updateCommand()
+		}>Save Command</button> 
 	</div>
 	<button class="absolute top-[2%] right-[1%] hover:text-red-500 transition-all" on:click={() => {visible = false}}>
 		<svg
