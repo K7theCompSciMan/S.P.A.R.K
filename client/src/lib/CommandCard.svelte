@@ -7,12 +7,13 @@
 	export let deleteCommand: (command: Command) => Promise<void> = async () => {};
 	export let runCommand: (command: Command) => Promise<void> = async () => {};
 	export let popup = false;
+	export let customClass = '';
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	class="bg-dark-background-300 rounded-2xl w-[90%] ml-[5%] h-[20%] flex flex-row relative items-center text-dark-text mb-[2%] cursor-pointer"
+	class="bg-dark-background-300 rounded-2xl w-[90%] ml-[5%] h-[20%] flex flex-row relative items-center text-dark-text mb-[2%] cursor-pointer {customClass}"
 	on:click={() => popup = true}
 >
 	<div class="flex flex-col h-full w-[50%] overflow-auto no-scrollbar">

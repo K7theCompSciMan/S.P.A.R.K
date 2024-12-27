@@ -38,8 +38,8 @@ async def listen():
 async def handle_ai(text, group, client, client_devices, server_devices):
     classifier = filterer_model.CommandClassifier()
     classifier.build_model()
-    client_devices_updated = [{'name': x['name'], 'commands': [command['alias'] for command in x['deviceCommands']]} for x in client_devices]
-    server_devices_updated = [{'name': x['name'], 'commands': [command['alias'] for command in x['deviceCommands']]} for x in server_devices]
+    client_devices_updated = [{'name': x['name'], 'commands': [{'name': command['name'], 'aliases': command['aliases']} for command in x['deviceCommands']]} for x in client_devices]
+    server_devices_updated = [{'name': x['name'], 'commands': [{'name': command['name'], 'aliases': command['aliases']} for command in x['deviceCommands']]} for x in server_devices]
     # mod_text = text + f" | {client_devices_updated} | {server_devices_updated} "
     if (classifier.predict(text)['confidence'] > 0.6):
         result = formatter.parse_command(f"{text} || {client_devices_updated} || {server_devices_updated}")

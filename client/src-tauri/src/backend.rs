@@ -106,7 +106,6 @@ async fn run_nats_backend(subject: &str, device: Device, path: String) -> Result
 
         }
     }
-
     Ok(())
 }
 
