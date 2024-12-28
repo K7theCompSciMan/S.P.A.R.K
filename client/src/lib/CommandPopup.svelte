@@ -30,11 +30,13 @@
 	async function runCommand(command: Command) {
 		invoke('run_command', { command: command.command });
 	}
-	$: console.log(newCommand);
+	// $: console.log(newCommand);
 </script>
 
 <div
-	class="bg-dark-background-300 rounded-2xl w-[80%] h-[80%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute items-center text-dark-text {location} {visible ? '' : 'hidden'}"
+	class="bg-dark-background-300 rounded-2xl w-[80%] h-[80%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute items-center text-dark-text {location} {visible
+		? ''
+		: 'hidden'}"
 >
 	<h1 class="text-dark-primary text-2xl text-center mt-2 mb-2">{type} Command for {device.name}</h1>
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -71,7 +73,11 @@
 									bind:value={alias}
 									class="bg-transparent focus:outline-none text-xl border-b border-dark-secondary pl-2"
 								/>
-								<button class="absolute left-[30%] top-[0.5%] transition-all hover:text-dark-fail duration-200" on:click={() => newCommand.aliases = newCommand.aliases.filter(a => a !== alias)}>
+								<button
+									class="absolute left-[30%] top-[0.5%] transition-all hover:text-dark-fail duration-200"
+									on:click={() =>
+										(newCommand.aliases = newCommand.aliases.filter((a) => a !== alias))}
+								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										fill="none"
@@ -80,7 +86,11 @@
 										stroke="currentColor"
 										class="size-6"
 									>
-										<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+										/>
 									</svg>
 								</button>
 							</div>
@@ -212,11 +222,19 @@
 				</div>
 			</div>
 		</div>
-		<button class="absolute w-[20%] h-[5%] bottom-[5%] text-xl left-[40%] bg-dark-background-600 rounded-2xl hover:text-dark-success {presetDropdown ? 'blur-md -z-10' : ''}" on:click={
-			async () => await updateCommand()
-		}>Save Command</button> 
+		<button
+			class="absolute w-[20%] h-[5%] bottom-[5%] text-xl left-[40%] bg-dark-background-600 rounded-2xl hover:text-dark-success {presetDropdown
+				? 'blur-md -z-10'
+				: ''}"
+			on:click={async () => await updateCommand()}>Save Command</button
+		>
 	</div>
-	<button class="absolute top-[2%] right-[1%] hover:text-red-500 transition-all" on:click={() => {visible = false}}>
+	<button
+		class="absolute top-[2%] right-[1%] hover:text-red-500 transition-all"
+		on:click={() => {
+			visible = false;
+		}}
+	>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
@@ -227,6 +245,5 @@
 		>
 			<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
 		</svg>
-
 	</button>
 </div>

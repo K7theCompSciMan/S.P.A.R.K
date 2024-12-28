@@ -8,6 +8,7 @@ export type Device = {
 	id?: string;
 	deviceCommands?: Command[];
 	type?: string;
+    aliases?: string[];
 };
 
 export type PublicUser = {
@@ -33,7 +34,8 @@ export const deviceToSpecificDevice = (device: Device) => {
 			assignedGroup: device.assignedGroup!,
 			assignedUser: device.assignedUser!,
 			id: device.id!,
-			deviceCommands: device.deviceCommands!
+			deviceCommands: device.deviceCommands!,
+            aliases: device.aliases!
 		} as ClientDevice;
 	} else {
 		return {
@@ -42,7 +44,8 @@ export const deviceToSpecificDevice = (device: Device) => {
 			assignedGroup: device.assignedGroup!,
 			assignedUser: device.assignedUser!,
 			id: device.id!,
-			deviceCommands: device.deviceCommands!
+			deviceCommands: device.deviceCommands!,
+            aliases: device.aliases!
 		} as ServerDevice;
 	}
 };

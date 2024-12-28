@@ -43,14 +43,12 @@
 		updateDevice(selectedDevice);
 	}
 	async function updateDevice(client: Device) {
+		selectedDevice = client;
 		client = deviceToSpecificDevice(client);
-		console.log(client);
-		console.log(selectedDevice);
-		if (selectedDevice == client) {
-			console.log('selectedDevice == client');
-		}
+		// console.log(client);
+		// console.log(selectedDevice);
 		if (selectedDevice.type === 'client') {
-			console.log('client');
+			// console.log('client');
 			let res = await fetch(`https://spark-api.fly.dev/device/client/`, {
 				method: 'PUT',
 				headers: {
@@ -60,7 +58,7 @@
 				body: JSON.stringify({ ...client as ClientDevice, id: client.id } as ClientDevice)
 			});
 			if (res.ok) {
-				console.log('Client updated');
+				// console.log('Client updated');
 				if (client.id === thisDevice.id) {
 					await setStore('device', client);
 					await setStore('deviceType', 'client');
@@ -69,7 +67,7 @@
 				console.error(await res.text());
 			}
 		} else {
-			console.log('server');
+			// console.log('server');
 			let res = await fetch(`https://spark-api.fly.dev/device/server/`, {
 				method: 'PUT',
 				headers: {
@@ -79,7 +77,7 @@
 				body: JSON.stringify({ ...client as ClientDevice, id: client.id } as ServerDevice)
 			});
 			if (res.ok) {
-				console.log('Device updated');
+				// console.log('Device updated');
 				if (client.id === thisDevice.id) {
 					await setStore('device', client);
 					await setStore('deviceType', 'server');
@@ -89,17 +87,15 @@
 			}
 		}
 	}
-
-	$: console.log(clients);
-
-	let selectedDeviceType = 'client';
+	
 	let selectedDevice: Device = {
 		id: '',
 		name: '',
 		messages: [],
 		deviceCommands: [],
-		type: 'client'
+		type: 'client',
 	};
+	// $: console.log(selectedDevice.aliases);
 	let settingsPopup = false;
 	async function getDevice(id: string) {
 		let res = await fetch(`https://spark-api.fly.dev/device/client/${id}`, {
@@ -135,7 +131,7 @@
 			}
 		});
 		if (res.ok) {
-			console.log('Message deleted');
+			// console.log('Message deleted');
 		} else {
 			console.error(await res.text());
 		}
@@ -169,10 +165,10 @@
 					<div
 						class="bg-dark-background-500 rounded-2xl w-full h-[12%] flex flex-row relative items-center text-dark-text mb-[2%] cursor-pointer hover:scale-105 shadow-lg hover:shadow-dark-accent hover:text-dark-accent transition-all duration-200"
 						on:click={(e) => {
-							console.log(e.target);
 							if (e.target!.id === 'clientName') {
 							} else {
-								selectedDevice = {...client, type: 'client'};
+								selectedDevice = client;
+								selectedDevice.type = 'client';
 								settingsPopup = true;
 							}
 						}}
@@ -196,29 +192,6 @@
 							<p id="messages" class="text-current">Messages: {client.messages.length}</p>
 							<p id="messages" class="text-current">Commands: {client.deviceCommands.length}</p>
 						</div>
-						<!-- <button
-							class="absolute top-[2%] right-[1%] hover:text-green-500 transition-all"
-							on:click={() => {
-								selectedDevice = server;
-								settingsPopup = true;
-								console.log(selectedDevice);
-							}}
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke-width="1.5"
-								stroke="currentColor"
-								class="size-6"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
-								/>
-							</svg>
-						</button> -->
 					</div>
 				{/each}
 			</div>
@@ -234,5 +207,10 @@
 		{getDevice}
 		{deleteMessage}
 		updateCommands={handleSubmit}
+		on:close={() => {
+			let client = clients.find((c) => c.id === selectedDevice.id);
+			client = deviceToSpecificDevice(selectedDevice); 
+			updateDevice(client);
+		}}
 	/>
 </div>
