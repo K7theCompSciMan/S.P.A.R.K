@@ -46,7 +46,7 @@ async def handle_ai(text, group, client, client_devices, server_devices):
         device_name = result['device']
         return result['formatted_command'], device_name, group
 
-    response = (send_to_ai(filtered_text, group['aiMessages'], client) if "<Error: " not in filtered_text else filtered_text)
+    response = (send_to_ai(text, group['aiMessages'], client))
     if "<Error: " in response:
         await print_to_console(response)
         return response, "", group
