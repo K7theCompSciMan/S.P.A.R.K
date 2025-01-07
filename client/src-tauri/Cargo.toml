@@ -15,7 +15,7 @@ rust-version = "1.79.0"
 # out-dir = "target/"
 
 [build-dependencies]
-tauri-build = { version = "1.5.3", features = [] }
+tauri-build = { version = "2.0.4", features = [] }
 
 [dependencies]
 tauri-plugin-store = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
