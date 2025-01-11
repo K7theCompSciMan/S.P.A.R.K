@@ -11,21 +11,21 @@ export const load: PageServerLoad = (event) => {
 export const actions: Actions = {
 	default: async (event) => {
 		const formData = Object.fromEntries(await event.request.formData());
-
-		if (!formData.email || !formData.password) {
+		console.log(formData);
+		if (!formData.username || !formData.password) {
 			return fail(400, {
-				error: 'Missing email or password'
+				error: 'Missing username or password'
 			});
 		}
 
-		const { email, password } = formData as { email: string; password: string };
+		const { username, password } = formData as { username: string; password: string };
 
 		const response = await fetch('https://spark-api.fly.dev/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ email, password })
+			body: JSON.stringify({ username, password })
 		});
 		if (response.status !== 200) {
 			return fail(401, {
@@ -35,7 +35,7 @@ export const actions: Actions = {
 		const data = await response.json();
 		const { user, accessToken, refreshToken } = data;
 		
-		event.locals.user = user;
+		event.locals.user = user;   
         event.locals.accessToken = accessToken;
 
 		
