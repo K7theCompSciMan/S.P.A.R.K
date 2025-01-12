@@ -6,8 +6,9 @@ from torch.utils.data import DataLoader
 from transformers import AutoTokenizer
 from fastapi import FastAPI, APIRouter
 import uvicorn
-from llm import LLM, ConversationDataset
-from llm.OpenAIAPI import ChatCompletionRequest, ChatCompletionResponse 
+from LLM import LLM
+from ConversationDataset import ConversationDataset
+from OpenAIAPI import ChatCompletionRequest, ChatCompletionResponse 
 
 
 def train_model(model, train_dataset, device, epochs=3):
