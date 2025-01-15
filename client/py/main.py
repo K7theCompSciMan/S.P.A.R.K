@@ -3,7 +3,7 @@ import pyttsx3 as tts
 from openai import OpenAI
 import  sys, requests, nats, asyncio
 from text_filter import *
-import filterer_model
+import client.py.command_classifier as command_classifier
 import command_formatter
 recognizer = sr.Recognizer()
 
@@ -36,7 +36,7 @@ async def listen():
 
 
 async def handle_ai(text, group, client, client_devices, server_devices):
-    classifier = filterer_model.CommandClassifier()
+    classifier = command_classifier.CommandClassifier()
     classifier.build_model()
     client_devices_updated = [{'name': x['name'], 'commands': [{'name': command['name'], 'aliases': command['aliases']} for command in x['deviceCommands']]} for x in client_devices]
     server_devices_updated = [{'name': x['name'], 'commands': [{'name': command['name'], 'aliases': command['aliases']} for command in x['deviceCommands']]} for x in server_devices]
@@ -128,7 +128,7 @@ async def print_to_console(content: str):
 global nc
 nc = nats.NATS()  
 global classifier
-classifier = filterer_model.CommandClassifier()
+classifier = command_classifier.CommandClassifier()
 formatter = command_formatter.CommandFormatter()
 async def nats_setup(server_device):
     ### IMPORTANT: REMEMBER TO LAUNCH NATS SERVER BEFORE RUNNING THIS ###

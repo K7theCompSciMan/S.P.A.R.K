@@ -5,12 +5,10 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.regularizers import l2
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 import pandas as pd
-import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-import numpy as np
 
 
 class CommandClassifier:
@@ -98,7 +96,7 @@ class CommandClassifier:
             monitor='val_accuracy',
             save_best_only=True
         )
-
+        
         history = self.model.fit(
             X_train, y_train,
             validation_data=(X_val, y_val),
