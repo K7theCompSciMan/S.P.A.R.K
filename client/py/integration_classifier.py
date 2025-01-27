@@ -45,13 +45,13 @@ class IntegrationClassifier:
             },
             'management': {
                 'actions': ['create', 'update', 'delete', 'assign', 'schedule', 'track', 'monitor', 'complete', 'start', 'finish'],
-                'objects': ['task', 'project', 'milestone', 'deadline', 'meeting', 'event', 'reminder', 'notification', 'alert'],
+                'objects': {'task': 'management', 'project': 'management', 'milestone': 'management', 'deadline': 'management', 'meeting': 'management', 'event': 'management', 'reminder': 'management', 'notification': 'management', 'alert': ''},
                 'attributes': ['priority', 'status', 'progress', 'due date', 'assigned to', 'category', 'label'],
                 'platforms': ['asana', 'trello', 'jira', 'monday', 'basecamp', 'clickup', 'notion']
             },
             'communication': {
                 'actions': ['send', 'receive', 'reply', 'forward', 'compose', 'call', 'message', 'chat', 'share', 'text', 'email', 'call'],
-                'objects': ['email', 'message', 'call', 'voice', 'video', 'text', 'document', 'file', 'contact'],
+                'objects': {'email': 'communication', 'sms': 'communication', 'call': 'communication', 'chat': 'communication', 'message': 'communication', 'email': 'communication', 'text': 'communication', 'call': 'communication'},
                 'platforms': ['slack', 'teams', 'zoom', 'discord', 'whatsapp', 'telegram', 'gmail', 'sms'],
                 'modifiers': ['urgent', 'private', 'group', 'direct', 'team', 'channel']
             }
