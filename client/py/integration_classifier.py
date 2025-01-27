@@ -1,40 +1,40 @@
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Embedding, Conv1D, MaxPooling1D, Dense, Dropout, GlobalMaxPooling1D, LSTM, Bidirectional, BatchNormalization
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras.regularizers import l2
-from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
-from tensorflow.keras.optimizers import Adam
-import pandas as pd
-import numpy as np
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from sklearn.utils.class_weight import compute_class_weight
-import json
-import random
-import nltk
-from nltk.stem import WordNetLemmatizer
-from collections import Counter
+# from tensorflow.keras.models import Sequential
+# from tensorflow.keras.layers import Embedding, Conv1D, MaxPooling1D, Dense, Dropout, GlobalMaxPooling1D, LSTM, Bidirectional, BatchNormalization
+# from tensorflow.keras.preprocessing.text import Tokenizer
+# from tensorflow.keras.preprocessing.sequence import pad_sequences
+# from tensorflow.keras.regularizers import l2
+# from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
+# from tensorflow.keras.optimizers import Adam
+# import pandas as pd
+# import numpy as np
+# from nltk.corpus import stopwords
+# from nltk.tokenize import word_tokenize
+# import matplotlib.pyplot as plt
+# from sklearn.model_selection import train_test_split
+# from sklearn.utils.class_weight import compute_class_weight
+# import json
+# import random
+# import nltk
+# from nltk.stem import WordNetLemmatizer
+# from collections import Counter
 from difflib import get_close_matches
 
 class IntegrationClassifier:
     def __init__(self, max_words=10000, max_length=30, embedding_dim=200):
-        self.max_words = max_words
-        self.max_length = max_length
-        self.embedding_dim = embedding_dim
-        self.tokenizer = Tokenizer(num_words=max_words, oov_token='<OOV>')
-        self.model = None
+        # self.max_words = max_words
+        # self.max_length = max_length
+        # self.embedding_dim = embedding_dim
+        # self.tokenizer = Tokenizer(num_words=max_words, oov_token='<OOV>')
+        # self.model = None
         
-        try:
-            nltk.download('punkt', quiet=True)
-            nltk.download('wordnet', quiet=True)
-            nltk.download('omw-1.4', quiet=True)
-        except:
-            pass
+        # try:
+        #     nltk.download('punkt', quiet=True)
+        #     nltk.download('wordnet', quiet=True)
+        #     nltk.download('omw-1.4', quiet=True)
+        # except:
+        #     pass
         
-        self.lemmatizer = WordNetLemmatizer()
+        # self.lemmatizer = WordNetLemmatizer()
         
         self.integration_indicators = {
             'media': {
@@ -52,7 +52,7 @@ class IntegrationClassifier:
             'communication': {
                 'actions': ['send', 'receive', 'reply', 'forward', 'compose', 'call', 'message', 'chat', 'share', 'text', 'email', 'call'],
                 'objects': {'email': 'communication', 'sms': 'communication', 'call': 'communication', 'chat': 'communication', 'message': 'communication', 'email': 'communication', 'text': 'communication', 'call': 'communication'},
-                'platforms': ['slack', 'teams', 'zoom', 'discord', 'whatsapp', 'telegram', 'gmail', 'sms'],
+                'platforms': ['slack', 'teams', 'zoom', 'discord', 'whatsapp', 'telegram', 'gmail', 'sms', 'signal'],
                 'modifiers': ['urgent', 'private', 'group', 'direct', 'team', 'channel']
             }
         }
@@ -279,7 +279,6 @@ class IntegrationClassifier:
         platform = None
         for category in self.integration_indicators:
             for word in text.split(' '):
-                print(self.integration_indicators[category]['actions'])
                 action_matches = get_close_matches(f" {word} ", self.integration_indicators[category]['actions'], n=1, cutoff=0.6)
                 if action_matches:
                     action = action_matches[0]
