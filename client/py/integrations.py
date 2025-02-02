@@ -11,40 +11,61 @@ class Platform:
 class MediaPlatform (Platform) :
     def __init__(self):
         super().__init__('media')
-    def play(self):
+    async def initialize_manager(self):
+        self.manager = await SessionManager.request_async()
+    async def play(self):
         # play music
+        for session in self.manager.get_sessions():
+            await session.try_toggle_play_pause_async()
         pass
-    def pause(self):
+    async def pause(self):
         # pause music
+        for session in self.manager.get_sessions():
+            await session.try_toggle_play_pause_async()
         pass
-    def stop(self):
+    async def stop(self):
         # stop music
+        for session in self.manager.get_sessions():
+            await session.try_stop_async()
         pass
-    def skip(self):
+    async def skip(self):
         # skip music
+        for session in self.manager.get_sessions():
+            await session.try_skip_next_async()
         pass
-    def shuffle(self):
+    async def shuffle(self):
         # shuffle music
+        for session in self.manager.get_sessions():
+            await session.try_change_shuffle_active_async()
         pass
-    def repeat(self):
+    async def repeat(self):
         # repeat music
+        for session in self.manager.get_sessions():
+            await session.try_change_auto_repeat_mode_async()
         pass
-    def loop(self):
+    async def loop(self):
         # loop music
+        #not implemented by default
         pass
-    def resume(self):
+    async def resume(self):
         # resume music
+        for session in self.manager.get_sessions():
+            await session.try_play_async()
         pass
-    def rewind(self):
+    async def rewind(self):
         # rewind music
+        for session in self.manager.get_sessions():
+            await session.try_rewind_async()
         pass
-    def forward(self):
+    async def forward(self):
         # forward music
+        for session in self.manager.get_sessions():
+            await session.try_fast_forward_async()
         pass
 
 class WindowsMediaPlatform (MediaPlatform):
     def __init__(self):
-        super().__init__('media')
+        super().__init__()
     def play(self):
         # play music
         pass
@@ -82,33 +103,33 @@ class Integration:
         self.platform = platform
         
 class MediaIntegration (Integration):
-    def __init__(self, integration_information, platform: Platform):
+    async def __init__(self, integration_information, platform: Platform):
         super().__init__('media', integration_information, platform)
         self.actions = ['play', 'pause', 'stop', 'skip', 'shuffle', 'repeat', 'loop', 'resume', 'rewind', 'forward']
-    def get_actions(self):
+    async def get_actions(self):
         return self.actions
-    def play(self):
+    async def play(self):
         # get devices in group
         # find device with music activated
         # play music
         self.platform.play()
-    def pause(self):
+    async def pause(self):
         self.platform.pause()
-    def stop(self):
+    async def stop(self):
         self.platform.stop()
-    def skip(self):
+    async def skip(self):
         self.platform.skip()
-    def shuffle(self):
+    async def shuffle(self):
         self.platform.shuffle()
-    def repeat(self):
+    async def repeat(self):
         self.platform.repeat()
-    def loop(self):
+    async def loop(self):
         self.platform.loop()
-    def resume(self):
+    async def resume(self):
         self.platform.resume()
-    def rewind(self):
+    async def rewind(self):
         self.platform.rewind()
-    def forward(self):
+    async def forward(self):
         self.platform.forward()
 
 # ----------------------Individual Platforms Integrated -------------------
@@ -184,26 +205,12 @@ class Youtube (MediaPlatform):
 class IntegrationManager:
     def __init__(self, integrations: list[Integration]):
         self.integrations = integrations
-        
 
-
-async def update_sessions(manager: SessionManager) -> None:
-    for session in manager.get_sessions():
-        print("media session:", session.source_app_user_model_id)
-        session_info = session.get_playback_info().playback_status
-        if session_info == PlaybackStatus.PLAYING:
-            print("media session is playing")
-            await session.try_pause_async()
-        elif session_info == PlaybackStatus.PAUSED:
-            print("media session is paused")
-            await session.try_play_async()
 
 async def main():
-    async with contextlib.AsyncExitStack() as stack:
-        loop = asyncio.get_running_loop()
-
-        manager = await SessionManager.request_async()
-        await update_sessions(manager)
+    mediaPlatform = MediaPlatform()
+    await mediaPlatform.initialize_manager()
+    await mediaPlatform.skip()
 
 
 if __name__ == "__main__":
