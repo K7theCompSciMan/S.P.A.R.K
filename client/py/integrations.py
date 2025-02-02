@@ -1,10 +1,7 @@
 from winsdk.windows.media.control import (
     GlobalSystemMediaTransportControlsSessionManager as SessionManager,
-    GlobalSystemMediaTransportControlsSessionPlaybackStatus as PlaybackStatus,
-    SessionsChangedEventArgs,
 )
 import asyncio
-import contextlib
 class Platform:
     def __init__(self, platform_name):
         self.platform_name = platform_name
