@@ -100,7 +100,7 @@ class Integration:
         self.platform = platform
         
 class MediaIntegration (Integration):
-    async def __init__(self, integration_information, platform: Platform):
+    async def __init__(self, integration_information, platform: Platform = MediaPlatform):
         super().__init__('media', integration_information, platform)
         self.actions = ['play', 'pause', 'stop', 'skip', 'shuffle', 'repeat', 'loop', 'resume', 'rewind', 'forward']
     async def get_actions(self):
@@ -134,70 +134,11 @@ class Spotify (MediaPlatform):
     def __init__(self, api_key):
         super().__init__('spotify')
         self.api_key = api_key
-    def play(self):
-        # play music
-        pass
-    def pause(self):
-        # pause music
-        pass
-    def stop(self):
-        # stop music
-        pass
-    def skip(self):
-        # skip music
-        pass
-    def shuffle(self):
-        # shuffle music
-        pass
-    def repeat(self):
-        # repeat music
-        pass
-    def loop(self):
-        # loop music
-        pass
-    def resume(self):
-        # resume music
-        pass
-    def rewind(self):
-        # rewind music
-        pass
-    def forward(self):
-        # forward music
-        pass
-class Youtube (MediaPlatform):
+        
+class YouTube (MediaPlatform):
     def __init__(self, api_key):
-        super().__init__('youtube')
+        super().__init__()
         self.api_key = api_key
-    def play(self):
-        # play video
-        pass
-    def pause(self):
-        # pause video
-        pass
-    def stop(self):
-        # stop video
-        pass
-    def skip(self):
-        # skip video
-        pass
-    def shuffle(self):
-        # shuffle video
-        pass
-    def repeat(self):
-        # repeat video
-        pass
-    def loop(self):
-        # loop video
-        pass
-    def resume(self):
-        # resume video
-        pass
-    def rewind(self):
-        # rewind video
-        pass
-    def forward(self):
-        # forward video
-        pass
 
 class IntegrationManager:
     def __init__(self, integrations: list[Integration]):
@@ -205,9 +146,9 @@ class IntegrationManager:
 
 
 async def main():
-    mediaPlatform = MediaPlatform()
+    mediaPlatform = YouTube('something')
     await mediaPlatform.initialize_manager()
-    await mediaPlatform.skip()
+    await mediaPlatform.play()
 
 
 if __name__ == "__main__":
