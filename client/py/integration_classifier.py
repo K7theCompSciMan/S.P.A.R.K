@@ -1,3 +1,4 @@
+
 from difflib import get_close_matches
 
 class IntegrationClassifier:
@@ -35,34 +36,36 @@ class IntegrationClassifier:
                 if action_matches:
                     action = action_matches[0]
                     print(f"got match for action {action}")
-                    for word in text.split(' '):
-                        modifier_matches = get_close_matches(f" {word} ", self.integration_indicators[category]['modifiers'], n=1, cutoff=0.6)
-                        if modifier_matches:
-                            print(f"got match for modifier {modifier_matches[0]}")
-                            modifier = modifier_matches[0]
-                            break
-                        else:
-                            print(f"no modifier match for {word}")
-                            modifier = None
-                    for word in text.split(' '):
-                        object_matches = get_close_matches(f" {word} ", self.integration_indicators[category]['objects'].keys(), n=1, cutoff=0.6)
-                        object = object_matches[0] if object_matches else None
-                        if object_matches:
-                            print(f"got match for object {object_matches[0]}")
-                            integration_type = self.integration_indicators[category]['objects'][object_matches[0]]
-                            break
-                        else:
-                            integration_type = category
-                    for word in text.split(' '):
-                        platform_matches = get_close_matches(f" {word} ", self.integration_indicators[category]['platforms'], n=1, cutoff=0.6)
-                        if platform_matches:
-                            print(f"got match for platform {platform_matches[0]}")
-                            platform = platform_matches[0]
-                            return action, modifier, object, platform,integration_type
-                        else:
-                            print(f"no platform match for {word}")
-                            platform = None
-        return action, modifier, object, platform,integration_type
+                else:
+                    action = None
+            for word in text.split(' '):
+                modifier_matches = get_close_matches(f" {word} ", self.integration_indicators[category]['modifiers'], n=1, cutoff=0.6)
+                if modifier_matches:
+                    print(f"got match for modifier {modifier_matches[0]}")
+                    modifier = modifier_matches[0]
+                    break
+                else:
+                    print(f"no modifier match for {word}")
+                    modifier = None
+            for word in text.split(' '):
+                object_matches = get_close_matches(f" {word} ", self.integration_indicators[category]['objects'].keys(), n=1, cutoff=0.6)
+                object = object_matches[0] if object_matches else None
+                if object_matches:
+                    print(f"got match for object {object_matches[0]}")
+                    integration_type = self.integration_indicators[category]['objects'][object_matches[0]]
+                    break
+                else:
+                    integration_type = category
+            for word in text.split(' '):
+                platform_matches = get_close_matches(f" {word} ", self.integration_indicators[category]['platforms'], n=1, cutoff=0.6)
+                if platform_matches:
+                    print(f"got match for platform {platform_matches[0]}")
+                    platform = platform_matches[0]
+                    break
+                else:
+                    print(f"no platform match for {word}")
+                    platform = None
+        return {'action': action, 'modifier':modifier,'object': object,'platform':  platform,'integration_type': integration_type}
 
 
 

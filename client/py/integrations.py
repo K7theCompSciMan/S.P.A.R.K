@@ -2,10 +2,14 @@ from winsdk.windows.media.control import (
     GlobalSystemMediaTransportControlsSessionManager as SessionManager,
 )
 import asyncio
+
+class IntegrationInformation (list):
+    
+    pass
 class Platform:
     def __init__(self, platform_name):
         self.platform_name = platform_name
-class MediaPlatform (Platform) :
+class WindowsMediaPlatform (Platform):
     def __init__(self):
         super().__init__('media')
     async def initialize_manager(self):
@@ -60,90 +64,56 @@ class MediaPlatform (Platform) :
             await session.try_fast_forward_async()
         pass
 
-class WindowsMediaPlatform (MediaPlatform):
-    def __init__(self):
-        super().__init__()
-    def play(self):
-        # play music
-        pass
-    def pause(self):
-        # pause music
-        pass
-    def stop(self):
-        # stop music
-        pass
-    def skip(self):
-        # skip music
-        pass
-    def shuffle(self):
-        # shuffle music
-        pass
-    def repeat(self):
-        # repeat music
-        pass
-    def loop(self):
-        # loop music
-        pass
-    def resume(self):
-        # resume music
-        pass
-    def rewind(self):
-        # rewind music
-        pass
-    def forward(self):
-        # forward music
-        pass
-class Integration:
-    def __init__(self, integration_type, integration_information, platform: Platform):
-        self.integration_type = integration_type
-        self.integration_information = integration_information
-        self.platform = platform
-        
-class MediaIntegration (Integration):
-    async def __init__(self, integration_information, platform: Platform = MediaPlatform):
-        super().__init__('media', integration_information, platform)
-        self.actions = ['play', 'pause', 'stop', 'skip', 'shuffle', 'repeat', 'loop', 'resume', 'rewind', 'forward']
-    async def get_actions(self):
-        return self.actions
-    async def play(self):
-        # get devices in group
-        # find device with music activated
-        # play music
-        self.platform.play()
-    async def pause(self):
-        self.platform.pause()
-    async def stop(self):
-        self.platform.stop()
-    async def skip(self):
-        self.platform.skip()
-    async def shuffle(self):
-        self.platform.shuffle()
-    async def repeat(self):
-        self.platform.repeat()
-    async def loop(self):
-        self.platform.loop()
-    async def resume(self):
-        self.platform.resume()
-    async def rewind(self):
-        self.platform.rewind()
-    async def forward(self):
-        self.platform.forward()
 
 # ----------------------Individual Platforms Integrated -------------------
-class Spotify (MediaPlatform):
+class Spotify (WindowsMediaPlatform):
     def __init__(self, api_key):
         super().__init__('spotify')
         self.api_key = api_key
         
-class YouTube (MediaPlatform):
+class YouTube (WindowsMediaPlatform):
     def __init__(self, api_key):
         super().__init__()
         self.api_key = api_key
 
-class IntegrationManager:
-    def __init__(self, integrations: list[Integration]):
-        self.integrations = integrations
 
+async def platform_handler(int_info):
+    pass
+
+async def music_handler(int_info):
+    pass
+
+async def film_handler(int_info):
+    pass
+
+async def media_handler(int_info):
+    if int_info['integration_type'] == 'music':
+        await music_handler(int_info)
+    elif int_info['integration_type'] == 'film':
+        await film_handler(int_info)
+    else:
+        if int_info['platform']:
+            await platform_handler(int_info)
+        else:
+            action = int_info['action']
+            windows_media_platform = WindowsMediaPlatform()
+            function = getattr(windows_media_platform, action)
+            await function()
+async def management_handler(int_info):
+    pass
+
+async def communication_handler(int_info):
+    pass
+
+async def manage_integration(int_info):
+    if int_info['integration_type'] == 'media' or int_info['integration_type'] == 'music' or int_info['integration_type'] == 'film':
+        await media_handler(int_info)
+    elif int_info['integration_type'] == 'management':
+        await management_handler(int_info)
+    elif int_info['integration_type'] == 'communication':
+        await communication_handler()
+    else:
+        return "Error integration type not found"
 
 async def main():
     mediaPlatform = YouTube('something')
