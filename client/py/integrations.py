@@ -76,40 +76,42 @@ class YouTube (WindowsMediaPlatform):
         super().__init__()
         self.api_key = api_key
 
-
-async def platform_handler(int_info):
+async def platform_handler(int_info, user):
+    platform = user['integrations'][int_info['platform']]
+    function = getattr(platform, int_info['action'])
+    await function()
     pass
 
-async def music_handler(int_info):
+async def music_handler(int_info, user):
     pass
 
-async def film_handler(int_info):
+async def film_handler(int_info, user):
     pass
 
-async def media_handler(int_info):
+async def media_handler(int_info, user):
     if int_info['integration_type'] == 'music':
-        await music_handler(int_info)
+        await music_handler(int_info, user)
     elif int_info['integration_type'] == 'film':
-        await film_handler(int_info)
+        await film_handler(int_info, user)
     else:
         if int_info['platform']:
-            await platform_handler(int_info)
+            await platform_handler(int_info, user)
         else:
             action = int_info['action']
             windows_media_platform = WindowsMediaPlatform()
             function = getattr(windows_media_platform, action)
             await function()
-async def management_handler(int_info):
+async def management_handler(int_info, user):
     pass
 
-async def communication_handler(int_info):
+async def communication_handler(int_info, user):
     pass
 
-async def manage_integration(int_info):
+async def manage_integration(int_info, user):
     if int_info['integration_type'] == 'media' or int_info['integration_type'] == 'music' or int_info['integration_type'] == 'film':
-        await media_handler(int_info)
+        await media_handler(int_info, user)
     elif int_info['integration_type'] == 'management':
-        await management_handler(int_info)
+        await management_handler(int_info, user)
     elif int_info['integration_type'] == 'communication':
         await communication_handler()
     else:
