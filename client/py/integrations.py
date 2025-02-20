@@ -83,10 +83,10 @@ async def platform_handler(int_info, user):
     pass
 
 async def music_handler(int_info, user):
-    pass
+    platform_handler(int_info, user)
 
 async def film_handler(int_info, user):
-    pass
+    platform_handler(int_info, user)
 
 async def media_handler(int_info, user):
     if int_info['integration_type'] == 'music':
@@ -102,10 +102,10 @@ async def media_handler(int_info, user):
             function = getattr(windows_media_platform, action)
             await function()
 async def management_handler(int_info, user):
-    pass
+    platform_handler(int_info, user)
 
 async def communication_handler(int_info, user):
-    pass
+    platform_handler(int_info, user)
 
 async def manage_integration(int_info, user):
     if int_info['integration_type'] == 'media' or int_info['integration_type'] == 'music' or int_info['integration_type'] == 'film':
