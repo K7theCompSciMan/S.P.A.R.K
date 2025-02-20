@@ -80,16 +80,18 @@
 </script>
 
 <!-- svelte-ignore css_unused_selector -->
-<div class="bg-background-500 w-[80vw] ml-[5%] rounded-[2rem] shadow-2xl h-screen overflow-auto">
-	<div class="flex flex-col items-center justify-center h-full pt-[3%]">
+<div class="bg-background-500 w-[80vw] ml-[5%] rounded-[2rem] shadow-2xl h-screen overflow-auto no-scrollbar">
+	<div class="flex flex-col items-center justify-center h-full pt-[3%] relative">
 		<h1 class="text-2xl text-slate-200">{device.name} Commands</h1>
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div id="commands" class="w-1/2 h-full pt-[2%]">
-			{#each deviceCommands as command}
-				<CommandCard bind:popup={popup} {command} {updateCommands} {deleteCommand} {runCommand} />
-			{/each}
+			<div class="rounded-2xl no-scrollbar overflow-auto flex flex-col items-center w-full max-h-[90%]">
+				{#each deviceCommands as command}
+					<CommandCard bind:popup={popup} {command} {updateCommands} {deleteCommand} {runCommand} />
+				{/each}
+			</div>
 			<!-- svelte-ignore a11y_click_events_have_key_events -->
 			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<div
@@ -114,19 +116,19 @@
 					<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
 				</svg>
 			</div>
-			<CreateCommandPopup
-				location="absolute left-[55%]"
-				{device}
-				bind:newCommand
-				bind:visible={createCommandPopup}
-				updateCommand={async () => {
-					createCommandPopup = false;
-					commandCreated = true;
-					deviceCommands = [...device.deviceCommands!, newCommand];
-					console.log(deviceCommands);
-					await updateCommands();
-				}}
-			/>
 		</div>
+		<CreateCommandPopup
+			location="absolute left-[50%]"
+			{device}
+			bind:newCommand
+			bind:visible={createCommandPopup}
+			updateCommand={async () => {
+				createCommandPopup = false;
+				commandCreated = true;
+				deviceCommands = [...device.deviceCommands!, newCommand];
+				console.log(deviceCommands);
+				await updateCommands();
+			}}
+		/>
 	</div>
 </div>

@@ -149,7 +149,7 @@
 </script>
 
 <div
-	class="bg-dark-background-600 w-[80vw] ml-[5%] rounded-[2rem] shadow-2xl h-screen overflow-auto relative"
+	class="bg-dark-background-600 w-[80vw] ml-[5%] rounded-[2rem] shadow-2xl h-screen overflow-hidden no-scrollbar relative"
 >
 	<div class="flex flex-col items-center h-full pt-[3%]">
 		<h1 class="text-2xl text-dark-primary">
@@ -211,6 +211,7 @@
 			let client = clients.find((c) => c.id === selectedDevice.id);
 			client = deviceToSpecificDevice(selectedDevice); 
 			updateDevice(client);
+			newCommand = { name: '', command: '', aliases: [''] };
 		}}
 	/>
 </div>

@@ -20,7 +20,107 @@
 				aliases: ['Open Notepad', 'Start Notepad'],
 				command: 'start notepad'
 			},
-			{ name: 'Open Chrome', aliases: ['Start Chrome'], command: 'start chrome' }
+			{ name: 'Open Chrome', aliases: ['Start Chrome'], command: 'start chrome' },
+			{
+				name: "open_browser",
+				aliases: ["browse", "web", "chrome", "firefox", "edge"],
+				command: "start chrome"
+			},
+			{
+				name: "open_file_explorer",
+				aliases: ["files", "explorer", "folders"],
+				command: "explorer.exe"
+			},
+			{
+				name: "open_notepad",
+				aliases: ["notes", "text", "edit"],
+				command: "notepad.exe"
+			},
+			{
+				name: "system_shutdown",
+				aliases: ["shutdown", "poweroff", "turn_off"],
+				command: "shutdown /s /t 0"
+			},
+			{
+				name: "system_restart",
+				aliases: ["restart", "reboot"],
+				command: "shutdown /r /t 0"
+			},
+			{
+				name: "sleep_mode",
+				aliases: ["sleep", "suspend"],
+				command: "rundll32.exe powrprof.dll,SetSuspendState 0,1,0"
+			},
+			{
+				name: "lock_computer",
+				aliases: ["lock", "secure"],
+				command: "rundll32.exe user32.dll,LockWorkStation"
+			},
+			{
+				name: "task_manager",
+				aliases: ["tasks", "processes", "performance"],
+				command: "taskmgr.exe"
+			},
+			{
+				name: "control_panel",
+				aliases: ["settings", "control", "config"],
+				command: "control.exe"
+			},
+			{
+				name: "calculator",
+				aliases: ["calc", "math"],
+				command: "calc.exe"
+			},
+			{
+				name: "system_info",
+				aliases: ["sysinfo", "specs", "about"],
+				command: "msinfo32.exe"
+			},
+			{
+				name: "disk_cleanup",
+				aliases: ["clean", "cleanup", "free_space"],
+				command: "cleanmgr.exe"
+			},
+			{
+				name: "word",
+				aliases: ["msword", "document", "doc"],
+				command: "start winword"
+			},
+			{
+				name: "excel",
+				aliases: ["msexcel", "spreadsheet", "xls"],
+				command: "start excel"
+			},
+			{
+				name: "media_player",
+				aliases: ["player", "video", "music"],
+				command: "wmplayer.exe"
+			},
+			{
+				name: "volume_mixer",
+				aliases: ["volume", "sound", "audio"],
+				command: "sndvol.exe"
+			},
+			{
+				name: "screen_snip",
+				aliases: ["screenshot", "snip", "capture"],
+				command: "SnippingTool.exe"
+			},
+			{
+				name: "check_updates",
+				aliases: ["updates", "windows_update"],
+				command: "wuapp.exe"
+			},
+			{
+				name: "open_terminal",
+				aliases: ["cmd", "command", "prompt"],
+				command: "cmd.exe"
+			},
+			{
+				name: "system_properties",
+				aliases: ["properties", "system", "advanced"],
+				command: "sysdm.cpl"
+			},			
 		]
 	};
 	let selectedPreset: Command = { name: 'Choose Preset', command: '', aliases: [''] };
@@ -34,7 +134,7 @@
 </script>
 
 <div
-	class="bg-dark-background-300 rounded-2xl w-[80%] h-[80%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute items-center text-dark-text {location} {visible
+	class="bg-dark-background-300 rounded-2xl w-[80%] h-[80%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute z-10 items-center text-dark-text {location} {visible
 		? ''
 		: 'hidden'}"
 >
