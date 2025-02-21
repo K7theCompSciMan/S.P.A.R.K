@@ -99,6 +99,12 @@ const tables = [
         notNull: true,
         defaultValue: '{\r\n    "primaryCommunicationMethod": "nats"\r\n}',
       },
+      {
+        name: "integrations",
+        type: "json",
+        notNull: true,
+        defaultValue: "[\r\n    \r\n]",
+      },
     ],
     revLinks: [
       { column: "assignedUser", table: "group" },

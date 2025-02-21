@@ -1,4 +1,5 @@
 import { User } from "../xata";
+import { Integration, Platforms } from "./integrations.model";
 
 export class  PublicUser{
     id: string;
@@ -28,3 +29,11 @@ export const defaultUser: PublicUser = {
     username: "default",
     settings: defaultUserSettings
 }
+
+export const defaultIntegrations: Integration[] = [
+    {
+        type: 'media',
+        sub_type: 'music',
+        connected_platform: Platforms.Default
+    }
+]

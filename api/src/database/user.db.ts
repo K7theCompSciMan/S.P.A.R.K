@@ -2,7 +2,8 @@ import { configDotenv } from "dotenv";
 import { User } from "../xata";
 import { getXataClient } from "../xata";
 import bcrypt from "bcryptjs";
-import { defaultUserSettings } from "src/models/user.model";
+import { defaultIntegrations, defaultUserSettings, PublicUser } from "src/models/user.model";
+import { Integration } from "src/models/integrations.model";
 
 configDotenv();
 const xata = getXataClient();
@@ -18,7 +19,8 @@ export const createUser = async (userData: User): Promise<User | null> => {
 	const user = await xata.db.user.create({
 		username: userData.username,
 		password: hashedPassword,
-		settings: defaultUserSettings
+		settings: defaultUserSettings,
+		integrations: defaultIntegrations,
 	});
 	return user;
 };
@@ -48,3 +50,13 @@ export const getUserByName = async (username: string): Promise<User | null> => {
 	const users = await getUsers();
 	return users.filter((user) => user.username === username)[0];
 };
+//integrations
+export const getIntegrations = async (user: PublicUser): Promise<Integration[]> => {
+	return (await getUserById(user.id)).integrations;
+}
+export const addIntegration = async (user: PublicUser, integration: Integration): Promise<Integration[]> => {
+    const userIntegrations = await getIntegrations(user);
+    userIntegrations.push(integration);
+    await updateUser({ ...user, integrations: userIntegrations });
+    return userIntegrations;
+}
