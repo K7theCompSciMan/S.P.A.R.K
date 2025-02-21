@@ -46,7 +46,8 @@
 			{ name: 'Clients', url: '/clients' },
 			{ name: 'Servers', url: '/servers' },
 			{ name: 'Commands', url: '/commands' },
-			{ name: 'Settings', url: '/settings' }
+			{ name: 'Settings', url: '/settings' },
+			{ name: 'Integrations', url: '/integrations' }
 		];
 	}, 100);
 	type Page = {
