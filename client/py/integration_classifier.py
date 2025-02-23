@@ -13,8 +13,8 @@ class IntegrationClassifier:
             'management': {
                 'actions': ['create', 'update', 'delete', 'assign', 'schedule', 'track', 'monitor', 'complete', 'start', 'finish'],
                 'objects': {'task': 'management', 'project': 'management', 'milestone': 'management', 'deadline': 'management', 'meeting': 'management', 'event': 'management', 'reminder': 'management', 'notification': 'management', 'alert': ''},
-                'attributes': ['priority', 'status', 'progress', 'due date', 'assigned to', 'category', 'label'],
-                'platforms': ['asana', 'trello', 'jira', 'monday', 'basecamp', 'clickup', 'notion']
+                'platforms': ['asana', 'trello', 'jira', 'monday', 'basecamp', 'clickup', 'notion'],
+                'modifiers': ['priority', 'status', 'progress', 'due date', 'assigned to', 'category', 'label'],
             },
             'communication': {
                 'actions': ['send', 'receive', 'reply', 'forward', 'compose', 'call', 'message', 'chat', 'share', 'text', 'email', 'call'],
