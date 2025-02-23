@@ -56,7 +56,17 @@ export const getIntegrations = async (user: PublicUser): Promise<Integration[]> 
 }
 export const addIntegration = async (user: PublicUser, integration: Integration): Promise<Integration[]> => {
     const userIntegrations = await getIntegrations(user);
+	if (userIntegrations.find((i) => i.id == integration.id)) {
+		console.log("Integration already added");
+		return userIntegrations;
+	}
     userIntegrations.push(integration);
+    await updateUser({ ...user, integrations: userIntegrations });
+    return userIntegrations;
+}
+export const removeIntegration = async (user: PublicUser, integration: Integration): Promise<Integration[]> => {
+    const userIntegrations = await getIntegrations(user);
+    userIntegrations.splice(userIntegrations.indexOf(integration), 1);
     await updateUser({ ...user, integrations: userIntegrations });
     return userIntegrations;
 }

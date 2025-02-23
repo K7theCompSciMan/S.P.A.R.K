@@ -32,6 +32,7 @@ export const defaultUser: PublicUser = {
 
 export const defaultIntegrations: Integration[] = [
     {
+        id: 0,
         type: 'media',
         sub_type: 'music',
         connected_platform: Platforms.Default
