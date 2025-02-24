@@ -102,7 +102,7 @@ async def main():
                     device = server_devices[server_device_names.index(device_name)]
                 message_content = f"[RUN COMMAND] {filtered_text.split(f'RUN COMMAND ON DEVICE: {device_name} | ')[1].split(' ||')[0]}"
                 await print_to_console(f"sending message: `{message_content}`")
-                await nc.publish(device['id'], message_content.encode('utf-8'))
+                await local_nc.publish(device['id'], message_content.encode('utf-8'))
                 data = requests.post(
                     "https://spark-api.fly.dev/device/server/sendMessage",
                     json={
@@ -121,20 +121,25 @@ async def main():
                     headers={"Authorization": f"Bearer {access_token}"},
                 )
 async def print_to_console(content: str):
-    await nc.publish("server-output", payload=bytes(content, 'utf-8'))
-    await nc.flush()
+    await local_nc.publish("server-output", payload=bytes(content, 'utf-8'))
+    await local_nc.flush()
     print(content)
 
 global nc
-nc = nats.NATS()  
+local_nc = nats.NATS()
+remote_nc = nats.NATS()
 global classifier
 classifier = command_classifier.CommandClassifier()
 formatter = command_formatter.CommandFormatter()
 async def nats_setup(server_device):
     ### IMPORTANT: REMEMBER TO LAUNCH NATS SERVER BEFORE RUNNING THIS ###
-    await nc.connect()
-    await nc.publish("server-output", b'nats-connect from python')
-    await nc.flush()
+    await local_nc.connect()
+    with open("nats_creds.creds", "r") as f:
+        creds = f.read()
+        await remote_nc._read_creds_user_jwt(creds)
+        await remote_nc.connect("tls://connect.ngs.global")
+    await local_nc.publish("server-output", b'nats-connect from python')
+    await local_nc.flush()
     print("nats connected")
 if __name__ == "__main__":
     asyncio.run(main())
