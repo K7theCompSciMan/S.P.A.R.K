@@ -2,8 +2,7 @@ import speech_recognition as sr
 import pyttsx3 as tts
 from openai import OpenAI
 import  sys, requests, nats, asyncio
-from text_filter import *
-import client.py.command_classifier as command_classifier
+import command_classifier as command_classifier
 import command_formatter
 recognizer = sr.Recognizer()
 
@@ -134,10 +133,10 @@ formatter = command_formatter.CommandFormatter()
 async def nats_setup(server_device):
     ### IMPORTANT: REMEMBER TO LAUNCH NATS SERVER BEFORE RUNNING THIS ###
     await local_nc.connect()
-    with open("nats_creds.creds", "r") as f:
-        creds = f.read()
-        await remote_nc._read_creds_user_jwt(creds)
-        await remote_nc.connect("tls://connect.ngs.global")
+    # with open("nats_creds.creds", "r") as f:
+    #     creds = f.read()
+    #     await remote_nc._read_creds_user_jwt(creds)
+    #     await remote_nc.connect("tls://connect.ngs.global")
     await local_nc.publish("server-output", b'nats-connect from python')
     await local_nc.flush()
     print("nats connected")
