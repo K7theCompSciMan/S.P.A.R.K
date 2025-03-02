@@ -23,7 +23,8 @@ class CommandClassifier:
             'stop ', 'pause ', 'create ', 'delete ', 'show ', 'hide ', 'increase ',
             'decrease ', 'adjust ', 'schedule ', 'remind ', 'add ', 'remove ', 'find ',
             'search ', 'navigate ', 'go ', 'get ', 'fetch ', 'bring ', 'move ', 'change ',
-            'launch ', 'run ', 'execute ', 'start ', 'restart ', 'stop ', 'pause ',
+            'launch ', 'run ', 'execute ', 'start ', 'restart ', 'stop ', 'pause ', 'lock', 
+            'sleep', 'shutdown', 'suspend', 'secure', 'check'
         }
         
     def preprocess_text(self, text):

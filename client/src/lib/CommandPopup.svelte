@@ -22,102 +22,102 @@
 			},
 			{ name: 'Open Chrome', aliases: ['Start Chrome'], command: 'start chrome' },
 			{
-				name: "open_browser",
+				name: "open browser",
 				aliases: ["browse", "web", "chrome", "firefox", "edge"],
 				command: "start chrome"
 			},
 			{
-				name: "open_file_explorer",
+				name: "open file explorer",
 				aliases: ["files", "explorer", "folders"],
 				command: "explorer.exe"
 			},
 			{
-				name: "open_notepad",
+				name: "open notepad",
 				aliases: ["notes", "text", "edit"],
 				command: "notepad.exe"
 			},
 			{
-				name: "system_shutdown",
-				aliases: ["shutdown", "poweroff", "turn_off"],
+				name: "system shutdown",
+				aliases: ["shutdown", "poweroff", "turn off"],
 				command: "shutdown /s /t 0"
 			},
 			{
-				name: "system_restart",
+				name: "system restart",
 				aliases: ["restart", "reboot"],
 				command: "shutdown /r /t 0"
 			},
 			{
-				name: "sleep_mode",
+				name: "sleep mode",
 				aliases: ["sleep", "suspend"],
 				command: "rundll32.exe powrprof.dll,SetSuspendState 0,1,0"
 			},
 			{
-				name: "lock_computer",
+				name: "lock computer",
 				aliases: ["lock", "secure"],
 				command: "rundll32.exe user32.dll,LockWorkStation"
 			},
 			{
-				name: "task_manager",
+				name: "task manager",
 				aliases: ["tasks", "processes", "performance"],
 				command: "taskmgr.exe"
 			},
 			{
-				name: "control_panel",
+				name: "control panel",
 				aliases: ["settings", "control", "config"],
 				command: "control.exe"
 			},
 			{
-				name: "calculator",
+				name: "open calculator",
 				aliases: ["calc", "math"],
 				command: "calc.exe"
 			},
 			{
-				name: "system_info",
+				name: "open system info",
 				aliases: ["sysinfo", "specs", "about"],
 				command: "msinfo32.exe"
 			},
 			{
-				name: "disk_cleanup",
-				aliases: ["clean", "cleanup", "free_space"],
+				name: "open disk cleanup",
+				aliases: ["clean", "cleanup", "free space"],
 				command: "cleanmgr.exe"
 			},
 			{
-				name: "word",
+				name: "open word",
 				aliases: ["msword", "document", "doc"],
 				command: "start winword"
 			},
 			{
-				name: "excel",
+				name: "open excel",
 				aliases: ["msexcel", "spreadsheet", "xls"],
 				command: "start excel"
 			},
 			{
-				name: "media_player",
+				name: "open media player",
 				aliases: ["player", "video", "music"],
 				command: "wmplayer.exe"
 			},
 			{
-				name: "volume_mixer",
+				name: "open volume mixer",
 				aliases: ["volume", "sound", "audio"],
 				command: "sndvol.exe"
 			},
 			{
-				name: "screen_snip",
+				name: "open screen snip",
 				aliases: ["screenshot", "snip", "capture"],
 				command: "SnippingTool.exe"
 			},
 			{
-				name: "check_updates",
-				aliases: ["updates", "windows_update"],
+				name: "check updates",
+				aliases: ["updates", "windows update"],
 				command: "wuapp.exe"
 			},
 			{
-				name: "open_terminal",
+				name: "open terminal",
 				aliases: ["cmd", "command", "prompt"],
 				command: "cmd.exe"
 			},
 			{
-				name: "system_properties",
+				name: "open system properties",
 				aliases: ["properties", "system", "advanced"],
 				command: "sysdm.cpl"
 			},			

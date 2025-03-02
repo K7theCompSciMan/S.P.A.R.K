@@ -93,14 +93,19 @@ class CommandFormatter:
         command_patterns = [
             r"(launch|open|start|run|execute)\s+(.+?)\s+on\s+(.+)",
             r"on\s+(.+?)\s+(launch|open|start|run|execute)\s+(.+)",
+            r"(lock|secure|shutdown|suspend|restart|stop|pause|sleep|check)\s+(.+)",
         ]
 
         for pattern in command_patterns:
             match = re.search(pattern, nl_text, re.IGNORECASE)
             if match:
+                print(match.groups())
                 if len(match.groups()) == 3:
                     verb, target, device = match.groups()
                     return device.strip(), f"{verb} {target}".strip()
+                if len(match.groups()) == 2:
+                    verb, device = match.groups()
+                    return device.strip(), f"{verb}".strip()
 
         return None, None
 
@@ -184,7 +189,7 @@ class CommandFormatter:
 
 
 if __name__ == "__main__":
-    test_input = """launch editor on my laptop || [{"name": "My PC", aliases: ['my laptop'], "commands": [{"name": "Launch Notepad", "aliases": ["editor", "notepad", "text editor"]},{"name": "Open Chrome", "aliases": ["browser", "chrome", "web"]}]}] """
+    test_input = """lock my pc || [{"name": "My PC", aliases: ['my laptop'], "commands": [{"name": "Launch Notepad", "aliases": ["editor", "notepad", "text editor"]},{"name": "Open Chrome", "aliases": ["browser", "chrome", "web"]}]}] """
 
     formatter = CommandFormatter()
     result = formatter.parse_command(test_input, device_data={"clients":[{"name": "My PC", 'aliases': ['laptop'] , "commands": [{"name": "Launch Notepad", "aliases": ["editor", "notepad", "text editor"]},{"name": "Open Chrome", "aliases": ["browser", "chrome", "web"]}]}], 'servers': []})

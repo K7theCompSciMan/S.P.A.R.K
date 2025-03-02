@@ -76,39 +76,6 @@ pub fn handle_server_device_updates() {
     });
 }
 
-async fn run_nats_backend(subject: &str, device: Device, path: String) -> Result<(), async_nats::Error> {
-    // Connect to the NATS server
-    let client = async_nats::connect("0.0.0.0").await?;
-
-    let new_subject = format!("{}", subject);
-    // Subscribe to the "messages" subject
-    let mut subscriber = client.subscribe(new_subject.clone()).await.unwrap();
-
-    // Publish messages to the "messages" new_subject.clone()
-    for _ in 0..10 {
-        client.publish(new_subject.clone(), "data".into()).await?;
-    }
-
-    // Receive and process messages
-    while let Some(message) = subscriber.next().await {
-        let message_content: &str = std::str::from_utf8(&message.payload).unwrap();
-        println!("Received message {:?}", message_content);
-        if message_content.contains("[RUN COMMAND]") {
-            for command in device.deviceCommands.clone() {
-                if format!("[RUN COMMAND] {}", command.name) == message_content {
-                    run_command(&command.command)
-                }
-            }
-        }
-        if message_content.contains("Uptade Device: ") {
-            let updated_device: Device = serde_json::from_str(message_content.replace("Uptade Device: ", "").as_str()).unwrap();
-            store::set(path.clone(), "device".to_string(), updated_device.to_json_value());
-
-        }
-    }
-    Ok(())
-}
-
 pub fn run_localhost_backend(path: String) -> Result<(), Error> {
     fn handle_connection(mut stream: TcpStream, mut messages: Vec<String>) {
         let mut buffer = [0; 1024];
@@ -140,15 +107,44 @@ pub fn run_localhost_backend(path: String) -> Result<(), Error> {
     } 
     let messages = vec!["test".to_string()];
     let listener = TcpListener::bind("127.0.0.1:4173").unwrap();
-
+    
     for stream in listener.incoming() {
         let stream = stream.unwrap();
-
+        
         handle_connection(stream, messages.clone());
     }
     return Ok(());
 }
 
+async fn run_nats_backend(device: Device, path: String, device_type: String) -> Result<(), async_nats::Error> {
+    // Connect to the NATS server
+    let creds_path = "bin/nats/user.creds";
+    let connection_options = async_nats::ConnectOptions::new().credentials_file(creds_path).await?.name(format!("SPARK-client: {}", device.id)); 
+    let client = async_nats::connect_with_options("connect.ngs.global", connection_options).await?;
+    let subject = format!("{groupId}/{deviceId}", groupId = device.assignedGroup.id, deviceId = device.id);
+    // Subscribe to the "messages" subject
+    let mut subscriber = client.subscribe(subject.clone()).await.unwrap();
+    println!("Subscribed to nats-subject: {subject}");
+
+    // Receive and process messages
+    while let Some(message) = subscriber.next().await {
+        let message_content: &str = std::str::from_utf8(&message.payload).unwrap();
+        println!("Received message {:?}", message_content);
+        if message_content.contains("[RUN COMMAND]") {
+            for command in device.deviceCommands.clone() {
+                if format!("[RUN COMMAND] {}", command.name) == message_content {
+                    run_command(&command.command)
+                }
+            }
+        }
+        if message_content.contains("Update Device") {
+            let request_url = format!("https://spark-api.fly.dev/device/{device_type}/{device_id}/", device_type = device_type, device_id = device.id);
+            let updated_device: Device = reqwest::get(&request_url).await?.json().await?;
+            let _ =store::set(path.clone(), "device".to_string(), updated_device.to_json_value());
+        }
+    }
+    Ok(())
+}
 
 pub fn handle_device_updates_api_call() -> Result<(), Error> {
     let path = "stores/store.json".to_string();
@@ -158,10 +154,10 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
     if device_type.clone() == "server" {
         handle_server_device_updates();
     }
-    let mut primary_communication_method = serde_json::from_value::<User>(store::get(path.clone(), "user".to_string())).unwrap_or(default_user()).settings.primaryCommunicationMethod ;
+    let primary_communication_method = serde_json::from_value::<User>(store::get(path.clone(), "user".to_string())).unwrap_or(default_user()).settings.primaryCommunicationMethod ;
     if primary_communication_method == "nats" {
         tauri::async_runtime::spawn(async move {
-            let _ = run_nats_backend(&device.id.clone().to_string(), device.clone(), path.clone()).await;
+            let _ = run_nats_backend( device.clone(), path.clone(), device_type.clone()).await;
         });
         return Ok(());
     }
@@ -178,7 +174,7 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
                 let past_messages = device.messages.clone();
                 let request_url = format!("https://spark-api.fly.dev/device/{device_type}/{device_id}/", device_type = device_type, device_id = device.id);
                 let updated_device: Device = reqwest::blocking::get(&request_url)?.json()?;
-                // println!("Getting Updated Device: {:?}", updated_device);
+                println!("Getting Updated Device from API");
                 // println!("_____________________________________________");
                 // println!("past Device Messages {:?}", device.messages );
                 // println!("updated Device Messages {:?}", updated_device.messages );
@@ -206,7 +202,7 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
             }
             // println!();
             thread::sleep(std::time::Duration::from_secs(10));
-            // println!("Getting updated device from store");
+            println!("Getting updated device from store");
             device = serde_json::from_value::<Device>(store::get(path.clone(), "device".to_string())).unwrap();
             // println!("Device from store: {:?}", device);
             device_type = serde_json::from_value::<String>(store::get(path.clone(), "deviceType".to_string())).unwrap_or("none".to_string());
