@@ -6,14 +6,20 @@ fn default_store() -> serde_json::Value {
             "id": "",
             "username": "",
             "settings": {
-                "primaryCommunicationMethod": "nats"
+                "primaryCommunicationMethod": "api"
             }
         },
         "device": {
             "id": "",
             "name": "",
             "messages": [],
-            "deviceCommands": []
+            "deviceCommands": [],
+            "assignedGroup": {
+                "id": ""
+            },
+            "assignedUser": {
+                "id": ""
+            }
         },
         "deviceType": "",
         "backendNATS": false,

@@ -1,4 +1,4 @@
-use std::{ops::DerefMut, sync::{Arc, Mutex}, thread::{self, current, panicking}};
+use std::{ops::DerefMut, sync::{Arc, Mutex}, thread::{self, current, panicking}, time::Duration};
 use futures_core::stream::Stream;
 use futures_util::StreamExt;
 use reqwest::{self, Error};
@@ -35,7 +35,7 @@ fn default_device() -> Device {
 
 }
 fn default_user() -> User {
-    User { id: "default".to_string(), username: "default".to_string(), settings: xata_structs::UserSettings { primaryCommunicationMethod: "nats".to_string() } }
+    User { id: "default".to_string(), username: "default".to_string(), settings: xata_structs::UserSettings { primaryCommunicationMethod: "api".to_string() } }
 }
 
 pub fn handle_server_device_updates() {
@@ -197,13 +197,17 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
                 }
             }
             else { 
-                // println!("____________________________");
-                // println!("No device or device type set");
+                println!("____________________________");
+                println!("No device or device type set");
             }
-            // println!();
+            println!("about to wait");
+            // let set_time = std::time::SystemTime::now();
+            // while std::time::SystemTime::now().duration_since(set_time).unwrap().as_secs() < 10 {
+            //     println!("waiting");
+            // }
             thread::sleep(std::time::Duration::from_secs(10));
             println!("Getting updated device from store");
-            device = serde_json::from_value::<Device>(store::get(path.clone(), "device".to_string())).unwrap();
+            device = serde_json::from_value::<Device>(store::get(path.clone(), "device".to_string())).unwrap_or(default_device());
             // println!("Device from store: {:?}", device);
             device_type = serde_json::from_value::<String>(store::get(path.clone(), "deviceType".to_string())).unwrap_or("none".to_string());
             // println!("Device Type from store: {:?}", device_type);

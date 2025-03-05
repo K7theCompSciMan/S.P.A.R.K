@@ -15,9 +15,9 @@ mod store;
 fn main() {
   tauri::Builder::default()
     .plugin(tauri_plugin_store::Builder::default().build())
-    .invoke_handler(tauri::generate_handler![app::start_app, app::run_command, store::get_store, store::set_store])
-    .system_tray(tray::init_tray())
-    .on_system_tray_event(tray::system_tray_event_handler)
+    .invoke_handler(tauri::generate_handler![app::run_command, store::get_store, store::set_store])
+    // .system_tray(tray::init_tray())
+    // .on_system_tray_event(tray::system_tray_event_handler)
     .on_window_event(|event| match event.event() {
       tauri::WindowEvent::CloseRequested { api, .. } => {
         event.window().hide().unwrap();
@@ -35,10 +35,12 @@ fn main() {
       //   Ok(())
       // });
       // println!("Store: {:?}", back_store);
-      
+      println!("initialized");
       let _ = thread::Builder::new().name("handle_device_updates_api_call".to_string()).spawn(move || {
+        println!("created new thread");
         let _ = handle_device_updates_api_call().expect("Error handling device updates");
       });
+      println!("finished setup");
       Ok(())
     })
     .build(tauri::generate_context!())

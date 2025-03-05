@@ -27,7 +27,6 @@
 				"all": false,
 				"copyFile": false,
 				"createDir": false,
-				"exists": false,
 				"readDir": false,
 				"readFile": false,
 				"removeDir": false,
@@ -42,8 +41,7 @@
 		},
 		"systemTray": {
 			"iconPath": "icons/icon.ico",
-			"iconAsTemplate": true,
-			"menuOnLeftClick": false
+			"iconAsTemplate": true
 		},
 		"bundle": {
 			"active": true,

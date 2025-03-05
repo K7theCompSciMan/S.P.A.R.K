@@ -3,14 +3,14 @@
 	import type { Device, PublicUser } from "$lib";
 	import { getStore } from "$lib/tauri";
 	import { onMount } from "svelte";
-    let user = {} as PublicUser;
-    let device = {} as Device;
+    let user = null;
+    let device = null;
     onMount(async () => {
-        user = await getStore("user") as PublicUser;
-        device = await getStore("device") as Device;
+        user = await getStore("user") as any ;
+        device = await getStore("device") as any ;
         if(!user && device.id) {
             goto("/login");
-        } else if (!device.id) {
+        } else if (!user && !device.id) {
             goto("/setup");
         } else {
             goto("/dashboard");
