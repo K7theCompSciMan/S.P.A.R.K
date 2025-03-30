@@ -1,22 +1,116 @@
 <script lang="ts">
-	import type { Command, Device } from '$lib';
+	import { deviceToSpecificDevice, type Command, type Device } from '$lib';
+	import type { Server } from '@sveltejs/kit';
 	import CommandCard from './CommandCard.svelte';
 	import CommandPopup from './CommandPopup.svelte';
 	import Radio from './Radio.svelte';
+	import { setStore } from './tauri';
+	import type { ClientDevice, ServerDevice } from './xata';
 
 	export let device: Device = {};
+	export let thisDevice: Device = {};
 	export let visible: boolean = false;
 
-	export let updateDevice: (device: Device) => void = () => {};
-	export let deleteCommand: (command: Command) => Promise<void> = async () => {};
+	let updateDevice: () => void = async() => {
+
+		let new_device = deviceToSpecificDevice(device);
+		// console.log(client);
+		// console.log(device);
+		if (device.type === 'client') {
+			// console.log('client');
+			let res = await fetch(`https://spark-api.fly.dev/device/client/`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					authorization: `Bearer ${accessToken}`
+				},
+				body: JSON.stringify({ ...new_device as ClientDevice, id: device.id } as ClientDevice)
+			});
+			if (res.ok) {
+				// console.log('Client updated');
+				if (device.id === thisDevice.id) {
+					await setStore('device', new_device);
+					await setStore('deviceType', 'client');
+				}
+			} else {
+				console.error(await res.text());
+			}
+		} else {
+			// console.log('server');
+			let res = await fetch(`https://spark-api.fly.dev/device/server/`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					authorization: `Bearer ${accessToken}`
+				},
+				body: JSON.stringify({ ...new_device as ServerDevice, id: device.id } as ServerDevice)
+			});
+			if (res.ok) {
+				// console.log('Device updated');
+				if (device.id === thisDevice.id) {
+					await setStore('device', new_device);
+					await setStore('deviceType', 'server');
+				}
+			} else {
+				console.error(await res.text());
+			}
+		}
+	};
+	let deleteCommand: (command: Command) => Promise<void> = async (command: Command) => {
+		device.deviceCommands = device.deviceCommands!.filter(
+			(c: Command) => c !== command
+		);
+		await updateDevice();
+	}
+;
 	export let runCommand: (command: Command) => Promise<void> = async () => {};
-	export let getDevice: (id: string) => Promise<any> = async () => {};
-	export let deleteMessage: (id: string) => Promise<void> = async () => {};
-	export let updateCommands: () => Promise<void> = async () => {};
+	let getDevice: (id: string) => Promise<any> = async (id: string) => {
+		let res = await fetch(`https://spark-api.fly.dev/device/client/${id}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				authorization: `Bearer ${accessToken}`
+			}
+		});
+		if (res.ok) {
+			return await res.json();
+		} else {
+			let res = await fetch(`https://spark-api.fly.dev/device/server/${id}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					authorization: `Bearer ${accessToken}`
+				}
+			});
+			if (res.ok) {
+				return await res.json();
+			} else {
+				console.error(await res.text());
+			}
+		}
+	};
+	let deleteMessage: (id: string) => Promise<void> = async (id: string) => {
+		let res = await fetch(`https://spark-api.fly.dev/device/message/${id}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				authorization: `Bearer ${accessToken}`
+			}
+		});
+		if (res.ok) {
+			// console.log('Message deleted');
+		} else {
+			console.error(await res.text());
+		}
+	};
+	// let updateCommands: () => Promise<void> = async () => {};
+
+	export let accessToken: string = '';
 
 	export let createCommandPopup = false;
 	export let newCommand: Command = { name: '', command: '', aliases: [''] };
 	// $: console.log(device.aliases);
+
 </script>
 
 <div
@@ -149,7 +243,7 @@
 				{#each device.deviceCommands! as command}
 					<CommandCard
 						{command}
-						updateCommands={async () => await updateDevice(device)}
+						updateCommands={async () => await updateDevice()}
 						{deleteCommand}
 						{runCommand}
 					/>
@@ -181,7 +275,7 @@
 	<button
 		on:click={() => {
 			visible = false;
-			updateDevice(device);
+			updateDevice();
 		}}
 		class="absolute text-dark-text top-[0.5%] right-[0.5%] hover:text-red-500 transition-all"
 	>
@@ -209,7 +303,7 @@
 		} else {
 			device.deviceCommands = [newCommand];
 		}
-		await updateCommands();
+		await updateDevice();
 	}}
 	on:close={() => {
 		newCommand = { name: '', command: '', aliases: [''] };

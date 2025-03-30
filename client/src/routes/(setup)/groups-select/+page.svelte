@@ -41,7 +41,7 @@
 	async function handleContinue() {
 		if (selectedGroup) {
 			deviceData.set({
-				assignedGroup: selectedGroup.id,
+				assignedGroup: {id: selectedGroup.id},
 				assignedUser: { id: user.id },
 				...$deviceData
 			});
@@ -96,7 +96,7 @@
 	class="text-center h-1/2 top-1/4 relative w-1/2 left-1/4 flex flex-col justify-items-center text-amber-600"
 >
 	<h1 class="text-6xl mt-[4%]">Select a Group</h1>
-	<div class="overflow-scroll w-full h-96 mt-[1%]">
+	<div class="overflow-auto w-full h-96 mt-[1%]">
 		{#each groups as group}
 			<div
 				class="border {selectedGroup === group

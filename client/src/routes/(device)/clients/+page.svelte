@@ -37,7 +37,7 @@
 			}
 		});
 	});
-
+	$: console.log(selectedDevice)
 	let newCommand: Command = { name: '', command: '', aliases: [''] };
 	async function handleSubmit() {
 		updateDevice(selectedDevice);
@@ -201,17 +201,14 @@
 		bind:device={selectedDevice}
 		bind:newCommand
 		bind:visible={settingsPopup}
-		{updateDevice}
-		{deleteCommand}
 		{runCommand}
-		{getDevice}
-		{deleteMessage}
-		updateCommands={handleSubmit}
+		{accessToken}
+		{thisDevice}
 		on:close={() => {
-			let client = clients.find((c) => c.id === selectedDevice.id);
-			client = deviceToSpecificDevice(selectedDevice); 
-			updateDevice(client);
-			newCommand = { name: '', command: '', aliases: [''] };
+			// let client = clients.find((c) => c.id === selectedDevice.id);
+			// client = deviceToSpecificDevice(selectedDevice); 
+			// updateDevice(client);
+			// newCommand = { name: '', command: '', aliases: [''] };
 		}}
 	/>
 </div>

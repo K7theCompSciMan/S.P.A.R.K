@@ -6,7 +6,9 @@
 	import { onMount } from "svelte";
 	import { getStore, setStore } from "$lib/tauri";
 	import type { Device, PublicUser } from "$lib";
+	import type { ClientDevice, ServerDevice } from "$lib/xata";
     let accessToken: string;
+    let devices: Device[];
     let user: PublicUser;
     onMount(async () => {
         user = await getStore("user") as PublicUser;
@@ -18,9 +20,10 @@
         if(device.id  && device.assignedUser){
             goto("/dashboard");
         }
-        if(!device.assignedGroup){
-            goto("/groups");
+        if(!$deviceData.assignedGroup){
+            goto("/groups-select");
         }
+        devices = await getDevicesInGroup();
     })
     let disabled=true;
     let value: string = "";
@@ -33,6 +36,29 @@
 	}
     ]
     let deviceType: string;
+    let selectedDevice: Device | null = null;
+
+    async function getDevicesInGroup() {
+        const res = await fetch(`https://spark-api.fly.dev/devices`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                // authorization: `Bearer ${accessToken}`
+            }
+        }        );
+        let data = await res.json();
+        let devices = data.clientDevices.map((device: ClientDevice) => {
+            return {...device, type: 'client'};
+        });
+
+        devices.push(...data.serverDevices.map((device: ServerDevice) => {
+            return {...device, type: 'server'};
+        }));
+        
+        console.log(devices)
+        devices = devices.filter((device: Device) => device.assignedGroup!.id === $deviceData.assignedGroup!.id);
+        return devices;
+    }
         
     
     async function handleSubmit(){
@@ -96,6 +122,18 @@
         goto("/dashboard");
         return true;
     }
+
+    async function handleConfirmDevice() {
+        if (selectedDevice) {
+            deviceData.set({
+                assignedGroup: $deviceData.assignedGroup,
+                assignedUser: $deviceData.assignedUser,
+                ...selectedDevice
+            });
+            await setStore('device', selectedDevice);
+            goto('/dashboard');
+        }
+    }
 </script>
 
 <svelte:head>
@@ -106,11 +144,43 @@
     <h1 class="text-6xl mt-[4%] text-center ">
         Set up your device 
     </h1>
-    <div class="overflow-none relative  flex flex-col justify-center  mt-[1%]">
-        <div>
+    <div class="overflow-none relative h-1/2 flex flex-row justify-center  mt-[1%]">
+        <div class="flex flex-col w-1/2 h-full justify-center items-center">
             <AnimatedInputLabel name="Device Name" width="w-[40%]" labelbg="bg-[#175094]" bind:value></AnimatedInputLabel>
             <Radio  legend="Select a device type" {options} fontSize={20} bind:userSelected={deviceType} ></Radio>
-            <button type="submit" on:click={async() => await handleSubmit()} class="border bg-transparent w-[75%] relative left-[12.5%] pl-4 pr-4 text-current rounded-md mt-[4%] scale-110 mt[6%]">Log In</button>
+            <button type="submit" on:click={async() => await handleSubmit()} class="border bg-transparent w-[40%]  pl-4 pr-4 text-current rounded-md mt-[4%] scale-110 ">Create Device</button>
+        </div>
+        <div class="overflow-auto w-1/2 h-full mt-[1%]">
+            <p> or select a device from the list below</p>
+            {#each devices as device}
+                <div
+                    class="border {selectedDevice === device
+                        ? 'border-emerald-700 border-2 bg-gray-200 scale-105'
+                        : 'bg-gray-500'}  mt-[2%] h-[12%] w-[75%] relative left-[12.5%] flex align-middle rounded-xl cursor-pointer shadow-xl hover:bg-gray-200 hover:scale-105 transition-all delay-75 duration-150"
+                >
+                    <!-- svelte-ignore a11y_click_events_have_key_events -->
+                    <!-- svelte-ignore a11y_no_static_element_interactions -->
+                    <div
+                        on:click={() => {
+                            if (selectedDevice === device) {
+                                selectedDevice = null;
+                            } else {
+                                selectedDevice = device;
+                            }
+                        }} class="flex flex-row justify-start w-full h-full"
+                    >
+                        <h2
+                            class="text-xl w-[80%] h-fit text-ellipsis overflow-auto text-left ml-[2%]"
+                        >
+                            {device.name}
+                        </h2>
+                        <p class="text-xl text-right ">
+                            {device.type === 'server' ? 'Server' : 'Client'}
+                        </p>
+                    </div>
+                </div>
+            {/each}
+            <button type="submit" on:click={async() => await handleConfirmDevice()} class="border bg-transparent w-[40%]  pl-4 pr-4 text-current rounded-md mt-[4%] scale-110 ">Confirm Device</button>
         </div>
     </div>
     <button on:click={() =>  goto("/device-info")}>

@@ -41,7 +41,7 @@
 	let pages: Page[];
 	setTimeout(() => {
 		pages = [
-			{ name: `This Device (${device.name})`, url: `/${device.id}` },
+			{ name: `This Device (${device.name})`, url: `this-device` },
 			{ name: 'Dashboard', url: '/dashboard' },
 			{ name: 'Clients', url: '/clients' },
 			{ name: 'Servers', url: '/servers' },

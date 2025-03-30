@@ -8,7 +8,7 @@
 	},
 	"package": {
 		"productName": "SPARK",
-		"version": "0.1.3"
+		"version": "0.3.0"
 	},
 	"tauri": {
 		"allowlist": {
@@ -69,7 +69,7 @@
 				"providerShortName": null,
 				"signingIdentity": null
 			},
-			"resources": ["stores/store.json", "bin/nats/user.creds"],
+			"resources": ["stores/store.json", "bin/nats/user.creds", "bin/python/*"],
 			"shortDescription": "",
 			"targets": "all",
 			"windows": {
