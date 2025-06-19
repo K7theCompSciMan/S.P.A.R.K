@@ -60,7 +60,7 @@ class CommandClassifier:
             Dense(128, activation='relu', kernel_regularizer=l2(0.01)),
             Dropout(0.3),
             Dense(1, activation='sigmoid')
-        ])
+        ])  
         
         model.compile(
             optimizer='adam',
