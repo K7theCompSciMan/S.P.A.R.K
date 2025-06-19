@@ -5,25 +5,32 @@ class ActivationFunction:
     class ReLU:
         @staticmethod
         def calculate(inputs):
-            print("performed ReLU")
+            # print("performed ReLU")
             return np.maximum(0, inputs)
 
         @staticmethod
         def backward(inputs, dvalues):
-            print("performed ReLU backward")
-            return np.multiply(dvalues, calculate(inputs))
+            # print("performed ReLU backward")
+            return dvalues * (inputs > 0)
     class Softmax:
         @staticmethod
         def calculate(inputs):
-            print("performed softmax")
+            # print("performed softmax")
             exp_values = np.exp(inputs - np.max(inputs, axis=1, keepdims=True))
             return exp_values / np.sum(exp_values, axis=1, keepdims=True)
         @staticmethod
-        def backward(inputs, dvalues):
-            print("performed softmax backward")
-            pass
+        def backward(outputs, dvalues):
+            # print("performed softmax backward")
+            dinputs = np.empty_like(dvalues)
+            for index, (output, dvalue) in enumerate(zip(outputs, dvalues)):
+                output = output.reshape(-1, 1)
+                matrix = np.diagflat(output) - np.dot(output, output.T)
+                dinputs[index] = np.dot(matrix, dvalue)
+            return dinputs
 class Loss:
     class CrossEntropy:
+        
+        
         @staticmethod
         def calculate(predicted, actual):
             samples = len(predicted)
@@ -36,12 +43,23 @@ class Loss:
             elif(len(actual.shape) == 2):
                 confidences = np.sum(clipped_pred * actual, axis=1)
             
-            losses = -np.log(confidences)
-            return np.mean(losses)
+            return -np.log(confidences)
+            
         @staticmethod
-        def backward(predicted, actual):
-            print("performed CrossEntropy backward")
-            return - np.divide(predicted, actual)
+        def mean(predicted, actual):
+            return np.mean(Loss.CrossEntropy.calculate(predicted, actual))
+        
+        @staticmethod
+        def backward(prediction, actual):
+            # print("performed CrossEntropy backward")
+            samples = len(prediction)
+            labels = len(prediction[0]) if len(actual.shape) == 2 else np.max(actual) + 1
+            if len(actual.shape) == 1:
+                actual = np.eye(labels)[actual]
+            
+            clipped_prediction = np.clip(prediction, 1e-7, 1.0 - 1e-7)
+            dinputs = - actual / clipped_prediction
+            return dinputs / samples
 class Layer:
     def __init__(self, input_size: int, output_size: int, activation_function: ActivationFunction):
         self.input_size = input_size
@@ -62,22 +80,33 @@ class Dense(Layer):
         self.inputs = inputs
     
     def forward(self, inputs):
+        self.set_inputs(inputs)
         self.output = np.dot(inputs, self.weights) + self.biases
-        print("performed forward pass Dense")
+        # print("performed forward pass Dense")
         return self.output
     def forward_with_activation(self, inputs):
-        self.output = self.activation_function.calculate(self.forward(inputs))
-        return self.output
+        self.pre_activation_output = self.forward(inputs)
+        self.activation_output = self.activation_function.calculate(self.forward(inputs))
+        return self.activation_output
+
+    def adjust_parameters(self):
+        self.weights -= 0.01 * self.dweights
+        self.biases -= 0.01 * self.dbiases
+    
     def backward(self, dvalues):
-        self.dweights = np.dot(dvalues, self.inputs.T)
+        # print("dense backward")
+        self.dweights = np.dot(self.inputs.T, dvalues)
         self.dbiases = np.sum(dvalues, axis=0, keepdims=True)
-        return self.dweights, self.dbiases
+        self.dinputs = np.dot(dvalues, self.weights.T)
+        return self.dinputs
     def backward_with_activation(self, dvalues):
-        activation_dvalues = self.activation_function.backward(self.forward(self.inputs), dvalues)
+        # print("dense backward with activation")
+        activation_dvalues = self.activation_function.backward(self.pre_activation_output, dvalues)
+        return self.backward(activation_dvalues)
 
 
 class NeuralNetwork:
-    def __init__(self, layers: list(Layer), loss_function: Loss):
+    def __init__(self, layers: list[Layer], loss_function: Loss):
         self.layers = layers
         self.output = None
         self.loss_function = loss_function
@@ -91,20 +120,49 @@ class NeuralNetwork:
             else:
                 self.output = layer.forward(self.output)
         return self.output
+    
+    def set_targets(self, targets):
+        self.targets = targets
 
     def calculate_loss(self, targets):
-        return self.loss_function.calculate(self.output, targets)
+        self.set_targets(targets)
+        return self.loss_function.mean(self.output, targets)
     
-    def backward(self, targets):
-        dloss = self.loss_function.backward(self.output, targets)
-        for layer in reversed(self.layers):
+    def backward(self):
+        dvalues = self.loss_function.backward(self.output, self.targets)
+        for index, layer in enumerate(reversed(self.layers)):
             if(layer.activation_function is not None):
-                dloss = layer.backward_with_activation(dloss)
-        
+                dvalues = layer.backward_with_activation(dvalues)  
+            
+    def adjust_parameters(self):
+        for layer in self.layers:
+            layer.adjust_parameters()
+
+    def get_accuracy(self):
+        targets = self.targets.copy()
+        predictions = np.argmax(self.output, axis=1)
+        if(len(targets.shape) == 2):
+            targets = np.argmax(self.targets, axis=1)
+        return np.mean(predictions == targets)
+    
 X, y = spiral_data(samples=100, classes=3)
-layer1 = Dense(2, 3, ActivationFunction.ReLU)
-layer2 = Dense(3, 3, ActivationFunction.Softmax)
-layer1.forward_with_activation(X) 
-layer2.forward_with_activation(layer1.output)
-print(layer2.output[:5])
-print(Loss.CrossEntropy.calculate(layer2.output, y))
+
+nn = NeuralNetwork([
+    Dense(2, 3, ActivationFunction.ReLU),
+    Dense(3, 3, ActivationFunction.Softmax)
+], Loss.CrossEntropy)
+nn.set_targets(y)
+nn.forward(X)
+print(nn.get_accuracy())
+
+nn.backward()
+nn.adjust_parameters()
+
+nn.forward(X)
+print(nn.get_accuracy())
+
+for i in range(1000):    
+    nn.forward(X)
+    print(nn.get_accuracy())
+    nn.backward()
+    nn.adjust_parameters()
