@@ -38,7 +38,7 @@ class ActivationFunction:
         
         @staticmethod
         def calculate(inputs, y_true):
-            output =ActivationFunction.CombinedSoftmaxCrossEntropy.softmax(inputs)
+            output = ActivationFunction.CombinedSoftmaxCrossEntropy.softmax(inputs)
             loss = ActivationFunction.CombinedSoftmaxCrossEntropy.loss(output, y_true)
             return output, loss
         
@@ -57,9 +57,11 @@ class ActivationFunction:
         @staticmethod
         def backward(probabilities, y_true):
             samples = len(probabilities)
-            if len(y_true.shape) == 1:
-                y_true = np.eye(probabilities.shape[1])[y_true]
-            return (probabilities - y_true) / samples
+            if len(y_true.shape) == 2:
+                y_true = np.argmax(y_true, axis=1)
+            dinputs = probabilities.copy()
+            dinputs[range(samples), y_true] -= 1
+            return dinputs / samples
 class Loss:
     class Empty:
         pass
