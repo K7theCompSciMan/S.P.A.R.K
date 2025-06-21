@@ -28,7 +28,6 @@ class ActivationFunction:
                 matrix = np.diagflat(output) - np.dot(output, output.T)
                 dinputs[index] = np.dot(matrix, dvalue)
             return dinputs
-        
     class CombinedSoftmaxCrossEntropy:
         @staticmethod
         def softmax(inputs):
@@ -96,54 +95,47 @@ class Loss:
             clipped_prediction = np.clip(prediction, 1e-7, 1.0 - 1e-7)
             dinputs = - actual / clipped_prediction
             return dinputs / samples
-
 class Layer:
-    def __init__(self, input_size: int, output_size: int, activation_function: ActivationFunction):
-        self.input_size = input_size
-        self.output_size = output_size
-        self.activation_function = activation_function
-    def forward(self, inputs):
-        pass
-    def backward(self, ):
-        pass
-class Dense(Layer):
-    def __init__(self, input_size: int, output_size: int, activation_function: ActivationFunction):
-        super().__init__(input_size, output_size, activation_function)
-        self.weights = 0.01 * np.random.randn(input_size, output_size)
-        self.biases = np.zeros((1, output_size))
-    
-    def set_inputs(self, inputs):
-        self.inputs = inputs
-    
-    def forward(self, inputs):
-        self.set_inputs(inputs)
-        self.output = np.dot(inputs, self.weights) + self.biases
-        # print("performed forward pass Dense")
-        return self.output
-    def forward_with_activation(self, inputs):
-        self.pre_activation_output = self.forward(inputs)
-        self.activation_output = self.activation_function.calculate(self.pre_activation_output)
-        return self.activation_output
-    
-    def forward_with_combined_activation(self, inputs, targets):
-        self.pre_activation_output = self.forward(inputs)
-        self.activation_output, self.loss = self.activation_function.calculate(self.pre_activation_output, targets)
-        return self.activation_output, self.loss
-    
-    def backward(self, dvalues):
-        # print("dense backward")
-        self.dweights = np.dot(self.inputs.T, dvalues)
-        self.dbiases = np.sum(dvalues, axis=0, keepdims=True)
-        self.dinputs = np.dot(dvalues, self.weights.T)
-        return self.dinputs
-    def backward_with_activation(self, dvalues):
-        # print("dense backward with activation")
-        activation_dvalues = self.activation_function.backward(self.pre_activation_output, dvalues)
-        return self.backward(activation_dvalues)
+    class Dense:
+        def __init__(self, input_size: int, output_size: int, activation_function: ActivationFunction):
+            self.input_size = input_size
+            self.output_size = output_size
+            self.activation_function = activation_function
+            self.weights = 0.01 * np.random.randn(input_size, output_size)
+            self.biases = np.zeros((1, output_size))
+        
+        def set_inputs(self, inputs):
+            self.inputs = inputs
+        
+        def forward(self, inputs):
+            self.set_inputs(inputs)
+            self.output = np.dot(inputs, self.weights) + self.biases
+            # print("performed forward pass Dense")
+            return self.output
+        def forward_with_activation(self, inputs):
+            self.pre_activation_output = self.forward(inputs)
+            self.activation_output = self.activation_function.calculate(self.pre_activation_output)
+            return self.activation_output
+        
+        def forward_with_combined_activation(self, inputs, targets):
+            self.pre_activation_output = self.forward(inputs)
+            self.activation_output, self.loss = self.activation_function.calculate(self.pre_activation_output, targets)
+            return self.activation_output, self.loss
+        
+        def backward(self, dvalues):
+            # print("dense backward")
+            self.dweights = np.dot(self.inputs.T, dvalues)
+            self.dbiases = np.sum(dvalues, axis=0, keepdims=True)
+            self.dinputs = np.dot(dvalues, self.weights.T)
+            return self.dinputs
+        def backward_with_activation(self, dvalues):
+            # print("dense backward with activation")
+            activation_dvalues = self.activation_function.backward(self.pre_activation_output, dvalues)
+            return self.backward(activation_dvalues)
 
-    def set_params(self, params: (float, float)):
-        self.weights = params['weights']
-        self.biases = params['biases']
+        def set_params(self, params: (float, float)):
+            self.weights = params['weights']
+            self.biases = params['biases']
 class Optimizer:
     class SGD:
         def __init__(self, learning_rate: float=1, rate_decay: float=0, min_rate: float=1e-3, momentum: float=None):
@@ -208,8 +200,6 @@ class Optimizer:
             
             layer.weights -= (self.learning_rate * layer.dweights) / (np.sqrt(layer.weight_cache) + self.epsilon)
             layer.biases  -= (self.learning_rate * layer.dbiases )/ (np.sqrt(layer.bias_cache) + self.epsilon)
-    
-    
     class RMSProp:
         def __init__(self, learning_rate: float=.001, rate_decay: float=0, min_rate: float=0, epsilon: float=1e-7, rho: float=0.9):
             self.learning_rate = learning_rate
@@ -239,7 +229,6 @@ class Optimizer:
             layer.bias_cache = self.rho * layer.bias_cache + (1 - self.rho) * layer.dbiases ** 2
             layer.weights -= self.learning_rate * layer.dweights / (np.sqrt(layer.weight_cache) + self.epsilon)
             layer.biases -= self.learning_rate * layer.dbiases / (np.sqrt(layer.bias_cache) + self.epsilon)
-    
     class Adam:
         def __init__(self, learning_rate: float=.001, rate_decay: float=0, min_rate: float=0, epsilon: float=1e-7, beta1: float=0.9, beta2: float=0.999):
             self.learning_rate = learning_rate
@@ -283,7 +272,6 @@ class Optimizer:
             
             layer.weights -= self.learning_rate * normalized_weight_momentums / (np.sqrt(normalized_weight_cache) + self.epsilon)
             layer.biases -= self.learning_rate * normalized_bias_momentums / (np.sqrt(normalized_bias_cache) + self.epsilon)
-            
 class NeuralNetwork:
     def __init__(self, layers: list[Layer], targets, optimizer: Optimizer, loss_function=Loss.Empty):
         self.layers = layers
@@ -389,14 +377,26 @@ class NeuralNetwork:
     
     def predict(self, inputs):
         pass
+class Tokenizer:
+    class Whitespace:
+        @staticmethod
+        def tokenize(text):
+            text =bytes(text, 'utf-8')
+            return text.split()
+
+
+
     
 X, y = spiral_data(samples=100, classes=3)
+test_x, test_y = spiral_data(samples=100, classes=3)
 
 nn = NeuralNetwork([
-    Dense(2, 64, ActivationFunction.ReLU),
-    Dense(64, 3, ActivationFunction.CombinedSoftmaxCrossEntropy)  
+    Layer.Dense(2, 64, ActivationFunction.ReLU),
+    Layer.Dense(64, 3, ActivationFunction.CombinedSoftmaxCrossEntropy)  
 ], y, Optimizer.Adam(learning_rate = .005, rate_decay=1e-7)) 
 
 # nn.load()
-# nn.validate(X, y)
-nn.train(X, y, 40001)
+# nn.train(X, y, 40001)
+# nn.validate(test_x, test_y)
+
+print(Tokenizer.Whitespace.tokenize("hello, world."))
