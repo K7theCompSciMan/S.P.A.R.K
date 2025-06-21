@@ -378,11 +378,46 @@ class NeuralNetwork:
     def predict(self, inputs):
         pass
 class Tokenizer:
-    class Whitespace:
-        @staticmethod
-        def tokenize(text):
-            text =bytes(text, 'utf-8')
-            return text.split()
+    def __init__(self ):
+        self.vocab_size = 1024
+        self.merges = {}
+        
+    def get_stats(self, tokens):
+        counts = {}
+        for pair in zip(tokens, tokens[1:]):
+            counts[pair] = counts.get(pair, 0) + 1
+        return counts
+        
+    def merge(self, tokens, pair, new_index):
+        new_tokens = []
+        i =0
+        while (i<len(tokens)):
+            if( i<len(tokens)-1 and tokens[i] == pair[0] and tokens[i+1] == pair[1]):
+                new_tokens.append(new_index)
+                i+=2
+            else:
+                new_tokens.append(tokens[i])
+                i+=1
+        return new_tokens
+    
+    def train(self, text, verbose=False):
+        num_merges = self.vocab_size - 256
+        tokens = list(text.encode('utf-8'))
+        
+        for i in range(num_merges):
+            stats = self.get_stats(tokens)
+            top_pair = max(stats, key=stats.get)
+            index = 256+i
+            if verbose:
+                print(f"merging {top_pair} -> {index}")
+            tokens = self.merge(tokens, top_pair, index)
+            self.merges[top_pair] = index
+        return self.merges
+    
+    def encode(self, text):
+        tokens = list(text.encode('utf-8'))
+        
+    
 
 
 
