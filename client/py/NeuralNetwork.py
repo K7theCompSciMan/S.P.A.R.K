@@ -279,7 +279,6 @@ class NeuralNetwork:
         self.loss_function = loss_function
         self.optimizer = optimizer
         self.targets = targets
-        
         #model initialization
         self.model = {'accuracy': 0, 'loss': 99999, 'params': [{'weights': x.weights, 'biases': x.biases} for x in self.layers]}
         
@@ -338,13 +337,13 @@ class NeuralNetwork:
         
         print("loaded model params")
     
-    def load(self, file="client/py/training.json"):
+    def load(self, file="client/py/nn_scratch_data.json"):
         with open(file, 'rb') as f:
             self.model = pickle.load(f)
         print("loaded model")
         self.load_model(self.model)
     
-    def train(self, inputs, targets, epochs: float, output_file="client/py/training.json"):
+    def train(self, inputs, targets, epochs: float, output_file="client/py/nn_scratch_data.json"):
         best_accuracy = self.model['accuracy']
         best_params = self.model['params']
         best_loss = self.model['loss']
@@ -371,67 +370,49 @@ class NeuralNetwork:
                 print("saved model")
     
     def validate(self, inputs, targets):
+        self.set_targets(targets)
         self.forward(inputs)
         
         print(f"validation accuracy: {self.get_accuracy()}, loss: {self.loss}")
-    
+        
     def predict(self, inputs):
-        pass
+        self.forward(inputs)
+        return self.postprocess(self.output)
+    
+    def set_preprocess(self, preprocess):
+        self.preprocess = preprocess
+    
+    def set_postprocess(self, postprocess):
+        self.postprocess = postprocess
 class Tokenizer:
-    def __init__(self ):
-        self.vocab_size = 1024
-        self.merges = {}
-        
-    def get_stats(self, tokens):
-        counts = {}
-        for pair in zip(tokens, tokens[1:]):
-            counts[pair] = counts.get(pair, 0) + 1
-        return counts
-        
-    def merge(self, tokens, pair, new_index):
-        new_tokens = []
-        i =0
-        while (i<len(tokens)):
-            if( i<len(tokens)-1 and tokens[i] == pair[0] and tokens[i+1] == pair[1]):
-                new_tokens.append(new_index)
-                i+=2
-            else:
-                new_tokens.append(tokens[i])
-                i+=1
-        return new_tokens
+    char_to_index = {}
+    index_to_char = {}
+
+    @staticmethod
+    def build_vocab(texts):
+        chars = sorted(set("".join(texts)))
+        Tokenizer.char_to_index = {c: i+1 for i, c in enumerate(chars)} 
+        Tokenizer.index_to_char = {i+1: c for i, c in enumerate(chars)}
+
+    @staticmethod
+    def encode(text: str):
+        return [Tokenizer.char_to_index.get(c, 0) for c in text]
+
+    @staticmethod
+    def decode(indices: list):
+        return ''.join(Tokenizer.index_to_char.get(i, '?') for i in indices)
     
-    def train(self, text, verbose=False):
-        num_merges = self.vocab_size - 256
-        tokens = list(text.encode('utf-8'))
-        
-        for i in range(num_merges):
-            stats = self.get_stats(tokens)
-            top_pair = max(stats, key=stats.get)
-            index = 256+i
-            if verbose:
-                print(f"merging {top_pair} -> {index}")
-            tokens = self.merge(tokens, top_pair, index)
-            self.merges[top_pair] = index
-        return self.merges
-    
-    def encode(self, text):
-        tokens = list(text.encode('utf-8'))
-        
+    @staticmethod
+    def pad_sequence(seq, max_len):
+        return np.array(seq + [0]*(max_len - len(seq)))[:max_len]
     
 
-
-
     
-X, y = spiral_data(samples=100, classes=3)
-test_x, test_y = spiral_data(samples=100, classes=3)
+if __name__ == "__main__":    
+    X, y = spiral_data(samples=100, classes=3)
+    test_x, test_y = spiral_data(samples=100, classes=3)
 
-nn = NeuralNetwork([
-    Layer.Dense(2, 64, ActivationFunction.ReLU),
-    Layer.Dense(64, 3, ActivationFunction.CombinedSoftmaxCrossEntropy)  
-], y, Optimizer.Adam(learning_rate = .005, rate_decay=1e-7)) 
-
-# nn.load()
-# nn.train(X, y, 40001)
-# nn.validate(test_x, test_y)
-
-print(Tokenizer.Whitespace.tokenize("hello, world."))
+    nn = NeuralNetwork([
+        Layer.Dense(2, 64, ActivationFunction.ReLU),
+        Layer.Dense(64, 1, ActivationFunction.CombinedSoftmaxCrossEntropy)  
+    ], y, Optimizer.Adam(learning_rate = .005, rate_decay=1e-7)) 
