@@ -62,6 +62,10 @@ class CommandClassifier:
     
     def train(self, output_file):
         self.nn.train(self.x_train, self.y_train, epochs=1000, output_file=output_file)
+        
+    def validate(self):
+        self.nn.set_targets(self.y_test)
+        self.nn.validate(self.x_test, self.y_test)
 
 
 
@@ -69,6 +73,7 @@ if __name__ == "__main__":
     classifier = CommandClassifier('client/py/nn_scratch_data.json')
     classifier.load_model('client/py/nn_scratch_model.json')
     # classifier.train('client/py/nn_scratch_data.json')
+    classifier.validate()
     while True:
         text = input("Enter text (or 'q' to quit): ")
         if text.lower() == 'q':
