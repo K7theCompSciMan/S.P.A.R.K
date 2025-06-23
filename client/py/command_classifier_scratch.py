@@ -55,10 +55,10 @@ x_test = np.stack(x_test.to_numpy())
 
 
 
-nn.load('client/py/nn_scratch_model.json')
 
 
 if __name__ == "__main__":
+    nn.load('client/py/nn_scratch_model.json')
     # history = nn.train(x_train, y_train, epochs=10000, output_file='client/py/nn_scratch_model.json')
     # nn.validate(x_test, y_test)
     while True:
