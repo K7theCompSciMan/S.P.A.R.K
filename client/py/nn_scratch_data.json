@@ -1,570 +1,6002 @@
 [
-  {"text": "Open Chrome on my laptop", "label": "command"},
-  {"text": "Launch Firefox browser on PC", "label": "command"},
-  {"text": "Start Microsoft Word on my computer", "label": "command"},
-  {"text": "Close all windows on desktop", "label": "command"},
-  {"text": "Shut down the laptop", "label": "command"},
-  {"text": "Restart my PC", "label": "command"},
-  {"text": "Turn off WiFi on phone", "label": "command"},
-  {"text": "Enable Bluetooth on my tablet", "label": "command"},
-  {"text": "Disconnect from network on laptop", "label": "command"},
-  {"text": "Open file explorer on computer", "label": "command"},
-  {"text": "Launch calculator app on phone", "label": "command"},
-  {"text": "Start music player on my device", "label": "command"},
-  {"text": "Open settings on tablet", "label": "command"},
-  {"text": "Minimize this window on PC", "label": "command"},
-  {"text": "Maximize browser on laptop", "label": "command"},
-  {"text": "Lock the screen on my phone", "label": "command"},
-  {"text": "Put laptop to sleep", "label": "command"},
-  {"text": "Turn up volume on computer", "label": "command"},
-  {"text": "Mute speakers on PC", "label": "command"},
-  {"text": "Adjust brightness on my tablet", "label": "command"},
-  {"text": "Open task manager on desktop", "label": "command"},
-  {"text": "End this process on laptop", "label": "command"},
-  {"text": "Install this software on PC", "label": "command"},
-  {"text": "Uninstall program on my computer", "label": "command"},
-  {"text": "Update system on phone", "label": "command"},
-  {"text": "Run system scan on laptop", "label": "command"},
-  {"text": "Clear cache on tablet", "label": "command"},
-  {"text": "Empty recycle bin on PC", "label": "command"},
-  {"text": "Create new folder on desktop", "label": "command"},
-  {"text": "Delete this file on my laptop", "label": "command"},
-  {"text": "Copy to clipboard on computer", "label": "command"},
-  {"text": "Paste here on PC", "label": "command"},
-  {"text": "Save document on my device", "label": "command"},
-  {"text": "Print this page on laptop", "label": "command"},
-  {"text": "Take screenshot on phone", "label": "command"},
-  {"text": "Record screen on tablet", "label": "command"},
-  {"text": "Open camera app on my phone", "label": "command"},
-  {"text": "Launch video call on laptop", "label": "command"},
-  {"text": "Send email on computer", "label": "command"},
-  {"text": "Sync data on my device", "label": "command"},
-  {"text": "Backup files on PC", "label": "command"},
-  {"text": "Format drive on desktop", "label": "command"},
-  {"text": "Eject USB on laptop", "label": "command"},
-  {"text": "Connect printer to PC", "label": "command"},
-  {"text": "Disable notifications on phone", "label": "command"},
-  {"text": "Turn on airplane mode on tablet", "label": "command"},
-  {"text": "Switch to dark mode on my laptop", "label": "command"},
-  {"text": "Change wallpaper on computer", "label": "command"},
-  {"text": "Set timer for 10 minutes on phone", "label": "command"},
-  {"text": "Open terminal on my PC", "label": "command"},
-  {"text": "Run diagnostic on laptop", "label": "command"},
-  {"text": "Clear history on tablet", "label": "command"},
-  {"text": "Please open Notepad on my PC", "label": "command"},
-  {"text": "Could you close this tab on laptop", "label": "command"},
-  {"text": "Turn the volume down on phone", "label": "command"},
-  {"text": "Switch to the next window on computer", "label": "command"},
-  {"text": "Go back to previous page on tablet", "label": "command"},
-  {"text": "Refresh the browser on my laptop", "label": "command"},
-  {"text": "Zoom in on this on PC", "label": "command"},
-  {"text": "Hide this application on desktop", "label": "command"},
-  {"text": "Show desktop on my computer", "label": "command"},
-  {"text": "Open new tab on laptop", "label": "command"},
-  {"text": "Close current document on PC", "label": "command"},
-  {"text": "Undo last action on my device", "label": "command"},
-  {"text": "Redo that change on tablet", "label": "command"},
-  {"text": "Select all text on phone", "label": "command"},
-  {"text": "Find and replace on laptop", "label": "command"},
-  {"text": "Check for updates on computer", "label": "command"},
-  {"text": "Scan for viruses on PC", "label": "command"},
-  {"text": "Defragment hard drive on desktop", "label": "command"},
-  {"text": "Clean temporary files on my laptop", "label": "command"},
-  {"text": "Reset network settings on phone", "label": "command"},
-  {"text": "Calibrate display on tablet", "label": "command"},
-  {"text": "Import contacts on my phone", "label": "command"},
-  {"text": "Export data on computer", "label": "command"},
-  {"text": "Compress this folder on PC", "label": "command"},
-  {"text": "Extract archive on laptop", "label": "command"},
-  {"text": "Mount drive on my desktop", "label": "command"},
-  {"text": "Unmount device on computer", "label": "command"},
-  {"text": "Enable firewall on PC", "label": "command"},
-  {"text": "Disable auto-updates on laptop", "label": "command"},
-  {"text": "Configure proxy on my computer", "label": "command"},
-  {"text": "Open Spotify on my phone", "label": "command"},
-  {"text": "Launch Teams on laptop", "label": "command"},
-  {"text": "Start Photoshop on PC", "label": "command"},
-  {"text": "Close Excel on desktop", "label": "command"},
-  {"text": "Minimize Discord on my laptop", "label": "command"},
-  {"text": "Restart Chrome on computer", "label": "command"},
-  {"text": "Force quit app on phone", "label": "command"},
-  {"text": "Switch user on PC", "label": "command"},
-  {"text": "Log out on my laptop", "label": "command"},
-  {"text": "Sign in to account on tablet", "label": "command"},
-  {"text": "Change password on computer", "label": "command"},
-  {"text": "Update driver on PC", "label": "command"},
-  {"text": "Install update on my phone", "label": "command"},
-  {"text": "Restart service on laptop", "label": "command"},
-  {"text": "Stop process on desktop", "label": "command"},
-  {"text": "Start backup on my computer", "label": "command"},
-  {"text": "Pause download on PC", "label": "command"},
-  {"text": "Resume upload on laptop", "label": "command"},
-  {"text": "Cancel operation on phone", "label": "command"},
-  {"text": "Enable VPN on my tablet", "label": "command"},
-  {"text": "Disable location on phone", "label": "command"},
-  {"text": "Turn on flashlight on my phone", "label": "command"},
-  {"text": "Activate voice recorder on tablet", "label": "command"},
-  {"text": "Open Maps on phone", "label": "command"},
-  {"text": "Launch browser on my laptop", "label": "command"},
-  {"text": "Start game on PC", "label": "command"},
-  {"text": "Close media player on computer", "label": "command"},
-  {"text": "Open downloads folder on laptop", "label": "command"},
-  {"text": "Clear downloads on my phone", "label": "command"},
-  {"text": "Empty trash on desktop", "label": "command"},
-  {"text": "Restore from backup on PC", "label": "command"},
-  {"text": "Sync calendar on my tablet", "label": "command"},
-  {"text": "Update app on phone", "label": "command"},
-  {"text": "Uninstall game on laptop", "label": "command"},
-  {"text": "Install antivirus on computer", "label": "command"},
-  {"text": "Run cleanup on PC", "label": "command"},
-  {"text": "Optimize storage on my phone", "label": "command"},
-  {"text": "Defrag disk on desktop", "label": "command"},
-  {"text": "Check disk on laptop", "label": "command"},
-  {"text": "Format SD card on my tablet", "label": "command"},
-  {"text": "Eject disc on PC", "label": "command"},
-  {"text": "Connect headphones to phone", "label": "command"},
-  {"text": "Pair device with my laptop", "label": "command"},
-  {"text": "Disconnect Bluetooth on tablet", "label": "command"},
-  {"text": "Reset WiFi on computer", "label": "command"},
-  {"text": "Forget network on my phone", "label": "command"},
-  {"text": "Add printer to PC", "label": "command"},
-  {"text": "Remove device from laptop", "label": "command"},
-  {"text": "Configure display on desktop", "label": "command"},
-  {"text": "Adjust resolution on my computer", "label": "command"},
-  {"text": "Change refresh rate on PC", "label": "command"},
-  {"text": "Set screensaver on laptop", "label": "command"},
-  {"text": "Disable screensaver on my desktop", "label": "command"},
-  {"text": "Lock workstation on computer", "label": "command"},
-  {"text": "Unlock screen on phone", "label": "command"},
-  {"text": "Set alarm on my tablet", "label": "command"},
-  {"text": "Cancel alarm on phone", "label": "command"},
-  {"text": "Start stopwatch on my phone", "label": "command"},
-  {"text": "Reset timer on tablet", "label": "command"},
-  {"text": "Open weather app on phone", "label": "command"},
-  {"text": "Launch news app on my tablet", "label": "command"},
-  {"text": "Start podcast on phone", "label": "command"},
-  {"text": "Play music on laptop", "label": "command"},
-  {"text": "Pause video on my computer", "label": "command"},
-  {"text": "Skip track on PC", "label": "command"},
-  {"text": "Repeat song on phone", "label": "command"},
-  {"text": "Shuffle playlist on my tablet", "label": "command"},
-  {"text": "Adjust equalizer on laptop", "label": "command"},
-  {"text": "Change audio output on computer", "label": "command"},
-  {"text": "Switch to headphones on PC", "label": "command"},
-  {"text": "Enable microphone on my laptop", "label": "command"},
-  {"text": "Mute mic on desktop", "label": "command"},
-  {"text": "Test speakers on computer", "label": "command"},
-  {"text": "Calibrate audio on PC", "label": "command"},
-  {"text": "Record voice memo on phone", "label": "command"},
-  {"text": "Start video recording on my tablet", "label": "command"},
-  {"text": "Take photo on phone", "label": "command"},
-  {"text": "Open gallery on my phone", "label": "command"},
-  {"text": "Edit image on tablet", "label": "command"},
-  {"text": "Share photo on phone", "label": "command"},
-  {"text": "Delete picture on my tablet", "label": "command"},
-  {"text": "Backup photos on phone", "label": "command"},
-  {"text": "Sync photos to laptop", "label": "command"},
-  {"text": "Import photos to computer", "label": "command"},
-  {"text": "Export video on PC", "label": "command"},
-  {"text": "Convert file on my laptop", "label": "command"},
-  {"text": "Compress video on desktop", "label": "command"},
-  {"text": "Resize image on computer", "label": "command"},
-  {"text": "Crop photo on my tablet", "label": "command"},
-  {"text": "Rotate picture on phone", "label": "command"},
-  {"text": "Apply filter on my phone", "label": "command"},
-  {"text": "Remove background on tablet", "label": "command"},
-  {"text": "Enhance image on laptop", "label": "command"},
-  {"text": "Adjust brightness on computer", "label": "command"},
-  {"text": "Change contrast on PC", "label": "command"},
-  {"text": "Increase saturation on my laptop", "label": "command"},
-  {"text": "Decrease volume on desktop", "label": "command"},
-  {"text": "Boost bass on computer", "label": "command"},
-  {"text": "Reduce treble on PC", "label": "command"},
-  {"text": "Balance audio on my laptop", "label": "command"},
-  {"text": "Normalize sound on desktop", "label": "command"},
-  {"text": "Remove noise on computer", "label": "command"},
-  {"text": "Add echo on PC", "label": "command"},
-  {"text": "Apply reverb on my laptop", "label": "command"},
-  {"text": "Trim audio on desktop", "label": "command"},
-  {"text": "Merge files on computer", "label": "command"},
-  {"text": "Split track on PC", "label": "command"},
-  {"text": "Loop section on my laptop", "label": "command"},
-  {"text": "Fade in on desktop", "label": "command"},
-  {"text": "Fade out on computer", "label": "command"},
-  {"text": "Crossfade on PC", "label": "command"},
-  {"text": "Mix tracks on my laptop", "label": "command"},
-  {"text": "Master audio on desktop", "label": "command"},
-  {"text": "Export mix on computer", "label": "command"},
-  {"text": "Render project on PC", "label": "command"},
-  {"text": "Save session on my laptop", "label": "command"},
-  {"text": "Load project on desktop", "label": "command"},
-  {"text": "Create playlist on computer", "label": "command"},
-  {"text": "Add to favorites on PC", "label": "command"},
-  {"text": "Remove from library on my laptop", "label": "command"},
-  {"text": "Search music on desktop", "label": "command"},
-  {"text": "Filter results on computer", "label": "command"},
-  {"text": "Sort by date on PC", "label": "command"},
-  {"text": "Group by artist on my laptop", "label": "command"},
-  {"text": "View details on desktop", "label": "command"},
-  {"text": "Show properties on computer", "label": "command"},
-  {"text": "Display metadata on PC", "label": "command"},
-  {"text": "Edit tags on my laptop", "label": "command"},
-  {"text": "Update info on desktop", "label": "command"},
-  {"text": "Refresh library on computer", "label": "command"},
-  {"text": "Rescan folders on PC", "label": "command"},
-  {"text": "Rebuild database on my laptop", "label": "command"},
-  {"text": "Optimize database on desktop", "label": "command"},
-  {"text": "Clean registry on computer", "label": "command"},
-  {"text": "Fix errors on PC", "label": "command"},
-  {"text": "Repair installation on my laptop", "label": "command"},
-  {"text": "Reinstall driver on desktop", "label": "command"},
-  {"text": "Update firmware on computer", "label": "command"},
-  {"text": "Flash BIOS on PC", "label": "command"},
-  {"text": "Reset CMOS on my laptop", "label": "command"},
-  {"text": "Clear NVRAM on desktop", "label": "command"},
-  {"text": "Boot from USB on computer", "label": "command"},
-  {"text": "Enter BIOS on PC", "label": "command"},
-  {"text": "Access recovery on my laptop", "label": "command"},
-  {"text": "Start safe mode on desktop", "label": "command"},
-  {"text": "Boot normally on computer", "label": "command"},
-  {"text": "Skip startup on PC", "label": "command"},
-  {"text": "Fast boot on my laptop", "label": "command"},
-  {"text": "Cold boot on desktop", "label": "command"},
-  {"text": "Warm restart on computer", "label": "command"},
-  {"text": "Force shutdown on PC", "label": "command"},
-  {"text": "Emergency stop on my laptop", "label": "command"},
-  {"text": "Hard reset on desktop", "label": "command"},
-  {"text": "Soft reset on computer", "label": "command"},
-  {"text": "Factory reset on PC", "label": "command"},
-  {"text": "Restore defaults on my laptop", "label": "command"},
-  {"text": "Reset settings on tablet", "label": "command"},
-  {"text": "Clear data on phone", "label": "command"},
-  {"text": "Wipe device on my tablet", "label": "command"},
-  {"text": "Format phone", "label": "command"},
-  {"text": "Erase all on my phone", "label": "command"},
-  {"text": "Reset to factory on tablet", "label": "command"},
-  {"text": "Restore backup on phone", "label": "command"},
-  {"text": "Import settings on my tablet", "label": "command"},
-  {"text": "Export configuration on phone", "label": "command"},
-  {"text": "Save profile on my phone", "label": "command"},
-  {"text": "Load profile on tablet", "label": "command"},
-  {"text": "Switch profile on phone", "label": "command"},
-  {"text": "Delete profile on my tablet", "label": "command"},
-  {"text": "Create user on phone", "label": "command"},
-  {"text": "Remove user on my phone", "label": "command"},
-  {"text": "Change user on tablet", "label": "command"},
-  {"text": "Guest mode on phone", "label": "command"},
-  {"text": "Admin mode on my tablet", "label": "command"},
-  {"text": "Developer options on phone", "label": "command"},
-  {"text": "Debug mode on my phone", "label": "command"},
-  {"text": "Test mode on tablet", "label": "command"},
-  {"text": "Performance mode on phone", "label": "command"},
-  {"text": "Power saving on my tablet", "label": "command"},
-  {"text": "Battery optimization on phone", "label": "command"},
-  {"text": "Ultra power saving on my phone", "label": "command"},
-  {"text": "Doze mode on tablet", "label": "command"},
-  {"text": "Standby mode on phone", "label": "command"},
-  {"text": "Hibernate on my tablet", "label": "command"},
-  {"text": "Deep sleep on phone", "label": "command"},
-  {"text": "Wake up on my phone", "label": "command"},
-
-  {"text": "What's the weather like?", "label": "not_command"},
-  {"text": "How are you today?", "label": "not_command"},
-  {"text": "What time is it?", "label": "not_command"},
-  {"text": "Where is the nearest restaurant?", "label": "not_command"},
-  {"text": "Tell me a joke", "label": "not_command"},
-  {"text": "What's 2 plus 2?", "label": "not_command"},
-  {"text": "How do I fix this error?", "label": "not_command"},
-  {"text": "Why is my computer slow?", "label": "not_command"},
-  {"text": "Can you help me?", "label": "not_command"},
-  {"text": "What does this mean?", "label": "not_command"},
-  {"text": "Is it going to rain tomorrow?", "label": "not_command"},
-  {"text": "Who won the game last night?", "label": "not_command"},
-  {"text": "What's the capital of France?", "label": "not_command"},
-  {"text": "How much does this cost?", "label": "not_command"},
-  {"text": "When is the meeting?", "label": "not_command"},
-  {"text": "Where did I put my keys?", "label": "not_command"},
-  {"text": "What's for dinner?", "label": "not_command"},
-  {"text": "How long will this take?", "label": "not_command"},
-  {"text": "Why isn't this working?", "label": "not_command"},
-  {"text": "What's new in the news?", "label": "not_command"},
-  {"text": "How was your weekend?", "label": "not_command"},
-  {"text": "What's your favorite color?", "label": "not_command"},
-  {"text": "Can you explain this concept?", "label": "not_command"},
-  {"text": "What's the difference between these?", "label": "not_command"},
-  {"text": "How do I get to the airport?", "label": "not_command"},
-  {"text": "What's the best way to learn programming?", "label": "not_command"},
-  {"text": "Why is the sky blue?", "label": "not_command"},
-  {"text": "What's the meaning of life?", "label": "not_command"},
-  {"text": "How old are you?", "label": "not_command"},
-  {"text": "What's your opinion on this?", "label": "not_command"},
-  {"text": "Is this normal?", "label": "not_command"},
-  {"text": "What would you recommend?", "label": "not_command"},
-  {"text": "How much storage do I have left?", "label": "not_command"},
-  {"text": "What apps are running?", "label": "not_command"},
-  {"text": "Is my battery low?", "label": "not_command"},
-  {"text": "What's my IP address?", "label": "not_command"},
-  {"text": "How much RAM is being used?", "label": "not_command"},
-  {"text": "What version of Windows is this?", "label": "not_command"},
-  {"text": "Which programs are installed?", "label": "not_command"},
-  {"text": "What's the CPU temperature?", "label": "not_command"},
-  {"text": "How fast is my internet?", "label": "not_command"},
-  {"text": "What's taking up disk space?", "label": "not_command"},
-  {"text": "Are there any updates available?", "label": "not_command"},
-  {"text": "What's the system uptime?", "label": "not_command"},
-  {"text": "Which devices are connected?", "label": "not_command"},
-  {"text": "What's the network status?", "label": "not_command"},
-  {"text": "Is antivirus running?", "label": "not_command"},
-  {"text": "What's the screen resolution?", "label": "not_command"},
-  {"text": "How many files are in this folder?", "label": "not_command"},
-  {"text": "What's the file size?", "label": "not_command"},
-  {"text": "When was this last modified?", "label": "not_command"},
-  {"text": "What format is this file?", "label": "not_command"},
-  {"text": "I'm having trouble with my printer", "label": "not_command"},
-  {"text": "The application keeps crashing", "label": "not_command"},
-  {"text": "My internet seems slow today", "label": "not_command"},
-  {"text": "I can't find my downloaded files", "label": "not_command"},
-  {"text": "This error message is confusing", "label": "not_command"},
-  {"text": "My laptop fan is very loud", "label": "not_command"},
-  {"text": "The screen keeps flickering", "label": "not_command"},
-  {"text": "I forgot my password", "label": "not_command"},
-  {"text": "Something is wrong with the audio", "label": "not_command"},
-  {"text": "My mouse isn't working properly", "label": "not_command"},
-  {"text": "The keyboard is typing strange characters", "label": "not_command"},
-  {"text": "I think I have a virus", "label": "not_command"},
-  {"text": "My computer is running very slowly", "label": "not_command"},
-  {"text": "The webcam isn't turning on", "label": "not_command"},
-  {"text": "I can't connect to WiFi", "label": "not_command"},
-  {"text": "My files seem to be missing", "label": "not_command"},
-  {"text": "The battery drains too quickly", "label": "not_command"},
-  {"text": "I'm getting a blue screen error", "label": "not_command"},
-  {"text": "The touchpad stopped working", "label": "not_command"},
-  {"text": "My phone won't charge", "label": "not_command"},
-  {"text": "How do I backup my photos?", "label": "not_command"},
-  {"text": "What's the best antivirus software?", "label": "not_command"},
-  {"text": "How can I speed up my computer?", "label": "not_command"},
-  {"text": "Which browser is most secure?", "label": "not_command"},
-  {"text": "How do I change my password?", "label": "not_command"},
-  {"text": "What's consuming my battery?", "label": "not_command"},
-  {"text": "How much data have I used?", "label": "not_command"},
-  {"text": "What's the WiFi password?", "label": "not_command"},
-  {"text": "How do I connect to Bluetooth?", "label": "not_command"},
-  {"text": "What's the latest iOS version?", "label": "not_command"},
-  {"text": "How do I free up storage space?", "label": "not_command"},
-  {"text": "What's eating up my RAM?", "label": "not_command"},
-  {"text": "How can I improve performance?", "label": "not_command"},
-  {"text": "Which apps are using most battery?", "label": "not_command"},
-  {"text": "How do I enable dark mode?", "label": "not_command"},
-  {"text": "What's the difference between 32-bit and 64-bit?", "label": "not_command"},
-  {"text": "How do I transfer files between devices?", "label": "not_command"},
-  {"text": "What's the best way to organize files?", "label": "not_command"},
-  {"text": "How do I set up two-factor authentication?", "label": "not_command"},
-  {"text": "What permissions does this app need?", "label": "not_command"},
-  {"text": "How do I clear browser cache?", "label": "not_command"},
-  {"text": "What's the difference between hibernate and sleep?", "label": "not_command"},
-  {"text": "How do I update my drivers?", "label": "not_command"},
-  {"text": "What's the best video editing software?", "label": "not_command"},
-  {"text": "How can I protect my privacy online?", "label": "not_command"},
-  {"text": "What's the difference between SSD and HDD?", "label": "not_command"},
-  {"text": "How do I schedule automatic backups?", "label": "not_command"},
-  {"text": "What's the safest way to download software?", "label": "not_command"},
-  {"text": "How do I check for malware?", "label": "not_command"},
-  {"text": "What's the best cloud storage service?", "label": "not_command"},
-  {"text": "How do I compress large files?", "label": "not_command"},
-  {"text": "What's the difference between USB 2.0 and 3.0?", "label": "not_command"},
-  {"text": "How do I set up a VPN?", "label": "not_command"},
-  {"text": "What's the best way to clean my screen?", "label": "not_command"},
-  {"text": "How often should I restart my computer?", "label": "not_command"},
-  {"text": "What's the ideal temperature for my CPU?", "label": "not_command"},
-  {"text": "How do I extend my laptop battery life?", "label": "not_command"},
-  {"text": "What's the difference between RAM and storage?", "label": "not_command"},
-  {"text": "How do I create a system restore point?", "label": "not_command"},
-  {"text": "What's the best way to secure my WiFi?", "label": "not_command"},
-  {"text": "How do I check my graphics card specs?", "label": "not_command"},
-  {"text": "What's the fastest way to copy large files?", "label": "not_command"},
-  {"text": "How do I change default programs?", "label": "not_command"},
-  {"text": "What's the difference between OLED and LCD?", "label": "not_command"},
-  {"text": "How do I monitor network usage?", "label": "not_command"},
-  {"text": "What's the best way to clean temporary files?", "label": "not_command"},
-  {"text": "How do I check for system errors?", "label": "not_command"},
-  {"text": "What's the difference between 2.4GHz and 5GHz WiFi?", "label": "not_command"},
-  {"text": "How do I calibrate my monitor colors?", "label": "not_command"},
-  {"text": "What's the best way to organize desktop icons?", "label": "not_command"},
-  {"text": "How do I check my computer's specifications?", "label": "not_command"},
-  {"text": "What's the safest way to remove programs?", "label": "not_command"},
-  {"text": "How do I test my internet speed?", "label": "not_command"},
-  {"text": "What's the difference between motherboard chipsets?", "label": "not_command"},
-  {"text": "How do I set up parental controls?", "label": "not_command"},
-  {"text": "What's the best way to manage startup programs?", "label": "not_command"},
-  {"text": "How do I check for duplicate files?", "label": "not_command"},
-  {"text": "What's the ideal humidity for electronics?", "label": "not_command"},
-  {"text": "How do I troubleshoot audio issues?", "label": "not_command"},
-  {"text": "What's the difference between integrated and dedicated graphics?", "label": "not_command"},
-  {"text": "How do I set up automatic updates?", "label": "not_command"},
-  {"text": "What's the best way to migrate to a new computer?", "label": "not_command"},
-  {"text": "How do I check my hard drive health?", "label": "not_command"},
-  {"text": "What's the difference between Windows Home and Pro?", "label": "not_command"},
-  {"text": "How do I create a strong password?", "label": "not_command"},
-  {"text": "What's the best way to clean my keyboard?", "label": "not_command"},
-  {"text": "How do I adjust power settings?", "label": "not_command"},
-  {"text": "What's the difference between optical and laser mice?", "label": "not_command"},
-  {"text": "How do I set up email on my phone?", "label": "not_command"},
-  {"text": "What's the best way to secure my social media?", "label": "not_command"},
-  {"text": "How do I check my phone's storage usage?", "label": "not_command"},
-  {"text": "What's the difference between 4G and 5G?", "label": "not_command"},
-  {"text": "How do I enable hotspot on my phone?", "label": "not_command"},
-  {"text": "What's the best way to clean my phone screen?", "label": "not_command"},
-  {"text": "How do I save battery on my tablet?", "label": "not_command"},
-  {"text": "What's the storage capacity of my device?", "label": "not_command"},
-  {"text": "How do I sync my contacts across devices?", "label": "not_command"},
-  {"text": "What's the latest firmware version?", "label": "not_command"},
-  {"text": "How do I set up face recognition?", "label": "not_command"},
-  {"text": "What's the difference between LCD and AMOLED?", "label": "not_command"},
-  {"text": "How do I enable developer mode?", "label": "not_command"},
-  {"text": "What's eating up my mobile data?", "label": "not_command"},
-  {"text": "How do I block spam calls?", "label": "not_command"},
-  {"text": "What's the best camera app?", "label": "not_command"},
-  {"text": "How do I customize my home screen?", "label": "not_command"},
-  {"text": "What's the difference between widgets and apps?", "label": "not_command"},
-  {"text": "How do I set up voice assistant?", "label": "not_command"},
-  {"text": "What's the best way to organize photos?", "label": "not_command"},
-  {"text": "How do I enable location services?", "label": "not_command"},
-  {"text": "What's the difference between airplane mode and do not disturb?", "label": "not_command"},
-  {"text": "How do I manage app permissions?", "label": "not_command"},
-  {"text": "What's the best way to backup my phone?", "label": "not_command"},
-  {"text": "How do I change my ringtone?", "label": "not_command"},
-  {"text": "What's the difference between internal and external storage?", "label": "not_command"},
-  {"text": "How do I set up fingerprint unlock?", "label": "not_command"},
-  {"text": "What's the best way to manage notifications?", "label": "not_command"},
-  {"text": "How do I clear app cache?", "label": "not_command"},
-  {"text": "What's the difference between force stop and disable?", "label": "not_command"},
-  {"text": "How do I update my apps?", "label": "not_command"},
-  {"text": "What's the best way to free up phone memory?", "label": "not_command"},
-  {"text": "How do I set up automatic app updates?", "label": "not_command"},
-  {"text": "What's the difference between cellular and WiFi calling?", "label": "not_command"},
-  {"text": "How do I enable night mode?", "label": "not_command"},
-  {"text": "What's the best way to protect my device from theft?", "label": "not_command"},
-  {"text": "How do I set up screen time limits?", "label": "not_command"},
-  {"text": "What's the difference between guest mode and private browsing?", "label": "not_command"},
-  {"text": "How do I change default apps?", "label": "not_command"},
-  {"text": "What's the best way to organize my apps?", "label": "not_command"},
-  {"text": "How do I enable auto-brightness?", "label": "not_command"},
-  {"text": "What's the difference between USB-C and Lightning?", "label": "not_command"},
-  {"text": "How do I set up wireless charging?", "label": "not_command"},
-  {"text": "What's the best way to clean my charging port?", "label": "not_command"},
-  {"text": "How do I check my warranty status?", "label": "not_command"},
-  {"text": "What's the difference between original and third-party chargers?", "label": "not_command"},
-  {"text": "How do I calibrate my phone's compass?", "label": "not_command"},
-  {"text": "What's the best way to test my phone's speakers?", "label": "not_command"},
-  {"text": "How do I check for water damage?", "label": "not_command"},
-  {"text": "What's the difference between recovery mode and download mode?", "label": "not_command"},
-  {"text": "How do I perform a soft reset?", "label": "not_command"},
-  {"text": "What's the best way to clean my phone's cache?", "label": "not_command"},
-  {"text": "How do I check my phone's temperature?", "label": "not_command"},
-  {"text": "What's the difference between bootloader and firmware?", "label": "not_command"},
-  {"text": "How do I enable USB debugging?", "label": "not_command"},
-  {"text": "What's the best way to root my device?", "label": "not_command"},
-  {"text": "How do I unlock my bootloader?", "label": "not_command"},
-  {"text": "What's the difference between stock and custom ROM?", "label": "not_command"},
-  {"text": "How do I flash custom firmware?", "label": "not_command"},
-  {"text": "What's the best way to unbrick my phone?", "label": "not_command"},
-  {"text": "How do I downgrade my firmware?", "label": "not_command"},
-  {"text": "What's the difference between Odin and Fastboot?", "label": "not_command"},
-  {"text": "How do I enter download mode?", "label": "not_command"},
-  {"text": "What's the best way to backup my ROM?", "label": "not_command"},
-  {"text": "How do I restore from TWRP backup?", "label": "not_command"},
-  {"text": "What's the difference between NANDroid and Titanium backup?", "label": "not_command"},
-  {"text": "How do I gain root access?", "label": "not_command"},
-  {"text": "What's the best way to remove bloatware?", "label": "not_command"},
-  {"text": "How do I install custom recovery?", "label": "not_command"},
-  {"text": "What's the difference between TWRP and CWM?", "label": "not_command"},
-  {"text": "How do I sideload APK files?", "label": "not_command"},
-  {"text": "What's the best way to overclock my CPU?", "label": "not_command"},
-  {"text": "How do I undervolt my processor?", "label": "not_command"},
-  {"text": "What's the difference between governors and schedulers?", "label": "not_command"},
-  {"text": "How do I change CPU frequency?", "label": "not_command"},
-  {"text": "What's the best way to monitor system performance?", "label": "not_command"},
-  {"text": "How do I check CPU usage on my phone?", "label": "not_command"},
-  {"text": "What's the difference between ARM and x86 processors?", "label": "not_command"},
-  {"text": "How do I optimize my device for gaming?", "label": "not_command"},
-  {"text": "What's the best way to reduce lag?", "label": "not_command"},
-  {"text": "How do I enable high refresh rate?", "label": "not_command"},
-  {"text": "What's the difference between 60Hz and 120Hz displays?", "label": "not_command"},
-  {"text": "How do I calibrate my touchscreen?", "label": "not_command"},
-  {"text": "What's the best way to test touch sensitivity?", "label": "not_command"},
-  {"text": "How do I adjust haptic feedback?", "label": "not_command"},
-  {"text": "What's the difference between vibration patterns?", "label": "not_command"},
-  {"text": "How do I customize notification sounds?", "label": "not_command"},
-  {"text": "What's the best way to organize my music library?", "label": "not_command"},
-  {"text": "How do I set up streaming services?", "label": "not_command"},
-  {"text": "What's the difference between lossless and compressed audio?", "label": "not_command"},
-  {"text": "How do I improve audio quality?", "label": "not_command"},
-  {"text": "What's the best equalizer setting?", "label": "not_command"},
-  {"text": "How do I enable spatial audio?", "label": "not_command"},
-  {"text": "What's the difference between stereo and surround sound?", "label": "not_command"},
-  {"text": "How do I connect to multiple Bluetooth devices?", "label": "not_command"},
-  {"text": "What's the best way to improve Bluetooth connection?", "label": "not_command"},
-  {"text": "How do I fix audio sync issues?", "label": "not_command"},
-  {"text": "What's the difference between aptX and LDAC?", "label": "not_command"},
-  {"text": "How do I enable high-quality Bluetooth audio?", "label": "not_command"},
-  {"text": "What's the best way to reduce audio latency?", "label": "not_command"},
-  {"text": "How do I set up multiroom audio?", "label": "not_command"},
-  {"text": "What's the difference between wired and wireless headphones?", "label": "not_command"},
-  {"text": "How do I choose the right audio codec?", "label": "not_command"},
-  {"text": "What's the best way to test headphone drivers?", "label": "not_command"},
-  {"text": "How do I burn-in new headphones?", "label": "not_command"},
-  {"text": "What's the difference between open and closed-back headphones?", "label": "not_command"},
-  {"text": "How do I properly clean my headphones?", "label": "not_command"},
-  {"text": "What's the best way to store headphones?", "label": "not_command"},
-  {"text": "How do I prevent headphone damage?", "label": "not_command"},
-  {"text": "What's the ideal volume level for safe listening?", "label": "not_command"},
-  {"text": "How do I protect my hearing?", "label": "not_command"},
-  {"text": "What's the difference between noise cancellation and isolation?", "label": "not_command"},
-  {"text": "How do I adjust ANC settings?", "label": "not_command"},
-  {"text": "What's the best way to use transparency mode?", "label": "not_command"},
-  {"text": "How do I customize touch controls?", "label": "not_command"},
-  {"text": "What's the difference between passive and active speakers?", "label": "not_command"},
-  {"text": "How do I position speakers correctly?", "label": "not_command"},
-  {"text": "What's the best way to eliminate speaker interference?", "label": "not_command"},
-  {"text": "How do I set up a home theater system?", "label": "not_command"},
-  {"text": "What's the difference between 2.1 and 5.1 surround sound?", "label": "not_command"},
-  {"text": "How do I calibrate my sound system?", "label": "not_command"},
-  {"text": "What's the best way to control smart home devices?", "label": "not_command"},
-  {"text": "How do I set up voice commands?", "label": "not_command"},
-  {"text": "What's the difference between Alexa and Google Assistant?", "label": "not_command"},
-  {"text": "How do I connect IoT devices?", "label": "not_command"},
-  {"text": "What's the best way to secure smart home network?", "label": "not_command"},
-  {"text": "How do I automate my lighting?", "label": "not_command"},
-  {"text": "What's the difference between Zigbee and Z-Wave?", "label": "not_command"},
-  {"text": "How do I set up smart thermostats?", "label": "not_command"},
-  {"text": "What's the best way to monitor energy usage?", "label": "not_command"},
-  {"text": "How do I create automation routines?", "label": "not_command"},
-  {"text": "What's the difference between scenes and routines?", "label": "not_command"},
-  {"text": "How do I troubleshoot smart device connectivity?", "label": "not_command"},
-  {"text": "What's the best way to update smart device firmware?", "label": "not_command"},
-  {"text": "How do I reset smart home devices?", "label": "not_command"},
-  {"text": "What's the difference between local and cloud processing?", "label": "not_command"},
-  {"text": "How do I ensure smart home privacy?", "label": "not_command"},
-  {"text": "What's the best way to backup smart home settings?", "label": "not_command"},
-  {"text": "How do I migrate between smart home platforms?", "label": "not_command"},
-  {"text": "What's the difference between Matter and HomeKit?", "label": "not_command"},
-  {"text": "How do I set up geofencing?", "label": "not_command"},
-  {"text": "What's the best way to manage multiple smart hubs?", "label": "not_command"},
-  {"text": "How do I optimize smart home performance?", "label": "not_command"},
-  {"text": "What's the difference between mesh and traditional WiFi?", "label": "not_command"},
-  {"text": "How do I extend my WiFi range?", "label": "not_command"},
-  {"text": "What's the best placement for WiFi routers?", "label": "not_command"},
-  {"text": "How do I optimize WiFi performance?", "label": "not_command"},
-  {"text": "What's the difference between WiFi 6 and WiFi 6E?", "label": "not_command"},
-  {"text": "How do I change WiFi channels?", "label": "not_command"},
-  {"text": "What's the best way to secure my network?", "label": "not_command"},
-  {"text": "How do I set up guest networks?", "label": "not_command"},
-  {"text": "What's the difference between WPA2 and WPA3?", "label": "not_command"},
-  {"text": "How do I monitor network traffic?", "label": "not_command"},
-  {"text": "What's the best way to prioritize network traffic?", "label": "not_command"},
-  {"text": "How do I set up QoS rules?", "label": "not_command"},
-  {"text": "What's the difference between bandwidth and throughput?", "label": "not_command"},
-  {"text": "How do I test network latency?", "label": "not_command"},
-  {"text": "What's the best way to reduce network congestion?", "label": "not_command"},
-  {"text": "How do I troubleshoot network connectivity?", "label": "not_command"}
+  {
+    "text": "hey, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "please send email to Robert Schroeder on the pc",
+    "label": "command"
+  },
+  {
+    "text": "turn on the air conditioner on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to increase volume with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "could you record video using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "restart the system on my pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "please send email to Julie White on the pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you text Jonathan Harmon saying meeting rescheduled using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "could you turn off the lights using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to take a picture with my phone",
+    "label": "command"
+  },
+  {
+    "text": "please turn on the air conditioner on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to start spotify with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to play a podcast with my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "what does AI stand for? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to text Heather White saying meeting rescheduled with my phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please restart the system on the pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "please turn on the air conditioner on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I want to start spotify with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "please text Julie White saying I'll be late on the phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to increase volume with my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to send email to Jonathan Harmon with my pc",
+    "label": "command"
+  },
+  {
+    "text": "please restart the system on the pc",
+    "label": "command"
+  },
+  {
+    "text": "please play music on the phone",
+    "label": "command"
+  },
+  {
+    "text": "please launch calculator on the pc",
+    "label": "command"
+  },
+  {
+    "text": "tell me a joke please",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "mute microphone on my pc",
+    "label": "command"
+  },
+  {
+    "text": "what's the weather like today? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to restart the system with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to start chrome with my pc",
+    "label": "command"
+  },
+  {
+    "text": "how do I cook pasta? please",
+    "label": "not_command"
+  },
+  {
+    "text": "play my playlist, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "open notepad, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "I want to start spotify with my pc",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone on my pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "when was the internet invented? please",
+    "label": "not_command"
+  },
+  {
+    "text": "how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "please set alarm for 7 AM on the phone",
+    "label": "command"
+  },
+  {
+    "text": "could you turn off the lights using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "play music on my phone",
+    "label": "command"
+  },
+  {
+    "text": "please open chrome on the pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "can you explain quantum physics? please",
+    "label": "not_command"
+  },
+  {
+    "text": "do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "when was the internet invented? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to mute microphone with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "please increase volume on the phone",
+    "label": "command"
+  },
+  {
+    "text": "send email to Julie White on my pc",
+    "label": "command"
+  },
+  {
+    "text": "record video, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "please text David Stewart saying I'll be late on the phone",
+    "label": "command"
+  },
+  {
+    "text": "could you text Kayla Graham saying meeting rescheduled using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "please turn off the lights on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "could you record video using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "increase volume on my phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "how tall is Mount Everest? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please record video on the phone",
+    "label": "command"
+  },
+  {
+    "text": "please restart the system on the pc",
+    "label": "command"
+  },
+  {
+    "text": "could you record video using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "send email to Jonathan Harmon, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "increase volume, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "please restart the system on the pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to mute microphone with my pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "please mute microphone on the pc",
+    "label": "command"
+  },
+  {
+    "text": "what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the weather like today? please",
+    "label": "not_command"
+  },
+  {
+    "text": "could you text Jennifer Thompson saying call me using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "turn off the lights on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "please take a picture on the phone",
+    "label": "command"
+  },
+  {
+    "text": "send email to Joseph Fields, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "I want to restart the system with my pc",
+    "label": "command"
+  },
+  {
+    "text": "how does a plane fly? please",
+    "label": "not_command"
+  },
+  {
+    "text": "could you mute microphone using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "why is the sky blue? please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "please restart the system on the pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "increase volume, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "hey, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to text Jennifer Ware saying meeting rescheduled with my phone",
+    "label": "command"
+  },
+  {
+    "text": "could you record video using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "tell me a joke please",
+    "label": "not_command"
+  },
+  {
+    "text": "turn off the lights, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for? please",
+    "label": "not_command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "could you record video using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "mute microphone on my pc",
+    "label": "command"
+  },
+  {
+    "text": "what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you explain quantum physics? please",
+    "label": "not_command"
+  },
+  {
+    "text": "lock the door, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "please open spotify on the pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "turn off the lights on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "restart the system on my pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you turn on the air conditioner using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "hey, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to increase volume with my phone",
+    "label": "command"
+  },
+  {
+    "text": "could you launch spotify using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "please start chrome on the pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the weather like today? please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to restart the system with my pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "please mute microphone on the pc",
+    "label": "command"
+  },
+  {
+    "text": "when was the internet invented? please",
+    "label": "not_command"
+  },
+  {
+    "text": "who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "please increase volume on the phone",
+    "label": "command"
+  },
+  {
+    "text": "please text Paul Lloyd saying I'll be late on the phone",
+    "label": "command"
+  },
+  {
+    "text": "what's the capital of Japan? please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "how far is the moon? please",
+    "label": "not_command"
+  },
+  {
+    "text": "launch calculator on my pc",
+    "label": "command"
+  },
+  {
+    "text": "how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "increase volume, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "please take a picture on the phone",
+    "label": "command"
+  },
+  {
+    "text": "launch spotify, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "set alarm for noon, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you explain quantum physics? please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "please launch terminal on the pc",
+    "label": "command"
+  },
+  {
+    "text": "how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "please record video on the phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "please turn off the lights on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to increase volume with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "who is the president of France? please",
+    "label": "not_command"
+  },
+  {
+    "text": "do penguins have knees? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "please send email to Julie White on the pc",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for? please",
+    "label": "not_command"
+  },
+  {
+    "text": "send email to Joshua Smith on my pc",
+    "label": "command"
+  },
+  {
+    "text": "please record video on the phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "could you mute microphone using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "could you take a picture using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "could you text Stacy Harmon saying call me using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "hey, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please mute microphone on the pc",
+    "label": "command"
+  },
+  {
+    "text": "set alarm for 8:30 PM, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "please text Jonathan Harmon saying meeting rescheduled on the phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you open terminal using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "increase volume, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "how far is the moon? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "mute microphone on my pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you turn off the lights using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you take a picture using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to text Kimberly Brennan saying I'll be late with my phone",
+    "label": "command"
+  },
+  {
+    "text": "lock the door on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "could you set alarm for 8:30 PM using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "could you play music using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "please send email to Stacy Harmon on the pc",
+    "label": "command"
+  },
+  {
+    "text": "what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "restart the system, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "could you turn on the air conditioner using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "please text Jennifer Thompson saying call me on the phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "take a picture on my phone",
+    "label": "command"
+  },
+  {
+    "text": "set alarm for 7 AM on my phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you turn on the air conditioner using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "please restart the system on the pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "turn off the lights, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "hey, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "restart the system on my pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "please send email to Jennifer Ware on the pc",
+    "label": "command"
+  },
+  {
+    "text": "how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to lock the door with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "please take a picture on the phone",
+    "label": "command"
+  },
+  {
+    "text": "could you send email to David Stewart using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "please lock the door on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "could you increase volume using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "hey, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "take a picture, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "turn off the lights, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "I want to increase volume with my phone",
+    "label": "command"
+  },
+  {
+    "text": "please send email to Vicki Marshall on the pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "lock the door on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "increase volume, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "please mute microphone on the pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to start notepad with my pc",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "take a picture, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "hey, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you explain quantum physics? please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "who is the president of France? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please launch calculator on the pc",
+    "label": "command"
+  },
+  {
+    "text": "play my playlist on my phone",
+    "label": "command"
+  },
+  {
+    "text": "set alarm for midnight, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "text Jennifer Thompson saying meeting rescheduled on my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "please play a podcast on the phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "please send email to Angela Brown on the pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "start notepad on my pc",
+    "label": "command"
+  },
+  {
+    "text": "is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "mute microphone on my pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to open terminal with my pc",
+    "label": "command"
+  },
+  {
+    "text": "could you play music using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "lock the door, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you mute microphone using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "text Vicki Marshall saying I'll be late on my phone",
+    "label": "command"
+  },
+  {
+    "text": "please restart the system on the pc",
+    "label": "command"
+  },
+  {
+    "text": "how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone on my pc",
+    "label": "command"
+  },
+  {
+    "text": "how does a plane fly? please",
+    "label": "not_command"
+  },
+  {
+    "text": "could you text Paul Lloyd saying meeting rescheduled using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "could you turn off the lights using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "lock the door on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn on the air conditioner with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I want to take a picture with my phone",
+    "label": "command"
+  },
+  {
+    "text": "record video, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "play a podcast on my phone",
+    "label": "command"
+  },
+  {
+    "text": "could you turn off the lights using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to text Dr. Gary Nelson saying call me with my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "please record video on the phone",
+    "label": "command"
+  },
+  {
+    "text": "please text Kimberly Brennan saying I'll be late on the phone",
+    "label": "command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please lock the door on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "text Stacy Harmon saying meeting rescheduled on my phone",
+    "label": "command"
+  },
+  {
+    "text": "do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you text Paul Lloyd saying call me using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "please send email to Jennifer Thompson on the pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the weather like today? please",
+    "label": "not_command"
+  },
+  {
+    "text": "do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "lock the door on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "please lock the door on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "do penguins have knees? please",
+    "label": "not_command"
+  },
+  {
+    "text": "start terminal on my pc",
+    "label": "command"
+  },
+  {
+    "text": "play my playlist, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you explain quantum physics? please",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the weather like today? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please set alarm for noon on the phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "how tall is Mount Everest? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please play a podcast on the phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to restart the system with my pc",
+    "label": "command"
+  },
+  {
+    "text": "restart the system, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "mute microphone, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "send email to Julie White, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "launch calculator on my pc",
+    "label": "command"
+  },
+  {
+    "text": "could you send email to Nancy Gonzalez using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "hey, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you launch calculator using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "I want to set alarm for 7 AM with my phone",
+    "label": "command"
+  },
+  {
+    "text": "what's the weather like today? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to set alarm for noon with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn on the air conditioner with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "open notepad on my pc",
+    "label": "command"
+  },
+  {
+    "text": "could you open notepad using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "when was the internet invented? please",
+    "label": "not_command"
+  },
+  {
+    "text": "record video, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "please play music on the phone",
+    "label": "command"
+  },
+  {
+    "text": "set alarm for 8:30 PM, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "turn on the air conditioner on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "text Jennifer Thompson saying I'll be late, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "start calculator on my pc",
+    "label": "command"
+  },
+  {
+    "text": "text Paul Lloyd saying call me, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "please send email to David Stewart on the pc",
+    "label": "command"
+  },
+  {
+    "text": "increase volume on my phone",
+    "label": "command"
+  },
+  {
+    "text": "please launch notepad on the pc",
+    "label": "command"
+  },
+  {
+    "text": "please increase volume on the phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "could you increase volume using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "please turn on the air conditioner on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "please turn off the lights on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "please restart the system on the pc",
+    "label": "command"
+  },
+  {
+    "text": "please restart the system on the pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you take a picture using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "hey, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the capital of Japan? please",
+    "label": "not_command"
+  },
+  {
+    "text": "lock the door on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "could you open calculator using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you send email to Dr. Gary Nelson using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "turn off the lights on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "open notepad on my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "please play my playlist on the phone",
+    "label": "command"
+  },
+  {
+    "text": "play a podcast, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "hey, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "how far is the moon? please",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the capital of Japan? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please take a picture on the phone",
+    "label": "command"
+  },
+  {
+    "text": "turn on the air conditioner on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "turn off the lights, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "please launch calculator on the pc",
+    "label": "command"
+  },
+  {
+    "text": "launch notepad on my pc",
+    "label": "command"
+  },
+  {
+    "text": "could you lock the door using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "tell me a joke please",
+    "label": "not_command"
+  },
+  {
+    "text": "text Stacy Harmon saying meeting rescheduled, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "please mute microphone on the pc",
+    "label": "command"
+  },
+  {
+    "text": "do penguins have knees? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to open calculator with my pc",
+    "label": "command"
+  },
+  {
+    "text": "take a picture on my phone",
+    "label": "command"
+  },
+  {
+    "text": "what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to send email to Robert Schroeder with my pc",
+    "label": "command"
+  },
+  {
+    "text": "play music on my phone",
+    "label": "command"
+  },
+  {
+    "text": "take a picture, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "please start calculator on the pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "please set alarm for midnight on the phone",
+    "label": "command"
+  },
+  {
+    "text": "do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to increase volume with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "restart the system on my pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "start spotify, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "how does a plane fly? please",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "lock the door, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "could you turn on the air conditioner using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "please play music on the phone",
+    "label": "command"
+  },
+  {
+    "text": "could you turn on the air conditioner using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "do penguins have knees? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please send email to Joseph Fields on the pc",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for? please",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "hey, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "please lock the door on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you start spotify using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "what's the weather like today? please",
+    "label": "not_command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "tell me a joke please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "mute microphone, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "restart the system, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "record video on my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to send email to Brandi Daniels with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "please increase volume on the phone",
+    "label": "command"
+  },
+  {
+    "text": "is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to send email to Kimberly Brennan with my pc",
+    "label": "command"
+  },
+  {
+    "text": "restart the system, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "hey, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "how tall is Mount Everest? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you lock the door using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "start calculator, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "turn off the lights, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "I want to set alarm for 8:30 PM with my phone",
+    "label": "command"
+  },
+  {
+    "text": "play my playlist, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "record video, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "start calculator on my pc",
+    "label": "command"
+  },
+  {
+    "text": "turn off the lights, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "I want to take a picture with my phone",
+    "label": "command"
+  },
+  {
+    "text": "launch calculator on my pc",
+    "label": "command"
+  },
+  {
+    "text": "how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you open calculator using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "please restart the system on the pc",
+    "label": "command"
+  },
+  {
+    "text": "please text Joseph Fields saying I'll be late on the phone",
+    "label": "command"
+  },
+  {
+    "text": "could you play a podcast using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "please start notepad on the pc",
+    "label": "command"
+  },
+  {
+    "text": "play my playlist, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to open spotify with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to launch chrome with my pc",
+    "label": "command"
+  },
+  {
+    "text": "turn on the air conditioner on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "send email to Paul Lloyd on my pc",
+    "label": "command"
+  },
+  {
+    "text": "please increase volume on the phone",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone on my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to start calculator with my pc",
+    "label": "command"
+  },
+  {
+    "text": "could you mute microphone using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "hey, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "please increase volume on the phone",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you set alarm for midnight using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "please set alarm for noon on the phone",
+    "label": "command"
+  },
+  {
+    "text": "open spotify, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta? please",
+    "label": "not_command"
+  },
+  {
+    "text": "could you launch spotify using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "hey, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you lock the door using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "restart the system on my pc",
+    "label": "command"
+  },
+  {
+    "text": "increase volume on my phone",
+    "label": "command"
+  },
+  {
+    "text": "tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "send email to Angela Brown, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "hey, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "take a picture on my phone",
+    "label": "command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "take a picture on my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to launch terminal with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to mute microphone with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "play a podcast, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn on the air conditioner with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "could you turn on the air conditioner using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "send email to Kimberly Brennan, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "please mute microphone on the pc",
+    "label": "command"
+  },
+  {
+    "text": "record video, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "could you launch terminal using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "open terminal, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "please open terminal on the pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "set alarm for noon, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "could you text Angela Brown saying I'll be late using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "I want to take a picture with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "how far is the moon? please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "turn off the lights on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "please turn off the lights on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I want to play my playlist with my phone",
+    "label": "command"
+  },
+  {
+    "text": "turn off the lights on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "what's the capital of Japan? please",
+    "label": "not_command"
+  },
+  {
+    "text": "how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to send email to David Stewart with my pc",
+    "label": "command"
+  },
+  {
+    "text": "could you set alarm for midnight using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "please mute microphone on the pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to play music with my phone",
+    "label": "command"
+  },
+  {
+    "text": "please turn on the air conditioner on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "please start spotify on the pc",
+    "label": "command"
+  },
+  {
+    "text": "do penguins have knees? please",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta? please",
+    "label": "not_command"
+  },
+  {
+    "text": "take a picture on my phone",
+    "label": "command"
+  },
+  {
+    "text": "could you turn off the lights using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "please record video on the phone",
+    "label": "command"
+  },
+  {
+    "text": "how do I cook pasta? please",
+    "label": "not_command"
+  },
+  {
+    "text": "could you launch notepad using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to increase volume with my phone",
+    "label": "command"
+  },
+  {
+    "text": "how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "please increase volume on the phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "lock the door, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "do penguins have knees? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you mute microphone using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "record video, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you increase volume using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "take a picture on my phone",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "hey, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to send email to Angela Brown with my pc",
+    "label": "command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "do penguins have knees? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "please text Nancy Gonzalez saying meeting rescheduled on the phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to mute microphone with my pc",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "hey, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "please turn on the air conditioner on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "increase volume on my phone",
+    "label": "command"
+  },
+  {
+    "text": "could you send email to Debbie Farrell using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to send email to Jennifer Ware with my pc",
+    "label": "command"
+  },
+  {
+    "text": "please send email to Paul Lloyd on the pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to take a picture with my phone",
+    "label": "command"
+  },
+  {
+    "text": "who is the president of France? please",
+    "label": "not_command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "send email to Robert Schroeder, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "restart the system, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to set alarm for noon with my phone",
+    "label": "command"
+  },
+  {
+    "text": "could you play music using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "what's the weather like today? please",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the weather like today? please",
+    "label": "not_command"
+  },
+  {
+    "text": "increase volume, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "hey, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "turn on the air conditioner on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I want to take a picture with my phone",
+    "label": "command"
+  },
+  {
+    "text": "how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "how does a plane fly? please",
+    "label": "not_command"
+  },
+  {
+    "text": "send email to Kayla Graham, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "please text Brandi Daniels saying call me on the phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to text Paul Lloyd saying I'll be late with my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to open spotify with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to send email to Debbie Farrell with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to restart the system with my pc",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "why is the sky blue? please",
+    "label": "not_command"
+  },
+  {
+    "text": "take a picture, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "set alarm for 7 AM, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "text Brandi Daniels saying I'll be late on my phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "please increase volume on the phone",
+    "label": "command"
+  },
+  {
+    "text": "what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you send email to Dr. Gary Nelson using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "text Paul Lloyd saying call me on my phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "set alarm for 7 AM on my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "record video on my phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you start chrome using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please text Dr. Gary Nelson saying I'll be late on the phone",
+    "label": "command"
+  },
+  {
+    "text": "please increase volume on the phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you turn off the lights using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "text Joseph Fields saying I'll be late on my phone",
+    "label": "command"
+  },
+  {
+    "text": "is it going to rain tomorrow? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "please send email to Joshua Smith on the pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to set alarm for noon with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to launch calculator with my pc",
+    "label": "command"
+  },
+  {
+    "text": "do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to increase volume with my phone",
+    "label": "command"
+  },
+  {
+    "text": "what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "please send email to Angela Brown on the pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to play a podcast with my phone",
+    "label": "command"
+  },
+  {
+    "text": "please launch spotify on the pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "why is the sky blue? please",
+    "label": "not_command"
+  },
+  {
+    "text": "when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "please record video on the phone",
+    "label": "command"
+  },
+  {
+    "text": "how far is the moon? please",
+    "label": "not_command"
+  },
+  {
+    "text": "how tall is Mount Everest? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "please launch notepad on the pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "set alarm for noon, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "hey, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "set alarm for midnight, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "could you increase volume using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "could you send email to Vicki Marshall using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "I want to take a picture with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn on the air conditioner with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "please increase volume on the phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to play a podcast with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to play my playlist with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to mute microphone with my pc",
+    "label": "command"
+  },
+  {
+    "text": "restart the system, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "I want to mute microphone with my pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to start terminal with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "what does AI stand for? please",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to restart the system with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to launch notepad with my pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "could you lock the door using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the capital of Japan? please",
+    "label": "not_command"
+  },
+  {
+    "text": "open calculator, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "restart the system, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "turn off the lights, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "lock the door, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "text Vicki Marshall saying meeting rescheduled on my phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to mute microphone with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to text Joseph Fields saying call me with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "please increase volume on the phone",
+    "label": "command"
+  },
+  {
+    "text": "could you send email to Jennifer Ware using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "I want to increase volume with my phone",
+    "label": "command"
+  },
+  {
+    "text": "how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "lock the door, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "text Paul Lloyd saying call me on my phone",
+    "label": "command"
+  },
+  {
+    "text": "please turn off the lights on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "hey, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "when was the internet invented? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to set alarm for noon with my phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "why is the sky blue? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please turn on the air conditioner on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "play my playlist, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "I want to send email to Paul Lloyd with my pc",
+    "label": "command"
+  },
+  {
+    "text": "what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you turn on the air conditioner using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "please restart the system on the pc",
+    "label": "command"
+  },
+  {
+    "text": "could you send email to Nancy Gonzalez using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for? please",
+    "label": "not_command"
+  },
+  {
+    "text": "open spotify on my pc",
+    "label": "command"
+  },
+  {
+    "text": "why is the sky blue? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "take a picture on my phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "set alarm for noon on my phone",
+    "label": "command"
+  },
+  {
+    "text": "set alarm for 8:30 PM on my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "launch terminal, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "could you turn off the lights using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "could you lock the door using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "hey, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "please restart the system on the pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "open spotify, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you send email to Kayla Graham using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to start notepad with my pc",
+    "label": "command"
+  },
+  {
+    "text": "how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "restart the system, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "please turn off the lights on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "send email to Nancy Gonzalez, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "is it going to rain tomorrow? please",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the capital of Japan? please",
+    "label": "not_command"
+  },
+  {
+    "text": "how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "mute microphone, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "could you text Kayla Graham saying I'll be late using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "when was the internet invented? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "could you record video using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "lock the door on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for? please",
+    "label": "not_command"
+  },
+  {
+    "text": "could you send email to Vicki Marshall using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "how far is the moon? please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "launch terminal, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "open terminal, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "please lock the door on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I want to text Dr. Gary Nelson saying I'll be late with my phone",
+    "label": "command"
+  },
+  {
+    "text": "could you launch notepad using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "how tall is Mount Everest? please",
+    "label": "not_command"
+  },
+  {
+    "text": "how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to play my playlist with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "mute microphone on my pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to set alarm for 8:30 PM with my phone",
+    "label": "command"
+  },
+  {
+    "text": "restart the system, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to lock the door with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "text Heather White saying meeting rescheduled on my phone",
+    "label": "command"
+  },
+  {
+    "text": "please open chrome on the pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "tell me a joke please",
+    "label": "not_command"
+  },
+  {
+    "text": "please launch spotify on the pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "mute microphone, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "record video, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "please start terminal on the pc",
+    "label": "command"
+  },
+  {
+    "text": "when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "why is the sky blue? please",
+    "label": "not_command"
+  },
+  {
+    "text": "set alarm for midnight on my phone",
+    "label": "command"
+  },
+  {
+    "text": "could you play a podcast using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "I want to start terminal with my pc",
+    "label": "command"
+  },
+  {
+    "text": "launch spotify, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "hey, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you turn on the air conditioner using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone on my pc",
+    "label": "command"
+  },
+  {
+    "text": "do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to open notepad with my pc",
+    "label": "command"
+  },
+  {
+    "text": "can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "please text Dr. Gary Nelson saying meeting rescheduled on the phone",
+    "label": "command"
+  },
+  {
+    "text": "what's the capital of Japan? please",
+    "label": "not_command"
+  },
+  {
+    "text": "how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "increase volume on my phone",
+    "label": "command"
+  },
+  {
+    "text": "lock the door, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "I want to launch calculator with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "how far is the moon? please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you explain quantum physics? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to lock the door with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn on the air conditioner with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "please set alarm for midnight on the phone",
+    "label": "command"
+  },
+  {
+    "text": "turn off the lights, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "please send email to Vicki Marshall on the pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "send email to Paul Lloyd, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you increase volume using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "please take a picture on the phone",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone on my pc",
+    "label": "command"
+  },
+  {
+    "text": "lock the door, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "send email to Julie White, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "why is the sky blue? please",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the capital of Japan? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to lock the door with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "open calculator on my pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "when was the internet invented? please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "please launch terminal on the pc",
+    "label": "command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "increase volume, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "is it going to rain tomorrow? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to increase volume with my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to mute microphone with my pc",
+    "label": "command"
+  },
+  {
+    "text": "please turn on the air conditioner on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "turn off the lights on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "could you turn on the air conditioner using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "open notepad on my pc",
+    "label": "command"
+  },
+  {
+    "text": "tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "turn off the lights, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "hey, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you turn off the lights using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "send email to Dr. Gary Nelson, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you explain quantum physics? please",
+    "label": "not_command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to turn on the air conditioner with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I want to take a picture with my phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "please play a podcast on the phone",
+    "label": "command"
+  },
+  {
+    "text": "could you open calculator using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "do penguins have knees? please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to take a picture with my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "send email to Stacy Harmon, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "increase volume on my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to increase volume with my phone",
+    "label": "command"
+  },
+  {
+    "text": "increase volume on my phone",
+    "label": "command"
+  },
+  {
+    "text": "please increase volume on the phone",
+    "label": "command"
+  },
+  {
+    "text": "can you explain quantum physics? please",
+    "label": "not_command"
+  },
+  {
+    "text": "could you turn on the air conditioner using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "please play a podcast on the phone",
+    "label": "command"
+  },
+  {
+    "text": "play my playlist, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "turn off the lights, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "record video on my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "please increase volume on the phone",
+    "label": "command"
+  },
+  {
+    "text": "tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "could you open notepad using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "take a picture, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please text Vicki Marshall saying meeting rescheduled on the phone",
+    "label": "command"
+  },
+  {
+    "text": "launch notepad on my pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "open notepad on my pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "please start terminal on the pc",
+    "label": "command"
+  },
+  {
+    "text": "please launch terminal on the pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you increase volume using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "please play a podcast on the phone",
+    "label": "command"
+  },
+  {
+    "text": "how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "could you turn off the lights using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "please lock the door on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you start chrome using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you record video using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "take a picture on my phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "how does a plane fly? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you record video using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "could you send email to Vicki Marshall using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "could you text Jennifer Ware saying call me using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the capital of Japan? please",
+    "label": "not_command"
+  },
+  {
+    "text": "increase volume on my phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "text Heather White saying call me, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "text Joseph Fields saying meeting rescheduled on my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to lock the door with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "increase volume on my phone",
+    "label": "command"
+  },
+  {
+    "text": "could you set alarm for noon using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "how does a plane fly? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you open notepad using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "open notepad, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "hey, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "please mute microphone on the pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "record video on my phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you take a picture using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "could you restart the system using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "please text Linda Reynolds saying meeting rescheduled on the phone",
+    "label": "command"
+  },
+  {
+    "text": "could you text Kayla Graham saying I'll be late using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you turn on the air conditioner using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "please open chrome on the pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "start terminal on my pc",
+    "label": "command"
+  },
+  {
+    "text": "set alarm for 8:30 PM, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "who is the president of France? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "when was the internet invented? please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "start terminal on my pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "open spotify, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "could you play my playlist using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn on the air conditioner with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "could you play my playlist using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "take a picture on my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "please text Paul Lloyd saying meeting rescheduled on the phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "send email to Linda Reynolds on my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to play my playlist with my phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you turn on the air conditioner using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "please take a picture on the phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "is it going to rain tomorrow? please",
+    "label": "not_command"
+  },
+  {
+    "text": "do penguins have knees? please",
+    "label": "not_command"
+  },
+  {
+    "text": "take a picture on my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to open spotify with my pc",
+    "label": "command"
+  },
+  {
+    "text": "when was the internet invented? please",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you set alarm for 7 AM using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "please turn off the lights on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "hey, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to send email to Julie White with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to start calculator with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "take a picture on my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to mute microphone with my pc",
+    "label": "command"
+  },
+  {
+    "text": "turn on the air conditioner on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "lock the door on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "lock the door, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "start calculator on my pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to start spotify with my pc",
+    "label": "command"
+  },
+  {
+    "text": "how far is the moon? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you start calculator using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "please start calculator on the pc",
+    "label": "command"
+  },
+  {
+    "text": "who is the president of France? please",
+    "label": "not_command"
+  },
+  {
+    "text": "send email to Robert Schroeder, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "what's the weather like today? please",
+    "label": "not_command"
+  },
+  {
+    "text": "how does a plane fly? please",
+    "label": "not_command"
+  },
+  {
+    "text": "when was the internet invented? please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "set alarm for noon, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "hey, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "restart the system, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "please turn off the lights on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I want to set alarm for noon with my phone",
+    "label": "command"
+  },
+  {
+    "text": "restart the system, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "could you start terminal using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "play music, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "I want to send email to Heather White with my pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to play my playlist with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to send email to Angela Brown with my pc",
+    "label": "command"
+  },
+  {
+    "text": "how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you turn on the air conditioner using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "is it going to rain tomorrow? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "please text Joshua Smith saying I'll be late on the phone",
+    "label": "command"
+  },
+  {
+    "text": "how does a plane fly? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to start spotify with my pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "do penguins have knees? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you set alarm for 7 AM using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to restart the system with my pc",
+    "label": "command"
+  },
+  {
+    "text": "hey, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "open spotify, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "hey, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "open spotify on my pc",
+    "label": "command"
+  },
+  {
+    "text": "who is the president of France? please",
+    "label": "not_command"
+  },
+  {
+    "text": "launch spotify, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "when was the internet invented? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please mute microphone on the pc",
+    "label": "command"
+  },
+  {
+    "text": "play a podcast, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "hey, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "turn off the lights, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "I want to take a picture with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to open terminal with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "please turn off the lights on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone on my pc",
+    "label": "command"
+  },
+  {
+    "text": "do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "open spotify, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for? please",
+    "label": "not_command"
+  },
+  {
+    "text": "take a picture, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "please text Heather White saying I'll be late on the phone",
+    "label": "command"
+  },
+  {
+    "text": "who is the president of France? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "set alarm for midnight on my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to turn on the air conditioner with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you start terminal using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "could you record video using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to take a picture with my phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "how far is the moon? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "start spotify on my pc",
+    "label": "command"
+  },
+  {
+    "text": "turn on the air conditioner on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "play a podcast on my phone",
+    "label": "command"
+  },
+  {
+    "text": "play my playlist on my phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "could you play my playlist using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to play my playlist with my phone",
+    "label": "command"
+  },
+  {
+    "text": "record video, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you turn off the lights using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "lock the door, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "tell me a joke please",
+    "label": "not_command"
+  },
+  {
+    "text": "please turn off the lights on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "start spotify on my pc",
+    "label": "command"
+  },
+  {
+    "text": "please open calculator on the pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you start notepad using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "I want to set alarm for 8:30 PM with my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to launch spotify with my pc",
+    "label": "command"
+  },
+  {
+    "text": "record video on my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you explain quantum physics? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "how do I cook pasta? please",
+    "label": "not_command"
+  },
+  {
+    "text": "tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "please turn off the lights on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "please launch chrome on the pc",
+    "label": "command"
+  },
+  {
+    "text": "please text Robert Schroeder saying call me on the phone",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "I want to play my playlist with my phone",
+    "label": "command"
+  },
+  {
+    "text": "lock the door on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you text Joshua Smith saying meeting rescheduled using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "record video, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "hey, when was the internet invented?",
+    "label": "not_command"
+  },
+  {
+    "text": "how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "tell me a joke please",
+    "label": "not_command"
+  },
+  {
+    "text": "please play my playlist on the phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "how far is the moon? please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "record video on my phone",
+    "label": "command"
+  },
+  {
+    "text": "could you mute microphone using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you play my playlist using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "start terminal on my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "please turn off the lights on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "could you turn off the lights using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "restart the system, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "send email to Linda Reynolds, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "how does a plane fly? please",
+    "label": "not_command"
+  },
+  {
+    "text": "could you open chrome using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "tell me a joke please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you open terminal using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "please lock the door on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "increase volume, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "please set alarm for midnight on the phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "could you mute microphone using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "hey, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to lock the door with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I want to text Jonathan Harmon saying meeting rescheduled with my phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "please text Kimberly Brennan saying call me on the phone",
+    "label": "command"
+  },
+  {
+    "text": "is it going to rain tomorrow? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "open calculator on my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to mute microphone with my pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "who is the president of France? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please turn on the air conditioner on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "open notepad, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "do penguins have knees? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please mute microphone on the pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to open calculator with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to set alarm for 7 AM with my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to turn on the air conditioner with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "hey, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "lock the door, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "launch calculator on my pc",
+    "label": "command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "start calculator on my pc",
+    "label": "command"
+  },
+  {
+    "text": "could you lock the door using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "turn off the lights, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "record video, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "what does AI stand for? please",
+    "label": "not_command"
+  },
+  {
+    "text": "send email to Jennifer Ware on my pc",
+    "label": "command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "please text Angela Brown saying meeting rescheduled on the phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "turn on the air conditioner on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "start chrome on my pc",
+    "label": "command"
+  },
+  {
+    "text": "please take a picture on the phone",
+    "label": "command"
+  },
+  {
+    "text": "is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "how does a plane fly? please",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, why is the sky blue?",
+    "label": "not_command"
+  },
+  {
+    "text": "what's the capital of Japan? please",
+    "label": "not_command"
+  },
+  {
+    "text": "start calculator, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "could you play a podcast using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to launch chrome with my pc",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "please record video on the phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to send email to Joshua Smith with my pc",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "could you set alarm for 8:30 PM using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you turn on the air conditioner using my smarthome?",
+    "label": "command"
+  },
+  {
+    "text": "lock the door, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "lock the door on my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to turn off the lights with my smarthome",
+    "label": "command"
+  },
+  {
+    "text": "tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "could you increase volume using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "tell me a joke please",
+    "label": "not_command"
+  },
+  {
+    "text": "set alarm for noon, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "what time is it in New York? please",
+    "label": "not_command"
+  },
+  {
+    "text": "mute microphone on my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to record video with my phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "could you open spotify using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, is it going to rain tomorrow?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "how far is the moon? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, can you explain quantum physics?",
+    "label": "not_command"
+  },
+  {
+    "text": "restart the system, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "increase volume, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "increase volume on my phone",
+    "label": "command"
+  },
+  {
+    "text": "play my playlist, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "can you explain quantum physics? please",
+    "label": "not_command"
+  },
+  {
+    "text": "play a podcast on my phone",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what's the weather like today?",
+    "label": "not_command"
+  },
+  {
+    "text": "please take a picture on the phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to send email to Jennifer Thompson with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "restart the system on my pc",
+    "label": "command"
+  },
+  {
+    "text": "launch chrome, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "increase volume on my phone",
+    "label": "command"
+  },
+  {
+    "text": "I want to send email to Nancy Gonzalez with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to open calculator with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to mute microphone with my pc",
+    "label": "command"
+  },
+  {
+    "text": "I want to take a picture with my phone",
+    "label": "command"
+  },
+  {
+    "text": "do penguins have knees? please",
+    "label": "not_command"
+  },
+  {
+    "text": "could you launch spotify using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "I want to send email to Jennifer Thompson with my pc",
+    "label": "command"
+  },
+  {
+    "text": "could you take a picture using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone on my pc",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "can you tell me, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "how does a plane fly?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you take a picture using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "I was wondering, what's the capital of Japan?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you text Dr. Gary Nelson saying meeting rescheduled using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "what does AI stand for? please",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to set alarm for 7 AM with my phone",
+    "label": "command"
+  },
+  {
+    "text": "tell me a joke please",
+    "label": "not_command"
+  },
+  {
+    "text": "I want to increase volume with my phone",
+    "label": "command"
+  },
+  {
+    "text": "can you tell me, how do I cook pasta?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you text David Stewart saying call me using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "I want to start chrome with my pc",
+    "label": "command"
+  },
+  {
+    "text": "open calculator, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "I want to mute microphone with my pc",
+    "label": "command"
+  },
+  {
+    "text": "play music, on my phone please",
+    "label": "command"
+  },
+  {
+    "text": "tell me a joke",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, who is the president of France?",
+    "label": "not_command"
+  },
+  {
+    "text": "please turn on the air conditioner on the smarthome",
+    "label": "command"
+  },
+  {
+    "text": "hey, do penguins have knees?",
+    "label": "not_command"
+  },
+  {
+    "text": "why is the sky blue? please",
+    "label": "not_command"
+  },
+  {
+    "text": "could you mute microphone using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "hey, how far is the moon?",
+    "label": "not_command"
+  },
+  {
+    "text": "please play a podcast on the phone",
+    "label": "command"
+  },
+  {
+    "text": "increase volume on my phone",
+    "label": "command"
+  },
+  {
+    "text": "hey, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "I was wondering, how tall is Mount Everest?",
+    "label": "not_command"
+  },
+  {
+    "text": "take a picture on my phone",
+    "label": "command"
+  },
+  {
+    "text": "turn on the air conditioner, on my smarthome please",
+    "label": "command"
+  },
+  {
+    "text": "launch terminal, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "could you take a picture using my phone?",
+    "label": "command"
+  },
+  {
+    "text": "mute microphone, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "restart the system, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "who is the president of France? please",
+    "label": "not_command"
+  },
+  {
+    "text": "send email to Jonathan Harmon, on my pc please",
+    "label": "command"
+  },
+  {
+    "text": "hey, what time is it in New York?",
+    "label": "not_command"
+  },
+  {
+    "text": "play a podcast on my phone",
+    "label": "command"
+  },
+  {
+    "text": "why is the sky blue? please",
+    "label": "not_command"
+  },
+  {
+    "text": "hey, what does AI stand for?",
+    "label": "not_command"
+  },
+  {
+    "text": "could you send email to Debbie Farrell using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "could you open terminal using my pc?",
+    "label": "command"
+  },
+  {
+    "text": "play my playlist on my phone",
+    "label": "command"
+  },
+  {
+    "text": "please turn off the lights on the smarthome",
+    "label": "command"
+  }
 ]

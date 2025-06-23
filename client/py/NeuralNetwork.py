@@ -352,7 +352,7 @@ class NeuralNetwork:
             self.forward(inputs)
             accuracy = self.get_accuracy()
             loss = self.loss
-            if((best_accuracy != None) and (best_loss != None) and accuracy > best_accuracy and loss < best_loss):
+            if((best_accuracy != None) and (best_loss != None) and accuracy >= best_accuracy and loss <= best_loss):
                 best_accuracy = accuracy
                 best_params = self.get_params()
                 best_loss = loss

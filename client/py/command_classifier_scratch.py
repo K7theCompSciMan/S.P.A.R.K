@@ -13,7 +13,6 @@ class CommandClassifier:
         
         self.max_len = 50
 
-
         self.training_data = self.data[:400]
         self.test_data = self.data[400:]
         Network.Tokenizer.build_vocab(self.training_data['text'])
@@ -61,7 +60,7 @@ class CommandClassifier:
         return prediction
     
     def train(self, output_file):
-        self.nn.train(self.x_train, self.y_train, epochs=1000, output_file=output_file)
+        self.nn.train(self.x_train, self.y_train, epochs=10000, output_file=output_file)
         
     def validate(self):
         self.nn.set_targets(self.y_test)
@@ -71,8 +70,8 @@ class CommandClassifier:
 
 if __name__ == "__main__":
     classifier = CommandClassifier('client/py/nn_scratch_data.json')
-    classifier.load_model('client/py/nn_scratch_model.json')
-    # classifier.train('client/py/nn_scratch_data.json')
+    # classifier.load_model('client/py/nn_scratch_model_conversational.json')
+    classifier.train('client/py/nn_scratch_model_dataset_claude.json')
     classifier.validate()
     while True:
         text = input("Enter text (or 'q' to quit): ")
