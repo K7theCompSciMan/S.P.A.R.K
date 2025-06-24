@@ -95,14 +95,83 @@ class Loss:
             clipped_prediction = np.clip(prediction, 1e-7, 1.0 - 1e-7)
             dinputs = - actual / clipped_prediction
             return dinputs / samples
+class Regularizer:
+    class Empty:
+        pass
+    class L1:
+        def __init__(self, weight_regularizer: float, bias_regularizer: float):
+            self.weight_regularizer = weight_regularizer
+            self.bias_regularizer = bias_regularizer
+        def calculate_weights(self, layer):
+            return self.weight_regularizer * np.sum(np.abs(layer.weights))
+        def calculate_biases(self, layer):
+            return self.bias_regularizer * np.sum(np.abs(layer.biases))
+        def calculate(self, layer):
+            return self.calculate_weights(layer) + self.calculate_biases(layer)
+
+        def backward(self, layer):
+            dL1 = np.ones_like(layer.weights)
+            dL1[layer.weights < 0] = -1 
+            layer.dweights += self.weight_regularizer * dL1 
+            dL1 = np.ones_like(layer.biases)
+            dL1[layer.biases < 0] = -1 
+            layer.dbiases += self.bias_regularizer * dL1 
+    
+    class L2:
+        def __init__(self, weight_regularizer: float, bias_regularizer: float):
+            self.weight_regularizer = weight_regularizer
+            self.bias_regularizer = bias_regularizer
+        def calculate_weights(self, layer):
+            return self.weight_regularizer * np.sum((layer.weights**2))
+        def calculate_biases(self, layer):
+            return self.bias_regularizer * np.sum((layer.biases**2))
+        def calculate(self, layer):
+            return self.calculate_weights(layer) + self.calculate_biases(layer)
+
+        def backward(self, layer):
+            layer.dweights += 2 * self.weight_regularizer * layer.weights
+            layer.dbiases += 2 * self.bias_regularizer * layer.biases
+    class L1L2:
+        def __init__(self, weight_regularizer: float, bias_regularizer: float):
+            self.weight_regularizer = weight_regularizer
+            self.bias_regularizer = bias_regularizer
+            self.l1 = Regularizer.L1(weight_regularizer, bias_regularizer)
+            self.l2 = Regularizer.L2(weight_regularizer, bias_regularizer)
+        def calculate_weights(self,layer):
+            return self.l1.calculate_weights(layer) + self.l2.calculate_weights(layer)
+        def calculate_biases(self,layer):
+            return self.l1.calculate_biases(layer) + self.l2.calculate_biases(layer)
+        def calculate(self, layer):
+            return self.l1.calculate(layer) + self.l2.calculate(layer)
+        def backward(self, layer):
+            self.l1.backward(layer)
+            self.l2.backward(layer)
 class Layer:
+    class Dropout:
+        def __init__(self, dropout_rate: float):
+            self.rate = 1-dropout_rate
+            self.weights = None
+            self.biases = None
+        
+        def forward(self, inputs):
+            self.binary_mask = np.random.binomial(1, self.rate, inputs.shape) / (self.rate)
+
+            return inputs * self.binary_mask
+        
+        def set_inputs(self, inputs):
+            self.inputs = inputs
+        
+        def backward(self, dvalues):
+            return dvalues *self.binary_mask
+            
     class Dense:
-        def __init__(self, input_size: int, output_size: int, activation_function: ActivationFunction):
+        def __init__(self, input_size: int, output_size: int, activation_function: ActivationFunction, regularizer: Regularizer=Regularizer.Empty):
             self.input_size = input_size
             self.output_size = output_size
             self.activation_function = activation_function
             self.weights = 0.01 * np.random.randn(input_size, output_size)
             self.biases = np.zeros((1, output_size))
+            self.regularizer = regularizer
         
         def set_inputs(self, inputs):
             self.inputs = inputs
@@ -126,6 +195,9 @@ class Layer:
             # print("dense backward")
             self.dweights = np.dot(self.inputs.T, dvalues)
             self.dbiases = np.sum(dvalues, axis=0, keepdims=True)
+            if (self.regularizer is not Regularizer.Empty):
+                self.regularizer.backward(self)
+            
             self.dinputs = np.dot(dvalues, self.weights.T)
             return self.dinputs
         def backward_with_activation(self, dvalues):
@@ -273,12 +345,13 @@ class Optimizer:
             layer.weights -= self.learning_rate * normalized_weight_momentums / (np.sqrt(normalized_weight_cache) + self.epsilon)
             layer.biases -= self.learning_rate * normalized_bias_momentums / (np.sqrt(normalized_bias_cache) + self.epsilon)
 class NeuralNetwork:
-    def __init__(self, layers: list[Layer], targets, optimizer: Optimizer, loss_function=Loss.Empty):
+    def __init__(self, layers: list[Layer], targets, optimizer: Optimizer, regularizer: Regularizer=Regularizer.Empty, loss_function=Loss.Empty):
         self.layers = layers
         self.output = None
         self.loss_function = loss_function
         self.optimizer = optimizer
         self.targets = targets
+        self.regularizer = regularizer
         #model initialization
         self.model = {'accuracy': 0, 'loss': 99999, 'params': [{'weights': x.weights, 'biases': x.biases} for x in self.layers]}
         
@@ -287,7 +360,7 @@ class NeuralNetwork:
         self.output = inputs
         for layer in self.layers:
             layer.set_inputs(self.output)
-            if(layer.activation_function is not None):
+            if(hasattr(layer, 'activation_function')):
                 if(layer.activation_function == ActivationFunction.CombinedSoftmaxCrossEntropy):
                     self.output, self.loss = layer.forward_with_combined_activation(self.output, self.targets)
                 else:
@@ -296,6 +369,9 @@ class NeuralNetwork:
                 self.output = layer.forward(self.output)
         if(self.loss_function is not Loss.Empty):
             self.loss = self.calculate_loss(self.targets)
+        for layer in self.layers:
+            if(hasattr(layer, 'regularizer') and layer.regularizer is not Regularizer.Empty):
+                self.loss += layer.regularizer.calculate(layer)
         return self.output
     
     def set_targets(self, targets):
@@ -313,12 +389,15 @@ class NeuralNetwork:
         else:
             dvalues = self.targets.copy()
         for index, layer in enumerate(reversed(self.layers)):
-            if(layer.activation_function is not None):
+            if(hasattr(layer, 'activation_function')):
                 dvalues = layer.backward_with_activation(dvalues)  
+            else:
+                dvalues = layer.backward(dvalues)
             
     def adjust_parameters(self):
         for layer in self.layers:
-            self.optimizer.adjust_parameters(layer)
+            if (type(layer) is not Layer.Dropout):
+                self.optimizer.adjust_parameters(layer)
 
     def get_accuracy(self):
         targets = self.targets.copy()
@@ -333,7 +412,8 @@ class NeuralNetwork:
     def load_model(self, model):
         self.model=model
         for index, layer in enumerate(self.layers):
-            layer.set_params(model['params'][index])
+            if(hasattr(layer, 'set_params')):
+                layer.set_params(model['params'][index])
         
         print("loaded model params")
     
@@ -376,7 +456,23 @@ class NeuralNetwork:
         print(f"validation accuracy: {self.get_accuracy()}, loss: {self.loss}")
         
     def predict(self, inputs):
-        self.forward(inputs)
+        self.inputs = inputs
+        self.output = inputs
+        for layer in self.layers:
+            layer.set_inputs(self.output)
+            if(hasattr(layer, 'activation_function')):
+                if(layer.activation_function == ActivationFunction.CombinedSoftmaxCrossEntropy):
+                    self.output, self.loss = layer.forward_with_combined_activation(self.output, self.targets)
+                else:
+                    self.output = layer.forward_with_activation(self.output)
+            else:
+                if (type(layer) is not Layer.Dropout):
+                    self.output = layer.forward(self.output)
+        if(self.loss_function is not Loss.Empty):
+            self.loss = self.calculate_loss(self.targets)
+        for layer in self.layers:
+            if(hasattr(layer, 'regularizer') and layer.regularizer is not Regularizer.Empty):
+                self.loss += layer.regularizer.calculate(layer)
         return self.postprocess(self.output)
     
     def set_preprocess(self, preprocess):
@@ -411,8 +507,9 @@ class Tokenizer:
 if __name__ == "__main__":    
     X, y = spiral_data(samples=100, classes=3)
     test_x, test_y = spiral_data(samples=100, classes=3)
-
     nn = NeuralNetwork([
-        Layer.Dense(2, 64, ActivationFunction.ReLU),
-        Layer.Dense(64, 1, ActivationFunction.CombinedSoftmaxCrossEntropy)  
-    ], y, Optimizer.Adam(learning_rate = .005, rate_decay=1e-7)) 
+        Layer.Dense(2, 64, ActivationFunction.ReLU, regularizer=Regularizer.L1L2(5e-4, 5e-4)),
+        Layer.Dropout(0.1),
+        Layer.Dense(64, 3, ActivationFunction.CombinedSoftmaxCrossEntropy)  
+    ], y, Optimizer.Adam(learning_rate = .005, rate_decay=1e-7))
+    nn.train(X, y, epochs=10000)

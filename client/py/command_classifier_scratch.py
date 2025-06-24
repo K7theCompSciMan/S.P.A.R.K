@@ -12,7 +12,6 @@ class CommandClassifier:
             self.data = pd.read_json(f)
         
         self.max_len = 50
-
         self.training_data = self.data[:400]
         self.test_data = self.data[400:]
         Network.Tokenizer.build_vocab(self.training_data['text'])
@@ -23,7 +22,8 @@ class CommandClassifier:
         self.y_test = np.stack(self.y_test.to_numpy())
 
         self.nn = Network.NeuralNetwork([
-            Network.Layer.Dense(self.max_len, 64, Network.ActivationFunction.ReLU),
+            Network.Layer.Dense(self.max_len, 64, Network.ActivationFunction.ReLU, Network.Regularizer.L1L2(8e-4, 8e-4)),
+            Network.Layer.Dropout(0.15),
             Network.Layer.Dense(64, 2, Network.ActivationFunction.CombinedSoftmaxCrossEntropy)  
         ], self.y_train, Network.Optimizer.Adam(learning_rate = .005, rate_decay=1e-7)) 
 
@@ -60,7 +60,7 @@ class CommandClassifier:
         return prediction
     
     def train(self, output_file):
-        self.nn.train(self.x_train, self.y_train, epochs=10000, output_file=output_file)
+        self.nn.train(self.x_train, self.y_train, epochs=1001, output_file=output_file)
         
     def validate(self):
         self.nn.set_targets(self.y_test)
@@ -69,10 +69,10 @@ class CommandClassifier:
 
 
 if __name__ == "__main__":
-    classifier = CommandClassifier('client/py/nn_scratch_data.json')
-    # classifier.load_model('client/py/nn_scratch_model_conversational.json')
-    classifier.train('client/py/nn_scratch_model_dataset_claude.json')
-    classifier.validate()
+    classifier = CommandClassifier('client/py/nn_scratch_data_dataset_claude.json')
+    classifier.load_model('client/py/nn_scratch_model_dataset_claude.json')
+    # classifier.train('client/py/nn_scratch_model_tone_adjusted.json')
+    # classifier.validate()
     while True:
         text = input("Enter text (or 'q' to quit): ")
         if text.lower() == 'q':
