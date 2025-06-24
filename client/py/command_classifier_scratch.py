@@ -71,8 +71,8 @@ class CommandClassifier:
 if __name__ == "__main__":
     classifier = CommandClassifier('client/py/nn_scratch_data_dataset_claude.json')
     classifier.load_model('client/py/nn_scratch_model_dataset_claude.json')
-    # classifier.train('client/py/nn_scratch_model_tone_adjusted.json')
-    # classifier.validate()
+    # classifier.train('client/py/nn_scratch_model_dataset_claude.json')
+    classifier.validate()
     while True:
         text = input("Enter text (or 'q' to quit): ")
         if text.lower() == 'q':
