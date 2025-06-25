@@ -5,15 +5,15 @@ import numpy as np
 import string
 
 class CommandClassifierSoftmax:
-    def __init__(self, data_file):
+    def __init__(self, data_file, data_size):
         self.data_file = data_file
         self.data  = None
         with open(self.data_file, 'rb') as f:
             self.data = pd.read_json(f)
         
         self.max_len = 50
-        self.training_data = self.data[:400]
-        self.test_data = self.data[400:]
+        self.training_data = self.data[:data_size]
+        self.test_data = self.data[data_size:]
         Network.Tokenizer.build_vocab(self.training_data['text'])
 
         self.y_train = self.training_data['label'].apply(lambda x: [1, 0] if x == 'command' else [0, 1])
@@ -24,7 +24,7 @@ class CommandClassifierSoftmax:
         self.nn = Network.NeuralNetwork([
             Network.Layer.Dense(self.max_len, 64, Network.ActivationFunction.ReLU, Network.Regularizer.L1L2(8e-4, 8e-4)),
             Network.Layer.Dropout(0.15),
-            Network.Layer.Dense(64, 2, Network.ActivationFunction.CombinedSoftmaxCrossEntropy)  
+            Network.Layer.Dense(64, 2, Network.ActivationFunction.CombinedSoftmaxCategoricalCrossEntropy)  
         ], self.y_train, Network.Optimizer.Adam(learning_rate = .005, rate_decay=1e-7)) 
 
 
@@ -60,22 +60,22 @@ class CommandClassifierSoftmax:
         return prediction
     
     def train(self, output_file):
-        self.nn.train(self.x_train, self.y_train, epochs=1001, output_file=output_file)
+        self.nn.train(self.x_train, self.y_train, epochs=10001, output_file=output_file)
         
     def validate(self):
         self.nn.set_targets(self.y_test)
         self.nn.validate(self.x_test, self.y_test)
 
 class CommandClassifierBinary:
-    def __init__(self, data_file):
+    def __init__(self, data_file, data_size):
         self.data_file = data_file
         self.data  = None
         with open(self.data_file, 'rb') as f:
             self.data = pd.read_json(f)
         
         self.max_len = 50
-        self.training_data = self.data[:400]
-        self.test_data = self.data[400:]
+        self.training_data = self.data[:data_size]
+        self.test_data = self.data[data_size:]
         Network.Tokenizer.build_vocab(self.training_data['text'])
 
         self.y_train = self.training_data['label'].apply(lambda x: [1] if x == 'command' else [0])
@@ -89,7 +89,7 @@ class CommandClassifierBinary:
         # print(self.training_data['text'][:5])
         self.nn = Network.NeuralNetwork([
             Network.Layer.Dense(self.max_len, 64, Network.ActivationFunction.ReLU, Network.Regularizer.L1L2(8e-4, 8e-4)),
-            Network.Layer.Dropout(0.15),
+            Network.Layer.Dropout(0.2),
             Network.Layer.Dense(64, 1, Network.ActivationFunction.Sigmoid)  
         ], self.y_train, Network.Optimizer.Adam(learning_rate = .005, rate_decay=1e-7), loss_function=Network.Loss.BinaryCrossEntropy) 
 
@@ -125,7 +125,7 @@ class CommandClassifierBinary:
         return prediction
     
     def train(self, output_file):
-        self.nn.train(self.x_train, self.y_train, epochs=1001, output_file=output_file)
+        self.nn.train(self.x_train, self.y_train, epochs=10001, output_file=output_file)
         
     def validate(self):
         self.nn.set_targets(self.y_test)
@@ -134,14 +134,14 @@ class CommandClassifierBinary:
 
 
 if __name__ == "__main__":
-    # classifier = CommandClassifierSoftmax('client/py/nn_scratch_data_dataset_claude.json')
-    # classifier.load_model('client/py/nn_scratch_model_dataset_claude.json')
-    # classifier.train('client/py/nn_scratch_model_dataset_claude.json')
+    # classifier = CommandClassifierSoftmax('client/py/command_dataset_direct_and_ai_questions.json', 4000)
+    # classifier.load_model('client/py/nn_scratch_model_direct_and_ai_softmax.json')
+    # classifier.train('client/py/nn_scratch_model_direct_and_ai_softmax.json')
     
-    classifier = CommandClassifierBinary('client/py/nn_scratch_data_dataset_claude.json')
-    classifier.train('client/py/nn_scratch_model_dataset_claude_binary.json')
+    # classifier = CommandClassifierBinary('client/py/command_dataset_direct_and_ai_questions.json', 4000)
+    # classifier.load_model('client/py/nn_scratch_model_direct_and_ai_binary.json')
+    # classifier.train('client/py/nn_scratch_model_direct_and_ai_binary.json')
     
-    classifier.validate()
     while True:
         text = input("Enter text (or 'q' to quit): ")
         if text.lower() == 'q':
