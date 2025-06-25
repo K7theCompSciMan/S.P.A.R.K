@@ -28,7 +28,7 @@ class ActivationFunction:
                 matrix = np.diagflat(output) - np.dot(output, output.T)
                 dinputs[index] = np.dot(matrix, dvalue)
             return dinputs
-    class CombinedSoftmaxCrossEntropy:
+    class CombinedSoftmaxCategoricalCrossEntropy:
         @staticmethod
         def softmax(inputs):
             exp_values = np.exp(inputs - np.max(inputs, axis=1, keepdims=True))
@@ -37,8 +37,8 @@ class ActivationFunction:
         
         @staticmethod
         def calculate(inputs, y_true):
-            output = ActivationFunction.CombinedSoftmaxCrossEntropy.softmax(inputs)
-            loss = ActivationFunction.CombinedSoftmaxCrossEntropy.loss(output, y_true)
+            output = ActivationFunction.CombinedSoftmaxCategoricalCrossEntropy.softmax(inputs)
+            loss = ActivationFunction.CombinedSoftmaxCategoricalCrossEntropy.loss(output, y_true)
             return output, loss
         
         @staticmethod
@@ -61,10 +61,22 @@ class ActivationFunction:
             dinputs = probabilities.copy()
             dinputs[range(samples), y_true] -= 1
             return dinputs / samples
+        
+    class Sigmoid:
+        @staticmethod
+        def calculate(inputs):
+            # print("performed sigmoid forward")
+            return 1.0 / (1 + np.exp(-inputs))
+        
+        @staticmethod
+        def backward(outputs, dvalues):
+            # print("performed sigmoid backward")
+            return dvalues * outputs * (1 - outputs)
+        
 class Loss:
     class Empty:
         pass
-    class CrossEntropy:
+    class CategoricalCrossEntropy:
 
         @staticmethod
         def calculate(predicted, actual):
@@ -82,11 +94,11 @@ class Loss:
             
         @staticmethod
         def mean(predicted, actual):
-            return np.mean(Loss.CrossEntropy.calculate(predicted, actual))
+            return np.mean(Loss.CategoricalCrossEntropy.calculate(predicted, actual))
         
         @staticmethod
         def backward(prediction, actual):
-            # print("performed CrossEntropy backward")
+            # print("performed CategoricalCrossEntropy backward")
             samples = len(prediction)
             labels = len(prediction[0]) if len(actual.shape) == 2 else np.max(actual) + 1
             if len(actual.shape) == 1:
@@ -95,6 +107,29 @@ class Loss:
             clipped_prediction = np.clip(prediction, 1e-7, 1.0 - 1e-7)
             dinputs = - actual / clipped_prediction
             return dinputs / samples
+    class BinaryCrossEntropy:
+        @staticmethod
+        def calculate(predicted, actual):
+            # print("performed BinaryCrossEntropy forward")
+            clipped_prediction = np.clip(predicted, 1e-7, 1.0 - 1e-7)
+            return (-(actual * np.log(clipped_prediction) + (1 - actual) * np.log(1 - clipped_prediction)))
+        
+        @staticmethod
+        def mean(predicted, actual):
+            return np.mean(Loss.BinaryCrossEntropy.calculate(predicted, actual))
+        
+        @staticmethod
+        def backward(predicted, actual):
+            # print("performed BinaryCrossEntropy backward")
+            
+            samples = len(predicted)
+            outputs = len(predicted[0])
+            
+            clipped_prediction = np.clip(predicted, 1e-7, 1.0 - 1e-7)
+            dinputs = - (actual / clipped_prediction - (1 - actual) / (1 - clipped_prediction)) / outputs
+            return dinputs / samples
+        
+        
 class Regularizer:
     class Empty:
         pass
@@ -202,7 +237,7 @@ class Layer:
             return self.dinputs
         def backward_with_activation(self, dvalues):
             # print("dense backward with activation")
-            activation_dvalues = self.activation_function.backward(self.pre_activation_output, dvalues)
+            activation_dvalues = self.activation_function.backward(self.activation_output, dvalues)
             return self.backward(activation_dvalues)
 
         def set_params(self, params: (float, float)):
@@ -344,6 +379,7 @@ class Optimizer:
             
             layer.weights -= self.learning_rate * normalized_weight_momentums / (np.sqrt(normalized_weight_cache) + self.epsilon)
             layer.biases -= self.learning_rate * normalized_bias_momentums / (np.sqrt(normalized_bias_cache) + self.epsilon)
+            # print("adjusted parameters")
 class NeuralNetwork:
     def __init__(self, layers: list[Layer], targets, optimizer: Optimizer, regularizer: Regularizer=Regularizer.Empty, loss_function=Loss.Empty):
         self.layers = layers
@@ -361,7 +397,7 @@ class NeuralNetwork:
         for layer in self.layers:
             layer.set_inputs(self.output)
             if(hasattr(layer, 'activation_function')):
-                if(layer.activation_function == ActivationFunction.CombinedSoftmaxCrossEntropy):
+                if(layer.activation_function == ActivationFunction.CombinedSoftmaxCategoricalCrossEntropy):
                     self.output, self.loss = layer.forward_with_combined_activation(self.output, self.targets)
                 else:
                     self.output = layer.forward_with_activation(self.output)
@@ -400,10 +436,17 @@ class NeuralNetwork:
                 self.optimizer.adjust_parameters(layer)
 
     def get_accuracy(self):
+        if (self.loss_function is Loss.BinaryCrossEntropy):
+            return self.get_accuracy_binary()
         targets = self.targets.copy()
         predictions = np.argmax(self.output, axis=1)
         if(len(targets.shape) == 2):
             targets = np.argmax(self.targets, axis=1)
+        return np.mean(predictions == targets)
+
+    def get_accuracy_binary(self):
+        targets = self.targets.copy()
+        predictions = (self.output > 0.5) * 1
         return np.mean(predictions == targets)
 
     def get_params(self):
@@ -437,7 +480,7 @@ class NeuralNetwork:
                 best_params = self.get_params()
                 best_loss = loss
             if not epoch % 100 :
-                print(f"epoch: {epoch}, accuracy: {accuracy}, loss: {loss}, learning rate: {self.optimizer.learning_rate}")
+                print(f"epoch: {epoch}, accuracy: {accuracy:.3f}, loss: {loss:.3f}, learning rate: {self.optimizer.learning_rate}")
                 # print(f"epoch: {epoch}, best accuracy: {best_accuracy}, best loss: {best_loss}, learning rate: {self.optimizer.learning_rate}")
             self.backward()
             self.adjust_parameters()
@@ -461,7 +504,7 @@ class NeuralNetwork:
         for layer in self.layers:
             layer.set_inputs(self.output)
             if(hasattr(layer, 'activation_function')):
-                if(layer.activation_function == ActivationFunction.CombinedSoftmaxCrossEntropy):
+                if(layer.activation_function == ActivationFunction.CombinedSoftmaxCategoricalCrossEntropy):
                     self.output, self.loss = layer.forward_with_combined_activation(self.output, self.targets)
                 else:
                     self.output = layer.forward_with_activation(self.output)
@@ -505,11 +548,12 @@ class Tokenizer:
 
     
 if __name__ == "__main__":    
-    X, y = spiral_data(samples=100, classes=3)
-    test_x, test_y = spiral_data(samples=100, classes=3)
+    X, y = spiral_data(samples=100, classes=2)
+    test_x, test_y = spiral_data(samples=100, classes=2)
+    y = y.reshape(-1, 1)
+    test_y = test_y.reshape(-1, 1)
     nn = NeuralNetwork([
-        Layer.Dense(2, 64, ActivationFunction.ReLU, regularizer=Regularizer.L1L2(5e-4, 5e-4)),
-        Layer.Dropout(0.1),
-        Layer.Dense(64, 3, ActivationFunction.CombinedSoftmaxCrossEntropy)  
-    ], y, Optimizer.Adam(learning_rate = .005, rate_decay=1e-7))
+        Layer.Dense(2, 64, ActivationFunction.ReLU, regularizer=Regularizer.L2(5e-6, 5e-6)),
+        Layer.Dense(64, 1, ActivationFunction.Sigmoid)  
+    ], y, Optimizer.Adam(learning_rate = 0.001, rate_decay=5e-9, min_rate=1e-5), loss_function=Loss.BinaryCrossEntropy)
     nn.train(X, y, epochs=10000)
