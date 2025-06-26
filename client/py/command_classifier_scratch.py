@@ -3,6 +3,67 @@ import json
 import pandas as pd
 import numpy as np
 import string
+import datasets
+COMMAND_SET = set([
+    'redeem_rewards',
+    'accept_reservations',
+    'smart_home',
+    'report_lost_card',
+    'repeat',
+    'order',
+    'jump_start',
+    'schedule_meeting',
+    'meeting_schedule',
+    'freeze_account',
+    'restaurant_reservation',
+    'make_call',
+    'text',
+    'change_language',
+    'timer',
+    'flip_coin',
+    'uber',
+    'car_rental',
+    'shopping_list',
+    'todo_list',
+    'change_accent',
+    'reminder_update',
+    'change_ai_name',
+    'share_location',
+    'calendar',
+    'translate',
+    'book_flight',
+    'insurance_change',
+    'todo_list_update',
+    'cancel_reservation',
+    'directions',
+    'reminder',
+    'find_phone',
+    'alarm',
+    'order_status',
+    'confirm_reservation',
+    'reset_settings',
+    'pin_change',
+    'replacement_card_duration',
+    'new_card',
+    'roll_dice',
+    'pto_request',
+    'calendar_update',
+    'play_music',
+    'direct_deposit',
+    'credit_limit_change',
+    'pay_bill',
+    'book_hotel',
+    'next_song',
+    'change_speed',
+    'shopping_list_update',
+    'order_checks',
+    'sync_device',
+    'schedule_maintenance',
+    'update_playlist',
+    'change_user_name',
+    'cancel',
+    'change_volume'
+])
 
 class CommandClassifierSoftmax:
     def __init__(self, data_file, data_size):
@@ -74,9 +135,23 @@ class CommandClassifierBinary:
             self.data = pd.read_json(f)
         
         self.max_len = 50
-        self.training_data = self.data[:data_size]
+        self.training_data = self.data[:data_size]    
         self.test_data = self.data[data_size:]
         Network.Tokenizer.build_vocab(self.training_data['text'])
+        
+        # self.data = datasets.load_dataset('clinc_oos', 'plus')
+        
+        # self.training_data = pd.DataFrame(self.data['train'])
+        # self.test_data = pd.DataFrame(self.data['test'])
+        
+        # self.max_len = 300
+        
+        # Network.Tokenizer.build_vocab(self.training_data['text'])
+
+        # self.y_train = self.training_data['intent'].apply(lambda x: [1] if x in COMMAND_SET else [0])
+        # self.y_train = np.stack(self.y_train.to_numpy())
+        # self.y_test = self.test_data['intent'].apply(lambda x: [1] if x in COMMAND_SET else [0])
+        # self.y_test = np.stack(self.y_test.to_numpy())
 
         self.y_train = self.training_data['label'].apply(lambda x: [1] if x == 'command' else [0])
         self.y_train = np.stack(self.y_train.to_numpy())
@@ -125,7 +200,7 @@ class CommandClassifierBinary:
         return prediction
     
     def train(self, output_file):
-        self.nn.train(self.x_train, self.y_train, epochs=10001, output_file=output_file)
+        self.nn.train(self.x_train, self.y_train, epochs=20001, output_file=output_file)
         
     def validate(self):
         self.nn.set_targets(self.y_test)
@@ -138,9 +213,10 @@ if __name__ == "__main__":
     # classifier.load_model('client/py/nn_scratch_model_direct_and_ai_softmax.json')
     # classifier.train('client/py/nn_scratch_model_direct_and_ai_softmax.json')
     
-    # classifier = CommandClassifierBinary('client/py/command_dataset_direct_and_ai_questions.json', 4000)
-    # classifier.load_model('client/py/nn_scratch_model_direct_and_ai_binary.json')
-    # classifier.train('client/py/nn_scratch_model_direct_and_ai_binary.json')
+    classifier = CommandClassifierBinary('client/py/pc_command_dataset.json', 3000)
+    classifier.load_model('client/py/nn_scratch_model_best.json')
+    # classifier.train('client/py/nn_scratch_model_pc_command_dataset_binary.json')
+    classifier.validate()
     
     while True:
         text = input("Enter text (or 'q' to quit): ")
