@@ -2,7 +2,7 @@ import speech_recognition as sr
 import pyttsx3 as tts
 from openai import OpenAI
 import  sys, requests, nats, asyncio
-import command_classifier as command_classifier
+import command_classifier_nn as command_classifier
 import command_formatter
 recognizer = sr.Recognizer()
 
@@ -11,9 +11,10 @@ class SPARK:
     def __init__(self):
         self.remote_nc = nats.NATS()
         self.base_topic = '>'
-        self.classifier = command_classifier.CommandClassifier()
+        self.classifier = command_classifier.CommandClassifier('client/py/pc_command_dataset.json', 3000)
         self.formatter = command_formatter.CommandFormatter()
-        self.classifier.build_model()
+        self.classifier.load_model('client/py/nn_scratch_model_best.json')
+
     def speak(self, text):
         engine = tts.init()
         engine.say(text)
@@ -44,9 +45,8 @@ class SPARK:
         client_devices_updated = [{'name': x['name'], 'commands': [{'name': command['name'], 'aliases': command['aliases']} for command in x['deviceCommands']]} for x in client_devices]
         server_devices_updated = [{'name': x['name'], 'commands': [{'name': command['name'], 'aliases': command['aliases']} for command in x['deviceCommands']]} for x in server_devices]
         # mod_text = text + f" | {client_devices_updated} | {server_devices_updated} "
-        # if (self.classifier.predict(text)['confidence'] > 0.6):
-        result = self.formatter.parse_command(f"{text} || {client_devices_updated} || {server_devices_updated}")
-        if(result['success']):
+        if (self.classifier.predict(text)['result'] == 'command'):
+            result = self.formatter.parse_command(f"{text} || {client_devices_updated} || {server_devices_updated}")
             device_name = result['device']
             return result['formatted_command'], device_name, group
 
