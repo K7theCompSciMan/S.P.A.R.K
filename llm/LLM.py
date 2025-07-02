@@ -1,39 +1,102 @@
 import re
 import tiktoken
-UNK = '<|unk|>'
-EOT = '<|endoftext|>'
+from torch.utils.data import Dataset, DataLoader
+import torch
+UNK = "<|unk|>"
+EOT = "<|endoftext|>"
+
 
 class WordTokenizer:
     def __init__(self, vocab):
         vocab.extend([EOT, UNK])
         vocabulary = {token: integer for integer, token in enumerate(vocab)}
         self.str_to_int = vocabulary
-        self.int_to_str = {i:s for s, i in vocabulary.items()}
+        self.int_to_str = {i: s for s, i in vocabulary.items()}
+
     def encode(self, text):
         preprocess = re.split(r'([,.:;?_!"()\']|--|\s)', text)
-        
-        preprocess = [
-            item.strip() for item in preprocess if item.strip()
-        ]
-        preprocess = [
-            item if item in self.str_to_int
-            else UNK for item in preprocess
-        ]
+
+        preprocess = [item.strip() for item in preprocess if item.strip()]
+        preprocess = [item if item in self.str_to_int else UNK for item in preprocess]
         ids = [self.str_to_int[x] for x in preprocess]
         return ids
 
     def decode(self, ids):
         text = " ".join([self.int_to_str[x] for x in ids])
-        text = re.sub(r'\s+([,.?!"()\'])', r'\1', text)
+        text = re.sub(r'\s+([,.?!"()\'])', r"\1", text)
         return text
 
-#im not good enough to make my own BPE, so just using tiktoken wrapper
+
+# im not good enough to make my own BPE, so just using tiktoken wrapper
 class BPE:
     def __init__(self):
         self.tokenizer = tiktoken.get_encoding("gpt2")
-    
+
     def encode(self, text):
         return self.tokenizer.encode(text, allowed_special={EOT})
-    
+
     def decode(self, ids):
         return self.tokenizer.decode(ids)
+
+
+# using pytorch dataset and dataloader too...
+class GPTDataset(Dataset):
+    def __init__(self, text, tokenizer, max_length, stride):
+        self.input_ids = []
+        self.target_ids = []
+        token_ids = tokenizer.encode(text)
+        for i in range(0, len(token_ids) - max_length, stride):
+            self.input_ids.append(torch.tensor(token_ids[i : i + max_length]))
+            self.target_ids.append(torch.tensor(token_ids[i + 1 : i + 1 + max_length]))
+
+    def __len__(self):
+        return len(self.input_ids)
+
+    def __getitem__(self, idx):
+        return self.input_ids[idx], self.target_ids[idx]
+
+
+def create_dataloader(
+    text,
+    batch_size=4,
+    max_length=256,
+    stride=128,
+    shuffle=True,
+    drop_last=True,
+    num_workers=0,
+):
+    tokenizer = BPE()
+
+    dataset = GPTDataset(text, tokenizer, max_length, stride)
+
+    dataloader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        shuffle=shuffle,
+        drop_last=drop_last,
+        num_workers=num_workers,
+    )
+
+    return dataloader
+
+
+class EmbeddingLayer:
+    def __init__(self, vocab_size, embedding_dim):
+        self.dict = torch.nn.Embedding(vocab_size, embedding_dim) #does the random init too
+    
+    def __getitem__(self, key):
+        return self.dict(torch.tensor([key]))
+
+    def __str__(self):
+        return self.dict.weight.__str__()
+    def get_embeddings(self, input_ids):
+        return self.dict(input_ids)
+
+
+
+
+input_ids = torch.tensor([2, 3, 5, 1])
+
+embed = EmbeddingLayer(6, 3)
+print(embed)
+print(embed.get_embeddings(input_ids))
