@@ -83,20 +83,64 @@ def create_dataloader(
 class EmbeddingLayer:
     def __init__(self, vocab_size, embedding_dim):
         self.dict = torch.nn.Embedding(vocab_size, embedding_dim) #does the random init too
-    
+        self.shape = self.dict.weight.shape
     def __getitem__(self, key):
         return self.dict(torch.tensor([key]))
 
     def __str__(self):
         return self.dict.weight.__str__()
-    def get_embeddings(self, input_ids):
+    def embed(self, input_ids):
         return self.dict(input_ids)
 
+class DataPreprocessor:
+    def __init__(self, text_file='llm/sample.txt', batch_size=4,
+    max_length=256,
+    stride=128,
+    shuffle=True,
+    drop_last=True,
+    num_workers=0,
+    vocab_size=50257,
+    embedding_dim=256,
+    ):
+        self.raw_text = ''
+        with open(text_file, 'r') as f:
+            self.raw_text = f.read()
+        self.vocab_size = vocab_size
+        self.embedding_dim = embedding_dim
+        self.batch_size = batch_size
+        self.max_length = max_length
+        self.context_size = self.max_length
+        self.token_embeddings_layer = EmbeddingLayer(vocab_size, embedding_dim)
+        self.pos_embeddings = EmbeddingLayer(self.context_size, embedding_dim).embed(torch.arange(self.context_size))
 
+        self.dataloader = create_dataloader(self.raw_text, batch_size=self.batch_size, max_length=self.max_length, stride=self.max_length, shuffle=self.shuffle, drop_last=self.drop_last, num_workers=self.num_workers)
+        self.data_iter = iter(self.dataloader)
+        
+    def preprocess(self):
+        inputs, targets = next(self.data_iter)
 
+        # print("Input Ids:", inputs)
+        # print("inputs_size:", inputs.shape)
 
-input_ids = torch.tensor([2, 3, 5, 1])
+        token_embeddings = self.token_embeddings_layer.embed(inputs)
+        # print("Token Embeddings:", token_embeddings)
+        # print("Token Embeddings size:", token_embeddings.shape)
+        input_embeddings = token_embeddings + self.pos_embeddings
+        print("input Embeddings:", input_embeddings)
+        print("input Embeddings size:", input_embeddings.shape)
+        return input_embeddings, targets
 
-embed = EmbeddingLayer(6, 3)
-print(embed)
-print(embed.get_embeddings(input_ids))
+class Attention:
+    class SimpleAttention:
+        def __init__(self, inputs):
+            self.attention_scores = torch.zeros(inputs.shape[0], inputs.shape[1])
+        def forward(self, query, query_index):
+            for i, x_i in enumerate(self.inputs):
+                self.attention_scores[query_index][i] = torch.dot(x_i, query)
+            self.attention_scores[query_index] = self.softmax(self.attention_scores[query_index])
+            return self.attention_scores[query_index]
+        def softmax(self, x):
+            x = x - torch.max(x, axis=0)
+            return torch.exp(x) / torch.sum(torch.exp(x))
+        
+
