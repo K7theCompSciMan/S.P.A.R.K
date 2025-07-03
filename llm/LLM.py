@@ -2,6 +2,7 @@ import re
 import tiktoken
 from torch.utils.data import Dataset, DataLoader
 import torch
+import torch.nn as nn
 UNK = "<|unk|>"
 EOT = "<|endoftext|>"
 
@@ -93,7 +94,7 @@ class EmbeddingLayer:
         return self.dict(input_ids)
 
 class DataPreprocessor:
-    def __init__(self, text_file='llm/sample.txt', batch_size=4,
+    def __init__(self, text_file='sample.txt', batch_size=4,
     max_length=256,
     stride=128,
     shuffle=True,
@@ -105,6 +106,10 @@ class DataPreprocessor:
         self.raw_text = ''
         with open(text_file, 'r') as f:
             self.raw_text = f.read()
+        self.stride  = stride
+        self.shuffle = shuffle
+        self.drop_last = drop_last
+        self.num_workers = num_workers
         self.vocab_size = vocab_size
         self.embedding_dim = embedding_dim
         self.batch_size = batch_size
@@ -126,21 +131,75 @@ class DataPreprocessor:
         # print("Token Embeddings:", token_embeddings)
         # print("Token Embeddings size:", token_embeddings.shape)
         input_embeddings = token_embeddings + self.pos_embeddings
-        print("input Embeddings:", input_embeddings)
-        print("input Embeddings size:", input_embeddings.shape)
+        # print("input Embeddings:", input_embeddings)
+        # print("input Embeddings size:", input_embeddings.shape)
         return input_embeddings, targets
 
 class Attention:
     class SimpleAttention:
         def __init__(self, inputs):
-            self.attention_scores = torch.zeros(inputs.shape[0], inputs.shape[1])
-        def forward(self, query, query_index):
-            for i, x_i in enumerate(self.inputs):
-                self.attention_scores[query_index][i] = torch.dot(x_i, query)
-            self.attention_scores[query_index] = self.softmax(self.attention_scores[query_index])
-            return self.attention_scores[query_index]
-        def softmax(self, x):
-            x = x - torch.max(x, axis=0)
-            return torch.exp(x) / torch.sum(torch.exp(x))
+            self.inputs = inputs
+            self.attention_scores = torch.zeros(inputs.shape[0], inputs.shape[0])
+        def forward(self):
+            self.attention_scores = self.inputs @ self.inputs.T
+            self.attention_weights = torch.softmax(self.attention_scores, dim=-1)
+            
+            self.context_vecs = self.attention_weights @ self.inputs
+            return self.context_vecs
         
+    class SelfAttention(nn.Module):
+        def __init__(self, d_in, d_out, qkv_bias=False):
+            super().__init__()
+            self.W_query = nn.Linear(d_in, d_out, bias=qkv_bias)
+            self.W_key = nn.Linear(d_in, d_out, bias=qkv_bias)
+            self.W_value = nn.Linear(d_in, d_out, bias=qkv_bias)
+        
+        def forward(self, x):
+            keys = self.W_key(x)
+            queries = self.W_query(x)
+            values = self.W_value(x)
+            
+            self.attention_scores = queries @ keys.T
+            self.attention_weights = torch.softmax(self.attention_scores / keys.shape[-1]**0.5, dim=-1)
 
+            return self.attention_weights @ values
+    class CausalAttention(nn.Module):
+        def __init__(self, d_in, d_out, context_length, dropout, qkv_bias=False):
+            super().__init__()
+            self.d_out = d_out
+            self.W_query = nn.Linear(d_in, d_out, bias=qkv_bias)
+            self.W_key = nn.Linear(d_in, d_out, bias=qkv_bias)
+            self.W_value = nn.Linear(d_in, d_out, bias=qkv_bias)
+            self.dropout = nn.Dropout(dropout)
+            self.register_buffer("mask", torch.triu(torch.ones(context_length, context_length), diagonal=1))
+        def forward(self, x):
+            b, num_tokens, d_in = x.shape
+            keys = self.W_key(x)
+            queries = self.W_query(x)
+            values = self.W_value(x)
+            
+            self.attention_scores = queries @ keys.transpose(1, 2)
+            self.attention_scores.masked_fill_(self.mask.bool()[:num_tokens, :num_tokens], -torch.inf)
+            self.attention_weights = torch.softmax(self.attention_scores / keys.shape[-1]**0.5, dim=-1)
+            self.attention_weights = self.dropout(self.attention_weights)
+            
+            self.context_vec = self.attention_weights @ values
+            return self.context_vec
+
+
+datapreprocessor = DataPreprocessor()
+inputs, targets = datapreprocessor.preprocess()
+
+test_inputs  = torch.tensor(
+  [[0.43, 0.15, 0.89], # Your     (x^1)
+   [0.55, 0.87, 0.66], # journey  (x^2)
+   [0.57, 0.85, 0.64], # starts   (x^3)
+   [0.22, 0.58, 0.33], # with     (x^4)
+   [0.77, 0.25, 0.10], # one      (x^5)
+   [0.05, 0.80, 0.55]] # step     (x^6)
+)
+batch = torch.stack((test_inputs, test_inputs), dim=0)
+
+attention = Attention.CausalAttention(test_inputs.shape[-1], 2, test_inputs.shape[0], 0.1)
+print(attention.forward(batch))
+print(attention.context_vec.shape)
