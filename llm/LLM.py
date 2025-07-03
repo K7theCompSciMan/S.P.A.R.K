@@ -179,7 +179,7 @@ class Attention:
             values = self.W_value(x)
             
             self.attention_scores = queries @ keys.transpose(1, 2)
-            self.attention_scores.masked_fill_(self.mask.bool()[:num_tokens, :num_tokens], -torch.inf)
+            self.attention_scores.masked_fill_(self.mask.bool()[:num_tokens, :num_tokens], -torch.inf) #safety with :num_tokens in case num_tokens < context_length
             self.attention_weights = torch.softmax(self.attention_scores / keys.shape[-1]**0.5, dim=-1)
             self.attention_weights = self.dropout(self.attention_weights)
             
@@ -200,6 +200,6 @@ test_inputs  = torch.tensor(
 )
 batch = torch.stack((test_inputs, test_inputs), dim=0)
 
-attention = Attention.CausalAttention(test_inputs.shape[-1], 2, test_inputs.shape[0], 0.1)
+attention = Attention.CausalAttention(batch.shape[-1], 2, batch.shape[1], 0.0)
 print(attention.forward(batch))
 print(attention.context_vec.shape)
