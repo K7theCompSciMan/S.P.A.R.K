@@ -83,9 +83,9 @@ class CommandClassifierSoftmax:
         self.y_test = np.stack(self.y_test.to_numpy())
 
         self.nn = Network.NeuralNetwork([
-            Network.Layer.Dense(self.max_len, 64, Network.ActivationFunction.ReLU, Network.Regularizer.L1L2(8e-4, 8e-4)),
+            Network.Layer.Dense(self.max_len, 128, Network.ActivationFunction.ReLU, Network.Regularizer.L1L2(8e-4, 8e-4)),
             Network.Layer.Dropout(0.15),
-            Network.Layer.Dense(64, 2, Network.ActivationFunction.CombinedSoftmaxCategoricalCrossEntropy)  
+            Network.Layer.Dense(128, 2, Network.ActivationFunction.CombinedSoftmaxCategoricalCrossEntropy)  
         ], self.y_train, Network.Optimizer.Adam(learning_rate = .005, rate_decay=1e-7)) 
 
 
@@ -120,8 +120,8 @@ class CommandClassifierSoftmax:
         prediction = self.nn.predict(padded)
         return prediction
     
-    def train(self, output_file):
-        self.nn.train(self.x_train, self.y_train, epochs=10001, output_file=output_file)
+    def train(self, output_file, epochs=20001):
+        self.nn.train(self.x_train, self.y_train, epochs=epochs, output_file=output_file)
         
     def validate(self):
         self.nn.set_targets(self.y_test)
@@ -163,9 +163,9 @@ class CommandClassifierBinary:
         # print(self.y_train[:5])
         # print(self.training_data['text'][:5])
         self.nn = Network.NeuralNetwork([
-            Network.Layer.Dense(self.max_len, 64, Network.ActivationFunction.ReLU, Network.Regularizer.L1L2(8e-4, 8e-4)),
+            Network.Layer.Dense(self.max_len, 128, Network.ActivationFunction.ReLU, Network.Regularizer.L1L2(8e-4, 8e-4)),
             Network.Layer.Dropout(0.2),
-            Network.Layer.Dense(64, 1, Network.ActivationFunction.Sigmoid)  
+            Network.Layer.Dense(128, 1, Network.ActivationFunction.Sigmoid)  
         ], self.y_train, Network.Optimizer.Adam(learning_rate = .005, rate_decay=1e-7), loss_function=Network.Loss.BinaryCrossEntropy) 
 
 
@@ -199,8 +199,8 @@ class CommandClassifierBinary:
         prediction = self.nn.predict(padded)
         return prediction
     
-    def train(self, output_file):
-        self.nn.train(self.x_train, self.y_train, epochs=20001, output_file=output_file)
+    def train(self, output_file, epochs=20001):
+        self.nn.train(self.x_train, self.y_train, epochs=epochs, output_file=output_file)
         
     def validate(self):
         self.nn.set_targets(self.y_test)
@@ -213,10 +213,10 @@ if __name__ == "__main__":
     # classifier.load_model('client/py/nn_scratch_model_direct_and_ai_softmax.json')
     # classifier.train('client/py/nn_scratch_model_direct_and_ai_softmax.json')
     
-    classifier = CommandClassifierBinary('client/py/pc_command_dataset.json', 3000)
-    classifier.load_model('client/py/nn_scratch_model_best.json')
-    # classifier.train('client/py/nn_scratch_model_pc_command_dataset_binary.json')
-    classifier.validate()
+    classifier = CommandClassifierBinary('pc_command_dataset.json', 3000)
+    # classifier.load_model('nn_scratch_model_best.json')
+    classifier.train('nn_scratch_model_pc_command_dataset_binary.json')
+    # classifier.validate()
     
     while True:
         text = input("Enter text (or 'q' to quit): ")

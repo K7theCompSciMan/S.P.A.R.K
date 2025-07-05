@@ -36,7 +36,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 can you sing?",
+    "text": "can you sing?",
     "label": "not_command"
   },
   {
@@ -160,7 +160,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you always listening?",
+    "text": "are you always listening?",
     "label": "not_command"
   },
   {
@@ -176,7 +176,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do you work?",
+    "text": "how do you work?",
     "label": "not_command"
   },
   {
@@ -192,7 +192,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the capital of Japan?",
+    "text": "what's the capital of Japan?",
     "label": "not_command"
   },
   {
@@ -228,11 +228,11 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 is it going to rain tomorrow?",
+    "text": "is it going to rain tomorrow?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your name?",
+    "text": "what's your name?",
     "label": "not_command"
   },
   {
@@ -268,7 +268,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the capital of Japan?",
+    "text": "what's the capital of Japan?",
     "label": "not_command"
   },
   {
@@ -276,7 +276,7 @@
     "label": "command"
   },
   {
-    "text": "mute microphone \u2014 right now, on the pc",
+    "text": "mute microphone right now, on the pc",
     "label": "command"
   },
   {
@@ -288,11 +288,11 @@
     "label": "not_command"
   },
   {
-    "text": "turn off the lights \u2014 right now, on the smarthome",
+    "text": "turn off the lights right now, on the smarthome",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 hello",
+    "text": "hello",
     "label": "not_command"
   },
   {
@@ -316,7 +316,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you explain quantum physics?",
+    "text": "can you explain quantum physics?",
     "label": "not_command"
   },
   {
@@ -344,7 +344,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 good morning",
+    "text": "good morning",
     "label": "not_command"
   },
   {
@@ -360,7 +360,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do penguins have knees?",
+    "text": "do penguins have knees?",
     "label": "not_command"
   },
   {
@@ -388,7 +388,7 @@
     "label": "not_command"
   },
   {
-    "text": "restart the system \u2014 right now, on the pc",
+    "text": "restart the system right now, on the pc",
     "label": "command"
   },
   {
@@ -436,11 +436,11 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's your name?",
+    "text": "what's your name?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 tell me something interesting",
+    "text": "tell me something interesting",
     "label": "not_command"
   },
   {
@@ -496,7 +496,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you sing?",
+    "text": "can you sing?",
     "label": "not_command"
   },
   {
@@ -528,7 +528,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you tell me a fun fact?",
+    "text": "can you tell me a fun fact?",
     "label": "not_command"
   },
   {
@@ -572,11 +572,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 who is the president of France?",
+    "text": "who is the president of France?",
     "label": "not_command"
   },
   {
-    "text": "increase volume \u2014 right now, on the phone",
+    "text": "increase volume right now, on the phone",
     "label": "command"
   },
   {
@@ -644,7 +644,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 who is the president of France?",
+    "text": "who is the president of France?",
     "label": "not_command"
   },
   {
@@ -652,7 +652,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 I'm bored",
+    "text": "I'm bored",
     "label": "not_command"
   },
   {
@@ -712,7 +712,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 who is the president of France?",
+    "text": "who is the president of France?",
     "label": "not_command"
   },
   {
@@ -788,7 +788,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 is AI dangerous?",
+    "text": "is AI dangerous?",
     "label": "not_command"
   },
   {
@@ -804,7 +804,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you beat me at chess?",
+    "text": "can you beat me at chess?",
     "label": "not_command"
   },
   {
@@ -840,7 +840,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 tell me something",
+    "text": "tell me something",
     "label": "not_command"
   },
   {
@@ -868,15 +868,15 @@
     "label": "command"
   },
   {
-    "text": "turn off the lights \u2014 right now, on the smarthome",
+    "text": "turn off the lights right now, on the smarthome",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 can you talk to other assistants?",
+    "text": "can you talk to other assistants?",
     "label": "not_command"
   },
   {
-    "text": "take a picture \u2014 right now, on the phone",
+    "text": "take a picture right now, on the phone",
     "label": "command"
   },
   {
@@ -952,7 +952,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how do airplanes stay in the air?",
+    "text": "how do airplanes stay in the air?",
     "label": "not_command"
   },
   {
@@ -960,7 +960,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what does AI stand for?",
+    "text": "what does AI stand for?",
     "label": "not_command"
   },
   {
@@ -972,7 +972,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the weather like?",
+    "text": "what's the weather like?",
     "label": "not_command"
   },
   {
@@ -992,7 +992,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you explain quantum physics?",
+    "text": "can you explain quantum physics?",
     "label": "not_command"
   },
   {
@@ -1008,15 +1008,15 @@
     "label": "not_command"
   },
   {
-    "text": "record video \u2014 right now, on the phone",
+    "text": "record video right now, on the phone",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's the weather like?",
+    "text": "what's the weather like?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how's it going?",
+    "text": "how's it going?",
     "label": "not_command"
   },
   {
@@ -1032,7 +1032,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you make jokes?",
+    "text": "can you make jokes?",
     "label": "not_command"
   },
   {
@@ -1056,7 +1056,7 @@
     "label": "command"
   },
   {
-    "text": "set alarm for 8:30 PM \u2014 right now, on the phone",
+    "text": "set alarm for 8:30 PM right now, on the phone",
     "label": "command"
   },
   {
@@ -1104,7 +1104,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you have emotions?",
+    "text": "do you have emotions?",
     "label": "not_command"
   },
   {
@@ -1112,7 +1112,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you always listening?",
+    "text": "are you always listening?",
     "label": "not_command"
   },
   {
@@ -1120,7 +1120,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you make jokes?",
+    "text": "can you make jokes?",
     "label": "not_command"
   },
   {
@@ -1140,11 +1140,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how tall is Mount Everest?",
+    "text": "how tall is Mount Everest?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the best way to cook rice?",
+    "text": "what's the best way to cook rice?",
     "label": "not_command"
   },
   {
@@ -1216,7 +1216,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why is the sky blue?",
+    "text": "why is the sky blue?",
     "label": "not_command"
   },
   {
@@ -1232,7 +1232,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 do penguins have knees?",
+    "text": "do penguins have knees?",
     "label": "not_command"
   },
   {
@@ -1284,7 +1284,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how tall is Mount Everest?",
+    "text": "how tall is Mount Everest?",
     "label": "not_command"
   },
   {
@@ -1312,7 +1312,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 good morning",
+    "text": "good morning",
     "label": "not_command"
   },
   {
@@ -1328,11 +1328,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how does a plane fly?",
+    "text": "how does a plane fly?",
     "label": "not_command"
   },
   {
-    "text": "increase volume \u2014 right now, on the phone",
+    "text": "increase volume right now, on the phone",
     "label": "command"
   },
   {
@@ -1360,7 +1360,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how tall is Mount Everest?",
+    "text": "how tall is Mount Everest?",
     "label": "not_command"
   },
   {
@@ -1400,7 +1400,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your favorite movie?",
+    "text": "what's your favorite movie?",
     "label": "not_command"
   },
   {
@@ -1428,7 +1428,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn on the air conditioner \u2014 right now, on the smarthome",
+    "text": "turn on the air conditioner right now, on the smarthome",
     "label": "command"
   },
   {
@@ -1436,7 +1436,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 hey!",
+    "text": "hey!",
     "label": "not_command"
   },
   {
@@ -1472,7 +1472,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why is the sky blue?",
+    "text": "why is the sky blue?",
     "label": "not_command"
   },
   {
@@ -1480,11 +1480,11 @@
     "label": "command"
   },
   {
-    "text": "text Mrs. Stacey Simpson saying meeting rescheduled \u2014 right now, on the phone",
+    "text": "text Mrs. Stacey Simpson saying meeting rescheduled right now, on the phone",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 are you always listening?",
+    "text": "are you always listening?",
     "label": "not_command"
   },
   {
@@ -1544,7 +1544,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 good night",
+    "text": "good night",
     "label": "not_command"
   },
   {
@@ -1580,11 +1580,11 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 tell me something interesting",
+    "text": "tell me something interesting",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do you work?",
+    "text": "how do you work?",
     "label": "not_command"
   },
   {
@@ -1592,7 +1592,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 who is the president of France?",
+    "text": "who is the president of France?",
     "label": "not_command"
   },
   {
@@ -1608,7 +1608,7 @@
     "label": "command"
   },
   {
-    "text": "open notepad \u2014 right now, on the pc",
+    "text": "open notepad right now, on the pc",
     "label": "command"
   },
   {
@@ -1696,7 +1696,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 I'm bored",
+    "text": "I'm bored",
     "label": "not_command"
   },
   {
@@ -1752,7 +1752,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why do we dream?",
+    "text": "why do we dream?",
     "label": "not_command"
   },
   {
@@ -1760,7 +1760,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your purpose?",
+    "text": "what's your purpose?",
     "label": "not_command"
   },
   {
@@ -1800,7 +1800,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn off the lights \u2014 right now, on the smarthome",
+    "text": "turn off the lights right now, on the smarthome",
     "label": "command"
   },
   {
@@ -1808,15 +1808,15 @@
     "label": "not_command"
   },
   {
-    "text": "take a picture \u2014 right now, on the phone",
+    "text": "take a picture right now, on the phone",
     "label": "command"
   },
   {
-    "text": "turn off the lights \u2014 right now, on the smarthome",
+    "text": "turn off the lights right now, on the smarthome",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 I'm bored",
+    "text": "I'm bored",
     "label": "not_command"
   },
   {
@@ -1888,7 +1888,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you talk to other assistants?",
+    "text": "can you talk to other assistants?",
     "label": "not_command"
   },
   {
@@ -1900,7 +1900,7 @@
     "label": "not_command"
   },
   {
-    "text": "text Danielle Lewis saying I'll be late \u2014 right now, on the phone",
+    "text": "text Danielle Lewis saying I'll be late right now, on the phone",
     "label": "command"
   },
   {
@@ -1940,7 +1940,7 @@
     "label": "command"
   },
   {
-    "text": "start calculator \u2014 right now, on the pc",
+    "text": "start calculator right now, on the pc",
     "label": "command"
   },
   {
@@ -1976,7 +1976,7 @@
     "label": "command"
   },
   {
-    "text": "send email to Brittany Allison \u2014 right now, on the pc",
+    "text": "send email to Brittany Allison right now, on the pc",
     "label": "command"
   },
   {
@@ -1992,7 +1992,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's up?",
+    "text": "what's up?",
     "label": "not_command"
   },
   {
@@ -2020,11 +2020,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your favorite movie?",
+    "text": "what's your favorite movie?",
     "label": "not_command"
   },
   {
-    "text": "lock the door \u2014 right now, on the smarthome",
+    "text": "lock the door right now, on the smarthome",
     "label": "command"
   },
   {
@@ -2140,7 +2140,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's up?",
+    "text": "what's up?",
     "label": "not_command"
   },
   {
@@ -2148,7 +2148,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn on the air conditioner \u2014 right now, on the smarthome",
+    "text": "turn on the air conditioner right now, on the smarthome",
     "label": "command"
   },
   {
@@ -2228,7 +2228,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the weather like?",
+    "text": "what's the weather like?",
     "label": "not_command"
   },
   {
@@ -2236,7 +2236,7 @@
     "label": "command"
   },
   {
-    "text": "lock the door \u2014 right now, on the smarthome",
+    "text": "lock the door right now, on the smarthome",
     "label": "command"
   },
   {
@@ -2244,7 +2244,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what does a black hole do?",
+    "text": "what does a black hole do?",
     "label": "not_command"
   },
   {
@@ -2280,7 +2280,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 hello",
+    "text": "hello",
     "label": "not_command"
   },
   {
@@ -2328,7 +2328,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn off the lights \u2014 right now, on the smarthome",
+    "text": "turn off the lights right now, on the smarthome",
     "label": "command"
   },
   {
@@ -2352,7 +2352,7 @@
     "label": "command"
   },
   {
-    "text": "take a picture \u2014 right now, on the phone",
+    "text": "take a picture right now, on the phone",
     "label": "command"
   },
   {
@@ -2440,7 +2440,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your purpose?",
+    "text": "what's your purpose?",
     "label": "not_command"
   },
   {
@@ -2460,7 +2460,7 @@
     "label": "command"
   },
   {
-    "text": "open chrome \u2014 right now, on the pc",
+    "text": "open chrome right now, on the pc",
     "label": "command"
   },
   {
@@ -2476,7 +2476,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you beat me at chess?",
+    "text": "can you beat me at chess?",
     "label": "not_command"
   },
   {
@@ -2488,7 +2488,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the best way to cook rice?",
+    "text": "what's the best way to cook rice?",
     "label": "not_command"
   },
   {
@@ -2524,7 +2524,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn off the lights \u2014 right now, on the smarthome",
+    "text": "turn off the lights right now, on the smarthome",
     "label": "command"
   },
   {
@@ -2532,7 +2532,7 @@
     "label": "not_command"
   },
   {
-    "text": "set alarm for midnight \u2014 right now, on the phone",
+    "text": "set alarm for midnight right now, on the phone",
     "label": "command"
   },
   {
@@ -2604,7 +2604,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 yo",
+    "text": "yo",
     "label": "not_command"
   },
   {
@@ -2648,7 +2648,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the weather like today?",
+    "text": "what's the weather like today?",
     "label": "not_command"
   },
   {
@@ -2676,7 +2676,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's up?",
+    "text": "what's up?",
     "label": "not_command"
   },
   {
@@ -2696,7 +2696,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -2792,15 +2792,15 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how do I cook pasta?",
+    "text": "how do I cook pasta?",
     "label": "not_command"
   },
   {
-    "text": "start spotify \u2014 right now, on the pc",
+    "text": "start spotify right now, on the pc",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 do you remember me?",
+    "text": "do you remember me?",
     "label": "not_command"
   },
   {
@@ -2840,7 +2840,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 good night",
+    "text": "good night",
     "label": "not_command"
   },
   {
@@ -2852,7 +2852,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's new today?",
+    "text": "what's new today?",
     "label": "not_command"
   },
   {
@@ -2900,7 +2900,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -2920,7 +2920,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you sing?",
+    "text": "can you sing?",
     "label": "not_command"
   },
   {
@@ -2944,7 +2944,7 @@
     "label": "not_command"
   },
   {
-    "text": "take a picture \u2014 right now, on the phone",
+    "text": "take a picture right now, on the phone",
     "label": "command"
   },
   {
@@ -2976,7 +2976,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 who is the president of France?",
+    "text": "who is the president of France?",
     "label": "not_command"
   },
   {
@@ -2992,7 +2992,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your name?",
+    "text": "what's your name?",
     "label": "not_command"
   },
   {
@@ -3000,7 +3000,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how's it going?",
+    "text": "how's it going?",
     "label": "not_command"
   },
   {
@@ -3016,7 +3016,7 @@
     "label": "command"
   },
   {
-    "text": "set alarm for midnight \u2014 right now, on the phone",
+    "text": "set alarm for midnight right now, on the phone",
     "label": "command"
   },
   {
@@ -3024,7 +3024,7 @@
     "label": "command"
   },
   {
-    "text": "send email to Joseph Miller \u2014 right now, on the pc",
+    "text": "send email to Joseph Miller right now, on the pc",
     "label": "command"
   },
   {
@@ -3160,7 +3160,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 sup",
+    "text": "sup",
     "label": "not_command"
   },
   {
@@ -3172,11 +3172,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why is the ocean salty?",
+    "text": "why is the ocean salty?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what are you thinking?",
+    "text": "what are you thinking?",
     "label": "not_command"
   },
   {
@@ -3244,7 +3244,7 @@
     "label": "not_command"
   },
   {
-    "text": "open calculator \u2014 right now, on the pc",
+    "text": "open calculator right now, on the pc",
     "label": "command"
   },
   {
@@ -3304,15 +3304,15 @@
     "label": "not_command"
   },
   {
-    "text": "text Janice Reyes saying I'll be late \u2014 right now, on the phone",
+    "text": "text Janice Reyes saying I'll be late right now, on the phone",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how does a plane fly?",
+    "text": "how does a plane fly?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's up?",
+    "text": "what's up?",
     "label": "not_command"
   },
   {
@@ -3328,7 +3328,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you always listening?",
+    "text": "are you always listening?",
     "label": "not_command"
   },
   {
@@ -3380,7 +3380,7 @@
     "label": "not_command"
   },
   {
-    "text": "open chrome \u2014 right now, on the pc",
+    "text": "open chrome right now, on the pc",
     "label": "command"
   },
   {
@@ -3392,7 +3392,7 @@
     "label": "not_command"
   },
   {
-    "text": "lock the door \u2014 right now, on the smarthome",
+    "text": "lock the door right now, on the smarthome",
     "label": "command"
   },
   {
@@ -3440,7 +3440,7 @@
     "label": "not_command"
   },
   {
-    "text": "open terminal \u2014 right now, on the pc",
+    "text": "open terminal right now, on the pc",
     "label": "command"
   },
   {
@@ -3456,7 +3456,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 are you always listening?",
+    "text": "are you always listening?",
     "label": "not_command"
   },
   {
@@ -3464,7 +3464,7 @@
     "label": "command"
   },
   {
-    "text": "turn off the lights \u2014 right now, on the smarthome",
+    "text": "turn off the lights right now, on the smarthome",
     "label": "command"
   },
   {
@@ -3488,11 +3488,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why do we dream?",
+    "text": "why do we dream?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 good morning",
+    "text": "good morning",
     "label": "not_command"
   },
   {
@@ -3556,7 +3556,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do you learn?",
+    "text": "how do you learn?",
     "label": "not_command"
   },
   {
@@ -3588,7 +3588,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn on the air conditioner \u2014 right now, on the smarthome",
+    "text": "turn on the air conditioner right now, on the smarthome",
     "label": "command"
   },
   {
@@ -3616,7 +3616,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's new today?",
+    "text": "what's new today?",
     "label": "not_command"
   },
   {
@@ -3684,7 +3684,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your favorite movie?",
+    "text": "what's your favorite movie?",
     "label": "not_command"
   },
   {
@@ -3720,7 +3720,7 @@
     "label": "not_command"
   },
   {
-    "text": "lock the door \u2014 right now, on the smarthome",
+    "text": "lock the door right now, on the smarthome",
     "label": "command"
   },
   {
@@ -3824,7 +3824,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the capital of Japan?",
+    "text": "what's the capital of Japan?",
     "label": "not_command"
   },
   {
@@ -3848,7 +3848,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why is the sky blue?",
+    "text": "why is the sky blue?",
     "label": "not_command"
   },
   {
@@ -3900,11 +3900,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how does a plane fly?",
+    "text": "how does a plane fly?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do airplanes stay in the air?",
+    "text": "how do airplanes stay in the air?",
     "label": "not_command"
   },
   {
@@ -3916,11 +3916,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you remember me?",
+    "text": "do you remember me?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you have emotions?",
+    "text": "do you have emotions?",
     "label": "not_command"
   },
   {
@@ -3940,7 +3940,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 can you talk to other assistants?",
+    "text": "can you talk to other assistants?",
     "label": "not_command"
   },
   {
@@ -3972,7 +3972,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 good night",
+    "text": "good night",
     "label": "not_command"
   },
   {
@@ -4012,7 +4012,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you explain quantum physics?",
+    "text": "can you explain quantum physics?",
     "label": "not_command"
   },
   {
@@ -4020,7 +4020,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you sing?",
+    "text": "can you sing?",
     "label": "not_command"
   },
   {
@@ -4044,11 +4044,11 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 can you make jokes?",
+    "text": "can you make jokes?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your purpose?",
+    "text": "what's your purpose?",
     "label": "not_command"
   },
   {
@@ -4076,7 +4076,7 @@
     "label": "not_command"
   },
   {
-    "text": "record video \u2014 right now, on the phone",
+    "text": "record video right now, on the phone",
     "label": "command"
   },
   {
@@ -4104,7 +4104,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you there?",
+    "text": "are you there?",
     "label": "not_command"
   },
   {
@@ -4168,7 +4168,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do you learn?",
+    "text": "how do you learn?",
     "label": "not_command"
   },
   {
@@ -4200,7 +4200,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's new today?",
+    "text": "what's new today?",
     "label": "not_command"
   },
   {
@@ -4236,7 +4236,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the best way to cook rice?",
+    "text": "what's the best way to cook rice?",
     "label": "not_command"
   },
   {
@@ -4268,7 +4268,7 @@
     "label": "not_command"
   },
   {
-    "text": "record video \u2014 right now, on the phone",
+    "text": "record video right now, on the phone",
     "label": "command"
   },
   {
@@ -4332,7 +4332,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 can you sing?",
+    "text": "can you sing?",
     "label": "not_command"
   },
   {
@@ -4388,7 +4388,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do I cook pasta?",
+    "text": "how do I cook pasta?",
     "label": "not_command"
   },
   {
@@ -4424,7 +4424,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the capital of Japan?",
+    "text": "what's the capital of Japan?",
     "label": "not_command"
   },
   {
@@ -4440,7 +4440,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 I'm bored",
+    "text": "I'm bored",
     "label": "not_command"
   },
   {
@@ -4452,7 +4452,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 tell me a joke",
+    "text": "tell me a joke",
     "label": "not_command"
   },
   {
@@ -4472,7 +4472,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what can you do?",
+    "text": "what can you do?",
     "label": "not_command"
   },
   {
@@ -4484,7 +4484,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how far is the moon?",
+    "text": "how far is the moon?",
     "label": "not_command"
   },
   {
@@ -4500,7 +4500,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 tell me something",
+    "text": "tell me something",
     "label": "not_command"
   },
   {
@@ -4544,7 +4544,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what does AI stand for?",
+    "text": "what does AI stand for?",
     "label": "not_command"
   },
   {
@@ -4584,7 +4584,7 @@
     "label": "not_command"
   },
   {
-    "text": "play my playlist \u2014 right now, on the phone",
+    "text": "play my playlist right now, on the phone",
     "label": "command"
   },
   {
@@ -4592,7 +4592,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how many stars are in the galaxy?",
+    "text": "how many stars are in the galaxy?",
     "label": "not_command"
   },
   {
@@ -4612,7 +4612,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 who is the president of France?",
+    "text": "who is the president of France?",
     "label": "not_command"
   },
   {
@@ -4648,7 +4648,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how does a plane fly?",
+    "text": "how does a plane fly?",
     "label": "not_command"
   },
   {
@@ -4688,11 +4688,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you tell me a fun fact?",
+    "text": "can you tell me a fun fact?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 tell me something interesting",
+    "text": "tell me something interesting",
     "label": "not_command"
   },
   {
@@ -4724,7 +4724,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn off the lights \u2014 right now, on the smarthome",
+    "text": "turn off the lights right now, on the smarthome",
     "label": "command"
   },
   {
@@ -4772,7 +4772,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 tell me a joke",
+    "text": "tell me a joke",
     "label": "not_command"
   },
   {
@@ -4820,7 +4820,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 let's talk",
+    "text": "let's talk",
     "label": "not_command"
   },
   {
@@ -4840,7 +4840,7 @@
     "label": "not_command"
   },
   {
-    "text": "play a podcast \u2014 right now, on the phone",
+    "text": "play a podcast right now, on the phone",
     "label": "command"
   },
   {
@@ -4904,7 +4904,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you talk to other assistants?",
+    "text": "can you talk to other assistants?",
     "label": "not_command"
   },
   {
@@ -4924,7 +4924,7 @@
     "label": "not_command"
   },
   {
-    "text": "launch spotify \u2014 right now, on the pc",
+    "text": "launch spotify right now, on the pc",
     "label": "command"
   },
   {
@@ -4976,7 +4976,7 @@
     "label": "command"
   },
   {
-    "text": "restart the system \u2014 right now, on the pc",
+    "text": "restart the system right now, on the pc",
     "label": "command"
   },
   {
@@ -5004,7 +5004,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what does AI stand for?",
+    "text": "what does AI stand for?",
     "label": "not_command"
   },
   {
@@ -5028,7 +5028,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you there?",
+    "text": "are you there?",
     "label": "not_command"
   },
   {
@@ -5072,7 +5072,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 sup",
+    "text": "sup",
     "label": "not_command"
   },
   {
@@ -5120,7 +5120,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what time is it in New York?",
+    "text": "what time is it in New York?",
     "label": "not_command"
   },
   {
@@ -5196,11 +5196,11 @@
     "label": "not_command"
   },
   {
-    "text": "play my playlist \u2014 right now, on the phone",
+    "text": "play my playlist right now, on the phone",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 do penguins have knees?",
+    "text": "do penguins have knees?",
     "label": "not_command"
   },
   {
@@ -5232,7 +5232,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what does AI stand for?",
+    "text": "what does AI stand for?",
     "label": "not_command"
   },
   {
@@ -5256,7 +5256,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you always listening?",
+    "text": "are you always listening?",
     "label": "not_command"
   },
   {
@@ -5276,11 +5276,11 @@
     "label": "not_command"
   },
   {
-    "text": "record video \u2014 right now, on the phone",
+    "text": "record video right now, on the phone",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what time is it in New York?",
+    "text": "what time is it in New York?",
     "label": "not_command"
   },
   {
@@ -5308,7 +5308,7 @@
     "label": "command"
   },
   {
-    "text": "restart the system \u2014 right now, on the pc",
+    "text": "restart the system right now, on the pc",
     "label": "command"
   },
   {
@@ -5348,7 +5348,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what are you thinking?",
+    "text": "what are you thinking?",
     "label": "not_command"
   },
   {
@@ -5360,7 +5360,7 @@
     "label": "not_command"
   },
   {
-    "text": "increase volume \u2014 right now, on the phone",
+    "text": "increase volume right now, on the phone",
     "label": "command"
   },
   {
@@ -5388,7 +5388,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you talk to other assistants?",
+    "text": "can you talk to other assistants?",
     "label": "not_command"
   },
   {
@@ -5452,7 +5452,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 hey!",
+    "text": "hey!",
     "label": "not_command"
   },
   {
@@ -5468,7 +5468,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 do you remember me?",
+    "text": "do you remember me?",
     "label": "not_command"
   },
   {
@@ -5484,7 +5484,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your purpose?",
+    "text": "what's your purpose?",
     "label": "not_command"
   },
   {
@@ -5508,7 +5508,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you tell me a fun fact?",
+    "text": "can you tell me a fun fact?",
     "label": "not_command"
   },
   {
@@ -5532,7 +5532,7 @@
     "label": "command"
   },
   {
-    "text": "play my playlist \u2014 right now, on the phone",
+    "text": "play my playlist right now, on the phone",
     "label": "command"
   },
   {
@@ -5612,7 +5612,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you dream?",
+    "text": "do you dream?",
     "label": "not_command"
   },
   {
@@ -5624,7 +5624,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do you work?",
+    "text": "how do you work?",
     "label": "not_command"
   },
   {
@@ -5664,7 +5664,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 is it going to rain tomorrow?",
+    "text": "is it going to rain tomorrow?",
     "label": "not_command"
   },
   {
@@ -5720,7 +5720,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 hello",
+    "text": "hello",
     "label": "not_command"
   },
   {
@@ -5760,7 +5760,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the weather like today?",
+    "text": "what's the weather like today?",
     "label": "not_command"
   },
   {
@@ -5800,7 +5800,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do you work?",
+    "text": "how do you work?",
     "label": "not_command"
   },
   {
@@ -5844,7 +5844,7 @@
     "label": "command"
   },
   {
-    "text": "set alarm for 7 AM \u2014 right now, on the phone",
+    "text": "set alarm for 7 AM right now, on the phone",
     "label": "command"
   },
   {
@@ -5892,7 +5892,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 tell me something interesting",
+    "text": "tell me something interesting",
     "label": "not_command"
   },
   {
@@ -5904,7 +5904,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 is it going to rain tomorrow?",
+    "text": "is it going to rain tomorrow?",
     "label": "not_command"
   },
   {
@@ -5948,7 +5948,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 good night",
+    "text": "good night",
     "label": "not_command"
   },
   {
@@ -6016,7 +6016,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 sup",
+    "text": "sup",
     "label": "not_command"
   },
   {
@@ -6064,7 +6064,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 tell me something interesting",
+    "text": "tell me something interesting",
     "label": "not_command"
   },
   {
@@ -6120,7 +6120,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you talk to other assistants?",
+    "text": "can you talk to other assistants?",
     "label": "not_command"
   },
   {
@@ -6148,7 +6148,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you tell me a fun fact?",
+    "text": "can you tell me a fun fact?",
     "label": "not_command"
   },
   {
@@ -6192,15 +6192,15 @@
     "label": "command"
   },
   {
-    "text": "record video \u2014 right now, on the phone",
+    "text": "record video right now, on the phone",
     "label": "command"
   },
   {
-    "text": "start notepad \u2014 right now, on the pc",
+    "text": "start notepad right now, on the pc",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 can you beat me at chess?",
+    "text": "can you beat me at chess?",
     "label": "not_command"
   },
   {
@@ -6220,7 +6220,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 hello",
+    "text": "hello",
     "label": "not_command"
   },
   {
@@ -6228,7 +6228,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 good night",
+    "text": "good night",
     "label": "not_command"
   },
   {
@@ -6244,7 +6244,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what does a black hole do?",
+    "text": "what does a black hole do?",
     "label": "not_command"
   },
   {
@@ -6264,7 +6264,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 I'm bored",
+    "text": "I'm bored",
     "label": "not_command"
   },
   {
@@ -6372,7 +6372,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 why is the ocean salty?",
+    "text": "why is the ocean salty?",
     "label": "not_command"
   },
   {
@@ -6396,7 +6396,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you have emotions?",
+    "text": "do you have emotions?",
     "label": "not_command"
   },
   {
@@ -6436,7 +6436,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why do we dream?",
+    "text": "why do we dream?",
     "label": "not_command"
   },
   {
@@ -6444,11 +6444,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you always listening?",
+    "text": "are you always listening?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 sup",
+    "text": "sup",
     "label": "not_command"
   },
   {
@@ -6488,7 +6488,7 @@
     "label": "not_command"
   },
   {
-    "text": "set alarm for noon \u2014 right now, on the phone",
+    "text": "set alarm for noon right now, on the phone",
     "label": "command"
   },
   {
@@ -6496,7 +6496,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's the capital of Japan?",
+    "text": "what's the capital of Japan?",
     "label": "not_command"
   },
   {
@@ -6528,7 +6528,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's the best way to cook rice?",
+    "text": "what's the best way to cook rice?",
     "label": "not_command"
   },
   {
@@ -6596,7 +6596,7 @@
     "label": "not_command"
   },
   {
-    "text": "text Brittany Allison saying meeting rescheduled \u2014 right now, on the phone",
+    "text": "text Brittany Allison saying meeting rescheduled right now, on the phone",
     "label": "command"
   },
   {
@@ -6620,7 +6620,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -6628,7 +6628,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how tall is Mount Everest?",
+    "text": "how tall is Mount Everest?",
     "label": "not_command"
   },
   {
@@ -6640,7 +6640,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you there?",
+    "text": "are you there?",
     "label": "not_command"
   },
   {
@@ -6668,7 +6668,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 is AI dangerous?",
+    "text": "is AI dangerous?",
     "label": "not_command"
   },
   {
@@ -6692,7 +6692,7 @@
     "label": "command"
   },
   {
-    "text": "record video \u2014 right now, on the phone",
+    "text": "record video right now, on the phone",
     "label": "command"
   },
   {
@@ -6756,7 +6756,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your name?",
+    "text": "what's your name?",
     "label": "not_command"
   },
   {
@@ -6780,7 +6780,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -6804,7 +6804,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do I cook pasta?",
+    "text": "how do I cook pasta?",
     "label": "not_command"
   },
   {
@@ -6812,7 +6812,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -6876,7 +6876,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the weather like?",
+    "text": "what's the weather like?",
     "label": "not_command"
   },
   {
@@ -6944,7 +6944,7 @@
     "label": "not_command"
   },
   {
-    "text": "lock the door \u2014 right now, on the smarthome",
+    "text": "lock the door right now, on the smarthome",
     "label": "command"
   },
   {
@@ -6964,7 +6964,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -7008,11 +7008,11 @@
     "label": "not_command"
   },
   {
-    "text": "lock the door \u2014 right now, on the smarthome",
+    "text": "lock the door right now, on the smarthome",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 tell me something",
+    "text": "tell me something",
     "label": "not_command"
   },
   {
@@ -7032,7 +7032,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn on the air conditioner \u2014 right now, on the smarthome",
+    "text": "turn on the air conditioner right now, on the smarthome",
     "label": "command"
   },
   {
@@ -7052,7 +7052,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your favorite movie?",
+    "text": "what's your favorite movie?",
     "label": "not_command"
   },
   {
@@ -7072,7 +7072,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 let's talk",
+    "text": "let's talk",
     "label": "not_command"
   },
   {
@@ -7092,7 +7092,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -7184,7 +7184,7 @@
     "label": "command"
   },
   {
-    "text": "play a podcast \u2014 right now, on the phone",
+    "text": "play a podcast right now, on the phone",
     "label": "command"
   },
   {
@@ -7212,7 +7212,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do I cook pasta?",
+    "text": "how do I cook pasta?",
     "label": "not_command"
   },
   {
@@ -7232,7 +7232,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 when was the internet invented?",
+    "text": "when was the internet invented?",
     "label": "not_command"
   },
   {
@@ -7240,7 +7240,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 good night",
+    "text": "good night",
     "label": "not_command"
   },
   {
@@ -7308,7 +7308,7 @@
     "label": "not_command"
   },
   {
-    "text": "lock the door \u2014 right now, on the smarthome",
+    "text": "lock the door right now, on the smarthome",
     "label": "command"
   },
   {
@@ -7324,7 +7324,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 I'm bored",
+    "text": "I'm bored",
     "label": "not_command"
   },
   {
@@ -7416,7 +7416,7 @@
     "label": "not_command"
   },
   {
-    "text": "set alarm for midnight \u2014 right now, on the phone",
+    "text": "set alarm for midnight right now, on the phone",
     "label": "command"
   },
   {
@@ -7464,7 +7464,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what can you do?",
+    "text": "what can you do?",
     "label": "not_command"
   },
   {
@@ -7488,7 +7488,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what are your capabilities?",
+    "text": "what are your capabilities?",
     "label": "not_command"
   },
   {
@@ -7540,7 +7540,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you make jokes?",
+    "text": "can you make jokes?",
     "label": "not_command"
   },
   {
@@ -7612,7 +7612,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's new today?",
+    "text": "what's new today?",
     "label": "not_command"
   },
   {
@@ -7652,15 +7652,15 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 sup",
+    "text": "sup",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 hey!",
+    "text": "hey!",
     "label": "not_command"
   },
   {
@@ -7680,11 +7680,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 tell me something",
+    "text": "tell me something",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 when was the internet invented?",
+    "text": "when was the internet invented?",
     "label": "not_command"
   },
   {
@@ -7696,11 +7696,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what time is it in New York?",
+    "text": "what time is it in New York?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your name?",
+    "text": "what's your name?",
     "label": "not_command"
   },
   {
@@ -7716,7 +7716,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how does a plane fly?",
+    "text": "how does a plane fly?",
     "label": "not_command"
   },
   {
@@ -7728,7 +7728,7 @@
     "label": "not_command"
   },
   {
-    "text": "set alarm for noon \u2014 right now, on the phone",
+    "text": "set alarm for noon right now, on the phone",
     "label": "command"
   },
   {
@@ -7772,7 +7772,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what are your capabilities?",
+    "text": "what are your capabilities?",
     "label": "not_command"
   },
   {
@@ -7784,7 +7784,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the latest news in tech?",
+    "text": "what's the latest news in tech?",
     "label": "not_command"
   },
   {
@@ -7812,7 +7812,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 sup",
+    "text": "sup",
     "label": "not_command"
   },
   {
@@ -7844,7 +7844,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do penguins have knees?",
+    "text": "do penguins have knees?",
     "label": "not_command"
   },
   {
@@ -7852,7 +7852,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what do you think?",
+    "text": "what do you think?",
     "label": "not_command"
   },
   {
@@ -7868,7 +7868,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 are you always listening?",
+    "text": "are you always listening?",
     "label": "not_command"
   },
   {
@@ -7892,7 +7892,7 @@
     "label": "not_command"
   },
   {
-    "text": "set alarm for midnight \u2014 right now, on the phone",
+    "text": "set alarm for midnight right now, on the phone",
     "label": "command"
   },
   {
@@ -7900,7 +7900,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why do we dream?",
+    "text": "why do we dream?",
     "label": "not_command"
   },
   {
@@ -7936,7 +7936,7 @@
     "label": "not_command"
   },
   {
-    "text": "launch chrome \u2014 right now, on the pc",
+    "text": "launch chrome right now, on the pc",
     "label": "command"
   },
   {
@@ -7944,11 +7944,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 tell me a joke",
+    "text": "tell me a joke",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do you work?",
+    "text": "how do you work?",
     "label": "not_command"
   },
   {
@@ -7972,7 +7972,7 @@
     "label": "command"
   },
   {
-    "text": "record video \u2014 right now, on the phone",
+    "text": "record video right now, on the phone",
     "label": "command"
   },
   {
@@ -7996,7 +7996,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do airplanes stay in the air?",
+    "text": "how do airplanes stay in the air?",
     "label": "not_command"
   },
   {
@@ -8024,7 +8024,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 tell me a joke",
+    "text": "tell me a joke",
     "label": "not_command"
   },
   {
@@ -8040,7 +8040,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how does a plane fly?",
+    "text": "how does a plane fly?",
     "label": "not_command"
   },
   {
@@ -8100,7 +8100,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the capital of Japan?",
+    "text": "what's the capital of Japan?",
     "label": "not_command"
   },
   {
@@ -8184,7 +8184,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do airplanes stay in the air?",
+    "text": "how do airplanes stay in the air?",
     "label": "not_command"
   },
   {
@@ -8200,7 +8200,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what time is it in New York?",
+    "text": "what time is it in New York?",
     "label": "not_command"
   },
   {
@@ -8332,11 +8332,11 @@
     "label": "not_command"
   },
   {
-    "text": "mute microphone \u2014 right now, on the pc",
+    "text": "mute microphone right now, on the pc",
     "label": "command"
   },
   {
-    "text": "set alarm for 7 AM \u2014 right now, on the phone",
+    "text": "set alarm for 7 AM right now, on the phone",
     "label": "command"
   },
   {
@@ -8356,7 +8356,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 I'm bored",
+    "text": "I'm bored",
     "label": "not_command"
   },
   {
@@ -8376,11 +8376,11 @@
     "label": "not_command"
   },
   {
-    "text": "play my playlist \u2014 right now, on the phone",
+    "text": "play my playlist right now, on the phone",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 do you have emotions?",
+    "text": "do you have emotions?",
     "label": "not_command"
   },
   {
@@ -8432,7 +8432,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why is the ocean salty?",
+    "text": "why is the ocean salty?",
     "label": "not_command"
   },
   {
@@ -8456,7 +8456,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you explain quantum physics?",
+    "text": "can you explain quantum physics?",
     "label": "not_command"
   },
   {
@@ -8476,7 +8476,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn off the lights \u2014 right now, on the smarthome",
+    "text": "turn off the lights right now, on the smarthome",
     "label": "command"
   },
   {
@@ -8484,7 +8484,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how do airplanes stay in the air?",
+    "text": "how do airplanes stay in the air?",
     "label": "not_command"
   },
   {
@@ -8560,11 +8560,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why is the sky blue?",
+    "text": "why is the sky blue?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do you work?",
+    "text": "how do you work?",
     "label": "not_command"
   },
   {
@@ -8580,7 +8580,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 when was the internet invented?",
+    "text": "when was the internet invented?",
     "label": "not_command"
   },
   {
@@ -8628,7 +8628,7 @@
     "label": "not_command"
   },
   {
-    "text": "record video \u2014 right now, on the phone",
+    "text": "record video right now, on the phone",
     "label": "command"
   },
   {
@@ -8672,7 +8672,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how do you work?",
+    "text": "how do you work?",
     "label": "not_command"
   },
   {
@@ -8764,7 +8764,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn on the air conditioner \u2014 right now, on the smarthome",
+    "text": "turn on the air conditioner right now, on the smarthome",
     "label": "command"
   },
   {
@@ -8772,7 +8772,7 @@
     "label": "not_command"
   },
   {
-    "text": "open terminal \u2014 right now, on the pc",
+    "text": "open terminal right now, on the pc",
     "label": "command"
   },
   {
@@ -8800,7 +8800,7 @@
     "label": "not_command"
   },
   {
-    "text": "take a picture \u2014 right now, on the phone",
+    "text": "take a picture right now, on the phone",
     "label": "command"
   },
   {
@@ -8856,7 +8856,7 @@
     "label": "not_command"
   },
   {
-    "text": "text Margaret Torres saying call me \u2014 right now, on the phone",
+    "text": "text Margaret Torres saying call me right now, on the phone",
     "label": "command"
   },
   {
@@ -8884,7 +8884,7 @@
     "label": "not_command"
   },
   {
-    "text": "launch terminal \u2014 right now, on the pc",
+    "text": "launch terminal right now, on the pc",
     "label": "command"
   },
   {
@@ -8920,7 +8920,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do you work?",
+    "text": "how do you work?",
     "label": "not_command"
   },
   {
@@ -8936,15 +8936,15 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's new today?",
+    "text": "what's new today?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 is AI dangerous?",
+    "text": "is AI dangerous?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you remember me?",
+    "text": "do you remember me?",
     "label": "not_command"
   },
   {
@@ -8952,7 +8952,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 let's talk",
+    "text": "let's talk",
     "label": "not_command"
   },
   {
@@ -9060,7 +9060,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn off the lights \u2014 right now, on the smarthome",
+    "text": "turn off the lights right now, on the smarthome",
     "label": "command"
   },
   {
@@ -9096,7 +9096,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you tell me a fun fact?",
+    "text": "can you tell me a fun fact?",
     "label": "not_command"
   },
   {
@@ -9160,7 +9160,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 tell me a joke",
+    "text": "tell me a joke",
     "label": "not_command"
   },
   {
@@ -9208,7 +9208,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -9264,7 +9264,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why do we dream?",
+    "text": "why do we dream?",
     "label": "not_command"
   },
   {
@@ -9320,7 +9320,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what does a black hole do?",
+    "text": "what does a black hole do?",
     "label": "not_command"
   },
   {
@@ -9344,7 +9344,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 is AI dangerous?",
+    "text": "is AI dangerous?",
     "label": "not_command"
   },
   {
@@ -9412,7 +9412,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's the latest news in tech?",
+    "text": "what's the latest news in tech?",
     "label": "not_command"
   },
   {
@@ -9424,7 +9424,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 is AI dangerous?",
+    "text": "is AI dangerous?",
     "label": "not_command"
   },
   {
@@ -9440,7 +9440,7 @@
     "label": "not_command"
   },
   {
-    "text": "mute microphone \u2014 right now, on the pc",
+    "text": "mute microphone right now, on the pc",
     "label": "command"
   },
   {
@@ -9452,7 +9452,7 @@
     "label": "command"
   },
   {
-    "text": "turn on the air conditioner \u2014 right now, on the smarthome",
+    "text": "turn on the air conditioner right now, on the smarthome",
     "label": "command"
   },
   {
@@ -9464,7 +9464,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why is the ocean salty?",
+    "text": "why is the ocean salty?",
     "label": "not_command"
   },
   {
@@ -9484,7 +9484,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how tall is Mount Everest?",
+    "text": "how tall is Mount Everest?",
     "label": "not_command"
   },
   {
@@ -9508,7 +9508,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's up?",
+    "text": "what's up?",
     "label": "not_command"
   },
   {
@@ -9552,7 +9552,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what can you do?",
+    "text": "what can you do?",
     "label": "not_command"
   },
   {
@@ -9568,7 +9568,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 is it going to rain tomorrow?",
+    "text": "is it going to rain tomorrow?",
     "label": "not_command"
   },
   {
@@ -9580,7 +9580,7 @@
     "label": "not_command"
   },
   {
-    "text": "restart the system \u2014 right now, on the pc",
+    "text": "restart the system right now, on the pc",
     "label": "command"
   },
   {
@@ -9592,7 +9592,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what does AI stand for?",
+    "text": "what does AI stand for?",
     "label": "not_command"
   },
   {
@@ -9624,7 +9624,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you there?",
+    "text": "are you there?",
     "label": "not_command"
   },
   {
@@ -9636,7 +9636,7 @@
     "label": "not_command"
   },
   {
-    "text": "send email to Rhonda Vincent \u2014 right now, on the pc",
+    "text": "send email to Rhonda Vincent right now, on the pc",
     "label": "command"
   },
   {
@@ -9644,7 +9644,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 I'm bored",
+    "text": "I'm bored",
     "label": "not_command"
   },
   {
@@ -9664,7 +9664,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 sup",
+    "text": "sup",
     "label": "not_command"
   },
   {
@@ -9680,11 +9680,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 when was the internet invented?",
+    "text": "when was the internet invented?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the best way to cook rice?",
+    "text": "what's the best way to cook rice?",
     "label": "not_command"
   },
   {
@@ -9696,7 +9696,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 hi",
+    "text": "hi",
     "label": "not_command"
   },
   {
@@ -9728,7 +9728,7 @@
     "label": "not_command"
   },
   {
-    "text": "mute microphone \u2014 right now, on the pc",
+    "text": "mute microphone right now, on the pc",
     "label": "command"
   },
   {
@@ -9756,7 +9756,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how tall is Mount Everest?",
+    "text": "how tall is Mount Everest?",
     "label": "not_command"
   },
   {
@@ -9764,7 +9764,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 good night",
+    "text": "good night",
     "label": "not_command"
   },
   {
@@ -9796,7 +9796,7 @@
     "label": "not_command"
   },
   {
-    "text": "open spotify \u2014 right now, on the pc",
+    "text": "open spotify right now, on the pc",
     "label": "command"
   },
   {
@@ -9828,11 +9828,11 @@
     "label": "not_command"
   },
   {
-    "text": "start notepad \u2014 right now, on the pc",
+    "text": "start notepad right now, on the pc",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's the best way to cook rice?",
+    "text": "what's the best way to cook rice?",
     "label": "not_command"
   },
   {
@@ -9872,11 +9872,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's new today?",
+    "text": "what's new today?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how many stars are in the galaxy?",
+    "text": "how many stars are in the galaxy?",
     "label": "not_command"
   },
   {
@@ -9932,7 +9932,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 when was the internet invented?",
+    "text": "when was the internet invented?",
     "label": "not_command"
   },
   {
@@ -9952,7 +9952,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what can you do?",
+    "text": "what can you do?",
     "label": "not_command"
   },
   {
@@ -9964,7 +9964,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how many stars are in the galaxy?",
+    "text": "how many stars are in the galaxy?",
     "label": "not_command"
   },
   {
@@ -9980,7 +9980,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's new today?",
+    "text": "what's new today?",
     "label": "not_command"
   },
   {
@@ -9992,7 +9992,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how's it going?",
+    "text": "how's it going?",
     "label": "not_command"
   },
   {
@@ -10056,7 +10056,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what are your capabilities?",
+    "text": "what are your capabilities?",
     "label": "not_command"
   },
   {
@@ -10072,7 +10072,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 hi",
+    "text": "hi",
     "label": "not_command"
   },
   {
@@ -10080,7 +10080,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -10092,11 +10092,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 is it going to rain tomorrow?",
+    "text": "is it going to rain tomorrow?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you dream?",
+    "text": "do you dream?",
     "label": "not_command"
   },
   {
@@ -10160,7 +10160,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn on the air conditioner \u2014 right now, on the smarthome",
+    "text": "turn on the air conditioner right now, on the smarthome",
     "label": "command"
   },
   {
@@ -10172,7 +10172,7 @@
     "label": "not_command"
   },
   {
-    "text": "mute microphone \u2014 right now, on the pc",
+    "text": "mute microphone right now, on the pc",
     "label": "command"
   },
   {
@@ -10180,7 +10180,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you make jokes?",
+    "text": "can you make jokes?",
     "label": "not_command"
   },
   {
@@ -10204,7 +10204,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn on the air conditioner \u2014 right now, on the smarthome",
+    "text": "turn on the air conditioner right now, on the smarthome",
     "label": "command"
   },
   {
@@ -10232,15 +10232,15 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the weather like?",
+    "text": "what's the weather like?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why is the ocean salty?",
+    "text": "why is the ocean salty?",
     "label": "not_command"
   },
   {
-    "text": "send email to Christine Cruz \u2014 right now, on the pc",
+    "text": "send email to Christine Cruz right now, on the pc",
     "label": "command"
   },
   {
@@ -10252,11 +10252,11 @@
     "label": "not_command"
   },
   {
-    "text": "mute microphone \u2014 right now, on the pc",
+    "text": "mute microphone right now, on the pc",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how smart are you?",
+    "text": "how smart are you?",
     "label": "not_command"
   },
   {
@@ -10264,7 +10264,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how do airplanes stay in the air?",
+    "text": "how do airplanes stay in the air?",
     "label": "not_command"
   },
   {
@@ -10276,7 +10276,7 @@
     "label": "not_command"
   },
   {
-    "text": "lock the door \u2014 right now, on the smarthome",
+    "text": "lock the door right now, on the smarthome",
     "label": "command"
   },
   {
@@ -10344,7 +10344,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you have emotions?",
+    "text": "do you have emotions?",
     "label": "not_command"
   },
   {
@@ -10364,7 +10364,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you talk to other assistants?",
+    "text": "can you talk to other assistants?",
     "label": "not_command"
   },
   {
@@ -10460,7 +10460,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how many stars are in the galaxy?",
+    "text": "how many stars are in the galaxy?",
     "label": "not_command"
   },
   {
@@ -10472,7 +10472,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 when was the internet invented?",
+    "text": "when was the internet invented?",
     "label": "not_command"
   },
   {
@@ -10488,7 +10488,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's your purpose?",
+    "text": "what's your purpose?",
     "label": "not_command"
   },
   {
@@ -10512,7 +10512,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 hi",
+    "text": "hi",
     "label": "not_command"
   },
   {
@@ -10528,7 +10528,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why is the ocean salty?",
+    "text": "why is the ocean salty?",
     "label": "not_command"
   },
   {
@@ -10544,7 +10544,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what do you think?",
+    "text": "what do you think?",
     "label": "not_command"
   },
   {
@@ -10604,7 +10604,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's up?",
+    "text": "what's up?",
     "label": "not_command"
   },
   {
@@ -10612,7 +10612,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what does AI stand for?",
+    "text": "what does AI stand for?",
     "label": "not_command"
   },
   {
@@ -10664,7 +10664,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how tall is Mount Everest?",
+    "text": "how tall is Mount Everest?",
     "label": "not_command"
   },
   {
@@ -10720,7 +10720,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you beat me at chess?",
+    "text": "can you beat me at chess?",
     "label": "not_command"
   },
   {
@@ -10792,7 +10792,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the weather like today?",
+    "text": "what's the weather like today?",
     "label": "not_command"
   },
   {
@@ -10844,7 +10844,7 @@
     "label": "not_command"
   },
   {
-    "text": "start chrome \u2014 right now, on the pc",
+    "text": "start chrome right now, on the pc",
     "label": "command"
   },
   {
@@ -10984,7 +10984,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the latest news in tech?",
+    "text": "what's the latest news in tech?",
     "label": "not_command"
   },
   {
@@ -11036,7 +11036,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your favorite movie?",
+    "text": "what's your favorite movie?",
     "label": "not_command"
   },
   {
@@ -11092,7 +11092,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do you learn?",
+    "text": "how do you learn?",
     "label": "not_command"
   },
   {
@@ -11116,7 +11116,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 sup",
+    "text": "sup",
     "label": "not_command"
   },
   {
@@ -11172,15 +11172,15 @@
     "label": "not_command"
   },
   {
-    "text": "mute microphone \u2014 right now, on the pc",
+    "text": "mute microphone right now, on the pc",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how many stars are in the galaxy?",
+    "text": "how many stars are in the galaxy?",
     "label": "not_command"
   },
   {
-    "text": "lock the door \u2014 right now, on the smarthome",
+    "text": "lock the door right now, on the smarthome",
     "label": "command"
   },
   {
@@ -11196,7 +11196,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how does a plane fly?",
+    "text": "how does a plane fly?",
     "label": "not_command"
   },
   {
@@ -11204,7 +11204,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your purpose?",
+    "text": "what's your purpose?",
     "label": "not_command"
   },
   {
@@ -11212,7 +11212,7 @@
     "label": "not_command"
   },
   {
-    "text": "play my playlist \u2014 right now, on the phone",
+    "text": "play my playlist right now, on the phone",
     "label": "command"
   },
   {
@@ -11240,7 +11240,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the weather like?",
+    "text": "what's the weather like?",
     "label": "not_command"
   },
   {
@@ -11280,7 +11280,7 @@
     "label": "not_command"
   },
   {
-    "text": "start calculator \u2014 right now, on the pc",
+    "text": "start calculator right now, on the pc",
     "label": "command"
   },
   {
@@ -11300,11 +11300,11 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 good morning",
+    "text": "good morning",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 good night",
+    "text": "good night",
     "label": "not_command"
   },
   {
@@ -11352,7 +11352,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's new today?",
+    "text": "what's new today?",
     "label": "not_command"
   },
   {
@@ -11372,7 +11372,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how far is the moon?",
+    "text": "how far is the moon?",
     "label": "not_command"
   },
   {
@@ -11424,11 +11424,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what time is it in New York?",
+    "text": "what time is it in New York?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 hey!",
+    "text": "hey!",
     "label": "not_command"
   },
   {
@@ -11444,7 +11444,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do you learn?",
+    "text": "how do you learn?",
     "label": "not_command"
   },
   {
@@ -11468,7 +11468,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 who is the president of France?",
+    "text": "who is the president of France?",
     "label": "not_command"
   },
   {
@@ -11516,7 +11516,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 hello",
+    "text": "hello",
     "label": "not_command"
   },
   {
@@ -11532,7 +11532,7 @@
     "label": "not_command"
   },
   {
-    "text": "restart the system \u2014 right now, on the pc",
+    "text": "restart the system right now, on the pc",
     "label": "command"
   },
   {
@@ -11544,7 +11544,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how's it going?",
+    "text": "how's it going?",
     "label": "not_command"
   },
   {
@@ -11600,7 +11600,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what does AI stand for?",
+    "text": "what does AI stand for?",
     "label": "not_command"
   },
   {
@@ -11632,7 +11632,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's the best way to cook rice?",
+    "text": "what's the best way to cook rice?",
     "label": "not_command"
   },
   {
@@ -11660,7 +11660,7 @@
     "label": "not_command"
   },
   {
-    "text": "play my playlist \u2014 right now, on the phone",
+    "text": "play my playlist right now, on the phone",
     "label": "command"
   },
   {
@@ -11672,7 +11672,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what time is it in New York?",
+    "text": "what time is it in New York?",
     "label": "not_command"
   },
   {
@@ -11704,7 +11704,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what are you thinking?",
+    "text": "what are you thinking?",
     "label": "not_command"
   },
   {
@@ -11724,7 +11724,7 @@
     "label": "not_command"
   },
   {
-    "text": "text Chris Santiago saying call me \u2014 right now, on the phone",
+    "text": "text Chris Santiago saying call me right now, on the phone",
     "label": "command"
   },
   {
@@ -11808,7 +11808,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's new today?",
+    "text": "what's new today?",
     "label": "not_command"
   },
   {
@@ -11816,7 +11816,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 let's talk",
+    "text": "let's talk",
     "label": "not_command"
   },
   {
@@ -11856,11 +11856,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what does a black hole do?",
+    "text": "what does a black hole do?",
     "label": "not_command"
   },
   {
-    "text": "set alarm for midnight \u2014 right now, on the phone",
+    "text": "set alarm for midnight right now, on the phone",
     "label": "command"
   },
   {
@@ -11872,15 +11872,15 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 tell me something interesting",
+    "text": "tell me something interesting",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's new today?",
+    "text": "what's new today?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how many stars are in the galaxy?",
+    "text": "how many stars are in the galaxy?",
     "label": "not_command"
   },
   {
@@ -11904,7 +11904,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you remember me?",
+    "text": "do you remember me?",
     "label": "not_command"
   },
   {
@@ -11936,7 +11936,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 is AI dangerous?",
+    "text": "is AI dangerous?",
     "label": "not_command"
   },
   {
@@ -11968,7 +11968,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how many stars are in the galaxy?",
+    "text": "how many stars are in the galaxy?",
     "label": "not_command"
   },
   {
@@ -11996,7 +11996,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what time is it in New York?",
+    "text": "what time is it in New York?",
     "label": "not_command"
   },
   {
@@ -12004,7 +12004,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you beat me at chess?",
+    "text": "can you beat me at chess?",
     "label": "not_command"
   },
   {
@@ -12020,7 +12020,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what are you thinking?",
+    "text": "what are you thinking?",
     "label": "not_command"
   },
   {
@@ -12044,7 +12044,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how's it going?",
+    "text": "how's it going?",
     "label": "not_command"
   },
   {
@@ -12060,7 +12060,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how far is the moon?",
+    "text": "how far is the moon?",
     "label": "not_command"
   },
   {
@@ -12220,7 +12220,7 @@
     "label": "not_command"
   },
   {
-    "text": "send email to Danielle Lewis \u2014 right now, on the pc",
+    "text": "send email to Danielle Lewis right now, on the pc",
     "label": "command"
   },
   {
@@ -12292,7 +12292,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what does a black hole do?",
+    "text": "what does a black hole do?",
     "label": "not_command"
   },
   {
@@ -12300,7 +12300,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 I'm bored",
+    "text": "I'm bored",
     "label": "not_command"
   },
   {
@@ -12324,7 +12324,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 good night",
+    "text": "good night",
     "label": "not_command"
   },
   {
@@ -12348,11 +12348,11 @@
     "label": "not_command"
   },
   {
-    "text": "increase volume \u2014 right now, on the phone",
+    "text": "increase volume right now, on the phone",
     "label": "command"
   },
   {
-    "text": "set alarm for 7 AM \u2014 right now, on the phone",
+    "text": "set alarm for 7 AM right now, on the phone",
     "label": "command"
   },
   {
@@ -12388,7 +12388,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's your favorite movie?",
+    "text": "what's your favorite movie?",
     "label": "not_command"
   },
   {
@@ -12428,11 +12428,11 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's the weather like?",
+    "text": "what's the weather like?",
     "label": "not_command"
   },
   {
-    "text": "mute microphone \u2014 right now, on the pc",
+    "text": "mute microphone right now, on the pc",
     "label": "command"
   },
   {
@@ -12468,7 +12468,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your favorite movie?",
+    "text": "what's your favorite movie?",
     "label": "not_command"
   },
   {
@@ -12484,7 +12484,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you dream?",
+    "text": "do you dream?",
     "label": "not_command"
   },
   {
@@ -12504,11 +12504,11 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 who is the president of France?",
+    "text": "who is the president of France?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what do you think?",
+    "text": "what do you think?",
     "label": "not_command"
   },
   {
@@ -12524,11 +12524,11 @@
     "label": "not_command"
   },
   {
-    "text": "restart the system \u2014 right now, on the pc",
+    "text": "restart the system right now, on the pc",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's your name?",
+    "text": "what's your name?",
     "label": "not_command"
   },
   {
@@ -12540,7 +12540,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you there?",
+    "text": "are you there?",
     "label": "not_command"
   },
   {
@@ -12556,7 +12556,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you make jokes?",
+    "text": "can you make jokes?",
     "label": "not_command"
   },
   {
@@ -12588,15 +12588,15 @@
     "label": "not_command"
   },
   {
-    "text": "set alarm for noon \u2014 right now, on the phone",
+    "text": "set alarm for noon right now, on the phone",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 can you make jokes?",
+    "text": "can you make jokes?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you remember me?",
+    "text": "do you remember me?",
     "label": "not_command"
   },
   {
@@ -12604,7 +12604,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you remember me?",
+    "text": "do you remember me?",
     "label": "not_command"
   },
   {
@@ -12632,7 +12632,7 @@
     "label": "not_command"
   },
   {
-    "text": "open spotify \u2014 right now, on the pc",
+    "text": "open spotify right now, on the pc",
     "label": "command"
   },
   {
@@ -12648,7 +12648,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 who is the president of France?",
+    "text": "who is the president of France?",
     "label": "not_command"
   },
   {
@@ -12680,7 +12680,7 @@
     "label": "not_command"
   },
   {
-    "text": "text Amanda Rios saying meeting rescheduled \u2014 right now, on the phone",
+    "text": "text Amanda Rios saying meeting rescheduled right now, on the phone",
     "label": "command"
   },
   {
@@ -12740,7 +12740,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn on the air conditioner \u2014 right now, on the smarthome",
+    "text": "turn on the air conditioner right now, on the smarthome",
     "label": "command"
   },
   {
@@ -12768,11 +12768,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the latest news in tech?",
+    "text": "what's the latest news in tech?",
     "label": "not_command"
   },
   {
-    "text": "text Jeffrey Johnson saying meeting rescheduled \u2014 right now, on the phone",
+    "text": "text Jeffrey Johnson saying meeting rescheduled right now, on the phone",
     "label": "command"
   },
   {
@@ -12804,7 +12804,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you there?",
+    "text": "are you there?",
     "label": "not_command"
   },
   {
@@ -12828,7 +12828,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what can you do?",
+    "text": "what can you do?",
     "label": "not_command"
   },
   {
@@ -12868,7 +12868,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -12924,11 +12924,11 @@
     "label": "not_command"
   },
   {
-    "text": "launch spotify \u2014 right now, on the pc",
+    "text": "launch spotify right now, on the pc",
     "label": "command"
   },
   {
-    "text": "turn on the air conditioner \u2014 right now, on the smarthome",
+    "text": "turn on the air conditioner right now, on the smarthome",
     "label": "command"
   },
   {
@@ -12968,7 +12968,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the latest news in tech?",
+    "text": "what's the latest news in tech?",
     "label": "not_command"
   },
   {
@@ -12980,11 +12980,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do you work?",
+    "text": "how do you work?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the capital of Japan?",
+    "text": "what's the capital of Japan?",
     "label": "not_command"
   },
   {
@@ -13012,7 +13012,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how's it going?",
+    "text": "how's it going?",
     "label": "not_command"
   },
   {
@@ -13036,7 +13036,7 @@
     "label": "command"
   },
   {
-    "text": "take a picture \u2014 right now, on the phone",
+    "text": "take a picture right now, on the phone",
     "label": "command"
   },
   {
@@ -13052,7 +13052,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your favorite movie?",
+    "text": "what's your favorite movie?",
     "label": "not_command"
   },
   {
@@ -13132,7 +13132,7 @@
     "label": "not_command"
   },
   {
-    "text": "restart the system \u2014 right now, on the pc",
+    "text": "restart the system right now, on the pc",
     "label": "command"
   },
   {
@@ -13180,11 +13180,11 @@
     "label": "not_command"
   },
   {
-    "text": "play my playlist \u2014 right now, on the phone",
+    "text": "play my playlist right now, on the phone",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 can you make jokes?",
+    "text": "can you make jokes?",
     "label": "not_command"
   },
   {
@@ -13192,7 +13192,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what do you think?",
+    "text": "what do you think?",
     "label": "not_command"
   },
   {
@@ -13204,7 +13204,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 hello",
+    "text": "hello",
     "label": "not_command"
   },
   {
@@ -13280,7 +13280,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -13304,7 +13304,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what does a black hole do?",
+    "text": "what does a black hole do?",
     "label": "not_command"
   },
   {
@@ -13372,7 +13372,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your purpose?",
+    "text": "what's your purpose?",
     "label": "not_command"
   },
   {
@@ -13380,7 +13380,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you have emotions?",
+    "text": "do you have emotions?",
     "label": "not_command"
   },
   {
@@ -13388,7 +13388,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn on the air conditioner \u2014 right now, on the smarthome",
+    "text": "turn on the air conditioner right now, on the smarthome",
     "label": "command"
   },
   {
@@ -13400,7 +13400,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -13436,7 +13436,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your name?",
+    "text": "what's your name?",
     "label": "not_command"
   },
   {
@@ -13444,7 +13444,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 when was the internet invented?",
+    "text": "when was the internet invented?",
     "label": "not_command"
   },
   {
@@ -13464,7 +13464,7 @@
     "label": "not_command"
   },
   {
-    "text": "restart the system \u2014 right now, on the pc",
+    "text": "restart the system right now, on the pc",
     "label": "command"
   },
   {
@@ -13536,7 +13536,7 @@
     "label": "not_command"
   },
   {
-    "text": "increase volume \u2014 right now, on the phone",
+    "text": "increase volume right now, on the phone",
     "label": "command"
   },
   {
@@ -13564,11 +13564,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 is it going to rain tomorrow?",
+    "text": "is it going to rain tomorrow?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do penguins have knees?",
+    "text": "do penguins have knees?",
     "label": "not_command"
   },
   {
@@ -13604,7 +13604,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 sup",
+    "text": "sup",
     "label": "not_command"
   },
   {
@@ -13660,7 +13660,7 @@
     "label": "command"
   },
   {
-    "text": "mute microphone \u2014 right now, on the pc",
+    "text": "mute microphone right now, on the pc",
     "label": "command"
   },
   {
@@ -13672,7 +13672,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the latest news in tech?",
+    "text": "what's the latest news in tech?",
     "label": "not_command"
   },
   {
@@ -13780,7 +13780,7 @@
     "label": "command"
   },
   {
-    "text": "text Russell Trevino saying meeting rescheduled \u2014 right now, on the phone",
+    "text": "text Russell Trevino saying meeting rescheduled right now, on the phone",
     "label": "command"
   },
   {
@@ -13792,7 +13792,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you dream?",
+    "text": "do you dream?",
     "label": "not_command"
   },
   {
@@ -13856,7 +13856,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you sing?",
+    "text": "can you sing?",
     "label": "not_command"
   },
   {
@@ -13876,7 +13876,7 @@
     "label": "not_command"
   },
   {
-    "text": "increase volume \u2014 right now, on the phone",
+    "text": "increase volume right now, on the phone",
     "label": "command"
   },
   {
@@ -13888,7 +13888,7 @@
     "label": "not_command"
   },
   {
-    "text": "launch calculator \u2014 right now, on the pc",
+    "text": "launch calculator right now, on the pc",
     "label": "command"
   },
   {
@@ -13900,7 +13900,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 sup",
+    "text": "sup",
     "label": "not_command"
   },
   {
@@ -13924,7 +13924,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do airplanes stay in the air?",
+    "text": "how do airplanes stay in the air?",
     "label": "not_command"
   },
   {
@@ -13960,7 +13960,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's new today?",
+    "text": "what's new today?",
     "label": "not_command"
   },
   {
@@ -13968,7 +13968,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how many stars are in the galaxy?",
+    "text": "how many stars are in the galaxy?",
     "label": "not_command"
   },
   {
@@ -14028,7 +14028,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do I cook pasta?",
+    "text": "how do I cook pasta?",
     "label": "not_command"
   },
   {
@@ -14144,7 +14144,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you always listening?",
+    "text": "are you always listening?",
     "label": "not_command"
   },
   {
@@ -14192,7 +14192,7 @@
     "label": "not_command"
   },
   {
-    "text": "turn on the air conditioner \u2014 right now, on the smarthome",
+    "text": "turn on the air conditioner right now, on the smarthome",
     "label": "command"
   },
   {
@@ -14220,7 +14220,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 hello",
+    "text": "hello",
     "label": "not_command"
   },
   {
@@ -14228,7 +14228,7 @@
     "label": "not_command"
   },
   {
-    "text": "start chrome \u2014 right now, on the pc",
+    "text": "start chrome right now, on the pc",
     "label": "command"
   },
   {
@@ -14236,7 +14236,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do you learn?",
+    "text": "how do you learn?",
     "label": "not_command"
   },
   {
@@ -14252,7 +14252,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -14260,7 +14260,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -14284,7 +14284,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 good night",
+    "text": "good night",
     "label": "not_command"
   },
   {
@@ -14292,7 +14292,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 let's talk",
+    "text": "let's talk",
     "label": "not_command"
   },
   {
@@ -14304,7 +14304,7 @@
     "label": "not_command"
   },
   {
-    "text": "launch chrome \u2014 right now, on the pc",
+    "text": "launch chrome right now, on the pc",
     "label": "command"
   },
   {
@@ -14336,7 +14336,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 tell me something",
+    "text": "tell me something",
     "label": "not_command"
   },
   {
@@ -14348,7 +14348,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what time is it in New York?",
+    "text": "what time is it in New York?",
     "label": "not_command"
   },
   {
@@ -14364,7 +14364,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how does a plane fly?",
+    "text": "how does a plane fly?",
     "label": "not_command"
   },
   {
@@ -14532,11 +14532,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the capital of Japan?",
+    "text": "what's the capital of Japan?",
     "label": "not_command"
   },
   {
-    "text": "launch calculator \u2014 right now, on the pc",
+    "text": "launch calculator right now, on the pc",
     "label": "command"
   },
   {
@@ -14552,7 +14552,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -14568,7 +14568,7 @@
     "label": "not_command"
   },
   {
-    "text": "increase volume \u2014 right now, on the phone",
+    "text": "increase volume right now, on the phone",
     "label": "command"
   },
   {
@@ -14584,7 +14584,7 @@
     "label": "command"
   },
   {
-    "text": "record video \u2014 right now, on the phone",
+    "text": "record video right now, on the phone",
     "label": "command"
   },
   {
@@ -14632,11 +14632,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what can you do?",
+    "text": "what can you do?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what time is it in New York?",
+    "text": "what time is it in New York?",
     "label": "not_command"
   },
   {
@@ -14664,7 +14664,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how tall is Mount Everest?",
+    "text": "how tall is Mount Everest?",
     "label": "not_command"
   },
   {
@@ -14696,7 +14696,7 @@
     "label": "not_command"
   },
   {
-    "text": "start spotify \u2014 right now, on the pc",
+    "text": "start spotify right now, on the pc",
     "label": "command"
   },
   {
@@ -14732,7 +14732,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the best way to cook rice?",
+    "text": "what's the best way to cook rice?",
     "label": "not_command"
   },
   {
@@ -14744,7 +14744,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how does a plane fly?",
+    "text": "how does a plane fly?",
     "label": "not_command"
   },
   {
@@ -14768,7 +14768,7 @@
     "label": "not_command"
   },
   {
-    "text": "launch chrome \u2014 right now, on the pc",
+    "text": "launch chrome right now, on the pc",
     "label": "command"
   },
   {
@@ -14820,7 +14820,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you explain quantum physics?",
+    "text": "can you explain quantum physics?",
     "label": "not_command"
   },
   {
@@ -14892,7 +14892,7 @@
     "label": "not_command"
   },
   {
-    "text": "take a picture \u2014 right now, on the phone",
+    "text": "take a picture right now, on the phone",
     "label": "command"
   },
   {
@@ -14908,7 +14908,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how does a plane fly?",
+    "text": "how does a plane fly?",
     "label": "not_command"
   },
   {
@@ -14920,7 +14920,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 when was the internet invented?",
+    "text": "when was the internet invented?",
     "label": "not_command"
   },
   {
@@ -14928,7 +14928,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 is it going to rain tomorrow?",
+    "text": "is it going to rain tomorrow?",
     "label": "not_command"
   },
   {
@@ -14940,7 +14940,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why is the ocean salty?",
+    "text": "why is the ocean salty?",
     "label": "not_command"
   },
   {
@@ -14964,7 +14964,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 hello",
+    "text": "hello",
     "label": "not_command"
   },
   {
@@ -14996,7 +14996,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 let's talk",
+    "text": "let's talk",
     "label": "not_command"
   },
   {
@@ -15012,7 +15012,7 @@
     "label": "not_command"
   },
   {
-    "text": "launch spotify \u2014 right now, on the pc",
+    "text": "launch spotify right now, on the pc",
     "label": "command"
   },
   {
@@ -15056,7 +15056,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how's it going?",
+    "text": "how's it going?",
     "label": "not_command"
   },
   {
@@ -15064,11 +15064,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 hello",
+    "text": "hello",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the weather like today?",
+    "text": "what's the weather like today?",
     "label": "not_command"
   },
   {
@@ -15076,7 +15076,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 why is the sky blue?",
+    "text": "why is the sky blue?",
     "label": "not_command"
   },
   {
@@ -15084,7 +15084,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how far is the moon?",
+    "text": "how far is the moon?",
     "label": "not_command"
   },
   {
@@ -15096,7 +15096,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's the weather like today?",
+    "text": "what's the weather like today?",
     "label": "not_command"
   },
   {
@@ -15108,15 +15108,15 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 do you remember me?",
+    "text": "do you remember me?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you dream?",
+    "text": "do you dream?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the best way to cook rice?",
+    "text": "what's the best way to cook rice?",
     "label": "not_command"
   },
   {
@@ -15136,7 +15136,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 do you have emotions?",
+    "text": "do you have emotions?",
     "label": "not_command"
   },
   {
@@ -15200,7 +15200,7 @@
     "label": "not_command"
   },
   {
-    "text": "record video \u2014 right now, on the phone",
+    "text": "record video right now, on the phone",
     "label": "command"
   },
   {
@@ -15224,11 +15224,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what are you thinking?",
+    "text": "what are you thinking?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what time is it in New York?",
+    "text": "what time is it in New York?",
     "label": "not_command"
   },
   {
@@ -15240,7 +15240,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what does a black hole do?",
+    "text": "what does a black hole do?",
     "label": "not_command"
   },
   {
@@ -15264,7 +15264,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's new today?",
+    "text": "what's new today?",
     "label": "not_command"
   },
   {
@@ -15344,7 +15344,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the latest news in tech?",
+    "text": "what's the latest news in tech?",
     "label": "not_command"
   },
   {
@@ -15368,7 +15368,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do you learn?",
+    "text": "how do you learn?",
     "label": "not_command"
   },
   {
@@ -15384,11 +15384,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the capital of Japan?",
+    "text": "what's the capital of Japan?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 when was the internet invented?",
+    "text": "when was the internet invented?",
     "label": "not_command"
   },
   {
@@ -15420,7 +15420,7 @@
     "label": "not_command"
   },
   {
-    "text": "play a podcast \u2014 right now, on the phone",
+    "text": "play a podcast right now, on the phone",
     "label": "command"
   },
   {
@@ -15436,7 +15436,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 good night",
+    "text": "good night",
     "label": "not_command"
   },
   {
@@ -15444,7 +15444,7 @@
     "label": "not_command"
   },
   {
-    "text": "play my playlist \u2014 right now, on the phone",
+    "text": "play my playlist right now, on the phone",
     "label": "command"
   },
   {
@@ -15524,7 +15524,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you make jokes?",
+    "text": "can you make jokes?",
     "label": "not_command"
   },
   {
@@ -15592,7 +15592,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how smart are you?",
+    "text": "how smart are you?",
     "label": "not_command"
   },
   {
@@ -15608,7 +15608,7 @@
     "label": "not_command"
   },
   {
-    "text": "set alarm for noon \u2014 right now, on the phone",
+    "text": "set alarm for noon right now, on the phone",
     "label": "command"
   },
   {
@@ -15664,7 +15664,7 @@
     "label": "not_command"
   },
   {
-    "text": "increase volume \u2014 right now, on the phone",
+    "text": "increase volume right now, on the phone",
     "label": "command"
   },
   {
@@ -15692,7 +15692,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's new today?",
+    "text": "what's new today?",
     "label": "not_command"
   },
   {
@@ -15704,7 +15704,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 is AI dangerous?",
+    "text": "is AI dangerous?",
     "label": "not_command"
   },
   {
@@ -15820,7 +15820,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 sup",
+    "text": "sup",
     "label": "not_command"
   },
   {
@@ -15852,7 +15852,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what does a black hole do?",
+    "text": "what does a black hole do?",
     "label": "not_command"
   },
   {
@@ -15864,7 +15864,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 let's talk",
+    "text": "let's talk",
     "label": "not_command"
   },
   {
@@ -15932,7 +15932,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 when was the internet invented?",
+    "text": "when was the internet invented?",
     "label": "not_command"
   },
   {
@@ -15956,7 +15956,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what are you thinking?",
+    "text": "what are you thinking?",
     "label": "not_command"
   },
   {
@@ -16032,7 +16032,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's up?",
+    "text": "what's up?",
     "label": "not_command"
   },
   {
@@ -16060,7 +16060,7 @@
     "label": "command"
   },
   {
-    "text": "mute microphone \u2014 right now, on the pc",
+    "text": "mute microphone right now, on the pc",
     "label": "command"
   },
   {
@@ -16068,7 +16068,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your purpose?",
+    "text": "what's your purpose?",
     "label": "not_command"
   },
   {
@@ -16092,7 +16092,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how does a plane fly?",
+    "text": "how does a plane fly?",
     "label": "not_command"
   },
   {
@@ -16128,7 +16128,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 what's the weather like today?",
+    "text": "what's the weather like today?",
     "label": "not_command"
   },
   {
@@ -16144,7 +16144,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 I'm bored",
+    "text": "I'm bored",
     "label": "not_command"
   },
   {
@@ -16184,7 +16184,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you make jokes?",
+    "text": "can you make jokes?",
     "label": "not_command"
   },
   {
@@ -16268,7 +16268,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you beat me at chess?",
+    "text": "can you beat me at chess?",
     "label": "not_command"
   },
   {
@@ -16284,7 +16284,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's new today?",
+    "text": "what's new today?",
     "label": "not_command"
   },
   {
@@ -16304,7 +16304,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 when was the internet invented?",
+    "text": "when was the internet invented?",
     "label": "not_command"
   },
   {
@@ -16312,7 +16312,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 yo",
+    "text": "yo",
     "label": "not_command"
   },
   {
@@ -16336,7 +16336,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your purpose?",
+    "text": "what's your purpose?",
     "label": "not_command"
   },
   {
@@ -16344,7 +16344,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how smart are you?",
+    "text": "how smart are you?",
     "label": "not_command"
   },
   {
@@ -16392,7 +16392,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -16420,7 +16420,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what time is it in New York?",
+    "text": "what time is it in New York?",
     "label": "not_command"
   },
   {
@@ -16484,7 +16484,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your favorite movie?",
+    "text": "what's your favorite movie?",
     "label": "not_command"
   },
   {
@@ -16548,7 +16548,7 @@
     "label": "not_command"
   },
   {
-    "text": "lock the door \u2014 right now, on the smarthome",
+    "text": "lock the door right now, on the smarthome",
     "label": "command"
   },
   {
@@ -16556,7 +16556,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you talk to other assistants?",
+    "text": "can you talk to other assistants?",
     "label": "not_command"
   },
   {
@@ -16564,7 +16564,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 can you sing?",
+    "text": "can you sing?",
     "label": "not_command"
   },
   {
@@ -16588,7 +16588,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your name?",
+    "text": "what's your name?",
     "label": "not_command"
   },
   {
@@ -16620,7 +16620,7 @@
     "label": "command"
   },
   {
-    "text": "record video \u2014 right now, on the phone",
+    "text": "record video right now, on the phone",
     "label": "command"
   },
   {
@@ -16632,7 +16632,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 yo",
+    "text": "yo",
     "label": "not_command"
   },
   {
@@ -16640,7 +16640,7 @@
     "label": "not_command"
   },
   {
-    "text": "play my playlist \u2014 right now, on the phone",
+    "text": "play my playlist right now, on the phone",
     "label": "command"
   },
   {
@@ -16648,7 +16648,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the weather like?",
+    "text": "what's the weather like?",
     "label": "not_command"
   },
   {
@@ -16656,7 +16656,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -16676,7 +16676,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the latest news in tech?",
+    "text": "what's the latest news in tech?",
     "label": "not_command"
   },
   {
@@ -16692,7 +16692,7 @@
     "label": "not_command"
   },
   {
-    "text": "open notepad \u2014 right now, on the pc",
+    "text": "open notepad right now, on the pc",
     "label": "command"
   },
   {
@@ -16724,7 +16724,7 @@
     "label": "command"
   },
   {
-    "text": "launch calculator \u2014 right now, on the pc",
+    "text": "launch calculator right now, on the pc",
     "label": "command"
   },
   {
@@ -16744,7 +16744,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you there?",
+    "text": "are you there?",
     "label": "not_command"
   },
   {
@@ -16792,7 +16792,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 do you remember me?",
+    "text": "do you remember me?",
     "label": "not_command"
   },
   {
@@ -16800,7 +16800,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how far is the moon?",
+    "text": "how far is the moon?",
     "label": "not_command"
   },
   {
@@ -16836,7 +16836,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -16932,11 +16932,11 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the weather like today?",
+    "text": "what's the weather like today?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how do I cook pasta?",
+    "text": "how do I cook pasta?",
     "label": "not_command"
   },
   {
@@ -16968,7 +16968,7 @@
     "label": "not_command"
   },
   {
-    "text": "mute microphone \u2014 right now, on the pc",
+    "text": "mute microphone right now, on the pc",
     "label": "command"
   },
   {
@@ -17016,7 +17016,7 @@
     "label": "not_command"
   },
   {
-    "text": "record video \u2014 right now, on the phone",
+    "text": "record video right now, on the phone",
     "label": "command"
   },
   {
@@ -17152,7 +17152,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you there?",
+    "text": "are you there?",
     "label": "not_command"
   },
   {
@@ -17240,7 +17240,7 @@
     "label": "command"
   },
   {
-    "text": "record video \u2014 right now, on the phone",
+    "text": "record video right now, on the phone",
     "label": "command"
   },
   {
@@ -17272,7 +17272,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 is it going to rain tomorrow?",
+    "text": "is it going to rain tomorrow?",
     "label": "not_command"
   },
   {
@@ -17280,11 +17280,11 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 can you make jokes?",
+    "text": "can you make jokes?",
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 tell me something",
+    "text": "tell me something",
     "label": "not_command"
   },
   {
@@ -17328,7 +17328,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 I'm bored",
+    "text": "I'm bored",
     "label": "not_command"
   },
   {
@@ -17368,7 +17368,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 can you tell me a fun fact?",
+    "text": "can you tell me a fun fact?",
     "label": "not_command"
   },
   {
@@ -17388,7 +17388,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 sup",
+    "text": "sup",
     "label": "not_command"
   },
   {
@@ -17436,11 +17436,11 @@
     "label": "command"
   },
   {
-    "text": "send email to Danielle Lang \u2014 right now, on the pc",
+    "text": "send email to Danielle Lang right now, on the pc",
     "label": "command"
   },
   {
-    "text": "lock the door \u2014 right now, on the smarthome",
+    "text": "lock the door right now, on the smarthome",
     "label": "command"
   },
   {
@@ -17452,7 +17452,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's your favorite movie?",
+    "text": "what's your favorite movie?",
     "label": "not_command"
   },
   {
@@ -17500,7 +17500,7 @@
     "label": "not_command"
   },
   {
-    "text": "play music \u2014 right now, on the phone",
+    "text": "play music right now, on the phone",
     "label": "command"
   },
   {
@@ -17516,7 +17516,7 @@
     "label": "not_command"
   },
   {
-    "text": "play my playlist \u2014 right now, on the phone",
+    "text": "play my playlist right now, on the phone",
     "label": "command"
   },
   {
@@ -17568,7 +17568,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 are you there?",
+    "text": "are you there?",
     "label": "not_command"
   },
   {
@@ -17588,7 +17588,7 @@
     "label": "not_command"
   },
   {
-    "text": "lock the door \u2014 right now, on the smarthome",
+    "text": "lock the door right now, on the smarthome",
     "label": "command"
   },
   {
@@ -17604,11 +17604,11 @@
     "label": "not_command"
   },
   {
-    "text": "open terminal \u2014 right now, on the pc",
+    "text": "open terminal right now, on the pc",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 are you always listening?",
+    "text": "are you always listening?",
     "label": "not_command"
   },
   {
@@ -17636,7 +17636,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what does a black hole do?",
+    "text": "what does a black hole do?",
     "label": "not_command"
   },
   {
@@ -17720,7 +17720,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how's it going?",
+    "text": "how's it going?",
     "label": "not_command"
   },
   {
@@ -17728,7 +17728,7 @@
     "label": "command"
   },
   {
-    "text": "lock the door \u2014 right now, on the smarthome",
+    "text": "lock the door right now, on the smarthome",
     "label": "command"
   },
   {
@@ -17772,7 +17772,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 how tall is Mount Everest?",
+    "text": "how tall is Mount Everest?",
     "label": "not_command"
   },
   {
@@ -17836,7 +17836,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 I'm bored",
+    "text": "I'm bored",
     "label": "not_command"
   },
   {
@@ -17856,7 +17856,7 @@
     "label": "not_command"
   },
   {
-    "text": "record video \u2014 right now, on the phone",
+    "text": "record video right now, on the phone",
     "label": "command"
   },
   {
@@ -17920,11 +17920,11 @@
     "label": "not_command"
   },
   {
-    "text": "take a picture \u2014 right now, on the phone",
+    "text": "take a picture right now, on the phone",
     "label": "command"
   },
   {
-    "text": "what about this \u2014 when was the internet invented?",
+    "text": "when was the internet invented?",
     "label": "not_command"
   },
   {
@@ -17940,7 +17940,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 why do we dream?",
+    "text": "why do we dream?",
     "label": "not_command"
   },
   {
@@ -17972,7 +17972,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 how does a plane fly?",
+    "text": "how does a plane fly?",
     "label": "not_command"
   },
   {
@@ -17988,7 +17988,7 @@
     "label": "command"
   },
   {
-    "text": "what about this \u2014 can you help me?",
+    "text": "can you help me?",
     "label": "not_command"
   },
   {
@@ -17996,7 +17996,7 @@
     "label": "not_command"
   },
   {
-    "text": "what about this \u2014 what's the weather like today?",
+    "text": "what's the weather like today?",
     "label": "not_command"
   }
 ]
