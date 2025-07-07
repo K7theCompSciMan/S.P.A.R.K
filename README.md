@@ -1,3 +1,1 @@
-**A fancy little thing that connects and manages your devices!**
-
-im still working on it but thank you
+**S.P.A.R.K** is a personal assistant that uses a neural network to understand natural language and run commands on your devices. It is designed to be used with a group of your devices, like laptops, cellphones, tablets, desktops, etc. It can also be used with a single device, but it will only respond to commands that are specific to that device. I'm also working on integrations with platforms like Spotify, YouTube, and other media in order to allow SPARK to have access to your integrations and control them.

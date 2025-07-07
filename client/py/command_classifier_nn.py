@@ -121,8 +121,10 @@ class CommandClassifierSoftmax:
         return prediction
     
     def train(self, output_file, epochs=20001):
-        self.nn.train(self.x_train, self.y_train, epochs=epochs, output_file=output_file)
-        
+        return self.nn.train(self.x_train, self.y_train, epochs=epochs, output_file=output_file)
+    
+    def plot_history(self):
+        return self.nn.plot_history()
     def validate(self):
         self.nn.set_targets(self.y_test)
         self.nn.validate(self.x_test, self.y_test)
@@ -200,8 +202,10 @@ class CommandClassifierBinary:
         return prediction
     
     def train(self, output_file, epochs=20001):
-        self.nn.train(self.x_train, self.y_train, epochs=epochs, output_file=output_file)
-        
+        return self.nn.train(self.x_train, self.y_train, epochs=epochs, output_file=output_file)
+
+    def plot_history(self):
+        return self.nn.plot_history()    
     def validate(self):
         self.nn.set_targets(self.y_test)
         self.nn.validate(self.x_test, self.y_test)

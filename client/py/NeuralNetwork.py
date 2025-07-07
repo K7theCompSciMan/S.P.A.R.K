@@ -1,7 +1,7 @@
 import numpy as np
 import nnfs
 from nnfs.datasets import spiral_data
-import pickle
+import pickle, matplotlib.pyplot as plt
 class ActivationFunction:
     class ReLU:
         @staticmethod
@@ -470,6 +470,7 @@ class NeuralNetwork:
         best_accuracy = self.model['accuracy']
         best_params = self.model['params']
         best_loss = self.model['loss']
+        self.history = {'epoch': [], 'accuracy': [], 'loss': []}
         print(best_accuracy, best_loss)
         for epoch in range(epochs):
             self.forward(inputs)
@@ -482,6 +483,9 @@ class NeuralNetwork:
             if not epoch % 100 :
                 print(f"epoch: {epoch}, accuracy: {accuracy:.3f}, loss: {loss:.3f}, learning rate: {self.optimizer.learning_rate}")
                 # print(f"epoch: {epoch}, best accuracy: {best_accuracy}, best loss: {best_loss}, learning rate: {self.optimizer.learning_rate}")
+            self.history['epoch'].append(epoch)
+            self.history['accuracy'].append(accuracy)
+            self.history['loss'].append(loss)
             self.backward()
             self.adjust_parameters()
         self.model = {'accuracy': best_accuracy, 'loss': best_loss, 'params': best_params}
@@ -491,6 +495,11 @@ class NeuralNetwork:
             with open(output_file, 'wb') as f:
                 pickle.dump(self.model, f, pickle.HIGHEST_PROTOCOL)
                 print("saved model")
+    
+    def plot_history(self):
+        plt.plot(self.history['epoch'], self.history['accuracy'])
+        plt.plot(self.history['epoch'], self.history['loss'])
+        plt.show()
     
     def validate(self, inputs, targets):
         self.set_targets(targets)
