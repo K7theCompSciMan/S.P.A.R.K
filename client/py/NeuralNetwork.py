@@ -71,8 +71,7 @@ class ActivationFunction:
         @staticmethod
         def backward(outputs, dvalues):
             # print("performed sigmoid backward")
-            return dvalues * outputs * (1 - outputs)
-        
+            return dvalues * outputs * (1 - outputs)        
 class Loss:
     class Empty:
         pass
@@ -127,9 +126,7 @@ class Loss:
             
             clipped_prediction = np.clip(predicted, 1e-7, 1.0 - 1e-7)
             dinputs = - (actual / clipped_prediction - (1 - actual) / (1 - clipped_prediction)) / outputs
-            return dinputs / samples
-        
-        
+            return dinputs / samples        
 class Regularizer:
     class Empty:
         pass
@@ -150,8 +147,7 @@ class Regularizer:
             layer.dweights += self.weight_regularizer * dL1 
             dL1 = np.ones_like(layer.biases)
             dL1[layer.biases < 0] = -1 
-            layer.dbiases += self.bias_regularizer * dL1 
-    
+            layer.dbiases += self.bias_regularizer * dL1     
     class L2:
         def __init__(self, weight_regularizer: float, bias_regularizer: float):
             self.weight_regularizer = weight_regularizer
@@ -197,8 +193,7 @@ class Layer:
             self.inputs = inputs
         
         def backward(self, dvalues):
-            return dvalues *self.binary_mask
-            
+            return dvalues *self.binary_mask            
     class Dense:
         def __init__(self, input_size: int, output_size: int, activation_function: ActivationFunction, regularizer: Regularizer=Regularizer.Empty):
             self.input_size = input_size
@@ -240,7 +235,7 @@ class Layer:
             activation_dvalues = self.activation_function.backward(self.activation_output, dvalues)
             return self.backward(activation_dvalues)
 
-        def set_params(self, params: (float, float)):
+        def set_params(self, params):
             self.weights = params['weights']
             self.biases = params['biases']
 class Optimizer:
