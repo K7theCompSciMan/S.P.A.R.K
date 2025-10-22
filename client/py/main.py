@@ -11,9 +11,10 @@ class SPARK:
     def __init__(self):
         self.remote_nc = nats.NATS()
         self.base_topic = '>'
-        self.classifier = command_classifier.CommandClassifier('client/py/pc_command_dataset.json', 3000)
+        self.classifier = command_classifier.CommandClassifierSoftmax('nn_scratch_data_device_specific.json', 3000)
         self.formatter = command_formatter.CommandFormatter()
-        self.classifier.load_model('client/py/nn_scratch_model_best.json')
+        self.classifier.load_model('classifier_models/softmax_device_specific.json')
+        self.classifier.validate()
 
     def speak(self, text):
         engine = tts.init()

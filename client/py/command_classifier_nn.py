@@ -72,7 +72,7 @@ class CommandClassifierSoftmax:
         with open(self.data_file, 'rb') as f:
             self.data = pd.read_json(f)
         
-        self.max_len = 50
+        self.max_len = 80
         self.training_data = self.data[:data_size]
         self.test_data = self.data[data_size:]
         Network.Tokenizer.build_vocab(self.training_data['text'])
@@ -89,7 +89,7 @@ class CommandClassifierSoftmax:
         ], self.y_train, Network.Optimizer.Adam(learning_rate = .005, rate_decay=1e-7)) 
 
 
-        self.nn.set_preprocess(lambda x: Network.Tokenizer.pad_sequence(Network.Tokenizer.encode(x.translate(str.maketrans('','',string.punctuation)).lower()), self.max_len))
+        self.nn.set_preprocess(lambda x: Network.Tokenizer.pad_sequence(Network.Tokenizer.encode(x.lower()), self.max_len))
         self.nn.set_postprocess(self.postprocess)
 
 
@@ -136,7 +136,7 @@ class CommandClassifierBinary:
         with open(self.data_file, 'rb') as f:
             self.data = pd.read_json(f)
         
-        self.max_len = 50
+        self.max_len = 80
         self.training_data = self.data[:data_size]    
         self.test_data = self.data[data_size:]
         Network.Tokenizer.build_vocab(self.training_data['text'])
@@ -171,7 +171,7 @@ class CommandClassifierBinary:
         ], self.y_train, Network.Optimizer.Adam(learning_rate = .005, rate_decay=1e-7), loss_function=Network.Loss.BinaryCrossEntropy) 
 
 
-        self.nn.set_preprocess(lambda x: Network.Tokenizer.pad_sequence(Network.Tokenizer.encode(x.translate(str.maketrans('','',string.punctuation)).lower()), self.max_len))
+        self.nn.set_preprocess(lambda x: Network.Tokenizer.pad_sequence(Network.Tokenizer.encode(x.lower()), self.max_len))
         self.nn.set_postprocess(self.postprocess)
 
 
