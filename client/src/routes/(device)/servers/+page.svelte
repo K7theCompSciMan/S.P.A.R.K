@@ -1,216 +1,122 @@
 <script lang="ts">
-	import DevicePopup from '$lib/DevicePopup.svelte';
-	import { invoke } from '@tauri-apps/api/tauri';
-	import Radio from '$lib/Radio.svelte';
-	import { goto } from '$app/navigation';
-	import { deviceToSpecificDevice, type Command, type Device } from '$lib';
-	import { getStore, setStore } from '$lib/tauri';
-	import type { ClientDevice, User, Group, ServerDevice } from '$lib/xata';
-	import { onMount } from 'svelte';
-	let thisDevice: Device = {};
-	let user: User = {};
-	let servers: ServerDevice[] = [];
-	let group: Group = {};
-	let accessToken = '';
-	onMount(async () => {
-		thisDevice = (await getStore('device')) as Device;
-		user = (await getStore('user')) as User;
-		group = (await getStore('group')) as Group;
-		accessToken = (await getStore('accessToken')) as string;
-		if (!thisDevice || !user || !group || !accessToken) {
-			console.error('Missing data');
-			goto('/setup');
-		}
-		group.devices['server'].forEach(async (element: string) => {
-			let res = await fetch(`https://spark-api.fly.dev/device/server/${element}`, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					authorization: `Bearer ${accessToken}`
-				}
-			});
-			if (res.ok) {
-				let data = await res.json();
-				servers = [...servers, data];
-			} else {
-				console.error(await res.text());
-			}
-		});
-	});
+    import { onMount } from 'svelte';
+    import { goto } from '$app/navigation';
+    import { invoke } from '@tauri-apps/api/tauri';
+    import DevicePopup from '$lib/DevicePopup.svelte';
+    import { getStore } from '$lib/tauri';
+    import { getDeviceApi, updateDeviceApi } from '$lib/api';
+    import type { Device, Command } from '$lib';
+    import type { ServerDevice, User, Group } from '$lib/xata';
 
-	let newCommand: Command = { name: '', command: '', aliases: [''] };
-	async function handleSubmit() {
-		updateDevice(selectedDevice);
-	}
-	async function updateDevice(server: Device) {
-		selectedDevice = server;
-		server = deviceToSpecificDevice(server);
-		// console.log(client);
-		// console.log(selectedDevice);
-		if (selectedDevice.type === 'server') {
-			// console.log('client');
-			let res = await fetch(`https://spark-api.fly.dev/device/server/`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					authorization: `Bearer ${accessToken}`
-				},
-				body: JSON.stringify({ ...server as ClientDevice, id: server.id } as ClientDevice)
-			});
-			if (res.ok) {
-				// console.log('Client updated');
-				if (server.id === thisDevice.id) {
-					await setStore('device', server);
-					await setStore('deviceType', 'server');
-				}
-			} else {
-				console.error(await res.text());
-			}
-		} else {
-			// console.log('server');
-			let res = await fetch(`https://spark-api.fly.dev/device/client/`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					authorization: `Bearer ${accessToken}`
-				},
-				body: JSON.stringify({ ...server as ClientDevice, id: server.id } as ServerDevice)
-			});
-			if (res.ok) {
-				// console.log('Device updated');
-				if (server.id === thisDevice.id) {
-					await setStore('device', server);
-					await setStore('deviceType', 'client');
-				}
-			} else {
-				console.error(await res.text());
-			}
-		}
-	}
-	
-	let selectedDevice: Device = {
-		id: '',
-		name: '',
-		messages: [],
-		deviceCommands: [],
-		type: 'client',
-	};
-	// $: console.log(selectedDevice.aliases);
-	let settingsPopup = false;
-	async function getDevice(id: string) {
-		let res = await fetch(`https://spark-api.fly.dev/device/server/${id}`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				authorization: `Bearer ${accessToken}`
-			}
-		});
-		if (res.ok) {
-			return await res.json();
-		} else {
-			let res = await fetch(`https://spark-api.fly.dev/device/client/${id}`, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					authorization: `Bearer ${accessToken}`
-				}
-			});
-			if (res.ok) {
-				return await res.json();
-			} else {
-				console.error(await res.text());
-			}
-		}
-	}
-	async function deleteMessage(id: string) {
-		let res = await fetch(`https://spark-api.fly.dev/device/message/${id}`, {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-				authorization: `Bearer ${accessToken}`
-			}
-		});
-		if (res.ok) {
-			// console.log('Message deleted');
-		} else {
-			console.error(await res.text());
-		}
-	}
-	async function deleteCommand(command: Command) {
-		selectedDevice.deviceCommands = selectedDevice.deviceCommands!.filter(
-			(c: Command) => c !== command
-		);
-		await updateDevice(selectedDevice);
-	}
+    let thisDevice: Device = {};
+    let user: User = {};
+    let group: Group = { name: '', devices: { client: [], server: [] } };
+    let servers: ServerDevice[] = [];
+    let accessToken = '';
+    
+    let settingsPopup = false;
+    let selectedDevice: Device = { id: '', name: '', messages: [], deviceCommands: [], type: 'server' };
+    let newCommand: Command = { name: '', command: '', aliases: [''] };
 
-	async function runCommand(command: Command) {
-		invoke('run_command', { command: command.command });
-	}
+    onMount(async () => {
+        thisDevice = (await getStore('device')) as Device;
+        user = (await getStore('user')) as User;
+        group = (await getStore('group')) as Group;
+        accessToken = (await getStore('accessToken')) as string;
+
+        if (!thisDevice || !user || !group || !accessToken) {
+            goto('/setup');
+            return;
+        }
+
+        const deviceIds = group.devices['server'] || [];
+        const results = await Promise.all(
+            deviceIds.map(id => getDeviceApi(id, 'server', accessToken))
+        );
+        servers = results.filter(d => d !== null);
+    });
+
+    async function handleUpdate(device: Device) {
+        const res = await updateDeviceApi(device, accessToken, thisDevice.id);
+        if (res.ok) {
+            servers = servers.map(c => c.id === device.id ? { ...c, ...device } : c);
+        }
+    }
+
+    function openSettings(server: ServerDevice) {
+        selectedDevice = { ...server, type: 'server' };
+        settingsPopup = true;
+    }
+
+    async function runCommand(command: Command) {
+        invoke('run_command', { command: command.command });
+    }
 </script>
 
-<div
-	class="bg-dark-background-600 w-[80vw] ml-[5%] rounded-[2rem] shadow-2xl h-screen overflow-auto relative"
->
-	<div class="flex flex-col items-center h-full pt-[3%]">
-		<h1 class="text-2xl text-dark-primary">
-			Server Devices in <span class="text-dark-accent">{group.name}</span>
-		</h1>
-		{#await servers}
-			<h1 class="text-dark-primary text-2xl">Loading...</h1>
-		{:then servers}
-			<div id="servers" class="w-1/2 h-full pt-[2%] {settingsPopup ? 'hidden' : ''}">
-				{#each servers as server}
-					<!-- svelte-ignore a11y_click_events_have_key_events -->
-					<!-- svelte-ignore a11y_no_static_element_interactions -->
-					<div
-						class="bg-dark-background-500 rounded-2xl w-full h-[12%] flex flex-row relative items-center text-dark-text mb-[2%] cursor-pointer hover:scale-105 shadow-lg hover:shadow-dark-accent hover:text-dark-accent transition-all duration-200"
-						on:click={(e) => {
-							if (e.target!.id === 'serverName') {
-							} else {
-								selectedDevice = server;
-								selectedDevice.type = 'server';
-								settingsPopup = true;
-							}
-						}}
-					>
-						<input
-							id="serverName"
-							type="text"
-							class="text-xl h-fit border-b-2 border-dark-secondary w-[30%] pl-[1%] focus:outline-none absolute top-[8%] left-[1.5%] bg-transparent"
-							placeholder="Name"
-							bind:value={server.name}
-							on:focusout={async () => {
-								await updateDevice(server);
-							}}
-							on:keypress={async (e) => {
-								if (e.key === 'Enter') {
-									await updateDevice(server);
-								}
-							}}
-						/>
-						<div class="absolute right-[1%] top-[50%]">
-							<p id="messages" class="text-current">Messages: {server.messages.length}</p>
-							<p id="messages" class="text-current">Commands: {server.deviceCommands.length}</p>
-						</div>
-					</div>
-				{/each}
-			</div>
-		{/await}
-	</div>
-	<DevicePopup
-		bind:device={selectedDevice}
-		bind:newCommand
-		bind:visible={settingsPopup}
-		{updateDevice}
-		{deleteCommand}
-		{runCommand}
-		{getDevice}
-		{deleteMessage}
-		updateCommands={handleSubmit}
-		on:close={() => {
-			let server = servers.find((c) => c.id === selectedDevice.id);
-			server = deviceToSpecificDevice(selectedDevice); 
-			updateDevice(server);
-		}}
-	/>
+<div class="bg-dark-background-600 w-[85vw] ml-[2.5%] rounded-[2.5rem] shadow-2xl h-[95vh] mt-[2.5vh] overflow-hidden relative border border-white/5">
+    <div class="flex flex-col items-center h-full pt-8 px-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl font-light text-slate-100">
+                Server Devices <span class="text-dark-accent font-medium">@{group.name}</span>
+            </h1>
+            <p class="text-dark-secondary text-sm mt-2">Manage and configure your edge nodes</p>
+        </header>
+
+        {#if servers.length === 0}
+            <div class="flex flex-col items-center justify-center h-64 opacity-50">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-dark-accent mb-4"></div>
+                <p class="text-dark-text">Scanning for devices...</p>
+            </div>
+        {:else}
+            <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto no-scrollbar pb-12">
+                <!-- svelte-ignore a11y_no_static_element_interactions -->
+                {#each servers as server}
+                    <!-- svelte-ignore a11y_click_events_have_key_events -->
+                    <div 
+                        class="bg-dark-background-500/50 backdrop-blur-md border border-white/10 rounded-2xl p-5 flex flex-col relative 
+                            		hover:border-dark-accent/50 hover:translate-y-[-2px] transition-all duration-300 group cursor-pointer"
+                        on:click|self={() => openSettings(server)}
+                    >
+                        <div class="flex justify-between items-start mb-4">
+                            <input
+                                type="text"
+                                class="bg-transparent text-xl font-semibold text-dark-text border-b border-transparent focus:border-dark-accent focus:outline-none w-2/3 transition-colors"
+                                bind:value={server.name}
+                                on:focusout={() => handleUpdate(server)}
+                                on:keydown={(e) => e.key === 'Enter' && handleUpdate(server)}
+                            />
+                            <button 
+                                class="p-2 rounded-lg bg-dark-background-400 text-dark-secondary group-hover:text-dark-accent transition-colors"
+                                on:click={() => openSettings(server)}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="flex gap-4 mt-auto">
+                            <div class="flex items-center gap-1.5 text-xs text-dark-secondary">
+                                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                                Messages: {server.messages?.length || 0}
+                            </div>
+                            <div class="flex items-center gap-1.5 text-xs text-dark-secondary">
+                                <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                Commands: {server.deviceCommands?.length || 0}
+                            </div>
+                        </div>
+                    </div>
+                {/each}
+            </div>
+        {/if}
+    </div>
+
+    <DevicePopup
+        bind:device={selectedDevice}
+        bind:visible={settingsPopup}
+        {runCommand}
+        {accessToken}
+        {thisDevice}
+    />
 </div>

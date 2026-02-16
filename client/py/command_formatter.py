@@ -131,6 +131,8 @@ class CommandFormatter:
             n=1,
             cutoff=0.6
         )
+        if not matches:
+            return None
         if self.command_aliases[matches[0]] in device['commands']:
             return self.command_aliases[matches[0]]
         else:

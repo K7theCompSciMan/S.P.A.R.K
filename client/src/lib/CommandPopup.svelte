@@ -1,349 +1,195 @@
 <script lang="ts">
-	import { invoke } from '@tauri-apps/api/tauri';
-	import type { Device, Command } from '$lib';
-	import { onMount } from 'svelte';
-	import type { Group } from './xata';
-	import { getStore } from './tauri';
-	export let device: Device = {};
-	export let newCommand: Command = { name: '', command: '', aliases: [''] };
-	export let updateCommand: () => Promise<void> = async () => {};
-	export let visible: boolean = false;
-	export let location: string = '';
-	export let type: 'Create' | 'Edit' = 'Create';
-	let presetDropdown = false;
-	let group: Group = {};
-	let presets: { group: Command[]; default: Command[] } = {
-		group: group.commandPresets,
-		default: [
-			{
-				name: 'Launch Notepad',
-				aliases: ['Open Notepad', 'Start Notepad'],
-				command: 'start notepad'
-			},
-			{ name: 'Open Chrome', aliases: ['Start Chrome'], command: 'start chrome' },
-			{
-				name: "open browser",
-				aliases: ["browse", "web", "chrome", "firefox", "edge"],
-				command: "start chrome"
-			},
-			{
-				name: "open file explorer",
-				aliases: ["files", "explorer", "folders"],
-				command: "explorer.exe"
-			},
-			{
-				name: "open notepad",
-				aliases: ["notes", "text", "edit"],
-				command: "notepad.exe"
-			},
-			{
-				name: "system shutdown",
-				aliases: ["shutdown", "poweroff", "turn off"],
-				command: "shutdown /s /t 0"
-			},
-			{
-				name: "system restart",
-				aliases: ["restart", "reboot"],
-				command: "shutdown /r /t 0"
-			},
-			{
-				name: "sleep mode",
-				aliases: ["sleep", "suspend"],
-				command: "rundll32.exe powrprof.dll,SetSuspendState 0,1,0"
-			},
-			{
-				name: "lock computer",
-				aliases: ["lock", "secure"],
-				command: "rundll32.exe user32.dll,LockWorkStation"
-			},
-			{
-				name: "task manager",
-				aliases: ["tasks", "processes", "performance"],
-				command: "taskmgr.exe"
-			},
-			{
-				name: "control panel",
-				aliases: ["settings", "control", "config"],
-				command: "control.exe"
-			},
-			{
-				name: "open calculator",
-				aliases: ["calc", "math"],
-				command: "calc.exe"
-			},
-			{
-				name: "open system info",
-				aliases: ["sysinfo", "specs", "about"],
-				command: "msinfo32.exe"
-			},
-			{
-				name: "open disk cleanup",
-				aliases: ["clean", "cleanup", "free space"],
-				command: "cleanmgr.exe"
-			},
-			{
-				name: "open word",
-				aliases: ["msword", "document", "doc"],
-				command: "start winword"
-			},
-			{
-				name: "open excel",
-				aliases: ["msexcel", "spreadsheet", "xls"],
-				command: "start excel"
-			},
-			{
-				name: "open media player",
-				aliases: ["player", "video", "music"],
-				command: "wmplayer.exe"
-			},
-			{
-				name: "open volume mixer",
-				aliases: ["volume", "sound", "audio"],
-				command: "sndvol.exe"
-			},
-			{
-				name: "open screen snip",
-				aliases: ["screenshot", "snip", "capture"],
-				command: "SnippingTool.exe"
-			},
-			{
-				name: "check updates",
-				aliases: ["updates", "windows update"],
-				command: "wuapp.exe"
-			},
-			{
-				name: "open terminal",
-				aliases: ["cmd", "command", "prompt"],
-				command: "cmd.exe"
-			},
-			{
-				name: "open system properties",
-				aliases: ["properties", "system", "advanced"],
-				command: "sysdm.cpl"
-			},			
-		]
-	};
-	let selectedPreset: Command = { name: 'Choose Preset', command: '', aliases: [''] };
-	onMount(async () => {
-		group = (await getStore('group')) as Group;
-	});
-	async function runCommand(command: Command) {
-		invoke('run_command', { command: command.command });
-	}
-	// $: console.log(newCommand);
+    import { invoke } from '@tauri-apps/api/tauri';
+    import { fade, fly } from 'svelte/transition';
+    import type { Device, Command } from '$lib';
+    import { onMount, createEventDispatcher } from 'svelte';
+    import type { Group } from './xata';
+    import { getStore } from './tauri';
+    import { DEFAULT_PRESETS } from '$lib/presets'; // Import from the helper file
+
+    const dispatch = createEventDispatcher();
+
+    export let device: Device = {};
+    export let newCommand: Command = { name: '', command: '', aliases: [''] };
+    export let updateCommand: () => Promise<void> = async () => {};
+    export let visible: boolean = false;
+    export let type: 'Create' | 'Edit' = 'Create';
+
+    let group: Group = {};
+    let showPresets = false;
+    
+    // Combine group presets and defaults
+    $: allPresets = [
+        ...(group?.commandPresets || []),
+        ...DEFAULT_PRESETS
+    ];
+
+    onMount(async () => {
+        group = (await getStore('group')) as Group;
+    });
+
+    async function runCurrent() {
+        await invoke('run_command', { command: newCommand.command });
+    }
+
+    function applyPreset(preset: Command) {
+        newCommand = { ...preset, aliases: [...preset.aliases] }; // Clone it
+        showPresets = false;
+    }
+
+    function close() {
+        visible = false;
+        dispatch('close');
+    }
 </script>
 
-<div
-	class="bg-dark-background-300 rounded-2xl w-[80%] h-[80%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute z-10 items-center text-dark-text {location} {visible
-		? ''
-		: 'hidden'}"
->
-	<h1 class="text-dark-primary text-2xl text-center mt-2 mb-2">{type} Command for {device.name}</h1>
-	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<div class="h-[94.3%] w-full flex flex-col">
-		<div class="w-full h-[10%] flex flex-col items-center p-2 justify-center">
-			<button
-				class=" rounded-md text-xl w-1/4 h-full text-dark-primary bg-dark-background-500 shadow-xl hover:text-dark-accent transition-all duration-200"
-				on:click={() => {
-					presetDropdown = !presetDropdown;
-				}}>{selectedPreset.name}</button
-			>
-		</div>
-		<div class="w-full h-[90%] flex flex-row items-center justify-center relative">
-			<div
-				class="w-1/2 h-full flex flex-col items-center justify-center {presetDropdown
-					? 'blur-md'
-					: ''} "
-			>
-				<div class="flex flex-col h-1/2 w-full p-[2%]" id="name">
-					<label for="name" class="text-xl">Command Name</label>
-					<input
-						type="text"
-						bind:value={newCommand.name}
-						class="bg-transparent focus:outline-none text-xl border-b w-[80%] border-dark-secondary pl-2"
-					/>
-				</div>
-				<div class="flex flex-col h-1/2 w-full p-[2%]" id="aliases">
-					<label for="name" class="text-xl">Command Aliases</label>
-					<div class="flex flex-col h-full w-full">
-						{#each newCommand.aliases as alias}
-							<div class="mt-2 relative">
-								<input
-									type="text"
-									bind:value={alias}
-									class="bg-transparent focus:outline-none text-xl border-b border-dark-secondary pl-2"
-								/>
-								<button
-									class="absolute left-[30%] top-[0.5%] transition-all hover:text-dark-fail duration-200"
-									on:click={() =>
-										(newCommand.aliases = newCommand.aliases.filter((a) => a !== alias))}
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke-width="1.5"
-										stroke="currentColor"
-										class="size-6"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-										/>
-									</svg>
-								</button>
-							</div>
-						{/each}
-						<button
-							class="bg-transparent focus:outline-none text-xl mt-[2%] w-fit h-fit border-dark-secondary"
-							on:click={() => {
-								newCommand.aliases = [...newCommand.aliases, ''];
-							}}
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke-width="1.5"
-								stroke="currentColor"
-								class="size-6"
-							>
-								<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-							</svg>
-						</button>
-					</div>
-				</div>
-			</div>
-			<div
-				class="w-1/2 h-full flex flex-col relative items-center justify-center {presetDropdown
-					? 'blur-md'
-					: ''} "
-			>
-				<div class="flex flex-col items-center justify-center h-fit w-fit relative">
-					<label for="name" class="text-xl">Command</label>
-					<textarea
-						name="command"
-						bind:value={newCommand.command}
-						class="bg-transparent rounded-2xl focus:outline-none resize-none overflow-auto no-scrollbar text-xl border w-[80%] mb-[28.5%] border-dark-secondary pl-2"
-						rows="5"
-						cols="50"
-					>
-						<code>
-						{newCommand.command}
-						</code>
-					</textarea>
-					<button
-						on:click={async () => await runCommand(newCommand)}
-						class="absolute right-[12%] top-[0.5%] transition hover:text-green-500"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="size-6"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
-							/>
-						</svg>
-					</button>
-				</div>
-			</div>
-			<div
-				id="presets"
-				class="absolute w-full h-full rounded-b-2xl opacity-75 bg-dark-background-500 flex flex-col items-center overflow-auto no-scrollbar {presetDropdown
-					? ''
-					: 'hidden'}"
-			>
-				<h1 class="text-dark-primary text-xl">Group Presets</h1>
-				<div class="w-full flex-flex-col items-center justify-center">
-					{#each presets.group as preset}
-						<button
-							class="w-[60%] ml-[20%] h-fit text-dark-text text-xl flex flex-row rounded-md bg-dark-background-300 hover:text-dark-accent transition-all duration-200 mt-2"
-							on:click={() => {
-								newCommand = preset;
-								selectedPreset = preset;
-								presetDropdown = false;
-							}}
-						>
-							<div class="w-1/2 h-full text-start px-2">
-								<h1 class="text-lg">{preset.name}</h1>
-								{#each preset.aliases as alias, i}
-									{#if i < 3}
-										<span class="text-dark-secondary text-sm"
-											>{i !== preset.aliases.length - 1 ? alias + ', ' : alias}</span
-										>
-									{:else if i === 3}
-										<span class="text-dark-secondary text-sm">...</span>
-									{/if}
-								{/each}
-							</div>
-							<div class="w-1/2 h-full text-end px-2">
-								<h1><code>{preset.command}</code></h1>
-							</div>
-						</button>
-					{/each}
-				</div>
-				<h1 class="text-dark-primary text-xl mt-2 {presets.group ? '' : 'mt-[30%]'}">
-					Default Presets
-				</h1>
-				<div class="w-full flex-flex-col items-center justify-center">
-					{#each presets.default as preset}
-						<button
-							class="w-[60%] ml-[20%] h-fit text-dark-text text-xl flex flex-row rounded-md bg-dark-background-300 hover:text-dark-accent transition-all duration-200 mt-2"
-							on:click={() => {
-								newCommand = preset;
-								selectedPreset = preset;
-								presetDropdown = false;
-							}}
-						>
-							<div class="w-1/2 h-full text-start px-2">
-								<h1 class="text-lg">{preset.name}</h1>
-								{#each preset.aliases as alias, i}
-									{#if i < 3}
-										<span class="text-dark-secondary text-sm"
-											>{i !== preset.aliases.length - 1 ? alias + ', ' : alias}</span
-										>
-									{:else if i === 3}
-										<span class="text-dark-secondary text-sm">...</span>
-									{/if}
-								{/each}
-							</div>
-							<div class="w-1/2 h-full text-end px-2">
-								<h1><code>{preset.command}</code></h1>
-							</div>
-						</button>
-					{/each}
-				</div>
-			</div>
-		</div>
-		<button
-			class="absolute w-[20%] h-[5%] bottom-[5%] text-xl left-[40%] bg-dark-background-600 rounded-2xl hover:text-dark-success {presetDropdown
-				? 'blur-md -z-10'
-				: ''}"
-			on:click={async () => await updateCommand()}>Save Command</button
-		>
-	</div>
-	<button
-		class="absolute top-[2%] right-[1%] hover:text-red-500 transition-all"
-		on:click={() => {
-			visible = false;
-		}}
-	>
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke-width="1.5"
-			stroke="currentColor"
-			class="size-6"
-		>
-			<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-		</svg>
-	</button>
-</div>
+{#if visible}
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
+    <div 
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+        transition:fade={{ duration: 200 }}
+        on:click|self={close}
+    >
+        <div 
+            class="bg-dark-background-800 w-full max-w-4xl h-[85vh] rounded-2xl shadow-2xl border border-white/10 flex flex-col relative overflow-hidden"
+            transition:fly={{ y: 20, duration: 300 }}
+        >
+            
+            <div class="h-16 border-b border-white/5 flex items-center justify-between px-6 bg-dark-background-900/50">
+                <h2 class="text-xl font-bold text-white">
+                    <span class="text-dark-primary">{type}</span> Command
+                </h2>
+                
+                <div class="flex items-center gap-2">
+                    <button 
+                        class="px-3 py-1.5 text-sm rounded-lg bg-dark-background-600 hover:bg-dark-primary hover:text-white transition-colors flex items-center gap-2 text-gray-300"
+                        on:click={() => showPresets = !showPresets}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                        </svg>
+                        {showPresets ? 'Hide Presets' : 'Load Preset'}
+                    </button>
+
+                    <button on:click={close} class="p-2 hover:text-red-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex-1 flex overflow-hidden relative">
+                
+                {#if showPresets}
+                    <div 
+                        class="absolute inset-y-0 left-0 z-20 w-80 bg-dark-background-700 border-r border-white/10 overflow-y-auto p-4"
+                        transition:fly={{ x: -20, duration: 200 }}
+                    >
+                        <h3 class="text-sm font-bold text-gray-400 uppercase mb-4 tracking-wider">Available Presets</h3>
+                        <div class="space-y-2">
+                            {#each allPresets as preset}
+                                <button 
+                                    class="w-full text-left p-3 rounded-lg bg-dark-background-600 hover:bg-dark-primary/20 hover:border-dark-primary border border-transparent transition-all group"
+                                    on:click={() => applyPreset(preset)}
+                                >
+                                    <div class="font-medium text-white group-hover:text-dark-primary">{preset.name}</div>
+                                    <div class="text-xs text-gray-400 font-mono truncate mt-1 opacity-70">{preset.command}</div>
+                                </button>
+                            {/each}
+                        </div>
+                    </div>
+                {/if}
+
+                <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-white/10 overflow-hidden">
+                    
+                    <div class="p-8 overflow-y-auto">
+                        <div class="space-y-6">
+                            <div class="flex flex-col gap-2">
+                                <label for="cmd-name" class="text-sm font-semibold text-gray-400">Command Name</label>
+                                <input 
+                                    id="cmd-name"
+                                    type="text" 
+                                    bind:value={newCommand.name}
+                                    placeholder="e.g. Open Browser"
+                                    class="bg-dark-background-900 border border-white/10 rounded-lg p-3 text-white focus:border-dark-primary focus:outline-none transition-colors"
+                                />
+                            </div>
+
+                            <div class="flex flex-col gap-2">
+                                <label for="cmd-alias" class="text-sm font-semibold text-gray-400">Aliases (Triggers)</label>
+                                <div class="bg-dark-background-900 border border-white/10 rounded-lg p-3 min-h-[100px] flex flex-wrap gap-2 content-start">
+                                    {#each newCommand.aliases as alias, i}
+                                        <div class="flex items-center gap-1 bg-dark-background-600 text-sm px-2 py-1 rounded-md border border-white/5">
+                                            <input 
+                                                class="bg-transparent w-auto min-w-[20px] max-w-[120px] focus:outline-none text-white"
+                                                bind:value={alias}
+                                                placeholder="..."
+                                            />
+                                            <button 
+                                                tabindex="-1"
+                                                class="text-gray-400 hover:text-red-400"
+                                                on:click={() => newCommand.aliases = newCommand.aliases.filter((_, idx) => idx !== i)}
+                                            >
+                                                &times;
+                                            </button>
+                                        </div>
+                                    {/each}
+                                    <button 
+                                        class="px-2 py-1 text-xs bg-dark-primary/20 text-dark-primary rounded hover:bg-dark-primary hover:text-white transition-colors"
+                                        on:click={() => newCommand.aliases = [...newCommand.aliases, '']}
+                                    >
+                                        + Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-8 bg-black/20 flex flex-col">
+                        <div class="flex items-center justify-between mb-2">
+                            <label for="cmd-code" class="text-sm font-semibold text-gray-400">Execution Code</label>
+                            <button 
+                                on:click={runCurrent}
+                                class="text-xs flex items-center gap-1 text-green-400 hover:text-green-300"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                                </svg>
+                                Test Run
+                            </button>
+                        </div>
+                        
+                        <div class="flex-1 relative">
+                            <textarea 
+                                id="cmd-code"
+                                bind:value={newCommand.command}
+                                class="w-full h-full bg-dark-background-900 font-mono text-sm p-4 rounded-lg border border-white/10 focus:border-dark-primary focus:outline-none resize-none"
+                                spellcheck="false"
+                            ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="h-20 border-t border-white/5 flex items-center justify-end px-8 gap-4 bg-dark-background-900/50">
+                <button 
+                    on:click={close}
+                    class="px-6 py-2 rounded-lg text-gray-400 hover:text-white transition-colors"
+                >
+                    Cancel
+                </button>
+                <button 
+                    on:click={async () => {
+                        await updateCommand();
+                        close();
+                    }}
+                    class="px-8 py-2 rounded-lg bg-dark-primary hover:bg-dark-accent text-white font-medium shadow-lg shadow-dark-primary/20 transition-all transform active:scale-95"
+                >
+                    Save Command
+                </button>
+            </div>
+        </div>
+    </div>
+{/if}

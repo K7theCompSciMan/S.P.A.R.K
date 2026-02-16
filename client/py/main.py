@@ -13,7 +13,7 @@ class SPARK:
         self.base_topic = '>'
         self.classifier = command_classifier.CommandClassifierSoftmax('nn_scratch_data_device_specific.json', 3000)
         self.formatter = command_formatter.CommandFormatter()
-        self.classifier.load_model('classifier_models/softmax_device_specific.json')
+        self.classifier.load_model('classifier_models/softmax_mixed_updated.json')
         self.classifier.validate()
 
     def speak(self, text):
@@ -24,9 +24,9 @@ class SPARK:
     async def listen(self, ):
         while True:
             try:
-                with sr.Microphone() as source:
+                with sr.Microphone(6) as source:
                     await self.print_to_console(f"Listening...")
-                    audio = recognizer.listen(source, timeout=3, phrase_time_limit=5)
+                    audio = recognizer.listen(source, phrase_time_limit=6)
                     text = str(recognizer.recognize_google(audio))
                     await self.print_to_console(f"You said : {text}")  
                     if "spark" in text.lower():
@@ -43,11 +43,16 @@ class SPARK:
 
     async def handle_ai(self, text, group, client, client_devices, server_devices):
 
-        client_devices_updated = [{'name': x['name'], 'commands': [{'name': command['name'], 'aliases': command['aliases']} for command in x['deviceCommands']]} for x in client_devices]
-        server_devices_updated = [{'name': x['name'], 'commands': [{'name': command['name'], 'aliases': command['aliases']} for command in x['deviceCommands']]} for x in server_devices]
+        client_devices_updated = [{'name': x['name'], 'aliases': x['aliases'], 'commands': [{'name': command['name'], 'aliases': command['aliases']} for command in x['deviceCommands']]} for x in client_devices]
+        server_devices_updated = [{'name': x['name'], 'aliases': x['aliases'], 'commands': [{'name': command['name'], 'aliases': command['aliases']} for command in x['deviceCommands']]} for x in server_devices]
         # mod_text = text + f" | {client_devices_updated} | {server_devices_updated} "
         if (self.classifier.predict(text)['result'] == 'command'):
-            result = self.formatter.parse_command(f"{text} || {client_devices_updated} || {server_devices_updated}")
+            result = self.formatter.parse_command(f"{text} || {client_devices_updated} || {server_devices_updated}", device_data={'clients': client_devices_updated, 'servers': server_devices_updated})
+            if(not result['success']): 
+                await self.print_to_console(result['error'])
+                self.speak(result['error'])
+                return result['error'], "", group
+            
             device_name = result['device']
             return result['formatted_command'], device_name, group
 

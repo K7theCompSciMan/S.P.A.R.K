@@ -2,7 +2,7 @@ from command_classifier_nn import CommandClassifierSoftmax, CommandClassifierBin
 
 # model_path = 'nn_scratch_model_dataset_claude.json'
 validation_data_path = "validation_data.json"
-data_path = "nn_scratch_data_device_specific.json"
+data_path = "nn_scratch_data_mixed_updated.json"
 
 classifier_softmax = CommandClassifierSoftmax(data_path, 3000)
 classifier_binary = CommandClassifierBinary(data_path, 3000)
@@ -10,9 +10,9 @@ classifier_binary = CommandClassifierBinary(data_path, 3000)
 # classifier_softmax.load_model("classifier_models/softmax_device_specific.json")
 # classifier_binary.load_model("classifier_models/binary_device_specific.json")
 
-classifier_softmax.train('classifier_models/softmax_mixed_updated_with_punctuation_preprocessing.json', epochs=101)
+classifier_softmax.train('classifier_models/softmax_mixed_updated.json', epochs=601)
 classifier_softmax.plot_history()
-classifier_binary.train('classifier_models/binary_mixed_updated_with_punctuation_preprocessing.json', epochs=101)
+classifier_binary.train('classifier_models/binary_mixed_updated.json', epochs=601)
 classifier_binary.plot_history()
 
 # direct and ai is not good (doesn't work for binary)

@@ -1,80 +1,64 @@
 <script lang="ts">
-	import type { PublicUser } from '$lib';
-	import AnimatedInputLabel from './AnimatedInputLabel.svelte';
+    import type { PublicUser } from '$lib';
+    import AnimatedInputLabel from './AnimatedInputLabel.svelte';
 
-	export let user: PublicUser;
-	let primaryCommunicationMethodOptions = [
-		{
-			value: 'nats',
-			text: 'NATS',
-			description:
-				"<p class='text-sm text-slate-500'>Use NATS, a publish/subscribe messaging system, to send messages between devices <i>(reduces API traffic)</i> <strong>RECOMMENDED</strong></p> "
-		},
-		{
-			value: 'localhost',
-			text: 'Localhost connection',
-			description:
-				"<p class='text-sm text-slate-500'>Use a localhost connection to send messages between devices <i>(reduces API traffic, requires devices to be on same WIFI or connection through VPN like Tailscale)</i> </p>"
-		},
-		{
-			value: 'api',
-			text: 'API Messaging',
-			description:
-				"<p class='text-sm text-slate-500'>Use the API to send messages between devices <i>(increases API traffic)</i> </p>"
-		}
-	];
+    export let user: PublicUser;
+
+    const methods = [
+        { id: 'nats', label: 'NATS', icon: 'M13.5 16.875h3.375m-9.75 0h3.375m-6.75 0h3.375', desc: 'Real-time Pub/Sub. Best for low latency.' },
+        { id: 'localhost', label: 'Local', icon: 'M9 3v18m6-18v18', desc: 'Direct socket. Requires same network/VPN.' },
+        { id: 'api', label: 'Cloud API', icon: 'M12 16.5V9.75', desc: 'Standard cloud sync. Easiest setup.' }
+    ];
 </script>
 
-<div class="bg-dark-background-500 w-[25%] h-[25%] rounded-2xl text-dark-text p-[1%] px-[2%]">
-	<h1 class="text-xl text-dark-secondary text-center">User Settings</h1>
-	<AnimatedInputLabel
-		name="Username"
-		labelbg="bg-dark-background-500"
-		bind:value={user.username}
-		size="scale-110"
-	/>
-	<div class="relative mt-4">
-		<label for="select" class="absolute text-md bg-dark-background-500 -left-2 z-10"
-			>Primary Communication Method</label
-		>
-		<select
-			bind:value={user.settings.primaryCommunicationMethod}
-			class="w-[75%] px-2 py-1 bg-transparent focus:outline-none border scale-110 rounded-2xl mt-4"
-			placeholder="Select an option"
-		>
-			{#each primaryCommunicationMethodOptions as option}
-				<option
-					value={option.value}
-					class="bg-dark-background-500 text-dark-text hover:text-dark-accent transition-all duration-200"
-				>
-					{option.text}
-				</option>
-			{/each}
-		</select>
-		<button class="absolute text-dark-text right-[10%] top-[30%] hover:text-dark-accent peer">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke-width="1.5"
-				stroke="currentColor"
-				class="size-8"
-			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
-				/>
-			</svg>
-		</button>
-        <div id="tooltip" class="hidden absolute bg-dark-background-500 rounded-2xl p-2 peer-hover:block  w-[100%] text-wrap hover:block -top-[100%] -right-[90%] text-sm ">
-            <p>The Primary Communication Method determines the primary method in which the devices in all of your groups interact with each other and send messages with each other</p>
-            <ul>
-                <li><span class="font-bold text-dark-accent">NATS</span> uses a publish/subscribe messaging system to send messages between devices <i>(reduces API traffic)</i> <strong>RECOMMENDED</strong></li>
-                <li><span class="font-bold text-dark-accent">Localhost connection</span> uses a localhost connection to send messages between devices <i>(reduces API traffic, <strong>requires devices to be on same WIFI or connection through VPN like Tailscale</strong>)</i></li>
-                <li><span class="font-bold text-dark-accent">API Messaging</span> uses the API to send messages between devices <i>(increases API traffic)</i></li>
-            </ul>
+<div class="bg-dark-background-500/40 backdrop-blur-md border border-white/10 rounded-[2rem] p-8 shadow-2xl w-full max-w-2xl">
+    <div class="flex items-center gap-4 mb-8">
+        <div class="p-3 bg-dark-accent/20 rounded-2xl border border-dark-accent/30">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-dark-accent">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
         </div>
-	</div>
-	<!-- tooltip here -->
+        <h1 class="text-2xl font-bold text-white">Profile Identity</h1>
+    </div>
+
+    <div class="space-y-8">
+        <div class="relative group">
+            <AnimatedInputLabel
+                name="Public Username"
+                labelbg="bg-[#1a1c23]" 
+                bind:value={user.username}
+                size="scale-100"
+            />
+            <p class="text-xs text-dark-secondary mt-2 px-1">This is how other devices identify you in logs.</p>
+        </div>
+
+        <div>
+            <label class="text-xs font-bold uppercase tracking-widest text-dark-accent mb-4 block">Communication Protocol</label>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {#each methods as method}
+                    <button 
+                        class="p-4 rounded-2xl border transition-all duration-300 text-left flex flex-col gap-2
+                        {user.settings.primaryCommunicationMethod === method.id 
+                            ? 'bg-dark-accent/10 border-dark-accent shadow-[0_0_15px_rgba(0,180,216,0.2)]' 
+                            : 'bg-white/5 border-white/5 hover:border-white/20'}"
+                        on:click={() => user.settings.primaryCommunicationMethod = method.id}
+                    >
+                        <span class="font-bold text-sm {user.settings.primaryCommunicationMethod === method.id ? 'text-dark-accent' : 'text-slate-300'}">
+                            {method.label}
+                        </span>
+                        <span class="text-[10px] text-dark-secondary leading-tight">{method.desc}</span>
+                    </button>
+                {/each}
+            </div>
+        </div>
+
+        <div class="bg-blue-500/5 border border-blue-500/20 rounded-xl p-4 flex gap-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-blue-400 shrink-0">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+            </svg>
+            <p class="text-xs text-slate-400 leading-relaxed">
+                <strong class="text-slate-200">Protocol Tip:</strong> NATS is the optimized default for SPARK. It ensures your commands arrive in milliseconds without overloading the central API.
+            </p>
+        </div>
+    </div>
 </div>
