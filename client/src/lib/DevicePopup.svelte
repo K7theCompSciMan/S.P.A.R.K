@@ -52,8 +52,8 @@
                             <label class="text-sm text-dark-secondary">Aliases</label>
                             {#each device.aliases || [] as alias, i}
                                 <div class="flex items-center gap-2 mt-1">
-                                    <input type="text" bind:value={device.aliases[i]} class="flex-1 bg-transparent border-b border-dark-secondary text-dark-text" />
-                                    <button on:click={() => device.aliases = device.aliases.filter((_, idx) => idx !== i)} class="text-red-400 hover:text-red-600">×</button>
+                                    <input type="text" bind:value={device.aliases![i]} class="flex-1 bg-transparent border-b border-dark-secondary text-dark-text" />
+                                    <button on:click={() => device.aliases = device.aliases!.filter((_, idx) => idx !== i)} class="text-red-400 hover:text-red-600">×</button>
                                 </div>
                             {/each}
                             <button class="mt-2 text-dark-accent text-sm" on:click={() => device.aliases = [...(device.aliases || []), '']}>+ Add Alias</button>

@@ -15,3 +15,44 @@
 body {
 	font-family: 'AR One Sans';
 }
+@layer base {
+	/* This kills the white background issue */
+	html, body {
+	  @apply bg-[#0a0b10] text-slate-200 antialiased;
+	  margin: 0;
+	  padding: 0;
+	  height: 100%;
+	  width: 100%;
+	  overflow: hidden;
+	}
+  
+	/* Custom scrollbar for that premium feel */
+	::-webkit-scrollbar {
+	  width: 6px;
+	}
+	::-webkit-scrollbar-track {
+	  @apply bg-transparent;
+	}
+	::-webkit-scrollbar-thumb {
+	  @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
+	}
+  }
+  
+  @layer components {
+	/* The "Glassmorphism" Master Class */
+	.spark-card {
+	  @apply bg-dark-background-600/50 backdrop-blur-md border border-white/5 rounded-[2rem] shadow-xl transition-all duration-300;
+	}
+  
+	.spark-card-hover {
+	  @apply hover:border-dark-accent/30 hover:shadow-2xl hover:shadow-dark-accent/5 hover:-translate-y-1;
+	}
+  
+	.spark-input {
+	  @apply bg-dark-background-800/50 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:border-dark-accent transition-colors;
+	}
+  
+	.spark-btn-primary {
+	  @apply px-6 py-2 bg-dark-accent text-white rounded-xl font-bold shadow-lg shadow-dark-accent/20 hover:scale-105 active:scale-95 transition-all;
+	}
+  }
