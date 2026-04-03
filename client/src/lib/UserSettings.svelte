@@ -1,11 +1,15 @@
 <script lang="ts">
-    import type { PublicUser } from '$lib';
+    import type { PublicUser, UserSettings } from '$lib';
     import AnimatedInputLabel from './AnimatedInputLabel.svelte';
     import { fly } from 'svelte/transition';
 
     export let user: PublicUser;
 
-    const methods = [
+    const methods: {
+        value: UserSettings['primaryCommunicationMethod'];
+        title: string;
+        desc: string;
+    }[] = [
         { value: 'nats', title: 'NATS', desc: 'Pub/Sub messaging. Low latency, recommended.' },
         { value: 'localhost', title: 'Local', desc: 'Requires same WiFi or Tailscale VPN.' },
         { value: 'api', title: 'Cloud API', desc: 'Standard messaging through central server.' }

@@ -4,17 +4,25 @@
     import { getStore } from '$lib/tauri';
     import { goto } from '$app/navigation';
     import type { Group } from '$lib/xata';
+    import { isGroupReady, isPublicUserReady } from '$lib/storeAccess';
 
-    let group: Group = { name: '', devices: { client: [], server: [] } };
+    let group = { id: '', name: '', devices: { client: [] as string[], server: [] as string[] } } as Group;
     let user: any = null;
     let loading = true;
 
     onMount(async () => {
-        group = (await getStore('group')) as Group;
-        user = (await getStore('user'));
+        const g = await getStore('group');
+        if (isGroupReady(g)) {
+            group = g;
+        }
+        const u = await getStore('user');
+        if (!isPublicUserReady(u)) {
+            await goto('/setup');
+            loading = false;
+            return;
+        }
+        user = u;
         loading = false;
-        
-        if (!user) goto('/setup');
     });
 
     $: clientCount = group.devices?.client?.length || 0;
@@ -23,6 +31,20 @@
 </script>
 
 <div class="min-h-screen p-6 lg:p-12">
+    {#if loading}
+        <div class="max-w-6xl mx-auto space-y-8 animate-pulse" aria-busy="true">
+            <div class="h-10 bg-white/5 rounded-lg w-1/3"></div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {#each [1, 2, 3, 4] as _}
+                    <div class="h-28 spark-card"></div>
+                {/each}
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="h-64 spark-card"></div>
+                <div class="h-64 spark-card"></div>
+            </div>
+        </div>
+    {:else}
     <div class="max-w-6xl mx-auto space-y-10" in:fly={{ y: 20, duration: 600 }}>
         
         <header>
@@ -118,4 +140,5 @@
             </section>
         </div>
     </div>
+    {/if}
 </div>

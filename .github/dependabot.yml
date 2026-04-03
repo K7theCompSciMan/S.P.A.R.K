@@ -12,7 +12,6 @@ updates:
   - package-ecosystem: "npm" # See documentation for possible values
     directories:
       - "/api"
-      - "/webapp"
       - "/client"
     schedule:
       interval: "weekly"

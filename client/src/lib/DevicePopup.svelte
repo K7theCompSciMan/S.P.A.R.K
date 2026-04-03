@@ -22,6 +22,15 @@
         device.deviceCommands = device.deviceCommands?.filter(c => c !== command);
         await handleUpdate();
     }
+
+    async function removeMessage(messageId: string | undefined) {
+        if (!messageId) return;
+        const ok = await deleteMessageApi(messageId, accessToken);
+        if (ok) {
+            device.messages = device.messages?.filter((m) => m.id !== messageId);
+            await handleUpdate();
+        }
+    }
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -66,13 +75,13 @@
                         <h2 class="text-xl text-dark-text mb-2 text-center">Recent Messages</h2>
                         <div class="overflow-y-auto space-y-2 no-scrollbar">
                             {#each device.messages || [] as message}
-                                {#await getDeviceApi(message.from, 'client', accessToken)}
-                                    <div class="animate-pulse bg-dark-background-300 h-12 rounded-lg" />
+                                {#await message.from ? getDeviceApi(message.from, 'client', accessToken) : Promise.resolve(null)}
+                                    <div class="animate-pulse bg-dark-background-300 h-12 rounded-lg"></div>
                                 {:then sender}
                                     <div class="bg-dark-background-300 p-3 rounded-lg relative group">
                                         <span class="text-dark-accent text-sm">{sender?.name || 'Unknown'}</span>
                                         <p class="text-green-500">{message.content}</p>
-                                        <button class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 text-red-500" on:click={() => deleteMessageApi(message.id, accessToken)}>
+                                        <button type="button" class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 text-red-500" on:click={() => removeMessage(message.id)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79" /></svg>
                                         </button>
                                     </div>

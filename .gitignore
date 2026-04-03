@@ -6,3 +6,4 @@ stores/
 ./**/stores
 .env
 client/stores/
+api/dist/

@@ -1,8 +1,10 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { goto } from '$app/navigation';
+    import { page } from '$app/stores';
     import { getStore } from '$lib/tauri';
-    import { currentUrl, navOpen } from '$lib/stores';
+    import { fetchUserGroups } from '$lib/api';
+    import { navOpen } from '$lib/stores';
     import NavButton from '$lib/NavButton.svelte';
     import '../../app.css';
 
@@ -12,15 +14,12 @@
     let screenWidth: number = 0;
 
     onMount(async () => {
-        currentUrl.set(window.location.pathname);
         [device, user] = await Promise.all([getStore('device'), getStore('user')]);
-        
+
         if (!user) return goto('/setup');
 
-        const token = await getStore('accessToken');
-        const res = await fetch(`https://spark-api.fly.dev/groups/${user.id}`, {
-            headers: { authorization: `Bearer ${token}` }
-        });
+        const token = (await getStore('accessToken')) as string;
+        const res = await fetchUserGroups(user.id, token);
         if (res.ok) groups = await res.json();
     });
 
@@ -39,7 +38,7 @@
 
 <div class="h-screen w-screen flex flex-col md:flex-row overflow-hidden">
     <nav class="
-        {$navOpen ? 'w-64 translate-x-0' : 'w-0 -translate-x-full md:w-20 md:translate-x-0'} 
+        {$navOpen ? 'w-64 translate-x-0' : 'w-0 -translate-x-full md:w-20 md:translate-x-0'}
         lg:w-64 fixed md:relative z-50 h-full bg-[#0d0f14] border-r border-white/5 
         transition-all duration-300 ease-in-out flex flex-col"
     >
@@ -52,10 +51,9 @@
                 <NavButton
                     {...pageItem}
                     type={pageItem.icon}
-                    selected={$currentUrl === pageItem.url}
+                    selected={$page.url.pathname === pageItem.url}
                     compact={!$navOpen && !isMobile && screenWidth < 1024}
                     onclick={() => {
-                        currentUrl.set(pageItem.url);
                         if (isMobile) navOpen.set(false);
                         goto(pageItem.url);
                     }}
@@ -71,7 +69,7 @@
                         name={group.name}
                         url={`/group/${group.id}`}
                         type="group"
-                        selected={$currentUrl === `/group/${group.id}`}
+                        selected={$page.url.pathname === `/group/${group.id}`}
                         compact={!$navOpen && !isMobile && screenWidth < 1024}
                     />
                 {/each}

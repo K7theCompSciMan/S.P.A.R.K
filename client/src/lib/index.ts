@@ -8,7 +8,7 @@ export type Device = {
 	id?: string;
 	deviceCommands?: Command[];
 	type?: string;
-    aliases?: string[];
+	aliases?: string[];
 };
 
 export type PublicUser = {
@@ -26,26 +26,12 @@ export type Command = {
 	aliases: string[];
 };
 
-export const deviceToSpecificDevice = (device: Device) => {
-	if (device.type === 'client') {
-		return {
-			name: device.name!,
-			messages: device.messages!,
-			assignedGroup: device.assignedGroup!,
-			assignedUser: device.assignedUser!,
-			id: device.id!,
-			deviceCommands: device.deviceCommands!,
-            aliases: device.aliases!
-		} as ClientDevice;
-	} else {
-		return {
-			name: device.name!,
-			messages: device.messages!,
-			assignedGroup: device.assignedGroup!,
-			assignedUser: device.assignedUser!,
-			id: device.id!,
-			deviceCommands: device.deviceCommands!,
-            aliases: device.aliases!
-		} as ServerDevice;
-	}
-};
+export const deviceToSpecificDevice = (device: Device): ClientDevice | ServerDevice => ({
+	name: device.name!,
+	messages: device.messages!,
+	assignedGroup: device.assignedGroup!,
+	assignedUser: device.assignedUser!,
+	id: device.id!,
+	deviceCommands: device.deviceCommands!,
+	aliases: device.aliases!
+}) as ClientDevice | ServerDevice;

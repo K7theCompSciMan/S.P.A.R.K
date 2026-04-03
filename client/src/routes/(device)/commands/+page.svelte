@@ -6,15 +6,25 @@
     import CommandCard from '$lib/CommandCard.svelte';
     import CreateCommandPopup from '$lib/CommandPopup.svelte';
     import { updateDeviceApi } from '$lib/api';
+    import { goto } from '$app/navigation';
+    import { isDeviceReady } from '$lib/storeAccess';
 
     let device: Device = { deviceCommands: [] };
     let accessToken = '';
     let createCommandPopup = false;
     let newCommand: Command = { name: '', command: '', aliases: [''] };
+    let loading = true;
 
     onMount(async () => {
-        device = (await getStore('device')) as Device;
+        const d = await getStore('device');
+        if (!isDeviceReady(d)) {
+            await goto('/setup');
+            loading = false;
+            return;
+        }
+        device = d as Device;
         accessToken = (await getStore('accessToken')) as string;
+        loading = false;
     });
 
     async function syncCommands() {
@@ -24,6 +34,16 @@
 </script>
 
 <div class="min-h-screen w-full bg-dark-background-900 p-4 md:p-8 overflow-y-auto">
+    {#if loading}
+        <div class="max-w-4xl mx-auto space-y-6 animate-pulse" aria-busy="true">
+            <div class="h-10 bg-white/5 rounded w-2/5"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {#each [1, 2, 3] as _}
+                    <div class="h-32 rounded-3xl bg-dark-background-600/50"></div>
+                {/each}
+            </div>
+        </div>
+    {:else}
     <div class="max-w-4xl mx-auto" in:fly={{ y: 20, duration: 400 }}>
         <header class="flex items-end justify-between mb-8">
             <div>
@@ -57,4 +77,5 @@
             createCommandPopup = false;
         }}
     />
+    {/if}
 </div>

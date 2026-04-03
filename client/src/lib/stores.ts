@@ -1,35 +1,14 @@
 import type { Device } from '$lib';
 import { writable } from 'svelte/store';
 
-function createDeviceData() {
-	const { subscribe, set } = writable({} as Device);
-
+function createWritableStore<T>(initial: T) {
+	const { subscribe, set } = writable(initial);
 	return {
 		subscribe,
-		set: (n: Device) => set(n),
-		reset: () => set({})
+		set: (n: T) => set(n),
+		reset: () => set(initial)
 	};
 }
 
-function createUrlStore() {
-	const { subscribe, set } = writable('' as string);
-	return {
-		subscribe,
-		set: (n: string) => set(n),
-		reset: () => set('')
-	};
-}
-
-function createNavOpenStore() {
-	const { subscribe, set } = writable(true);
-
-	return {
-		subscribe,
-		set: (n: boolean) => set(n),
-		reset: () => set(true)
-	};
-}
-
-export const deviceData = createDeviceData();
-export const currentUrl = createUrlStore();
-export const navOpen = createNavOpenStore();
+export const deviceData = createWritableStore({} as Device);
+export const navOpen = createWritableStore(true);

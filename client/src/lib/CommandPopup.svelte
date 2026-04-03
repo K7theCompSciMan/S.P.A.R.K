@@ -5,6 +5,7 @@
     import { onMount, createEventDispatcher } from 'svelte';
     import type { Group } from './xata';
     import { getStore } from './tauri';
+    import { isGroupReady } from './storeAccess';
     import { DEFAULT_PRESETS } from '$lib/presets'; // Import from the helper file
 
     const dispatch = createEventDispatcher();
@@ -15,7 +16,7 @@
     export let visible: boolean = false;
     export let type: 'Create' | 'Edit' = 'Create';
 
-    let group: Group = {};
+    let group = {} as Group;
     let showPresets = false;
     
     // Combine group presets and defaults
@@ -25,7 +26,10 @@
     ];
 
     onMount(async () => {
-        group = (await getStore('group')) as Group;
+        const g = await getStore('group');
+        if (isGroupReady(g)) {
+            group = g;
+        }
     });
 
     async function runCurrent() {

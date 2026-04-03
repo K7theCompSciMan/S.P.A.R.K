@@ -1,3 +1,4 @@
+const SPARK_API_BASE: &str = "https://spark-api.fly.dev";
 use std::{ops::DerefMut, sync::{Arc, Mutex}, thread::{self, current, panicking}};
 use futures_core::stream::Stream;
 use futures_util::StreamExt;
@@ -138,7 +139,7 @@ async fn run_nats_backend(device: Device, path: String, device_type: String) -> 
             }
         }
         if message_content.contains("Update Device") {
-            let request_url = format!("https://spark-api.fly.dev/device/{device_type}/{device_id}/", device_type = device_type, device_id = device.id);
+            let request_url = format!("{SPARK_API_BASE}/device/{device_type}/{device_id}/", device_type = device_type, device_id = device.id);
             let updated_device: Device = reqwest::get(&request_url).await?.json().await?;
             let _ =store::set(path.clone(), "device".to_string(), updated_device.to_json_value());
         }
@@ -172,7 +173,7 @@ pub fn handle_device_updates_api_call() -> Result<(), Error> {
             let running_backend = serde_json::from_value::<bool>(store::get(path.clone(), "runningClientBackend".to_string())).unwrap();
             if device.id!="default".to_string() && device_type!="none".to_string() && running_backend {            
                 let past_messages = device.messages.clone();
-                let request_url = format!("https://spark-api.fly.dev/device/{device_type}/{device_id}/", device_type = device_type, device_id = device.id);
+                let request_url = format!("{SPARK_API_BASE}/device/{device_type}/{device_id}/", device_type = device_type, device_id = device.id);
                 let updated_device: Device = reqwest::blocking::get(&request_url)?.json()?;
                 println!("Getting Updated Device from API");
                 // println!("_____________________________________________");

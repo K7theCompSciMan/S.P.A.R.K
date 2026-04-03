@@ -41,6 +41,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@xata.io/client": "^0.29.5",
 		"autoprefixer": "^10.4.19",
 		"pnpm": "^9.6.0",
 		"postcss": "^8.4.39",

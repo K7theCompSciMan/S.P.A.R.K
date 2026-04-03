@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-    import "../../app.css";
-    onMount(async() => {
-    })
+	import '../../app.css';
 </script>
-<div class="bg-gradient-to-br from-sky-700 to-indigo-900 overflow-auto h-screen w-full">
-    <slot/>
+
+<div class="min-h-screen w-full bg-dark-background-900 text-dark-text overflow-auto">
+	<div class="mx-auto max-w-4xl px-4 py-10 md:py-16">
+		<slot />
+	</div>
 </div>

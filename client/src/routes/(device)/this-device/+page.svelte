@@ -10,8 +10,8 @@
 
     let loading = true;
     let thisDevice: Device = { name: '', id: '', messages: [], deviceCommands: [] };
-    let user: User = {};
-    let group: Group = {};
+    let user = {} as User;
+    let group = {} as Group;
     let accessToken = '';
 
     onMount(async () => {
@@ -110,7 +110,7 @@
                 
                 <footer class="bg-white/5 p-6 border-t border-white/5 flex justify-between items-center">
                     <p class="text-xs text-gray-500 italic">Configuration syncs automatically to the Spark Cloud API</p>
-                    <span class="text-[10px] text-dark-accent font-bold uppercase tracking-widest">{user?.email}</span>
+                    <span class="text-[10px] text-dark-accent font-bold uppercase tracking-widest">{user?.username}</span>
                 </footer>
             </div>
         </div>

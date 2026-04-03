@@ -4,13 +4,13 @@
     import { goto } from '$app/navigation';
     import DevicePopup from '$lib/DevicePopup.svelte';
     import { getStore, runCommand } from '$lib/tauri';
-    import { getDeviceApi, updateDeviceApi } from '$lib/api';
+    import { getDeviceApi } from '$lib/api';
     import type { Device } from '$lib';
     import type { ClientDevice, User, Group } from '$lib/xata';
 
     let loading = true;
-    let user: User = {};
-    let group: Group = { name: '', devices: { client: [], server: [] } };
+    let user = {} as User;
+    let group = { id: '', name: '', devices: { client: [] as string[], server: [] as string[] } } as Group;
     let clients: ClientDevice[] = [];
     let accessToken = '';
     
@@ -22,7 +22,11 @@
         group = (await getStore('group')) as Group;
         accessToken = (await getStore('accessToken')) as string;
 
-        if (!user || !group) return goto('/setup');
+        if (!user || !group) {
+            await goto('/setup');
+            loading = false;
+            return;
+        }
 
         const deviceIds = group.devices['client'] || [];
         const results = await Promise.all(deviceIds.map((id: string) => getDeviceApi(id, 'client', accessToken)));
@@ -31,12 +35,22 @@
     });
 
     function openSettings(client: ClientDevice) {
-        selectedDevice = { ...client, type: 'client' };
+        selectedDevice = { ...client, type: 'client', name: client.name ?? undefined } as Device;
         settingsPopup = true;
     }
 </script>
 
 <div class="min-h-screen w-full bg-dark-background-900 text-dark-text p-4 md:p-8">
+    {#if loading}
+        <div class="max-w-4xl mx-auto space-y-6 animate-pulse" aria-busy="true">
+            <div class="h-8 bg-white/5 rounded w-1/3"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {#each [1, 2, 3, 4] as _}
+                    <div class="h-36 rounded-3xl bg-dark-background-600/50"></div>
+                {/each}
+            </div>
+        </div>
+    {:else}
     <div class="max-w-4xl mx-auto" in:fly={{ y: 20, duration: 400 }}>
         <header class="flex items-center justify-between mb-8">
             <div>
@@ -69,4 +83,5 @@
     </div>
 
     <DevicePopup runCommand={runCommand} bind:device={selectedDevice} bind:visible={settingsPopup} {accessToken} />
+    {/if}
 </div>
