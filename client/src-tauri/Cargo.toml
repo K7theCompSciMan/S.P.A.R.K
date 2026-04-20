@@ -26,7 +26,7 @@ reqwest = {version = "0.12.9", features = ["json", "blocking"] }
 json = "0.12.4"
 tokio = { version = "1", features = ["full"] }
 mini-redis = "0.4"
-futures = "0.3.30"
+futures = "0.3.31"
 tauri-runtime-wry = "0.14.9"
 fs = "0.0.5"
 rants = "0.6.0"
