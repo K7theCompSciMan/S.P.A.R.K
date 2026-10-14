@@ -1,12 +1,25 @@
 use serde_json;
-use std::{fs::File, thread};
+use std::fs::{self, File};
+use std::path::PathBuf;
+
+fn store_path(relative: &str) -> PathBuf {
+    if let Some(proj_dirs) = directories::ProjectDirs::from("com", "spark", "ai.assistant") {
+        let base = proj_dirs.data_dir().to_path_buf();
+        fs::create_dir_all(&base).ok();
+        base.join(relative)
+    } else {
+        PathBuf::from(relative)
+    }
+}
+
 fn default_store() -> serde_json::Value {
-    return serde_json::json!({
+    serde_json::json!({
         "user": {
             "id": "",
+            "email": "",
             "username": "",
             "settings": {
-                "primaryCommunicationMethod": "nats"
+                "primaryCommunicationMethod": "realtime"
             }
         },
         "device": {
@@ -16,48 +29,59 @@ fn default_store() -> serde_json::Value {
             "deviceCommands": []
         },
         "deviceType": "",
-        "backendNATS": false,
+        "accessToken": "",
+        "refreshToken": "",
+        // Written by the frontend's initRealtime() call so the Rust
+        // Realtime backend can open a WebSocket without needing env vars.
+        "supabaseUrl": "",
+        "supabaseAnonKey": "",
         "runningClientBackend": false,
         "runningServerBackend": false
-    });
+    })
 }
-pub fn get(path: String, key: String) -> serde_json::Value {
-    let file = File::open(path.clone()).expect("Error opening file");
-    let json: serde_json::Value = serde_json::from_reader(file.try_clone().expect("Couldn't clone file")).map_err(|e| {
-        if e.is_eof() {
-            let write_file = File::create(path.clone()).expect("Error creating file");
-            serde_json::to_writer_pretty(write_file, &default_store()).expect("Error writing file");
+
+fn read_store(path: &PathBuf) -> serde_json::Value {
+    if let Some(parent) = path.parent() {
+        fs::create_dir_all(parent).ok();
+    }
+    match File::open(path) {
+        Ok(file) => serde_json::from_reader(file).unwrap_or_else(|_| {
+            let write = File::create(path).expect("Cannot create store file");
+            let defaults = default_store();
+            serde_json::to_writer_pretty(write, &defaults).expect("Cannot write defaults");
+            defaults
+        }),
+        Err(_) => {
+            let write = File::create(path).expect("Cannot create store file");
+            let defaults = default_store();
+            serde_json::to_writer_pretty(write, &defaults).expect("Cannot write defaults");
+            defaults
         }
-    }).unwrap();
-    return json.get(key).expect("Error getting key").clone();
+    }
 }
 
-pub fn set(path: String, key: String, value: serde_json::Value) {
-    let read_file = File::open(path.clone()).expect("Error creating file");
-    // println!("reading from file in set function");
-    let json: serde_json::Value = serde_json::from_reader(read_file.try_clone().expect("Couldn't clone file")).expect("Error reading file");
-    // println!("read from file in set function");
-    let write_file = File::create(path.clone()).expect("Error creating file");
-    let mut new_json = json.as_object().unwrap().clone();
-    new_json.insert(key, value);
-    serde_json::to_writer_pretty(write_file, &new_json).expect("Error writing file");
+pub fn get(relative_path: String, key: String) -> serde_json::Value {
+    let path = store_path(&relative_path);
+    let json = read_store(&path);
+    json.get(&key).cloned().unwrap_or(serde_json::Value::Null)
+}
+
+pub fn set(relative_path: String, key: String, value: serde_json::Value) {
+    let path = store_path(&relative_path);
+    let mut json = read_store(&path);
+    if let Some(obj) = json.as_object_mut() {
+        obj.insert(key, value);
+    }
+    let write = File::create(&path).expect("Cannot open store for writing");
+    serde_json::to_writer_pretty(write, &json).expect("Cannot write store");
 }
 
 #[tauri::command]
-pub fn get_store(path: String, key: String) -> serde_json::Value {
-    return get(path, key);
+pub fn get_store(_path: String, key: String) -> serde_json::Value {
+    get("stores/store.json".to_string(), key)
 }
 
 #[tauri::command]
-pub fn set_store(path: String, key: String, value: serde_json::Value) {
-    set(path, key, value);
+pub fn set_store(_path: String, key: String, value: serde_json::Value) {
+    set("stores/store.json".to_string(), key, value);
 }
-
-// pub fn main() {
-//     println!("{}", format!("user: {:?}", get("stores/store.json".to_string(), "user".to_string())));
-//     println!("{}", format!("user: {:?}", get("stores/store.json".to_string(), "user".to_string())));
-//     thread::sleep(std::time::Duration::from_secs(2));
-//     println!("setting new value");
-//     set("stores/store.json".to_string(), "user".to_string(), serde_json::json!({ "id": "rec_cq87c29m0de2bt39lmmg", "username": "KesavanTEST" }));
-//     println!("{}",format!("user: {:?}", get("stores/store.json".to_string(), "user".to_string())));
-// }

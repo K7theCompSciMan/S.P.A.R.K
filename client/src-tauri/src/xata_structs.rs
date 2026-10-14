@@ -1,28 +1,32 @@
 use serde::{Deserialize, Serialize};
-use serde_json::{json, Value}; // Import the `json` macro from the `serde_json` crate
+use serde_json::{json, Value};
 
-
-#[derive(Deserialize, Debug, Clone, PartialEq)]
+/// Mirrors the shape returned by Supabase for a device record.
+/// Fields use camelCase to stay compatible with the existing frontend stores.
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct Device {
     pub name: String,
     pub id: String,
-    pub assignedUser: AssignedUser ,
+    #[serde(alias = "assignedUser", alias = "assigned_user")]
+    pub assignedUser: AssignedUser,
+    #[serde(alias = "assignedGroup", alias = "assigned_group")]
     pub assignedGroup: Group,
     pub messages: Vec<Message>,
+    #[serde(alias = "deviceCommands", alias = "device_commands", default)]
     pub deviceCommands: Vec<Command>,
+}
 
-}
 impl Device {
-pub fn to_json_value(&self) -> Value {
-    json!({
-        "name": self.name,
-        "id": self.id,
-        "assignedUser": self.assignedUser,
-        "assignedGroup": self.assignedGroup,
-        "messages": self.messages,
-        "deviceCommands": self.deviceCommands,
-    })
-}
+    pub fn to_json_value(&self) -> Value {
+        json!({
+            "name": self.name,
+            "id": self.id,
+            "assignedUser": self.assignedUser,
+            "assignedGroup": self.assignedGroup,
+            "messages": self.messages,
+            "deviceCommands": self.deviceCommands,
+        })
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
@@ -34,16 +38,18 @@ pub struct User {
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct AssignedUser {
-    pub id: String
+    pub id: String,
 }
+
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct UserSettings {
-    pub primaryCommunicationMethod: String
+    #[serde(alias = "primaryCommunicationMethod")]
+    pub primaryCommunicationMethod: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct Group {
-    pub id: String
+    pub id: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -53,6 +59,7 @@ pub struct Message {
     pub to: String,
     pub status: Option<i8>,
     pub content: String,
+    #[serde(alias = "fromDeviceType", alias = "from_device_type")]
     pub fromDeviceType: String,
 }
 
@@ -71,7 +78,7 @@ impl PartialEq for Message {
 pub struct Command {
     pub name: String,
     pub aliases: Vec<String>,
-    pub command: String
+    pub command: String,
 }
 
 impl PartialEq for Command {

@@ -10,6 +10,7 @@
 	import { getRequiredAccessToken, isPublicUserReady } from '$lib/storeAccess';
 
 	let user: PublicUser = {
+		email: '',
 		username: 'default',
 		id: '1',
 		settings: { primaryCommunicationMethod: 'nats' }

@@ -1,58 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=AR+One+Sans:wght@400..700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-	.no-scrollbar::-webkit-scrollbar {
-		display: none;
-	}
-	.no-scrollbar {
-		-ms-overflow-style: none; /* IE and Edge */
-		scrollbar-width: none; /* Firefox */
-	}
-}
-body {
-	font-family: 'AR One Sans';
-}
 @layer base {
-	/* This kills the white background issue */
-	html, body {
-	  @apply bg-[#0a0b10] text-slate-200 antialiased;
-	  margin: 0;
-	  padding: 0;
-	  height: 100%;
-	  width: 100%;
-	  overflow: hidden;
-	}
-  
-	/* Custom scrollbar for that premium feel */
-	::-webkit-scrollbar {
-	  width: 6px;
-	}
-	::-webkit-scrollbar-track {
-	  @apply bg-transparent;
-	}
-	::-webkit-scrollbar-thumb {
-	  @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
-	}
+  body {
+    @apply bg-dark-background-950 text-dark-text antialiased selection:bg-dark-accent/30 selection:text-white;
   }
-  
-  @layer components {
-	/* The "Glassmorphism" Master Class */
-	.spark-card {
-	  @apply bg-dark-background-600/50 backdrop-blur-md border border-white/5 rounded-[2rem] shadow-xl transition-all duration-300;
-	}
-  
-	.spark-card-hover {
-	  @apply hover:border-dark-accent/30 hover:shadow-2xl hover:shadow-dark-accent/5 hover:-translate-y-1;
-	}
-  
-	.spark-input {
-	  @apply bg-dark-background-800/50 border border-white/10 rounded-xl px-4 py-2 focus:outline-none focus:border-dark-accent transition-colors;
-	}
-  
-	.spark-btn-primary {
-	  @apply px-6 py-2 bg-dark-accent text-white rounded-xl font-bold shadow-lg shadow-dark-accent/20 hover:scale-105 active:scale-95 transition-all;
-	}
+}
+
+@layer components {
+  /* Ultra-Premium Obsidian Glassmorphism */
+  .spark-card {
+    @apply relative bg-dark-background-900/40 backdrop-blur-xl border border-white/[0.06] rounded-[1.25rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] transition-all duration-300 overflow-hidden;
   }
+
+  /* Inner light line across top frame */
+  .spark-card::before {
+    content: '';
+    @apply absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.12] to-transparent pointer-events-none;
+  }
+
+  /* High-fidelity hover mechanics */
+  .spark-card-hover {
+    @apply hover:border-dark-secondary/30 hover:bg-dark-background-800/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.12)] hover:-translate-y-0.5 cursor-pointer;
+  }
+
+  /* Deep inputs matching true dark theme */
+  .spark-input {
+    @apply bg-dark-background-950/60 border border-white/[0.08] rounded-xl px-4 py-3 focus:outline-none focus:border-dark-primary focus:ring-1 focus:ring-dark-primary/40 transition-all text-white placeholder-gray-600;
+  }
+
+  /* High Contrast Gradient Button */
+  .spark-btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-dark-secondary to-dark-accent text-white rounded-xl font-semibold shadow-lg shadow-dark-accent/15 hover:shadow-dark-accent/25 hover:brightness-110 active:scale-[0.98] transition-all border border-white/10;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

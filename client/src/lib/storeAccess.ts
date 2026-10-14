@@ -1,6 +1,6 @@
 import { goto } from '$app/navigation';
 import type { Device, PublicUser } from '$lib';
-import type { Group } from '$lib/xata';
+import type { Group } from '$lib/supabase';
 import { getStore } from './tauri';
 
 export function isPublicUserReady(u: unknown): u is PublicUser {
@@ -8,9 +8,12 @@ export function isPublicUserReady(u: unknown): u is PublicUser {
 		!!u &&
 		typeof u === 'object' &&
 		'id' in u &&
+		'email' in u &&
 		'username' in u &&
 		typeof (u as PublicUser).id === 'string' &&
 		!!(u as PublicUser).id &&
+		typeof (u as PublicUser).email === 'string' &&
+		!!(u as PublicUser).email &&
 		typeof (u as PublicUser).username === 'string' &&
 		!!(u as PublicUser).username
 	);

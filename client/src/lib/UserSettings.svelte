@@ -26,12 +26,21 @@
             <div class="space-y-10">
                 <section>
                     <label class="text-xs font-bold uppercase tracking-widest text-dark-accent mb-4 block">Identity</label>
-                    <AnimatedInputLabel
-                        name="Username"
-                        labelbg="bg-[#1a1c23]" 
-                        bind:value={user.username}
-                        size="scale-100"
-                    />
+                    <div class="space-y-4">
+                        <AnimatedInputLabel
+                            name="Email"
+                            type="email"
+                            labelbg="bg-[#1a1c23]"
+                            bind:value={user.email}
+                            size="scale-100"
+                        />
+                        <AnimatedInputLabel
+                            name="Username"
+                            labelbg="bg-[#1a1c23]" 
+                            bind:value={user.username}
+                            size="scale-100"
+                        />
+                    </div>
                 </section>
 
                 <section>

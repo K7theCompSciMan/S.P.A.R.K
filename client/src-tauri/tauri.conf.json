@@ -16,7 +16,6 @@
 				"all": false,
 				"execute": false,
 				"open": false,
-				"scope": [{ "name": "bin/python/server", "sidecar": true, "args": true }],
 				"sidecar": true
 			},
 			"all": false,
@@ -26,22 +25,22 @@
 			"fs": {
 				"all": false,
 				"copyFile": false,
-				"createDir": false,
-				"exists": false,
+				"createDir": true,
+				"exists": true,
 				"readDir": false,
-				"readFile": false,
+				"readFile": true,
 				"removeDir": false,
 				"removeFile": false,
 				"renameFile": false,
-				"scope": ["$RESOURCE/stores/*"],
-				"writeFile": false
+				"scope": ["$APPDATA/stores/*", "$RESOURCE/stores/*"],
+				"writeFile": true
 			},
 			"path": {
 				"all": true
 			}
 		},
 		"systemTray": {
-			"iconPath": "icons/icon.ico",
+			"iconPath": "icons/icon.png",
 			"iconAsTemplate": true,
 			"menuOnLeftClick": false
 		},
@@ -52,7 +51,6 @@
 			"deb": {
 				"depends": []
 			},
-			"externalBin": ["bin/python/server"],
 			"icon": [
 				"icons/32x32.png",
 				"icons/128x128.png",
@@ -69,7 +67,6 @@
 				"providerShortName": null,
 				"signingIdentity": null
 			},
-			"resources": ["stores/store.json", "bin/nats/user.creds", "bin/python/*"],
 			"shortDescription": "",
 			"targets": "all",
 			"windows": {

@@ -4,10 +4,12 @@
 	import { getStore } from '$lib/tauri';
 	import { onMount } from 'svelte';
 	import { isDeviceReady, isPublicUserReady } from '$lib/storeAccess';
+	import { restoreAuthFromStore } from '$lib/auth';
 
 	let loading = true;
 
 	onMount(async () => {
+		await restoreAuthFromStore();
 		const user = await getStore('user');
 		const device = await getStore('device');
 		const hasUser = isPublicUserReady(user);

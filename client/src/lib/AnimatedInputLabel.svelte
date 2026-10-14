@@ -1,22 +1,25 @@
 <script lang="ts">
-    export let type="text";
-    export let width="w-[75%]";
-    export let height="h-8";
-    export let name="";
-    export let labelbg = "";
-    export let value = "";
-    let isfocused=false;
-    export let size = "";
+  export let type = "text";
+  export let width = "w-full";
+  export let height = ""; // Prop placeholder for legacy compatibility
+  export let name = "";
+  export let labelbg = ""; // Prop placeholder for legacy compatibility
+  export let value = "";
+  export let size = "";
 </script>
 
-{#if value && !isfocused}
-<div class=" h-fit self-center flex mt-[6%] {width} {size}">
-    <input {type} class="rounded-xl self-center bg-transparent border {height} w-full focus peer pl-2" id={name} bind:value on:focusout={() => isfocused=false}>
-    <label for={name} id="{name}-label" class=" pl-2 pr-2 rounded-md absolute ml-2 mt-1 cursor-text transform transition-transform {labelbg} -translate-y-[1.125rem] text-md">{name}</label> 
+<div class="relative group {width} {size}">
+  <input 
+    {type} 
+    id={name}
+    bind:value 
+    placeholder=" "
+    class="block w-full px-4 pt-6 pb-2 text-sm text-zinc-100 bg-dark-background-950/40 border border-white/[0.07] rounded-xl appearance-none focus:outline-none focus:ring-0 focus:border-dark-primary peer transition-all duration-200"
+  />
+  <label 
+    for={name} 
+    class="absolute text-sm text-zinc-500 duration-200 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:text-dark-primary pointer-events-none font-medium"
+  >
+    {name}
+  </label>
 </div>
-{:else}
-<div class=" h-fit self-center flex mt-[6%] {width} {size}">
-    <input {type} class="rounded-xl self-center bg-transparent border {height} w-full focus peer pl-2" id={name} bind:value on:focusin={() => isfocused=true} on:focusout={() => isfocused=false}>
-    <label for={name} id="{name}-label" class=" pl-2 pr-2 rounded-md absolute ml-2 mt-1 cursor-text transform transition-all {labelbg} peer-focus:-translate-y-[1.125rem] peer-focus:text-md">{name}</label> 
-</div>
-{/if}

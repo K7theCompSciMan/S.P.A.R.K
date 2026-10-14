@@ -14,7 +14,8 @@
 		"test:integration": "playwright test",
 		"test:unit": "vitest",
 		"tauri": "tauri",
-		"build-py": "PyInstaller -F py/main.py --distpath src-tauri/bin/python --clean -n server-x86_64-pc-windows-msvc"
+		"build-py:mac": "PyInstaller -F py/main.py --distpath src-tauri/bin/python --clean -n server-aarch64-apple-darwin",
+		"build-py:win": "PyInstaller -F py/main.py --distpath src-tauri/bin/python --clean -n server-x86_64-pc-windows-msvc"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
@@ -41,7 +42,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@xata.io/client": "^0.29.5",
+		"@supabase/supabase-js": "^2.45.0",
 		"autoprefixer": "^10.4.19",
 		"pnpm": "^9.6.0",
 		"postcss": "^8.4.39",

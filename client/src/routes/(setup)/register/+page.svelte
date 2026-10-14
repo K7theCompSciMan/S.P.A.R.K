@@ -8,26 +8,35 @@
 	import { registerApi } from '$lib/api';
 
 	let canProceed = false;
-	let username: string = '';
-	let password: string = '';
-	let confirmPassword: string = '';
+	let email = '';
+	let username = '';
+	let password = '';
+	let confirmPassword = '';
+	let errorMsg = '';
 
 	onMount(async () => {
-		const device = await getStore('device') as Device;
+		const device = (await getStore('device')) as Device;
 		if (device.id && device.assignedUser) {
 			await goto('/dashboard');
 		}
 	});
 
 	async function handleSubmit() {
+		errorMsg = '';
+
 		if (password !== confirmPassword) {
-			alert('Passwords do not match');
+			errorMsg = 'Passwords do not match.';
 			return false;
 		}
-		const response = await registerApi(username, password);
+
+		const response = await registerApi(email, username, password);
+
 		if (response.status !== 200) {
+			const body = await response.json().catch(() => ({}));
+			errorMsg = body.error ?? 'Registration failed. Please try again.';
 			return false;
 		}
+
 		const { user, accessToken, refreshToken } = await response.json();
 		await setStore('user', user);
 		await setStore('accessToken', accessToken);
@@ -46,8 +55,26 @@
 		Already have an account?
 		<a href="/login" class="underline text-dark-accent hover:text-white transition-colors">Sign in</a>
 	</p>
+
+	{#if errorMsg}
+		<div class="w-full max-w-md bg-red-500/10 border border-red-500/20 text-red-400 text-xs py-2.5 px-3 rounded-xl text-left">
+			{errorMsg}
+		</div>
+	{/if}
+
 	<div class="w-full max-w-md flex flex-col gap-4">
-		<AnimatedInputLabel name="Username" labelbg="bg-dark-background-600" bind:value={username} size="scale-110"
+		<AnimatedInputLabel
+			name="Email"
+			type="email"
+			labelbg="bg-dark-background-600"
+			bind:value={email}
+			size="scale-110"
+		></AnimatedInputLabel>
+		<AnimatedInputLabel
+			name="Username"
+			labelbg="bg-dark-background-600"
+			bind:value={username}
+			size="scale-110"
 		></AnimatedInputLabel>
 		<AnimatedInputLabel
 			name="Password"

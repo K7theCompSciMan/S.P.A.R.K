@@ -1,38 +1,34 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-	content: ['./src/**/*.{svelte, html, js, ts}'],
+	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		extend: {
-			colors: {
-				dark: {
-					primary: '#8c8df1',
-					secondary: '#66139a',
-					accent: '#bb25e4',
-					success: '#31e425',
-					fail: '#f90000',
-					warning: '#f98100',
-					background: {
-						800: '#04051f',
-						600: '#0F051f',
-						500: '#2F051f',
-						300: '#843b5e'
-					},
-					text: '#d3d6fa'
-				},
-				light: {
-					primary: '#0e1071',
-					secondary: '#b865ec',
-					accent: '#b11bda',
-					success: '#31e425',
-					fail: '#f90000',
-					warning: '#f98100',
-					background: {
-						default: '#dfe0fb'
-					},
-					text: '#05082e'
-				}
-			}
+	  extend: {
+		colors: {
+		  dark: {
+			background: {
+			  50: '#fafafa',
+			  100: '#f4f4f5',
+			  200: '#e4e4e7',
+			  300: '#d4d4d8',
+			  400: '#a1a1aa',
+			  500: '#71717a',
+			  600: '#52525b',
+			  700: '#27272a',
+			  800: '#18181b', // Card slate
+			  900: '#09090b', // Base canvas background
+			  950: '#030303'  // Pure obsidian deep background
+			},
+			primary: '#3b82f6', // Premium deep electric blue
+			secondary: '#6366f1', // Rich indigo highlight
+			accent: '#a855f7', // Vibrant royal violet accent
+			text: '#f4f4f5'
+		  }
+		},
+		fontFamily: {
+		  sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+		  mono: ['JetBrains Mono', 'Fira Code', 'monospace']
 		}
+	  }
 	},
-	plugins: [import('tailwind-scrollbar-hide')]
-};
+	plugins: []
+  };
